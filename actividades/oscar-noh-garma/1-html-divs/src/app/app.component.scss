@@ -1,0 +1,49 @@
+main {
+  margin: 50px auto;
+  width: 800px;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+h3 {
+  text-align: center;
+}
+
+button {
+  all: unset;
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  background-color: #7c3aed;
+  border-radius: 5px;
+  color: white;
+  transition: all 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  scale: 1.05;
+  background-color: #5b21b6;
+  cursor: pointer;
+}
+
+.box {
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  background-color: #ede9fe;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.grid .box {
+  border: none;
+}
