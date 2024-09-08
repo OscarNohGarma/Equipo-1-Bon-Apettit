@@ -1,0 +1,78 @@
+.Cuadricula1{
+  width: 1400px; /* Ancho del rectángulo */
+  height: 150px; /* Altura del rectángulo */
+  background-color: lightblue; /* Color de fondo */
+  border: 2px solid black; /* Borde del rectángulo */
+  padding: 30px; /* Espaciado interno */
+  text-align: center; /* Alineación del texto */
+  margin: 20px auto; /* Centrar en la página */
+}
+
+.Cuadricula2{
+    width: 1400px; /* Ancho del rectángulo */
+    height: 150px; /* Altura del rectángulo */
+    background-color: lightblue; /* Color de fondo */
+    border: 2px solid black; /* Borde del rectángulo */
+    padding: 30px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    margin: 20px auto; /* Centrar en la página */
+}
+
+.Cuadricula3{
+    width: 1400px; /* Ancho del rectángulo */
+    height: 150px; /* Altura del rectángulo */
+    background-color: lightblue; /* Color de fondo */
+    border: 2px solid black; /* Borde del rectángulo */
+    padding: 30px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    margin: 20px auto; /* Centrar en la página */
+}
+
+.Cuadricula_abajo{
+    width: 1400px; /* Ancho del rectángulo */
+    height: 500px; /* Altura del rectángulo */
+    background-color: lightblue; /* Color de fondo */
+    border: 2px solid black; /* Borde del rectángulo */
+    padding: 30px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    margin: 20px auto; /* Centrar en la página */
+
+}  
+
+.Cuadricula_abajo1{
+    position: relative; /* Establece el posicionamiento relativo */
+    right: 600px;
+    top: -20px;
+    width: 140px; /* Ancho del rectángulo */
+    height: 450px; /* Altura del rectángulo */
+    background-color: rgb(234, 242, 244); /* Color de fondo */
+    border: 2px solid black; /* Borde del rectángulo */
+    padding: 30px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    margin: 20px auto; /* Centrar en la página */
+}
+
+.Cuadricula_abajo2{
+    position: relative; /* Establece el posicionamiento relativo */
+    top:-550px;
+    width: 140px; /* Ancho del rectángulo */
+    height: 450px; /* Altura del rectángulo */
+    background-color: rgb(234, 242, 244); /* Color de fondo */
+    border: 2px solid black; /* Borde del rectángulo */
+    padding: 30px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    margin: 20px auto; /* Centrar en la página */
+}
+
+.Cuadricula_abajo3{
+    position: relative; /* Establece el posicionamiento relativo */
+    left: 600px;
+    top:-1080px;
+    width: 140px; /* Ancho del rectángulo */
+    height: 450px; /* Altura del rectángulo */
+    background-color: rgb(234, 242, 244); /* Color de fondo */
+    border: 2px solid black; /* Borde del rectángulo */
+    padding: 30px; /* Espaciado interno */
+    text-align: center; /* Alineación del texto */
+    margin: 20px auto; /* Centrar en la página */
+}
