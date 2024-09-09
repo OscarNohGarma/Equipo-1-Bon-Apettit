@@ -1,0 +1,100 @@
+:host {
+    display: block;
+    height: 100vh; /* Asegúrate de que el componente ocupe toda la altura de la vista */
+    width: 100%; /* Asegúrate de que el componente ocupe todo el ancho de la vista */
+    background: linear-gradient(80deg, #4f4043 75% , #80716c  75%);
+    margin: 0; /* Elimina los márgenes */
+    padding: 0; /* Elimina el relleno */
+}
+
+.body{
+    position: absolute; 
+    top: 120px;
+    left: 150px;  
+}
+
+.title{
+    color: white;
+    font-family: 'Gill Sans';
+    font-size: 50px;
+    text-align: left,
+}
+
+.information{
+    color: #9d917c ;
+    text-align: left;
+    top: 10px;
+    font-family: 'Arial Narrow Bold';
+    font-style: italic;
+    text-transform: uppercase;
+    font-size: 25px;
+}
+
+p{
+    line-height: .5;
+}
+
+.color{
+    background-color: #6c5a60;
+}
+
+.nav-cafe{
+    position: absolute; 
+    width: 380px;
+    height: auto; 
+    top: 80px;
+    left: 1000px;
+    transform: rotate(30deg);
+}
+
+.box{
+    position: absolute; 
+    color: white;
+    text-align: left;
+    top: 370px;
+    left: 150px;  
+    
+}
+
+.box1{
+    position: absolute; 
+    color: white;
+    text-align: left;
+    top: 400px;
+    left: 260px;  
+    font-size: 32px;
+    
+}
+
+.nav-icon{
+    position: absolute; 
+    width: 100px;
+    height: auto;
+    top: 20px;
+    left: -10px; 
+}
+
+.box2{
+    position: absolute; 
+    color: white;
+    text-align: left;
+    top: 450px;
+    left: -10px; 
+}
+
+.box3{
+    position: absolute; 
+    color: white;
+    text-align: left;
+    top: 560px;
+    left: 260px;  
+    font-size: 32px;
+}
+
+.nav-icon2{
+    position: absolute; 
+    width: 80px;
+    height: auto;
+    top: 130px;
+    left: 150px; 
+}
