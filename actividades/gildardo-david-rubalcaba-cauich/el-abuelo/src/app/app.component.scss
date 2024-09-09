@@ -1,0 +1,48 @@
+
+div{
+    border-radius: 2%;
+    
+}
+.content{
+    background-color: rgb(114, 141, 141);
+    width: 50%; 
+    margin: 0 auto; 
+    border: 2px solid black; 
+    padding: 10px;
+    gap: 20px;
+    margin-bottom: 20px; 
+    
+}
+.contenedor {
+    
+    display: flex;
+    width: 50%; 
+    margin: 0 auto; 
+    gap: 20px;
+    margin-bottom: 20px;
+    flex-direction: row;
+}
+h1 {
+    font-size: 3.125rem;
+    color: var(--gray-900);
+    font-weight: 500;
+    line-height: 100%;
+    letter-spacing: -0.125rem;
+    margin: 0;
+    
+}
+.boton {
+    padding: 10px 20px; /* Ajusta el tamaño del botón */
+    cursor: pointer; /* Cambia el cursor cuando se pasa por encima */
+    background-color: rgb(132, 120, 177);
+}
+.elemento{
+    background-color: rgb(114, 141, 141);
+    display: flex; /* Configura el contenedor como un flex container */
+    flex-direction: column; /* Orientación horizontal */
+    justify-content: center; /* Centra los elementos horizontalmente */
+    border: 2px solid black; /* Aplica un borde negro de 2 píxeles de grosor */
+    align-items: center; /* Centra los elementos verticalmente (opcional) */
+    gap: 2px; /* Espacio entre los elementos */
+    height: 50vh;
+}

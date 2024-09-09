@@ -1,0 +1,50 @@
+h1{
+ font-size: 3.5rem;
+ font-weight: bold;
+ font-family: Arial, Helvetica, sans-serif;
+}
+
+h2{
+  font-weight: bold;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  text-decoration: underline;
+}
+
+.cardOne{
+  text-align: justify;
+  padding-left: 2rem;
+  margin-bottom: 2rem;
+  border: solid;
+  padding-right: 2rem;
+  margin-left: 5rem;
+  margin-right: 5rem;
+  margin-top: 2rem;
+}
+
+
+.container{
+  display: flex;
+  align-content: space-between;
+  align-items: center;
+}
+
+.collectionCard{
+  text-align: left;
+  margin-left: 1.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.boton{
+  border-radius: 10%;
+  border-color: black;
+  text-align: center;
+  font-weight: 700;
+  text-transform: uppercase;
+  margin: auto;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  cursor: pointer;
+}
