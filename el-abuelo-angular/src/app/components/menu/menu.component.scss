@@ -1,0 +1,222 @@
+main {
+  margin: 50px auto;
+  width: 800px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+h3 {
+  text-align: center;
+}
+
+// @media (min-width: 1280px) {
+.bg-menu::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%; /* Ocupa el 70% del lado derecho */
+  height: 100%;
+  background-image: url("../../../assets/menu.jpg"); /* Ruta de la imagen */
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* Coloca la imagen detrás del contenido */
+  opacity: 0.6; /* Ajusta la opacidad de la imagen */
+
+  /* Superposición de color morado */
+  background-color: rgba(34, 0, 128, 0.6); /* Color morado con opacidad */
+  background-blend-mode: overlay; /* Mezcla la imagen con el color morado */
+}
+// }
+
+@media (min-width: 1280px) {
+  .bg-menu::before {
+    width: 70%; /* Ocupa el 70% del lado derecho */
+
+    clip-path: polygon(0 50%, 15% 0, 100% 0, 100% 50%, 100% 100%, 15% 100%);
+  }
+}
+
+.menu {
+  display: grid;
+  margin-bottom: 50px;
+}
+@media (min-width: 1280px) {
+  .menu {
+    grid-template-columns: 1fr 3fr;
+  }
+}
+
+button {
+  all: unset;
+  display: block;
+  width: 100%;
+  padding: 5px 0;
+  text-align: center;
+  color: white;
+  background-color: #c0915a;
+  border: 1px solid #c0915a;
+  transition: background-color 0.3s;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #9e7744;
+  cursor: pointer;
+}
+
+.box {
+  padding: 30px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  background-color: #fef6e9;
+  box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.grid {
+  margin-top: 60px;
+  display: grid;
+  gap: 20px 40px;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .grid {
+    height: 600px; /* Ajusta la altura según sea necesario */
+    overflow-y: auto; /* Habilita el scroll vertical */
+    margin: 0 100px;
+    padding-right: 20px;
+  }
+}
+
+.grid .box {
+  border: none;
+}
+
+.seleccion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.mobile-seleccion {
+  display: none; /* Oculto por defecto */
+  text-align: center;
+  position: relative;
+}
+
+.selected-category {
+  display: inline-block;
+  font-size: 20px;
+  font-weight: bold;
+  color: white;
+  // background-color: rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  border-bottom: 3px solid white;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.selected-category:hover {
+  cursor: pointer;
+  background-color: rgb(255, 255, 255, 0.5);
+}
+.toggle-menu {
+  all: unset;
+  padding: 0 4px;
+  font-size: 16px;
+  margin-left: 10px;
+  color: white;
+}
+
+.submenu-mobile {
+  display: none; /* Oculto por defecto */
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  width: 150px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 5px;
+  z-index: 1000;
+  margin-top: 10px;
+}
+
+.submenu-mobile.show {
+  display: block; /* Mostrar cuando tiene la clase "show" */
+}
+
+.submenu-mobile div {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+}
+
+.submenu-mobile div:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Menú original para pantallas grandes */
+.seleccion {
+  display: none; /* Ocultar el menú original en pantallas pequeñas */
+}
+
+.mobile-seleccion {
+  display: block; /* Mostrar menú móvil en pantallas pequeñas */
+}
+@media (min-width: 768px) {
+  .mobile-seleccion {
+    display: none; /* Ocultar en pantallas grandes */
+  }
+
+  .seleccion {
+    display: flex; /* Mostrar el menú original en pantallas grandes */
+    flex-direction: row;
+    justify-content: center;
+    gap: 30px;
+  }
+}
+
+// @media (max-width: 767px) {
+// }
+
+@media (min-width: 1280px) {
+  .seleccion {
+    flex-direction: column;
+  }
+}
+
+.opcion {
+  text-align: center;
+  width: 150px;
+  padding: 10px 20px;
+  border: none;
+  border-bottom: 3px solid white;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  position: relative; /* Necesario para el menú desplegable */
+}
+.opcion:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgb(255, 255, 255, 0.3);
+  cursor: pointer;
+}
