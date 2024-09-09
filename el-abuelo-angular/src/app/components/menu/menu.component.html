@@ -1,0 +1,116 @@
+<div class="bg-menu">
+
+    <div class="menu  container">
+        <!-- asdasdasdasd -->
+
+        <div class="mobile-seleccion">
+            <div class="selected-category" (click)="toggleMenu()">
+                {{ selectedCategory }}
+                <p class="toggle-menu">▼</p>
+            </div>
+            <div class="submenu-mobile" [class.show]="isMenuOpen">
+                <div (click)="selectCategory('COMIDA')">COMIDA</div>
+                <div (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
+                <div (click)="selectCategory('POSTRES')">POSTRES</div>
+                <div (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
+            </div>
+        </div>
+
+        <div class="seleccion">
+            <div class="opcion" (click)="selectCategory('COMIDA')">COMIDA</div>
+            <div class="opcion" (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
+            <div class="opcion" (click)="selectCategory('POSTRES')">POSTRES</div>
+            <div class="opcion" (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
+        </div>
+
+        <!-- asdasdasdasd -->
+        <div class="grid" *ngIf="selectedCategory === 'COMIDA'">
+            <div class="box">
+                <h1>Comida 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Comida 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+        </div>
+        <div class="grid" *ngIf="selectedCategory === 'BEBIDAS'">
+            <div class="box">
+                <h1>Bebida 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Bebida 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+        </div>
+        <div class="grid" *ngIf="selectedCategory === 'POSTRES'">
+            <div class="box">
+                <h1>Postre 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Postre 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+        </div>
+        <div class="grid" *ngIf="selectedCategory === 'ESPECIALES'">
+            <div class="box">
+                <h1>Especial 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 1</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+            <div class="box">
+                <h1>Especial 2</h1>
+                <p>$$</p>
+                <button>AÑADIR</button>
+            </div>
+        </div>
+    </div>
+</div>
