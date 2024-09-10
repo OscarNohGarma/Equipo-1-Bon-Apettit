@@ -1,9 +1,141 @@
+h1,
+h2,
+h3 {
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 1rem 0 4rem 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.header {
+  background-image: url(../../../assets/menu.jpg);
+  background-color: rgba(0, 0, 0, 0.4);
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  padding: 5rem 0;
+}
+
+.contenido-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--blanco);
+}
+
+.nombre-sitio {
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  font-size: 40px;
+}
+
+@media (min-width: 768px) {
+  .nombre-sitio {
+    font-size: 70px;
+  }
+}
+
+.nombre-sitio span {
+  font-weight: 900;
+}
+
+@media (min-width: 992px) {
+  .barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.contacto {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .contacto {
+    align-items: flex-end;
+  }
+}
+
+.telefono {
+  display: flex;
+}
+
+.telefono::before {
+  content: "";
+  display: block;
+  width: 4rem;
+  height: 4rem;
+  // background-image: url(../img/telefono.png);
+  background-repeat: no-repeat;
+  background-position: center center;
+  margin-right: 1rem;
+}
+
+.header a {
+  color: var(--blanco);
+  font-size: 2rem;
+}
+
+.navegacion {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+  .navegacion {
+    flex-direction: row;
+  }
+}
+
+.slogan {
+  text-align: center;
+  color: white;
+}
+@media (min-width: 768px) {
+  .slogan {
+    text-align: right;
+  }
+}
+.slogan h1 {
+  font-size: 30px;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .slogan h1 {
+    font-size: 5rem;
+  }
+}
+
+.slogan p {
+  margin: 0;
+  line-height: 1;
+}
+
+// DIVISION
+
 .navegacion {
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: 5px;
   margin-bottom: 50px;
+  padding: 20px;
 }
 
 .navegacion img {
