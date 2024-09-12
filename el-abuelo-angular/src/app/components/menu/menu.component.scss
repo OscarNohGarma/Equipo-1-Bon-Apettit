@@ -17,42 +17,46 @@ h3 {
 }
 
 // @media (min-width: 1280px) {
-.bg-menu::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%; /* Ocupa el 70% del lado derecho */
-  height: 100%;
-  background-image: url("../../../assets/menu.jpg"); /* Ruta de la imagen */
-  background-size: cover;
-  background-position: center;
-  z-index: -1; /* Coloca la imagen detrás del contenido */
-  opacity: 0.6; /* Ajusta la opacidad de la imagen */
+// .bg-menu::before {
+//   content: "";
+//   position: fixed;
+//   top: 0;
+//   right: 0;
+//   width: 100%; /* Ocupa el 70% del lado derecho */
+//   height: 100%;
+//   background-image: url("../../../assets/menu.jpg"); /* Ruta de la imagen */
+//   background-size: cover;
+//   background-position: center;
+//   z-index: -1; /* Coloca la imagen detrás del contenido */
+//   opacity: 0.6; /* Ajusta la opacidad de la imagen */
 
-  /* Superposición de color morado */
-  background-color: rgba(34, 0, 128, 0.6); /* Color morado con opacidad */
-  background-blend-mode: overlay; /* Mezcla la imagen con el color morado */
-}
+//   /* Superposición de color morado */
+//   background-color: rgba(34, 0, 128, 0.6); /* Color morado con opacidad */
+//   background-blend-mode: overlay; /* Mezcla la imagen con el color morado */
+// }
+// // }
+
+// @media (min-width: 1280px) {
+//   .bg-menu::before {
+//     width: 70%; /* Ocupa el 70% del lado derecho */
+
+//     clip-path: polygon(0 50%, 15% 0, 100% 0, 100% 50%, 100% 100%, 15% 100%);
+//   }
 // }
 
-@media (min-width: 1280px) {
-  .bg-menu::before {
-    width: 70%; /* Ocupa el 70% del lado derecho */
-
-    clip-path: polygon(0 50%, 15% 0, 100% 0, 100% 50%, 100% 100%, 15% 100%);
-  }
+.bg-menu {
+  margin-top: 50px;
 }
 
 .menu {
   display: grid;
   margin-bottom: 50px;
 }
-@media (min-width: 1280px) {
-  .menu {
-    grid-template-columns: 1fr 3fr;
-  }
-}
+// @media (min-width: 1280px) {
+//   .menu {
+//     grid-template-columns: 1fr 3fr;
+//   }
+// }
 
 button {
   all: unset;
@@ -97,7 +101,7 @@ button:hover {
   .grid {
     height: 600px; /* Ajusta la altura según sea necesario */
     overflow-y: auto; /* Habilita el scroll vertical */
-    margin: 0 100px;
+    margin: 60px 100px 0 100px;
     padding-right: 20px;
   }
 }
@@ -108,7 +112,7 @@ button:hover {
 
 .seleccion {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   gap: 30px;
@@ -121,26 +125,27 @@ button:hover {
 
 .selected-category {
   display: inline-block;
-  font-size: 20px;
-  font-weight: bold;
-  color: white;
+  font-size: 18px;
+  font-weight: 300;
+  color: #343a40;
   // background-color: rgba(255, 255, 255, 0.3);
   padding: 10px 20px;
-  border-bottom: 3px solid white;
+  border: 1px solid #343a40;
   position: relative;
   transition: background-color 0.2s;
 }
 
 .selected-category:hover {
   cursor: pointer;
-  background-color: rgb(255, 255, 255, 0.5);
+  background-color: #343a40;
+  color: white;
 }
 .toggle-menu {
   all: unset;
   padding: 0 4px;
   font-size: 16px;
   margin-left: 10px;
-  color: white;
+  color: #343a40;
 }
 
 .submenu-mobile {
@@ -195,21 +200,21 @@ button:hover {
 // @media (max-width: 767px) {
 // }
 
-@media (min-width: 1280px) {
-  .seleccion {
-    flex-direction: column;
-  }
-}
+// @media (min-width: 1280px) {
+//   .seleccion {
+//     flex-direction: column;
+//   }
+// }
 
 .opcion {
   text-align: center;
-  width: 150px;
-  padding: 10px 20px;
+  width: auto;
+  padding: 5px 25px;
   border: none;
-  border-bottom: 3px solid white;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 300;
+  font-size: 15px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   position: relative; /* Necesario para el menú desplegable */
@@ -217,6 +222,6 @@ button:hover {
 .opcion:hover {
   text-decoration: none;
   color: white;
-  background-color: rgb(255, 255, 255, 0.3);
+  background-color: #343a40;
   cursor: pointer;
 }

@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent {
-  selectedCategory: string = 'COMIDA'; // Categoría por defecto
+  selectedCategory: string = 'TODOS'; // Categoría por defecto
   isMenuOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
 
   toggleMenu() {

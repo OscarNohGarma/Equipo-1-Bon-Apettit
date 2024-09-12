@@ -9,6 +9,7 @@
                 <p class="toggle-menu">▼</p>
             </div>
             <div class="submenu-mobile" [class.show]="isMenuOpen">
+                <div (click)="selectCategory('TODOS')">TODOS</div>
                 <div (click)="selectCategory('COMIDA')">COMIDA</div>
                 <div (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
                 <div (click)="selectCategory('POSTRES')">POSTRES</div>
@@ -17,6 +18,7 @@
         </div>
 
         <div class="seleccion">
+            <div class="opcion" (click)="selectCategory('TODOS')">TODOS</div>
             <div class="opcion" (click)="selectCategory('COMIDA')">COMIDA</div>
             <div class="opcion" (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
             <div class="opcion" (click)="selectCategory('POSTRES')">POSTRES</div>
