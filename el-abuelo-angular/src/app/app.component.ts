@@ -6,8 +6,12 @@ import { GaleriaInstalacionesComponent } from "./components/galeria-instalacione
 @Component({
   selector: 'app-root',
   standalone: true,
+<<<<<<< Updated upstream
   imports: [RouterOutlet, NavbarComponent, GaleriaInstalacionesComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+=======
+  imports: [RouterOutlet, NavbarComponent, InicioComponent, GaleriaInstalacionesComponent],
+>>>>>>> Stashed changes
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
