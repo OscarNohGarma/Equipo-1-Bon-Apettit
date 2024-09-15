@@ -1,38 +1,10 @@
-
-<div class="content">
-  <div class="overlay">
-  <h2 class="titulo">
-
-    Instalaciones
-  </h2>
-  <div class="location">
-
-    <h3>
-      Lugar
-    </h3>
-
-    <p>
-      Dzitbalche, Campeche, Mexico
-    </p>
-    <p>
-      Calle 18 #29, Dzitbalché, Mexico
-    </p>
-    <img allowfullscreen="" height="200" loading="lazy"
-      src="../../../assets/map.png"
-      style="border:0;" width="100%">
-
-  </div>
-  <div class="gallery">
-    <div class="gallery-wrapper">
-      <img alt="Main Image" class="main" height="200"
-      src="../../../assets/PCentral.jpg"
-      width="200" />
-
-      <img alt="Small Image 1" class="small1" src="../../../assets/PFotografico.jpg" />
-      <img alt="Small Image 2" class="small2" src="../../../assets/PComedor.jpg" />
-      <img alt="Small Image 3" class="small3" src="../../../assets/PFrente.jpg" />
-      <img alt="Small Image 4" class="small4" src="../../../assets/PFondoPatio.jpg" />
+<main class="contenedor mt-5 container">
+  <h2>Conoce nuestra cafetería</h2>
+  <div *ngFor="let modelo of modelos" class="modelo" [ngClass]="modelo.clase" [ngStyle]="{'background-image': 'url(' + modelo.imagen + ')'}">
+    <div class="contenido-modelo">
+      <h3>{{ modelo.nombre }}</h3>
+      <p>{{ modelo.descripcion }}</p>
+      <a href="#" class="btn">Más información</a>
     </div>
-  </div>
-</div>
-</div>
+  </div><!-- modelo -->
+</main>
