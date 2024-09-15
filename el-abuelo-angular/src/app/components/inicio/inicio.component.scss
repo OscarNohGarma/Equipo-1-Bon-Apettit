@@ -1,91 +1,3 @@
-// .body {
-//   position: absolute;
-//   top: 220px;
-//   left: 150px;
-// }
-
-// .title {
-//   color: white;
-//   font-size: 50px;
-//   text-align: left;
-// }
-
-// .information {
-//   color: #9d917c;
-//   text-align: left;
-//   top: 10px;
-//   font-style: italic;
-//   text-transform: uppercase;
-//   font-size: 25px;
-// }
-
-// p {
-//   line-height: 0.5;
-// }
-
-// .color {
-//   background-color: #6c5a60;
-// }
-
-// .nav-cafe {
-//   position: absolute;
-//   width: 300px;
-//   height: auto;
-//   top: 190px;
-//   left: 1000px;
-// }
-
-// .box {
-//   position: absolute;
-//   color: white;
-//   text-align: left;
-//   top: 370px;
-//   left: 150px;
-// }
-
-// .box1 {
-//   position: absolute;
-//   color: white;
-//   text-align: left;
-//   font-family: Tahoma;
-//   top: 450px;
-//   left: 260px;
-//   font-size: 32px;
-// }
-
-// .nav-icon {
-//   position: absolute;
-//   width: 100px;
-//   height: auto;
-//   top: 20px;
-//   left: -10px;
-// }
-
-// .box2 {
-//   position: absolute;
-//   color: white;
-//   text-align: left;
-//   top: 450px;
-//   left: -10px;
-// }
-
-// .box3 {
-//   position: absolute;
-//   color: white;
-//   font-family: Tahoma;
-//   text-align: left;
-//   top: 610px;
-//   left: 260px;
-//   font-size: 32px;
-// }
-
-// .nav-icon2 {
-//   position: absolute;
-//   width: 80px;
-//   height: auto;
-//   top: 130px;
-//   left: 150px;
-// }
 
 h1 {
   font-size: 20px;
@@ -136,4 +48,40 @@ h3 {
 .contenido-nosotros h2,
 .contenido-nosotros p {
   margin-bottom: 1rem;
+}
+
+
+
+.historia {
+  display: grid;
+  color: black;
+  grid-template-rows: repeat(2, 1fr);
+  background-image: url(../../../assets/menu.jpg);
+  background-repeat: no-repeat;
+  background-position: bottom right;
+  background-size: 800px;
+}
+
+@media (min-width: 992px) {
+  .historia {
+    background-size: 950px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.contenido-historia {
+  background-color: white;
+  padding: 5rem 5rem 0 5rem;
+}
+
+@media (min-width: 768px) {
+  .contenido-historia {
+    padding-bottom: 5rem;
+  }
+}
+
+@media (min-width: 992px) {
+  .contenido-historia {
+    grid-column: 1/3;
+  }
 }
