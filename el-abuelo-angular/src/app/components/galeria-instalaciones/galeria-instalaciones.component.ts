@@ -15,7 +15,7 @@ export class GaleriaInstalacionesComponent  {
       nombre: 'Parador Star',
       descripcion: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum odio vel dolor voluptates, asperiores quod'
             +'laudantium repellendus? Repudiandae exercitationem ex magni! Veritatis consectetur cupiditate,'+
-            'voluptatem quae repellat perspiciatis assumenda explicabo.',
+            'voluptatems quae repellat perspiciatis assumenda explicabo.',
       imagen: '../../../assets/galeriaInstalaciones/PCentral.jpg',
       clase: 'basico'
     },
