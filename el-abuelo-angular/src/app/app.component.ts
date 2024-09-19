@@ -3,11 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { InicioComponent } from './components/inicio/inicio.component';
 import { GaleriaInstalacionesComponent } from "./components/galeria-instalaciones/galeria-instalaciones.component";
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, NavbarComponent, GaleriaInstalacionesComponent, InicioComponent],
+  imports: [RouterOutlet, NavbarComponent, GaleriaInstalacionesComponent, InicioComponent, HttpClientModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
 })
