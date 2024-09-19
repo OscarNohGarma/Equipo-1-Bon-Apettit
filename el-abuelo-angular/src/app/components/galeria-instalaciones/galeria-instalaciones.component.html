@@ -1,6 +1,7 @@
-<main class="contenedor mt-5 container">
+<main class="mt-10 container">
   <h2>Conoce nuestra cafetería</h2>
-  <div *ngFor="let modelo of modelos" class="modelo" [ngClass]="modelo.clase" [ngStyle]="{'background-image': 'url(' + modelo.imagen + ')'}">
+  <div *ngFor="let modelo of modelos" class="modelo" [ngClass]="modelo.clase"
+    [ngStyle]="{'background-image': 'url(' + modelo.imagen + ')'}">
     <div class="contenido-modelo">
       <h3>{{ modelo.nombre }}</h3>
       <p>{{ modelo.descripcion }}</p>

@@ -2,3 +2,20 @@ body {
   background-color: white;
   font-family: "raleway", sans-serif;
 }
+h1 {
+  font-size: 20px;
+}
+h2 {
+  font-size: 55px;
+  font-weight: bolder;
+}
+h3 {
+  font-size: 50px;
+}
+h1,
+h2,
+h3 {
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 1rem 0 4rem 0;
+}

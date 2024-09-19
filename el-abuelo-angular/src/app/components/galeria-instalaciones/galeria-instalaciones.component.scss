@@ -6,35 +6,31 @@
   --fuentePrincipal: "Raleway", "sans-serif";
 }
 
-h1,
-h2,
-h3 {
-  font-weight: 900;
-  line-height: 1.2;
-  margin: 1rem 0 4rem 0;
-}
-
-h1 {
-  font-size: 4.8rem;
-}
-h2 {
-  font-size: 3.8rem;
-}
-h3 {
-  font-size: 3.4rem;
-}
-
 a {
   text-decoration: none;
 }
+h2 {
+  text-align: center;
+}
 
-
+@media (min-width: 768px) {
+  h2 {
+    text-align: start;
+  }
+}
+h3 {
+  font-weight: 700;
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 1rem 0 3rem 0;
+}
 .btn {
   color: #343a40;
   background-color: #fff;
   border: 1px solid #343a40;
   padding: 0.5rem 2rem;
   transition: background-color 0.3s;
+  border-radius: 0;
 }
 .btn:hover {
   background-color: #343a40;
@@ -47,10 +43,9 @@ a {
   text-align: center;
 }
 
-.mt-5 {
-  margin-top: 5rem;
+.mt-10 {
+  margin-top: 150px;
 }
-
 
 .modelo {
   display: grid;
@@ -75,8 +70,6 @@ a {
   background-color: #fff;
 }
 
-
-
 @media (min-width: 768px) {
   .basico {
     background-position: top right;
@@ -97,8 +90,6 @@ a {
   }
 }
 
-
-
 @media (min-width: 768px) {
   .elite {
     background-position: top right;
@@ -107,5 +98,3 @@ a {
     padding: 2rem 2rem 2rem 0;
   }
 }
-
-
