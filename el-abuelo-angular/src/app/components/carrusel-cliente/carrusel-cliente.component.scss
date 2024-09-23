@@ -1,0 +1,15 @@
+.hm-gradient {
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+}
+.darken-grey-text {
+  color: #2E2E2E;
+}
+.carousel-item img {
+  height: 400px; /* Ajusta esta altura según tus necesidades */
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .carousel-item img {
+      height: 300px; /* Altura más pequeña para dispositivos móviles */
+  }
+}
