@@ -1,13 +1,9 @@
 <div class="bg-menu">
+    <div class="menu container">
+        <h1 class="encabezado">Menú</h1>
+        <h2 class="subtitulo">¡Disfruta de nuestra deliciosa comida!</h2>
 
-    <div class="menu  container">
-        <!-- asdasdasdasd -->
-        <h1 class="encabezado">
-            Menú
-        </h1>
-        <h2 class="subtitulo">
-            ¡Disfruta de nuestra deliciosa comida!
-        </h2>
+        <!-- Menú de selección en móvil -->
         <div class="mobile-seleccion">
             <div class="selected-category" (click)="toggleMenu()">
                 {{ selectedCategory }}
@@ -22,6 +18,7 @@
             </div>
         </div>
 
+        <!-- Menú de selección en pantallas grandes -->
         <div class="seleccion">
             <div class="opcion button" (click)="selectCategory('TODOS')">TODOS</div>
             <div class="opcion button" (click)="selectCategory('COMIDA')">COMIDA</div>
@@ -30,146 +27,12 @@
             <div class="opcion button" (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
         </div>
 
-        <!-- asdasdasdasd -->
-        <div class="grid" *ngIf="selectedCategory === 'TODOS'">
-            <div class="box">
-                <h1>Hamburguesa</h1>
-                <img src="https://s3.abcstatics.com/media/gurmesevilla/2012/01/comida-rapida-casera.jpg" alt="comida">
-                <p class="precio">$80</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Frappé</h1>
-                <img src="https://img.freepik.com/fotos-premium/cafe-frape-frio-tu-sed-ai-generation_724548-21265.jpg"
-                    alt="bebida">
-                <p class="precio">$50</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Pastel de fresa</h1>
-                <img src="https://cdn7.kiwilimon.com/recetaimagen/16297/8238.jpg" alt="postre">
-                <p class="precio">$45</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-        </div>
-        <div class="grid" *ngIf="selectedCategory === 'COMIDA'">
-            <div class="box">
-                <h1>Hamburguesa</h1>
-                <img src="https://s3.abcstatics.com/media/gurmesevilla/2012/01/comida-rapida-casera.jpg" alt="comida">
-                <p class="precio">$80</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Hamburguesa</h1>
-                <img src="https://s3.abcstatics.com/media/gurmesevilla/2012/01/comida-rapida-casera.jpg" alt="comida">
-                <p class="precio">$80</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Hamburguesa</h1>
-                <img src="https://s3.abcstatics.com/media/gurmesevilla/2012/01/comida-rapida-casera.jpg" alt="comida">
-                <p class="precio">$80</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Hamburguesa</h1>
-                <img src="https://s3.abcstatics.com/media/gurmesevilla/2012/01/comida-rapida-casera.jpg" alt="comida">
-                <p class="precio">$80</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Hamburguesa</h1>
-                <img src="https://s3.abcstatics.com/media/gurmesevilla/2012/01/comida-rapida-casera.jpg" alt="comida">
-                <p class="precio">$80</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-        </div>
-        <div class="grid" *ngIf="selectedCategory === 'BEBIDAS'">
-            <div class="box">
-                <h1>Frappé</h1>
-                <img src="https://img.freepik.com/fotos-premium/cafe-frape-frio-tu-sed-ai-generation_724548-21265.jpg"
-                    alt="bebida">
-                <p class="precio">$50</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Frappé</h1>
-                <img src="https://img.freepik.com/fotos-premium/cafe-frape-frio-tu-sed-ai-generation_724548-21265.jpg"
-                    alt="bebida">
-                <p class="precio">$50</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Frappé</h1>
-                <img src="https://img.freepik.com/fotos-premium/cafe-frape-frio-tu-sed-ai-generation_724548-21265.jpg"
-                    alt="bebida">
-                <p class="precio">$50</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-        </div>
-        <div class="grid" *ngIf="selectedCategory === 'POSTRES'">
-            <div class="box">
-                <h1>Pastel de fresa</h1>
-                <img src="https://cdn7.kiwilimon.com/recetaimagen/16297/8238.jpg" alt="postre">
-                <p class="precio">$45</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Pastel de fresa</h1>
-                <img src="https://cdn7.kiwilimon.com/recetaimagen/16297/8238.jpg" alt="postre">
-                <p class="precio">$45</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-        </div>
-        <div class="grid" *ngIf="selectedCategory === 'ESPECIALES'">
-            <div class="box">
-                <h1>Especial 1</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 2</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 1</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 2</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 1</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 2</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 1</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 2</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 1</h1>
-                <p>$$</p>
-                <button class="button add">AÑADIR</button>
-            </div>
-            <div class="box">
-                <h1>Especial 2</h1>
-                <p>$$</p>
+        <!-- Productos filtrados -->
+        <div class="grid">
+            <div class="box" *ngFor="let product of filteredProducts">
+                <h1>{{ product.name }}</h1>
+                <img [src]="product.image" [alt]="product.name" class="imagen">
+                <p class="precio">${{ product.price }}</p>
                 <button class="button add">AÑADIR</button>
             </div>
         </div>
