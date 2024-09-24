@@ -1,22 +1,30 @@
+<div class="nav-back">
+
+    <div class="navegacion">
+        <a [routerLink]="['/']">Inicio</a>
+        <a [routerLink]="['menu']">Menú</a>
+        <a [routerLink]="['Galeria']">Galería</a>
+        <a [routerLink]="['contacto']">Contacto</a>
+    </div>
+</div>
 <div class="header">
     <div class="container contenido-header">
         <div class="barra">
             <div class="logo">
                 <h1 class="nombre-sitio">El<span>Abuelo</span></h1>
             </div>
-            <div class="contacto">
-                <!-- <a class="telefono" href="tel:01-800-0000-000">01-800-0000-000</a> -->
-                <nav class="navegacion">
-                    <a [routerLink]="['/']">Inicio</a>
-                    <a [routerLink]="['menu']">Menú</a>
-                    <a [routerLink]="['Galeria']">Galería</a>
-                    <a [routerLink]="['contacto']">Contacto</a>
-                </nav>
+            <!-- <a class="telefono" href="tel:01-800-0000-000">01-800-0000-000</a> -->
+            <div class="nav-phone">
+                <a [routerLink]="['/']">Inicio</a>
+                <a [routerLink]="['menu']">Menú</a>
+                <a [routerLink]="['Galeria']">Galería</a>
+                <a [routerLink]="['contacto']">Contacto</a>
+            </div>
+            <div class="slogan">
+                <h1>Ven a visitarnos</h1>
+                <p>Hacemos tus experiencias algo inolvidable</p>
             </div>
         </div>
-        <div class="slogan">
-            <h1>Ven a visitarnos</h1>
-            <p>Construimos la casa de tus sueños</p>
-        </div>
+
     </div>
 </div>

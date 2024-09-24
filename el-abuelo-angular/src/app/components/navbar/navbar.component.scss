@@ -17,11 +17,11 @@ img {
 
 .header {
   background-image: url(../../../assets/menu.jpg);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.41);
   background-blend-mode: overlay;
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: center 25%;
   padding: 5rem 0;
 }
 
@@ -57,50 +57,9 @@ img {
   }
 }
 
-.contacto {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-@media (min-width: 992px) {
-  .contacto {
-    align-items: flex-end;
-  }
-}
-
-.telefono {
-  display: flex;
-}
-
-.telefono::before {
-  content: "";
-  display: block;
-  width: 4rem;
-  height: 4rem;
-  // background-image: url(../img/telefono.png);
-  background-repeat: no-repeat;
-  background-position: center center;
-  margin-right: 1rem;
-}
-
 .header a {
   color: var(--blanco);
   font-size: 2rem;
-}
-
-.navegacion {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-@media (min-width: 768px) {
-  .navegacion {
-    flex-direction: row;
-  }
 }
 
 .slogan {
@@ -118,7 +77,18 @@ img {
 }
 @media (min-width: 768px) {
   .slogan h1 {
+    font-size: 3rem;
+  }
+  .slogan {
+    text-align: center;
+  }
+}
+@media (min-width: 1280px) {
+  .slogan h1 {
     font-size: 5rem;
+  }
+  .slogan {
+    text-align: end;
   }
 }
 
@@ -127,9 +97,10 @@ img {
   line-height: 1;
 }
 
-// DIVISION
+// NAVEGACION
 
-.navegacion {
+.navegacion,
+.nav-phone {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -137,34 +108,55 @@ img {
   margin-bottom: 50px;
   padding: 20px;
 }
+.navegacion {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+@media (min-width: 768px) {
+  .nav-phone {
+    display: none;
+  }
+}
 
 .navegacion img {
   height: 80px;
   margin-bottom: 20px;
 }
 
-.navegacion a {
+.navegacion a,
+.nav-phone a {
   text-decoration: none;
   color: white;
-  font-size: 20px;
-  padding: 10px;
+  padding: 5px;
   transition: all 0.2s ease-in-out;
   border-radius: 3px;
 }
 
-.navegacion a:hover {
+.navegacion a:hover,
+.nav-phone a:hover {
   text-decoration: none;
   color: white;
-  font-size: 20px;
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.nav-phone a {
+  font-size: 20px;
+}
+
+.navegacion {
+  display: none;
+  font-size: 16px;
+  background-color: #242424;
 }
 
 @media (min-width: 768px) {
   .navegacion {
-    gap: 20px;
+    display: flex;
+    gap: 30px;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    padding: 5px;
   }
   .navegacion img {
     margin-right: 30px;
@@ -174,8 +166,6 @@ img {
 
 @media (min-width: 1280px) {
   .navegacion {
-    flex-direction: row;
-    align-items: center;
-    justify-content: flex-start;
+    gap: 50px;
   }
 }
