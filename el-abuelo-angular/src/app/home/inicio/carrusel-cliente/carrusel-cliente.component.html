@@ -1,19 +1,17 @@
-<main>
+<div>
   <div class="container mt-4">
+    <h2 style="margin-top: 8rem;
+  margin-bottom: 4rem;">Nuestras Visitas</h2>
     <div class="row">
       <!-- Primer Carrusel -->
       <div class="col-md-6">
         <div id="carousel-1" class="carousel slide carousel-fade mb-5" data-ride="carousel">
           <ol class="carousel-indicators">
-            <li *ngFor="let img of carrusel1; let i = index"
-                [attr.data-target]="'#carousel-1'"
-                [attr.data-slide-to]="i"
-                [class.active]="i === 0"></li>
+            <li *ngFor="let img of carrusel1; let i = index" [attr.data-target]="'#carousel-1'" [attr.data-slide-to]="i"
+              [class.active]="i === 0"></li>
           </ol>
           <div class="carousel-inner" role="listbox">
-            <div *ngFor="let img of carrusel1; let i = index"
-                 class="carousel-item"
-                 [class.active]="i === 0">
+            <div *ngFor="let img of carrusel1; let i = index" class="carousel-item" [class.active]="i === 0">
               <img class="d-block w-100" [src]="img" [alt]="'Slide ' + (i + 1)">
             </div>
           </div>
@@ -32,15 +30,11 @@
       <div class="col-md-6">
         <div id="carousel-2" class="carousel slide carousel-fade mb-5" data-ride="carousel">
           <ol class="carousel-indicators">
-            <li *ngFor="let img of carrusel2; let i = index"
-                [attr.data-target]="'#carousel-2'"
-                [attr.data-slide-to]="i"
-                [class.active]="i === 0"></li>
+            <li *ngFor="let img of carrusel2; let i = index" [attr.data-target]="'#carousel-2'" [attr.data-slide-to]="i"
+              [class.active]="i === 0"></li>
           </ol>
           <div class="carousel-inner" role="listbox">
-            <div *ngFor="let img of carrusel2; let i = index"
-                 class="carousel-item"
-                 [class.active]="i === 0">
+            <div *ngFor="let img of carrusel2; let i = index" class="carousel-item" [class.active]="i === 0">
               <img class="d-block w-100" [src]="img" [alt]="'Slide ' + (i + 1)">
             </div>
           </div>
@@ -56,4 +50,4 @@
       </div>
     </div>
   </div>
-</main>
+</div>
