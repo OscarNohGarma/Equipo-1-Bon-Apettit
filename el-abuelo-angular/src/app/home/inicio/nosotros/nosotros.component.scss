@@ -3,7 +3,7 @@
   display: grid;
   color: black;
   grid-template-rows: repeat(2, 1fr);
-  background-image: url(../../../assets/457402195_1033340645149779_1729530164898725567_n.jpg);
+  background-image: url(../../../../assets/457402195_1033340645149779_1729530164898725567_n.jpg);
   background-repeat: no-repeat;
   background-position: bottom center;
   background-size: 800px;
@@ -18,7 +18,7 @@
 
 .contenido-nosotros {
   background-color: white;
-  padding: 5rem 5rem 0 5rem;
+  padding: 0rem 5rem 0 5rem;
 }
 
 @media (min-width: 768px) {
@@ -42,7 +42,7 @@ p {
   display: grid;
   color: black;
   grid-template-rows: repeat(2, 1fr);
-  background-image: url(../../../assets/menu.jpg);
+  background-image: url(../../../../assets/menu.jpg);
   background-repeat: no-repeat;
   background-position: bottom right;
   background-size: 800px;

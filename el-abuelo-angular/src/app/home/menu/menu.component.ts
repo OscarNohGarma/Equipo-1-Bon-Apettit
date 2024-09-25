@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuProduct } from '../../interface/menuProduct';
+import { MenuProduct } from '../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-menu',
