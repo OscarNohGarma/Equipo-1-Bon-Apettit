@@ -1,0 +1,128 @@
+h2 {
+  margin-bottom: 25px;
+}
+
+.sticky-box {
+  position: fixed;
+  top: 54px;
+  right: -400px; // Fuera de la pantalla
+  width: 330px;
+  padding: 35px;
+  background-color: #f8f9fa;
+  border: 1px solid #92979c;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: right 0.5s ease; // Transición para el deslizamiento
+}
+
+.sticky-box.show {
+  right: 0; // Mostrar en la pantalla
+}
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.productos {
+  max-height: 475px;
+  overflow-y: scroll;
+}
+.producto {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  background-color: #f5f5f5;
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid #b2b9c0;
+}
+.producto:last-child {
+  margin-bottom: 0;
+}
+.btn-del {
+  text-decoration: none;
+  color: rgb(177, 15, 15);
+  font-size: 25px;
+  font-weight: 700;
+  padding: 0;
+  background-color: #343a40;
+  display: block;
+  inline-size: 0;
+  border: 1px solid rgb(177, 15, 15);
+  border-radius: 100%;
+}
+.btn-del:hover {
+  cursor: pointer;
+}
+
+.pago {
+  text-align: center;
+  font-size: 18px;
+  margin-top: 20px;
+}
+.pago p span {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.button {
+  all: unset;
+  text-align: center;
+  width: 100%;
+  padding: 5px 0px;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
+
+.nombre {
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.subtotal {
+  font-weight: 800;
+  margin: 0;
+  color: #343a40;
+}
+
+.subtotal span {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.circle-button {
+  width: 25px; /* Ajusta el tamaño según sea necesario */
+  height: 25px; /* Ajusta el tamaño según sea necesario */
+  border: none;
+  border-radius: 50%;
+  border: 2px solid rgb(177, 15, 15); /* Color de fondo del círculo */
+  color: rgb(177, 15, 15);
+  font-size: 12px; /* Tamaño de la 'X' */
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.circle-button:hover {
+  background-color: rgb(231, 193, 193); /* Color de fondo al pasar el ratón */
+}
+
+.close-icon {
+  margin: 0; /* Elimina el margen de los elementos en el interior */
+}
