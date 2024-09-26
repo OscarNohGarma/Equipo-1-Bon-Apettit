@@ -12,30 +12,36 @@ import { MenuProduct } from '../../../core/models/menuProduct';
 })
 export class OrdenComponent implements OnInit {
   productosEnOrden: MenuProduct[] = [];
-  isVisible: boolean = false; // Controlar la visibilidad
+  isVisible = false; // Mantener solo esta variable
+  buttonIsVisible = false; // Mantener solo esta variable
 
   constructor(public ordenService: OrderService) {}
 
   ngOnInit() {
     this.ordenService.productosEnOrden$.subscribe((productos) => {
       this.productosEnOrden = productos;
-      if (productos.length > 0) {
-        this.isVisible = true; // Mostrar cuando hay productos
-      } else {
-        this.isVisible = false; // Ocultar si no hay productos
-      }
+      this.isVisible = this.productosEnOrden.length > 0; // Mostrar solo si hay productos
+      this.buttonIsVisible = this.productosEnOrden.length > 0; // Mantener solo esta variable
     });
+  }
+
+  toggleOrden() {
+    this.isVisible = !this.isVisible; // Alternar visibilidad
   }
 
   get total(): number {
     return this.ordenService.getTotal();
   }
 
-  incrementarCantidad(index: number): void {
-    this.ordenService.incrementarCantidad(index); // Llama al servicio para incrementar
+  incrementarCantidad(index: number) {
+    this.ordenService.incrementarCantidad(index);
   }
 
-  decrementarCantidad(index: number): void {
-    this.ordenService.decrementarCantidad(index); // Llama al servicio para decrementar
+  decrementarCantidad(index: number) {
+    this.ordenService.decrementarCantidad(index);
+  }
+
+  confirmarPedido() {
+    // Lógica para confirmar el pedido
   }
 }

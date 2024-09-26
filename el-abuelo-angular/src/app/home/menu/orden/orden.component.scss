@@ -8,29 +8,31 @@ p {
 .sticky-box {
   position: fixed;
   top: 54px;
-  right: -400px; // Fuera de la pantalla
+  right: 0; /* Posición inicial en la pantalla */
   width: 330px;
   padding: 35px;
   background-color: #f8f9fa;
   border: 1px solid #92979c;
-  padding: 25px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  transition: right 0.5s ease; // Transición para el deslizamiento
+  transition: transform 0.5s ease; /* Transición para el deslizamiento */
+  transform: translateX(
+    100%
+  ); /* Desplazar completamente fuera de la pantalla */
 }
 
 .sticky-box.show {
-  right: 0; // Mostrar en la pantalla
+  transform: translateX(0); /* Desplazar a la posición original */
+}
+
+.productos {
+  max-height: 475px;
+  overflow-y: auto; /* Cambiar a auto para permitir el desplazamiento */
 }
 
 h2 {
   font-size: 30px;
   text-align: center;
-}
-
-.productos {
-  max-height: 475px;
-  overflow-y: scroll;
 }
 .producto {
   display: flex;
@@ -38,12 +40,13 @@ h2 {
   align-items: flex-start;
   background-color: #ffffff;
   padding: 15px;
+  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  border: 1px solid #b2b9c0;
+  // border: 1px solid #b2b9c0;
 }
-.producto:last-child {
-  margin-bottom: 0;
-}
+// .producto:last-child {
+//   margin-bottom: 0;
+// }
 .btn-del {
   text-decoration: none;
   color: rgb(177, 15, 15);
@@ -165,3 +168,41 @@ h2 {
   font-weight: 700;
   color: #343a40;
 }
+
+.relative-box {
+  position: relative;
+}
+
+.toggle-button {
+  background-color: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  margin-bottom: 15px; /* Añade un margen para separar del título */
+  position: absolute;
+  left: -67px;
+  top: 150px;
+
+  background-color: #f8f9fa;
+  border: 1px solid #92979c;
+  // border-right: 1px solid #f8f9fa;
+  padding: 10px 10px;
+  font-weight: 700;
+  color: #343a40;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+// @media (max-width: 768px) {
+//   .sticky-box {
+//     width: 100%; /* Ajusta el ancho para pantallas pequeñas */
+//     padding: 20px; /* Reduce el padding */
+//   }
+
+//   .button {
+//     font-size: 14px; /* Reduce el tamaño de la fuente */
+//   }
+
+//   .toggle-button {
+//     font-size: 18px; /* Reduce el tamaño de la fuente del botón */
+//   }
+// }
