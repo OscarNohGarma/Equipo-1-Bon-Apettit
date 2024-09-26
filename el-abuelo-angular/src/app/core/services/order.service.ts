@@ -11,7 +11,21 @@ export class OrderService {
 
   agregarProducto(producto: MenuProduct) {
     const productosActuales = this.productosEnOrdenSubject.getValue();
-    this.productosEnOrdenSubject.next([...productosActuales, producto]);
+    const itemExistente = productosActuales.find(
+      (item) => item.id === producto.id
+    );
+
+    if (itemExistente) {
+      // Si el producto ya está en la orden, solo aumenta la cantidad y actualiza el subtotal
+      itemExistente.quantity! += 1; // Aumentar la cantidad
+      itemExistente.subtotal! = itemExistente.price * itemExistente.quantity!; // Actualizar subtotal
+    } else {
+      // Si el producto no está en la orden, inicializa cantidad y subtotal
+      producto.quantity = 1; // Inicializa la cantidad en 1
+      producto.subtotal = producto.price; // Inicializa el subtotal con el precio del producto
+      productosActuales.push(producto); // Agrega el nuevo producto
+    }
+    this.productosEnOrdenSubject.next([...productosActuales]); // Actualiza el observable
   }
 
   eliminarProducto(index: number) {
@@ -23,6 +37,6 @@ export class OrderService {
   getTotal(): number {
     return this.productosEnOrdenSubject
       .getValue()
-      .reduce((acc, producto) => acc + producto.price, 0);
+      .reduce((acc, item) => acc + (item.subtotal || 0), 0); // Suma los subtotales
   }
 }
