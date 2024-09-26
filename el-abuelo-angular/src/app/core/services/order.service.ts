@@ -8,6 +8,7 @@ import { MenuProduct } from '../../core/models/menuProduct';
 export class OrderService {
   private productosEnOrdenSubject = new BehaviorSubject<MenuProduct[]>([]);
   productosEnOrden$ = this.productosEnOrdenSubject.asObservable();
+  isVisible: boolean = false;
 
   agregarProducto(producto: MenuProduct) {
     const productosActuales = this.productosEnOrdenSubject.getValue();
@@ -17,15 +18,21 @@ export class OrderService {
 
     if (itemExistente) {
       // Si el producto ya está en la orden, solo aumenta la cantidad y actualiza el subtotal
-      itemExistente.quantity! += 1; // Aumentar la cantidad
-      itemExistente.subtotal! = itemExistente.price * itemExistente.quantity!; // Actualizar subtotal
+      itemExistente.quantity! += 1;
+      itemExistente.subtotal! = itemExistente.price * itemExistente.quantity!;
     } else {
       // Si el producto no está en la orden, inicializa cantidad y subtotal
-      producto.quantity = 1; // Inicializa la cantidad en 1
-      producto.subtotal = producto.price; // Inicializa el subtotal con el precio del producto
-      productosActuales.push(producto); // Agrega el nuevo producto
+      producto.quantity = 1;
+      producto.subtotal = producto.price;
+      productosActuales.push(producto);
     }
-    this.productosEnOrdenSubject.next([...productosActuales]); // Actualiza el observable
+
+    this.productosEnOrdenSubject.next([...productosActuales]);
+
+    // Activar visibilidad si hay productos
+    if (productosActuales.length > 0) {
+      this.isVisible = true;
+    }
   }
 
   eliminarProducto(index: number) {

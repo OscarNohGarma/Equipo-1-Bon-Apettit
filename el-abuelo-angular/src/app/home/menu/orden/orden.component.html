@@ -1,4 +1,4 @@
-<div class="sticky-box">
+<div class="sticky-box" [class.show]=" isVisible">
     <h2>Tu orden</h2>
     <div class="productos">
         <div *ngFor="let item of productosEnOrden; let i = index" class="producto">

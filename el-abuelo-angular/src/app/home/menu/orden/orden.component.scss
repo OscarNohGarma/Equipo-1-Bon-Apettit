@@ -4,15 +4,20 @@ h2 {
 
 .sticky-box {
   position: fixed;
-  top: 54px; /* Ajusta la distancia desde el borde superior */
-  right: 0;
-  width: 350px; /* Ancho del cuadro */
-  //   height: 200px; /* Altura del cuadro */
-  background-color: #f8f9fa; /* Color de fondo */
-  border: 1px solid #92979c; /* Borde */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar un efecto flotante */
-  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  top: 54px;
+  right: -400px; // Fuera de la pantalla
+  width: 330px;
   padding: 35px;
+  background-color: #f8f9fa;
+  border: 1px solid #92979c;
+  padding: 25px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  transition: right 0.5s ease; // Transición para el deslizamiento
+}
+
+.sticky-box.show {
+  right: 0; // Mostrar en la pantalla
 }
 
 h2 {

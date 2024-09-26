@@ -11,17 +11,20 @@ import { MenuProduct } from '../../../core/models/menuProduct';
   styleUrls: ['./orden.component.scss'],
 })
 export class OrdenComponent implements OnInit {
-  productosEnOrden: MenuProduct[] = []; // Sigue usando MenuProduct
+  productosEnOrden: MenuProduct[] = [];
+  isVisible: boolean = false; // Controlar la visibilidad
 
   constructor(public ordenService: OrderService) {}
 
   ngOnInit() {
-    this.ordenService.productosEnOrden$.subscribe(
-      (productos: MenuProduct[]) => {
-        this.productosEnOrden = productos;
-        console.log(this.productosEnOrden);
+    this.ordenService.productosEnOrden$.subscribe((productos) => {
+      this.productosEnOrden = productos;
+      if (productos.length > 0) {
+        this.isVisible = true; // Mostrar cuando hay productos
+      } else {
+        this.isVisible = false; // Ocultar si no hay productos
       }
-    );
+    });
   }
 
   get total(): number {
