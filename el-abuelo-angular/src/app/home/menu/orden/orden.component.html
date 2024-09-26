@@ -1,20 +1,26 @@
-<div class="sticky-box" [class.show]=" isVisible">
+<div class="sticky-box" [class.show]="isVisible">
     <h2>Tu orden</h2>
     <div class="productos">
         <div *ngFor="let item of productosEnOrden; let i = index" class="producto">
             <div>
                 <p class="nombre">{{ item.name }}</p>
-                <p class="cantidad">(Cantidad: {{ item.quantity }})</p>
-                <p class="subtotal"> Subtotal: <span>${{ item.subtotal }}</span> </p>
+                <p class="precio">${{item.price}}</p>
+                <div class="cantidad">
+                    <div (click)="decrementarCantidad(i)" class="inc">-</div>
+
+                    {{ item.quantity }}
+
+                    <div (click)="incrementarCantidad(i)" class="dec">+</div>
+                </div>
+                <p class="subtotal">Subtotal: <span>${{ item.subtotal }}</span></p>
             </div>
             <button (click)="ordenService.eliminarProducto(i)" class="circle-button">
                 <span class="close-icon">✖</span>
             </button>
-
         </div>
     </div>
     <div class="pago">
-        <p>Total a pagar: <span>${{ total }}</span> </p>
+        <p>Total a pagar: <span>${{ total }}</span></p>
     </div>
     <button class="button add">CONFIRMAR PEDIDO</button>
 </div>

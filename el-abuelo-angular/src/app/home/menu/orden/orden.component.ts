@@ -30,4 +30,12 @@ export class OrdenComponent implements OnInit {
   get total(): number {
     return this.ordenService.getTotal();
   }
+
+  incrementarCantidad(index: number): void {
+    this.ordenService.incrementarCantidad(index); // Llama al servicio para incrementar
+  }
+
+  decrementarCantidad(index: number): void {
+    this.ordenService.decrementarCantidad(index); // Llama al servicio para decrementar
+  }
 }
