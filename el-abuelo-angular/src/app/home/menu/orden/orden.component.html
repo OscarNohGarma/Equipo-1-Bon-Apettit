@@ -1,10 +1,11 @@
 <div class="sticky-box">
     <h2>Tu orden</h2>
     <div class="pago">
-        <p>Total a pagar: </p>
+        <p>Total a pagar: {{ total }}</p>
     </div>
-    <div class="div-nombre">
-        <input type="text" placeholder="Ingresa tu nombre" class="name">
+    <div *ngFor="let product of productosEnOrden; let i = index">
+        <p>{{ product.name }} - ${{ product.price }}</p>
+        <button (click)="ordenService.eliminarProducto(i)">Eliminar</button>
     </div>
     <button class="button add">CONFIRMAR PEDIDO</button>
 </div>
