@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
 import { MenuProduct } from '../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
+import { OrdenComponent } from './orden/orden.component';
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, OrdenComponent],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
 })

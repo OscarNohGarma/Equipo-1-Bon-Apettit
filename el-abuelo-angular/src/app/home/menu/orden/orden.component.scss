@@ -1,0 +1,51 @@
+.sticky-box {
+  position: fixed;
+  top: 54px; /* Ajusta la distancia desde el borde superior */
+  right: 0;
+  width: 300px; /* Ancho del cuadro */
+  //   height: 200px; /* Altura del cuadro */
+  background-color: #f8f9fa; /* Color de fondo */
+  border: 1px solid #92979c; /* Borde */
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para dar un efecto flotante */
+  z-index: 1000; /* Asegura que esté por encima de otros elementos */
+  padding: 25px;
+}
+
+h2 {
+  font-size: 30px;
+  text-align: center;
+}
+
+.pago {
+  text-align: center;
+  font-size: 18px;
+}
+
+.div-nombre {
+  margin-bottom: 20px;
+}
+.name {
+  width: 100%;
+  padding: 5px;
+}
+
+.button {
+  all: unset;
+  text-align: center;
+  width: 100%;
+  padding: 5px 0px;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
