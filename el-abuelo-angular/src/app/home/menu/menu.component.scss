@@ -85,9 +85,14 @@ h3 {
   border: 1px solid #343a40;
   color: #343a40;
   font-weight: 400;
-  font-size: 15px;
+  font-size: 18px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
+}
+@media (min-width: 768px) {
+  .button {
+    font-size: 15px;
+  }
 }
 
 .button:hover {
@@ -112,20 +117,36 @@ h3 {
 
 .box h1 {
   font-weight: 800;
-  font-size: 25px;
+  font-size: 30px;
+}
+@media (min-width: 768px) {
+  .box h1 {
+    font-size: 25px;
+  }
 }
 
 .imagen {
-  width: 230px;
-  height: 180px;
+  width: 90%;
+  height: 300px;
   margin: 15px 0;
   object-fit: cover; /* Hace que la imagen se ajuste recortando el exceso */
   object-position: center; /* Centra la imagen dentro del contenedor */
 }
+@media (min-width: 768px) {
+  .imagen {
+    width: 230px;
+    height: 180px;
+  }
+}
 .precio {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 700;
   color: #343a40;
+}
+@media (min-width: 768px) {
+  .precio {
+    font-size: 25px;
+  }
 }
 .grid {
   margin-top: 60px;

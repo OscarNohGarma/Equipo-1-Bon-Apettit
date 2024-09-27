@@ -68,4 +68,7 @@ export class OrderService {
       .getValue()
       .reduce((acc, item) => acc + (item.subtotal || 0), 0); // Suma los subtotales
   }
+  eliminarTodosLosProductos() {
+    this.productosEnOrdenSubject.next([]); // Establece la lista de productos a vacía
+  }
 }
