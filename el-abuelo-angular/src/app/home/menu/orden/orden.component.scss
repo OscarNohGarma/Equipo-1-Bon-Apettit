@@ -5,24 +5,73 @@ p {
   margin-bottom: 10px;
 }
 
+.bg-open {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  background-color: rgb(0, 0, 0);
+  opacity: 0;
+  transition: opacity 0.5s ease, z-index 0s 0.5s; /* Agrega una transición de z-index con un retraso */
+  bottom: 0;
+  z-index: -1; /* Siempre detrás inicialmente */
+}
+
+.bg-open.show-bg {
+  z-index: 0;
+  opacity: 50%;
+  transition: opacity 0.5s ease, z-index 0s; /* Cambia z-index inmediatamente cuando el fondo está visible */
+}
+@media (min-width: 1280px) {
+  .bg-open.show-bg {
+    opacity: 0;
+    z-index: -1;
+  }
+}
+
 .sticky-box {
   position: fixed;
-  top: 54px;
-  right: 0; /* Posición inicial en la pantalla */
-  width: 330px;
-  padding: 35px;
+  top: auto; /* Deshabilitar la posición fija en la parte superior */
+  right: 0; /* Mantener alineación a la derecha */
+  bottom: 0; /* Alinear al fondo de la pantalla */
+  width: 100%; /* Hacer que ocupe todo el ancho de la pantalla */
+
+  padding: 20px;
   background-color: #f8f9fa;
   border: 1px solid #92979c;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   z-index: 1000;
   transition: transform 0.5s ease; /* Transición para el deslizamiento */
-  transform: translateX(
+  transform: translateY(
     100%
-  ); /* Desplazar completamente fuera de la pantalla */
+  ); /* Desplazar completamente fuera de la pantalla en pantallas pequeñas */
 }
 
 .sticky-box.show {
-  transform: translateX(0); /* Desplazar a la posición original */
+  transform: translateY(
+    0
+  ); /* Desplazar a la posición original en pantallas grandes */
+}
+
+/* Media query para dispositivos más pequeños */
+@media (min-width: 1280px) {
+  .sticky-box {
+    padding: 35px;
+    top: 54px; /* Posición inicial en pantallas grandes */
+    bottom: auto;
+    right: 0; /* Alinear a la derecha */
+    width: 330px; /* Ancho del menú */
+
+    transform: translateX(
+      100%
+    ); /* Desplazar completamente fuera de la pantalla en pantallas grandes */
+  }
+
+  .sticky-box.show {
+    transform: translateX(
+      0
+    ); /* Desplazar a la posición original en pantallas pequeñas */
+  }
 }
 
 .productos {
@@ -171,6 +220,9 @@ h2 {
 
 .relative-box {
   position: relative;
+  display: flex; /* Usar flexbox para alinear el contenido */
+  align-items: center; /* Centrar verticalmente los elementos dentro del contenedor */
+  height: 100%;
 }
 
 .toggle-button {
@@ -180,18 +232,25 @@ h2 {
   cursor: pointer;
   margin-bottom: 15px; /* Añade un margen para separar del título */
   position: absolute;
-  left: -67px;
-  top: 150px;
 
   background-color: #f8f9fa;
   border: 1px solid #92979c;
+  left: 50%;
+  top: -36px;
   // border-right: 1px solid #f8f9fa;
   padding: 10px 10px;
   font-weight: 700;
   color: #343a40;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transform: translate(-50%, -50%) rotate(90deg);
 }
-
+@media (min-width: 1280px) {
+  .toggle-button {
+    left: -67px;
+    top: 150px;
+    transform: rotate(0deg);
+  }
+}
 // @media (max-width: 768px) {
 //   .sticky-box {
 //     width: 100%; /* Ajusta el ancho para pantallas pequeñas */
