@@ -1,6 +1,7 @@
-import { ProductoMenu } from "src/document/menu.document";
+import { ModeloPrincipal } from "src/document/modelo_principal";
 export const FirestoreDatabaseProvider = 'firestoredb';
 export const FirestoreOptionsProvider = 'firestoreOptions';
 export const FirestoreCollectionProviders: string[] = [
-    ProductoMenu.collectionName, 
+    ModeloPrincipal.collectionName, 
+    
 ];
