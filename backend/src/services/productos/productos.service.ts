@@ -20,14 +20,34 @@ export class ProductosService {
     }
     findAll(): Promise<ProductoEntity[]> {
       return this.productoRepository.find();
+      
+      
     }
+    async findAll2(): Promise<ProductoEntity[]> {
+      const productos: ProductoEntity[] = await this.findAll();
+      console.log(productos);
+      return productos;
+    }
+  
   
     findOne(id: number): Promise<ProductoEntity> {
       return this.productoRepository.findOneBy({ id });
     }
 
+    findByName(name: string): Promise<ProductoEntity> {
+      return this.productoRepository.findOne({ where: { namee: name } });
+    }
+
     async remove(id: string): Promise<void> {
       await this.productoRepository.delete(id);
+    }
+    async removeByName(namee: string): Promise<void> {
+      const producto = await this.productoRepository.findOne({ where: { namee: namee } });
+      if (producto) {
+        await this.productoRepository.remove(producto);
+      } else {
+        console.log(`Producto con nombre ${namee} no encontrado.`);
+      }
     }
    
     async editProducto(id: number, producto: ProductoEntity): Promise<ProductoEntity> {
@@ -37,6 +57,14 @@ export class ProductosService {
       const productoactualizado = await this.productoRepository.save(updatedProducto)
       return updatedProducto;
 
+    }
+
+    async editProductoByName(namee: string,  producto: ProductoEntity): Promise<ProductoEntity> {
+      const updatedProducto = await this.productoRepository.findOne({ where: { namee: namee } });
+      let update = Object.assign(updatedProducto,producto);
+      const productoactualizado = await this.productoRepository.save(updatedProducto)
+      return updatedProducto;
+      
     }
     
       

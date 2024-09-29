@@ -4,6 +4,7 @@
 /build
 /secretJson
 
+/secretJson
 # Logs
 logs
 *.log
