@@ -26,7 +26,7 @@ export class FirebaseProductoService {
 
     const doc = await collection.doc();
     entity.id = doc.id;  // Asigna un nuevo ID a la entidad
-    await collection.doc(entity.namee).set(entity);
+    await collection.doc(doc.id).set(entity);
     return entity;
   }
 
