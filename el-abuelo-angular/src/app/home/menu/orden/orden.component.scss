@@ -77,6 +77,18 @@ p {
 .productos {
   max-height: 475px;
   overflow-y: auto; /* Cambiar a auto para permitir el desplazamiento */
+  display: grid;
+}
+
+@media (min-width: 768px) {
+  .productos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .productos {
+    grid-template-columns: 1fr;
+  }
 }
 
 h2 {
@@ -89,8 +101,10 @@ h2 {
   align-items: flex-start;
   background-color: #ffffff;
   padding: 15px;
-  box-shadow: 0 5px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  border-radius: 5px;
+  margin: 5px;
   // border: 1px solid #b2b9c0;
 }
 // .producto:last-child {
