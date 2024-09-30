@@ -11,6 +11,9 @@ import { FirestoreModule } from './module/firestore/firestore.module';
 import { FirebaseProductoService } from './services/firebase_producto/firebase_producto.service';
 import { FirestoreMenuModule } from './module/firestoremenu/firestoremenu.module';
 import { FirebaseProductoController } from './controllers/firebase-producto/firebase-producto.controller';
+import { StorageService } from './services/storage-service/storage.service';
+import { UploadController } from './controllers/upload/upload.controller';
+import { FirestorageModule } from './module/firestore/firestorage/firestorage.module';
 
 
 @Module({
@@ -39,9 +42,10 @@ import { FirebaseProductoController } from './controllers/firebase-producto/fire
       }),
       inject: [ConfigService],
     }),
+    
 
-    FirestoreModule],
-  controllers: [AppController],
-  providers: [AppService],
+    FirestoreModule,FirestorageModule],
+  controllers: [AppController, UploadController],
+  providers: [AppService,StorageService],
 })
 export class AppModule {}
