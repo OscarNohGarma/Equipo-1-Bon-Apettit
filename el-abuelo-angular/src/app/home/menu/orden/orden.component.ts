@@ -67,6 +67,9 @@ export class OrdenComponent implements OnInit {
           // Esperar a que la navegación esté completa antes de desplazar
           window.scrollTo(0, 0); // Desplazarse al principio de la página
         });
+        setTimeout(() => {
+          window.location.reload();
+        }, 200);
       }, 500); // Ajusta el tiempo según lo necesites
     } else {
       alert('Por favor ingresa tu nombre.');
