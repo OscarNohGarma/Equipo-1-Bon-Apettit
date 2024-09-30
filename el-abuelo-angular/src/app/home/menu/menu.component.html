@@ -31,11 +31,19 @@
         <div class="grid">
             <div class="box" *ngFor="let product of filteredProducts">
                 <h1>{{ product.name }}</h1>
-                <img [src]="product.image" [alt]="product.name" class="imagen">
-                <p class="precio">${{ product.price }}</p>
+                <img [src]="product.image" [alt]="product.name" class="imagen" (click)="openImage(product.image)" />
+                <p class="precio">{{ product.price | currency }}</p>
                 <button class="button add" (click)="agregarProducto(product)">AGREGAR</button>
             </div>
         </div>
+
+        <!-- Modal para la imagen expandida -->
+        <div class="image-modal" [ngClass]="{ 'show': expandedImage !== null }" (click)="closeImage()">
+            <div class="image-modal-content">
+                <img [src]="expandedImage" alt="Expanded" class="expanded-image" />
+            </div>
+        </div>
+
 
         <app-orden />
     </div>
