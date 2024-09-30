@@ -41,9 +41,34 @@ export class OrderService {
     this.productosEnOrdenSubject.next([...productosActuales]);
   }
 
+  // Método para incrementar la cantidad
+  incrementarCantidad(index: number) {
+    const productosActuales = this.productosEnOrdenSubject.getValue();
+    const item = productosActuales[index];
+    if (item) {
+      item.quantity! += 1; // Aumentar la cantidad
+      item.subtotal! = item.price * item.quantity!; // Actualizar el subtotal
+      this.productosEnOrdenSubject.next([...productosActuales]); // Emitir el nuevo estado
+    }
+  }
+
+  // Método para decrementar la cantidad
+  decrementarCantidad(index: number) {
+    const productosActuales = this.productosEnOrdenSubject.getValue();
+    const item = productosActuales[index];
+    if (item && item.quantity! > 1) {
+      item.quantity! -= 1; // Disminuir la cantidad
+      item.subtotal! = item.price * item.quantity!; // Actualizar el subtotal
+      this.productosEnOrdenSubject.next([...productosActuales]); // Emitir el nuevo estado
+    }
+  }
+
   getTotal(): number {
     return this.productosEnOrdenSubject
       .getValue()
       .reduce((acc, item) => acc + (item.subtotal || 0), 0); // Suma los subtotales
+  }
+  eliminarTodosLosProductos() {
+    this.productosEnOrdenSubject.next([]); // Establece la lista de productos a vacía
   }
 }

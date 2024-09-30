@@ -1,20 +1,47 @@
-<div class="sticky-box" [class.show]=" isVisible">
+<div class="bg-open" [class.show-bg]="isVisible"></div>
+
+<div class="sticky-box" [class.show]="isVisible">
+    <div class="relative-box">
+        <button (click)="isVisible = !isVisible" class="toggle-button" *ngIf="buttonIsVisible">
+            {{ isVisible ? '⟩' : '⟨' }} </button>
+    </div>
+
     <h2>Tu orden</h2>
     <div class="productos">
         <div *ngFor="let item of productosEnOrden; let i = index" class="producto">
             <div>
                 <p class="nombre">{{ item.name }}</p>
-                <p class="cantidad">(Cantidad: {{ item.quantity }})</p>
-                <p class="subtotal"> Subtotal: <span>${{ item.subtotal }}</span> </p>
+                <p class="precio">${{ item.price }}</p>
+                <div class="cantidad">
+                    <div (click)="decrementarCantidad(i)" class="inc">-</div>
+                    {{ item.quantity }}
+                    <div (click)="incrementarCantidad(i)" class="dec">+</div>
+                </div>
+                <p class="subtotal">Subtotal: <span>${{ item.subtotal }}</span></p>
             </div>
             <button (click)="ordenService.eliminarProducto(i)" class="circle-button">
                 <span class="close-icon">✖</span>
             </button>
-
         </div>
     </div>
+
     <div class="pago">
-        <p>Total a pagar: <span>${{ total }}</span> </p>
+        <p>Total a pagar: <span>${{ total }}</span></p>
     </div>
-    <button class="button add">CONFIRMAR PEDIDO</button>
+
+    <button (click)="confirmarPedido()" class="button add">CONFIRMAR PEDIDO</button>
+</div>
+
+<!-- Modal -->
+<div [class.show-bg]="modalVisible" class="modal-overlay">
+    <div class="modal-content">
+        <h3>Confirmar Pedido</h3>
+        <p>Ingresa tu nombre para confirmar el pedido:</p>
+        <input type="text" [(ngModel)]="clienteNombre" placeholder="Tu nombre" class="input-name" />
+
+        <div class="modal-buttons">
+            <button (click)="enviarPedido()" class="button confirm">Confirmar</button>
+            <button (click)="cerrarModal()" class="button cancel">Cancelar</button>
+        </div>
+    </div>
 </div>
