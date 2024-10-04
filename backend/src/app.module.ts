@@ -1,36 +1,26 @@
-import { ProductosModule } from './module/productos.module';
+
 
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { join } from 'path';
-import { TypeOrmModule } from '@nestjs/typeorm';
+
+
 import { ConfigModule, ConfigService} from '@nestjs/config';
 
 import { FirestoreModule } from './module/firestore/firestore.module';
-import { FirebaseProductoService } from './services/firebase_producto/firebase_producto.service';
 import { FirestoreMenuModule } from './module/firestoremenu/firestoremenu.module';
-import { FirebaseProductoController } from './controllers/firebase-producto/firebase-producto.controller';
 import { StorageService } from './services/storage-service/storage.service';
 import { UploadController } from './controllers/upload/upload.controller';
 import { FirestorageModule } from './module/firestore/firestorage/firestorage.module';
+import { FirebaseMenuService } from './services/firebase_menu/firebase_menu.service';
+import { FirebaseCitaController } from './controllers/firebase-cita/firebase-cita.controller';
+import { FirebaseCitasService } from './services/firebase-citas/firebase-citas.service';
+import { FirebaseOrdenService } from './services/firebase-orden/firebase-orden.service';
+import { FirebaseOrdenController } from './controllers/firebase-orden/firebase-orden.controller';
 
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(
-       {
-        "type": "mysql",
-        "host": "localhost",
-        "port": 3306,
-        "username": "root",
-        "password": "",
-        "database": "elabuelo",
-        "entities": [join(__dirname, '**', '*.entity.{ts,js}')],
-        "synchronize": true,
-      }
-    ),ProductosModule,
-
     ConfigModule.forRoot({
       isGlobal: true,
     }),
@@ -45,7 +35,7 @@ import { FirestorageModule } from './module/firestore/firestorage/firestorage.mo
     
 
     FirestoreModule,FirestorageModule],
-  controllers: [AppController, UploadController],
-  providers: [AppService,StorageService],
+  controllers: [AppController, UploadController, FirebaseCitaController, FirebaseOrdenController],
+  providers: [AppService,StorageService, FirebaseMenuService, FirebaseCitasService, FirebaseOrdenService],
 })
 export class AppModule {}

@@ -15,3 +15,10 @@ export class Menu extends ModeloPrincipal {
     categoria: string;  
    
 }
+export class Orden extends ModeloPrincipal {
+    tipocollection: string = "orden";
+    productos: Array<Map<string, number>>;
+    total: number;
+ 
+   
+}

@@ -1,27 +1,15 @@
-import { Controller, Get, Post, Body, Param, Delete, Put, Query } from '@nestjs/common';
-//import { Menu } from 'src/document/modelmenu';
-import { FirebaseProductoService } from 'src/services/firebase_producto/firebase_producto.service';
-
-
-import { ref, uploadBytes } from 'firebase/storage';
-
+import { Controller, Get, Post, Body, Param, Delete, Put} from '@nestjs/common';
 import { Menu } from 'src/document/modelos';
-import { Rutas, Tiporuta } from 'src/module/global.var';
-import { Citas } from 'src/document/modelos';
+import { FirebaseMenuService } from 'src/services/firebase_menu/firebase_menu.service';
 
 @Controller('firebase')
 export class FirebaseProductoController {
    
     
-    constructor(private readonly servicio: FirebaseProductoService) {
-      
-
-      
-    }
+    constructor(private readonly servicio: FirebaseMenuService) {}
     // Métodos para Menu
     @Post('/menu/addmenu')
     async createNewMenu(@Body() newMenu: Menu): Promise<{ message: string; }> {
-
         await this.servicio.createEntity(newMenu, "menu");
         return { message: 'Menu creada con éxito' };
     }
@@ -49,40 +37,4 @@ export class FirebaseProductoController {
         await this.servicio.updateEntity(menuId, updatedMenu,"menu");
         return { message: 'Menu actualizada con éxito' };
     }
-  // Métodos para Citas
-  @Post('/cita/addcita')
-  async createNewCita(@Body() newCita: Citas): Promise<{ message: string; }> {
-      await this.servicio.createEntity(newCita, "citas");
-      return { message: 'Cita creada con éxito' };
-  }
-
-  @Get('/cita/getcita')
-  async getAllCitas() {
-      const citas = await this.servicio.getAllEntities("citas");
-      return citas;
-  }
-
-  @Get('/cita/getcita/:id')
-  async getCitaById(@Param('id') citaId: string) {
-      const cita = await this.servicio.getEntityById(citaId,"citas");
-      return cita;
-  }
-
-  @Delete('/cita/deletecita/:id')
-  async deleteCitaById(@Param('id') citaId: string) {
-      await this.servicio.deleteEntityById(citaId,"citas");
-      return { message: 'Cita eliminada con éxito' };
-  }
-
-  @Put('/cita/updatecita/:id')
-  async updateCita(@Param('id') citaId: string, @Body() updatedCita: Citas) {
-      await this.servicio.updateEntity(citaId, updatedCita,"citas");
-      return { message: 'Cita actualizada con éxito' };
-  }
-
-  
-
-  
-  
-  
 }

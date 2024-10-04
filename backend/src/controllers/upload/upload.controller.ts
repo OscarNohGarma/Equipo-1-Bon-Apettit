@@ -14,13 +14,13 @@ export class UploadController {
     return { message: `Archivo se agrego correctamente` };
   }
 
-  @Get('getimg/:fileName')
+  @Get('/getimg/:fileName')
   async getFile(@Param('fileName') fileName: string): Promise<{ url: string }> {
     const url = await this.storageService.getFile(fileName);
     return { url }; // Aquí devuelves la URL del archivo
   }
 
-  @Delete('deleteimg/:fileName') // Asegúrate de que Delete esté importado
+  @Delete('/deleteimg/:fileName') // Asegúrate de que Delete esté importado
   async deleteFile(@Param('fileName') fileName: string): Promise<{ message: string }> {
     await this.storageService.deleteFile(fileName);
     return { message: `Archivo ${fileName} eliminado correctamente` };
