@@ -1,0 +1,120 @@
+h1,
+h2,
+h3 {
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 0rem 0 1rem 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+.header {
+  background-color: #202020;
+  padding: 2rem 0;
+}
+@media (min-width: 1280px) {
+  .header {
+    padding: 1rem;
+  }
+}
+
+.contenido-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--blanco);
+}
+
+.nombre-sitio {
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  font-size: 40px;
+}
+
+@media (min-width: 768px) {
+  .nombre-sitio {
+    font-size: 50px;
+    margin-bottom: 0;
+  }
+}
+
+.nombre-sitio span {
+  font-weight: 900;
+}
+
+@media (min-width: 992px) {
+  .barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.header a {
+  color: var(--blanco);
+  font-size: 2rem;
+}
+
+.slogan {
+  text-align: center;
+  color: white;
+}
+@media (min-width: 768px) {
+  .slogan {
+    text-align: right;
+  }
+}
+.slogan h1 {
+  font-size: 30px;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .slogan h1 {
+    font-size: 2rem;
+  }
+  .slogan {
+    text-align: center;
+  }
+}
+@media (min-width: 1280px) {
+  .slogan h1 {
+    font-size: 2rem;
+  }
+  .slogan p {
+    font-size: 18px;
+  }
+  .slogan {
+    text-align: center;
+    margin-bottom: 0;
+  }
+}
+
+.slogan p {
+  margin: 0;
+  line-height: 1;
+}
+
+.usuario {
+  text-align: center;
+  color: white;
+}
+
+.logo {
+  max-height: 4rem;
+  margin-bottom: 10px;
+}
+
+.abuelo {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .abuelo {
+    flex-direction: column;
+  }
+}
