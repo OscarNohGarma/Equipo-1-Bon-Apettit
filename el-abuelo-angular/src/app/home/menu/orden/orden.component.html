@@ -10,8 +10,8 @@
     <div class="productos">
         <div *ngFor="let item of productosEnOrden; let i = index" class="producto">
             <div>
-                <p class="nombre">{{ item.name }}</p>
-                <p class="precio">${{ item.price }}</p>
+                <p class="nombre">{{ item.namee }}</p>
+                <p class="precio">${{ item.precio }}</p>
                 <div class="cantidad">
                     <div (click)="decrementarCantidad(i)" class="inc">-</div>
                     {{ item.quantity }}

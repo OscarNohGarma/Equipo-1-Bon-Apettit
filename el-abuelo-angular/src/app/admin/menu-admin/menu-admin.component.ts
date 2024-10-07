@@ -36,7 +36,7 @@ export class MenuAdminComponent implements OnInit {
   loadMenu(): void {
     this.menuService.getMenu().subscribe((data) => {
       this.menuItems = data;
-      console.log(this.menuItems);
+      // console.log(this.menuItems);
     });
   }
 
@@ -45,7 +45,7 @@ export class MenuAdminComponent implements OnInit {
       return this.menuItems;
     }
     return this.menuItems.filter(
-      (product) => product.category === this.selectedCategory
+      (product) => product.categoria === this.selectedCategory
     );
   }
   toggleMenu() {

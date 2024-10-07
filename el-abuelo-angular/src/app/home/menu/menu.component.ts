@@ -49,7 +49,7 @@ export class MenuComponent implements OnInit {
       return this.menuItems;
     }
     return this.menuItems.filter(
-      (product) => product.category === this.selectedCategory
+      (product) => product.categoria === this.selectedCategory
     );
   }
 

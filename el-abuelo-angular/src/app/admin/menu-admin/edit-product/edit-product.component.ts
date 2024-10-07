@@ -26,10 +26,10 @@ export class EditProductComponent implements OnInit {
     private router: Router
   ) {
     this.productForm = this.fb.group({
-      name: [''],
-      price: [''],
-      description: [''],
-      category: [''],
+      namee: [''],
+      precio: [''],
+      image: [''],
+      categoria: [''],
       // Otros campos que tengas en MenuProduct
     });
   }
@@ -47,10 +47,10 @@ export class EditProductComponent implements OnInit {
       this.product = product;
       // Rellenar el formulario con los datos del producto
       this.productForm.patchValue({
-        name: product.name,
-        price: product.price,
-        description: product.image, // Dependiendo de los campos de tu modelo
-        category: product.category,
+        namee: product.namee,
+        precio: product.precio,
+        image: product.image, // Dependiendo de los campos de tu modelo
+        categoria: product.categoria,
       });
     });
   }

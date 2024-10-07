@@ -30,9 +30,9 @@
         <!-- Productos filtrados -->
         <div class="grid">
             <div class="box" *ngFor="let product of filteredProducts">
-                <h1>{{ product.name }}</h1>
-                <img [src]="product.image" [alt]="product.name" class="imagen" (click)="openImage(product.image)" />
-                <p class="precio">{{ product.price | currency }}</p>
+                <h1>{{ product.namee }}</h1>
+                <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
+                <p class="precio">{{ product.precio | currency }}</p>
                 <button class="button add" [routerLink]="['edit', product.id]">EDITAR</button>
             </div>
         </div>
