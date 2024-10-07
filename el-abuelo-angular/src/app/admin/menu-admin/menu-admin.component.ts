@@ -3,11 +3,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../core/services/menu.service';
 import { MenuProduct } from '../../core/models/menuProduct';
+import { Router, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-menu-admin',
   standalone: true,
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: './menu-admin.component.html',
   styleUrl: './menu-admin.component.scss',
   providers: [MenuService],
@@ -19,7 +20,7 @@ export class MenuAdminComponent implements OnInit {
   menuItems: MenuProduct[] = [];
   expandedImage: string | null = null; // Controla la imagen expandida
 
-  constructor(private menuService: MenuService) {} // Inyectar el servicio
+  constructor(private menuService: MenuService, private router: Router) {} // Inyectar el servicio
 
   ngOnInit(): void {
     // this.http.get('http://localhost:3000/firebase/menu/getmenu').subscribe(
@@ -64,5 +65,7 @@ export class MenuAdminComponent implements OnInit {
   closeImage() {
     this.expandedImage = null;
   }
-  editarProducto(product: MenuProduct) {}
+  // editarProducto(product: MenuProduct) {
+  //   this.router.navigate([`/menu/edit/${product.id}`]); // Navega a la página de edición con el ID del producto
+  // }
 }
