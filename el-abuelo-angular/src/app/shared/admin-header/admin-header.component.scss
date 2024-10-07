@@ -16,7 +16,7 @@ a {
 }
 @media (min-width: 1280px) {
   .header {
-    padding: 1rem;
+    padding: 0.7rem;
   }
 }
 
@@ -117,4 +117,44 @@ a {
   .abuelo {
     flex-direction: column;
   }
+}
+
+/////
+.box {
+  border: 1px solid rgb(52, 58, 64, 0.3);
+
+  margin-bottom: 10px;
+  background-color: rgb(250, 250, 250);
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .box h1 {
+    font-size: 25px;
+  }
+}
+
+//Navbar
+.navbar {
+  padding: 0;
+  justify-content: space-around;
+  color: #4b4b4b;
+}
+
+.elemento-nav {
+  font-size: 18px;
+  font-weight: 600;
+  color: inherit;
+  padding: 12px 10px;
+  transition: all 0.15s ease-in-out;
+  color: #4b4b4b;
+}
+.elemento-nav:hover {
+  background-color: #dfdfdf;
+  cursor: pointer;
 }
