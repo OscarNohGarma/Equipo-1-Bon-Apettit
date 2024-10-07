@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MenuService } from '../../../core/services/menu.service';
@@ -22,7 +22,8 @@ export class EditProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private menuService: MenuService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private router: Router
   ) {
     this.productForm = this.fb.group({
       name: [''],
@@ -55,10 +56,26 @@ export class EditProductComponent implements OnInit {
   }
 
   saveProduct() {
-    if (this.productForm.valid) {
-      const updatedProduct = { ...this.product, ...this.productForm.value };
-      // Aquí agregas la lógica para actualizar el producto (ejemplo: llamada PUT)
-      console.log('Producto actualizado:', updatedProduct);
+    if (this.productForm.valid && this.productId) {
+      const updatedProduct = { ...this.productForm.value, id: this.productId }; // Agregar el ID al objeto
+
+      this.menuService.updateMenuItem(this.productId, updatedProduct).subscribe(
+        (response) => {
+          console.log('Producto actualizado exitosamente:', response);
+          setTimeout(() => {
+            alert('El producto se ha actualizado correctamente.'); // Muestra la alerta
+            this.router.navigate(['/admin/menu']); // Redirige al menú (ajusta la ruta según tu configuración)
+          }, 1000);
+
+          // Aquí puedes redirigir o mostrar un mensaje de éxito
+        },
+        (error) => {
+          console.error('Error al actualizar el producto:', error);
+          // Manejo de errores aquí
+        }
+      );
+    } else {
+      console.error('Formulario inválido o ID de producto no encontrado.');
     }
   }
 }
