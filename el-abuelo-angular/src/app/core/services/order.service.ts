@@ -19,11 +19,11 @@ export class OrderService {
     if (itemExistente) {
       // Si el producto ya está en la orden, solo aumenta la cantidad y actualiza el subtotal
       itemExistente.quantity! += 1;
-      itemExistente.subtotal! = itemExistente.price * itemExistente.quantity!;
+      itemExistente.subtotal! = itemExistente.precio * itemExistente.quantity!;
     } else {
       // Si el producto no está en la orden, inicializa cantidad y subtotal
       producto.quantity = 1;
-      producto.subtotal = producto.price;
+      producto.subtotal = producto.precio;
       productosActuales.push(producto);
     }
 
@@ -47,7 +47,7 @@ export class OrderService {
     const item = productosActuales[index];
     if (item) {
       item.quantity! += 1; // Aumentar la cantidad
-      item.subtotal! = item.price * item.quantity!; // Actualizar el subtotal
+      item.subtotal! = item.precio * item.quantity!; // Actualizar el subtotal
       this.productosEnOrdenSubject.next([...productosActuales]); // Emitir el nuevo estado
     }
   }
@@ -58,7 +58,7 @@ export class OrderService {
     const item = productosActuales[index];
     if (item && item.quantity! > 1) {
       item.quantity! -= 1; // Disminuir la cantidad
-      item.subtotal! = item.price * item.quantity!; // Actualizar el subtotal
+      item.subtotal! = item.precio * item.quantity!; // Actualizar el subtotal
       this.productosEnOrdenSubject.next([...productosActuales]); // Emitir el nuevo estado
     }
   }

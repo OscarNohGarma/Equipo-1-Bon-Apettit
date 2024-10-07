@@ -1,7 +1,7 @@
 <div class="bg-menu">
     <div class="menu container">
-        <h1 class="encabezado">Menú</h1>
-        <h2 class="subtitulo">¡Disfruta de nuestra deliciosa comida!</h2>
+        <h1 class="encabezado">Administrar Menú</h1>
+        <h2 class="subtitulo">Edita los elementos del menú</h2>
 
         <!-- Menú de selección en móvil -->
         <div class="mobile-seleccion">
@@ -33,7 +33,7 @@
                 <h1>{{ product.namee }}</h1>
                 <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
                 <p class="precio">{{ product.precio | currency }}</p>
-                <button class="button add" (click)="agregarProducto(product)">AGREGAR</button>
+                <button class="button add" [routerLink]="['edit', product.id]">EDITAR</button>
             </div>
         </div>
 
@@ -45,6 +45,7 @@
         </div>
 
 
-        <app-orden />
+        <!-- <app-orden /> -->
+
     </div>
 </div>
