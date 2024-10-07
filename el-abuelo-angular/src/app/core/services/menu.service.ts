@@ -55,21 +55,23 @@ export class MenuService {
     // Sólo envías los atributos que están en la base de datos
     const { id, name, image, price, category } = menuItem;
     return this.http.post(`${this.baseUrl}/addmenu`, {
-      name,
-      image,
-      price,
-      category,
+      image: image,
+      namee: name,
+      precio: price,
+      categoria: category,
     });
   }
 
   // Actualizar un ítem del menú
   updateMenuItem(id: string, updatedMenuItem: MenuProduct): Observable<any> {
     const { name, image, price, category } = updatedMenuItem;
+    console.log(updatedMenuItem);
+
     return this.http.put(`${this.baseUrl}/updatemenu/${id}`, {
-      name,
-      image,
-      price,
-      category,
+      image: image,
+      namee: name,
+      precio: price,
+      categoria: category,
     });
   }
 
