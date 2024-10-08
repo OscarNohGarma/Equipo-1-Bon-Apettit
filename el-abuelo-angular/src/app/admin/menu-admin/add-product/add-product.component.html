@@ -18,8 +18,20 @@
 
     <div class="form-group">
         <label for="image">Imagen del Producto:</label>
-        <div class="image-preview">
+        <!-- <div class="image-preview">
             <img [src]="product?.image" *ngIf="product?.image" alt="Imagen del Producto" class="image-thumbnail" />
+        </div> -->
+        <div class="cont-imagen">
+            <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Vista previa"
+                style="max-width: 100%; margin-top: 10px;">
+            <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" id="fileInput">
+            <label for="fileInput" class="submit-button">
+                Seleccionar archivo
+            </label>
+            <p *ngIf="!isValidImage" style="color: red;">Por favor, selecciona un archivo de imagen válido (JPEG, PNG,
+                GIF, WEBP).</p>
+
+            <!-- <button (click)="onUpload()" class="button">Subir Imagen</button> -->
         </div>
     </div>
 

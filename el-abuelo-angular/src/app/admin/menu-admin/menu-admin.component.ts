@@ -66,14 +66,13 @@ export class MenuAdminComponent implements OnInit {
     this.expandedImage = null;
   }
   deleteProducto(id: number) {
-    console.log(id);
     const confirmed = window.confirm(
       '¿Estás seguro de que deseas eliminar este ítem del menú?'
     );
     if (confirmed) {
       this.menuService.deleteMenuItem(id.toString()).subscribe(
         (response) => {
-          console.log('Producto eliminado:', response);
+          // console.log('Producto eliminado:', response);
           // Aquí puedes agregar lógica para actualizar la vista
           setTimeout(() => {
             alert('Producto eliminado correctamente.');
