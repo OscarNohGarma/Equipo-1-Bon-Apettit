@@ -1,22 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MenuService } from '../../../core/services/menu.service';
 import { MenuProduct } from '../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 import { UploadService } from '../../../core/services/upload.service';
 import { Observable } from 'rxjs';
-
 @Component({
-  selector: 'app-edit-product',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink], // Aquí es donde debes incluirlo
+  selector: 'app-add-product',
   standalone: true,
-  templateUrl: './edit-product.component.html',
-  styleUrl: './edit-product.component.scss',
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  templateUrl: './add-product.component.html',
+  styleUrl: './add-product.component.scss',
   providers: [MenuService, UploadService],
 })
-export class EditProductComponent implements OnInit {
+export class AddProductComponent {
   productForm: FormGroup;
   productId: string | null = null;
   product: MenuProduct | null = null;
@@ -27,7 +25,6 @@ export class EditProductComponent implements OnInit {
   imagePreviewUrl: string | null = null; // Propiedad para la vista previa
 
   constructor(
-    private route: ActivatedRoute,
     private menuService: MenuService,
     private fb: FormBuilder,
     private router: Router,
@@ -42,28 +39,6 @@ export class EditProductComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.productId = this.route.snapshot.paramMap.get('id'); // Obtén el ID del producto de la URL
-    if (this.productId) {
-      this.loadProduct(this.productId); // Cargar el producto con el ID
-    }
-  }
-
-  loadProduct(id: string) {
-    // Usar el método getMenuById que ya tienes en tu servicio
-    this.menuService.getMenuById(id).subscribe((product: MenuProduct) => {
-      this.product = product;
-      // Rellenar el formulario con los datos del producto
-      this.productForm.patchValue({
-        namee: product.namee,
-        precio: product.precio,
-        image: product.image, // Dependiendo de los campos de tu modelo
-        categoria: product.categoria,
-      });
-      this.imageUrl = product.image; // Suponiendo que product.image es la URL de la imagen
-      this.imagePreviewUrl = this.imageUrl; // Establecer la vista previa
-    });
-  }
   generateUniqueId(): string {
     return Math.random().toString(36).substr(2, 9);
   }
@@ -101,36 +76,29 @@ export class EditProductComponent implements OnInit {
   }
 
   saveProduct() {
-    if (this.productForm.valid && this.productId) {
+    if (this.productForm.valid) {
       this.onUpload().subscribe(() => {
-        const updatedProduct = {
-          ...this.productForm.value,
-          id: this.productId,
-          image: this.imageUrl,
-        }; // Agregar el ID al objeto
+        const newProduct = { ...this.productForm.value, image: this.imageUrl }; // Agregar la URL de la imagen
+        // console.log(newProduct);
 
-        this.menuService
-          .updateMenuItem(this.productId!, updatedProduct)
-          .subscribe(
-            (response) => {
-              console.log('Producto actualizado exitosamente:', response);
-              setTimeout(() => {
-                alert('El producto se ha actualizado correctamente.'); // Muestra la alerta
-                this.router.navigate(['/admin/menu']); // Redirige al menú (ajusta la ruta según tu configuración)
-              }, 1000);
+        this.menuService.addMenuItem(newProduct).subscribe(
+          (response) => {
+            //! console.log('Producto añadido exitosamente:', response);
 
-              // Aquí puedes redirigir o mostrar un mensaje de éxito
-            },
-            (error) => {
-              console.error('Error al actualizar el producto:', error);
-              // Manejo de errores aquí
-            }
-          );
+            alert('El producto se ha añadido correctamente.');
+            this.router.navigate(['/admin/menu']);
+          },
+          (error) => {
+            console.error('Error al agregar el producto:', error);
+          }
+        );
       });
     } else {
       console.error('Formulario inválido o ID de producto no encontrado.');
+      alert('Por favor llena todos los campos.');
     }
   }
+
   onUpload() {
     return new Observable((observer) => {
       if (this.selectedFile) {

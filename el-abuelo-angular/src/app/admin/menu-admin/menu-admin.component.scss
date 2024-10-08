@@ -49,7 +49,6 @@ h3 {
   font-size: 40px;
   font-weight: bolder;
   text-align: center;
-  margin-bottom: 20px;
   margin-top: 3px;
   font-weight: 900;
 }
@@ -111,6 +110,7 @@ h3 {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  position: relative;
 }
 
 .box h1 {
@@ -306,4 +306,63 @@ h3 {
 
 .image-modal:hover {
   cursor: pointer;
+}
+//ELIMINAR
+
+// .producto-top {
+//   position: relative;
+// }
+
+.btn-delete {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  opacity: 60%;
+  top: 15px;
+  right: 15px;
+  transition: all 0.2s ease-in;
+}
+@media (min-width: 768px) {
+  .btn-delete {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.btn-delete:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-button {
+  background-color: white;
+  color: #343a40;
+  border: 3px solid #343a40;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  font-size: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-left: 20px; /* Espacio entre el encabezado y el botón */
+}
+@media (min-width: 768px) {
+  .add-button {
+    width: 40px;
+    height: 40px;
+    font-size: 50px;
+  }
+}
+.add-button:hover {
+  background-color: #343a40;
+  color: white;
 }

@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { InicioAdminComponent } from './inicio-admin/inicio-admin.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { EditProductComponent } from './menu-admin/edit-product/edit-product.component';
+import { AddProductComponent } from './menu-admin/add-product/add-product.component';
 
 export const adminRoutes: Routes = [
   {
@@ -19,5 +20,10 @@ export const adminRoutes: Routes = [
     path: 'menu/edit/:id', // Nueva ruta para editar productos
     title: 'Editar Producto - El abuelo',
     component: EditProductComponent,
+  },
+  {
+    path: 'menu/add', // Nueva ruta para editar productos
+    title: 'Agregar Producto - El abuelo',
+    component: AddProductComponent,
   },
 ];

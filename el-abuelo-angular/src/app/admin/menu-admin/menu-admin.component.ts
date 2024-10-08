@@ -65,7 +65,24 @@ export class MenuAdminComponent implements OnInit {
   closeImage() {
     this.expandedImage = null;
   }
-  // editarProducto(product: MenuProduct) {
-  //   this.router.navigate([`/menu/edit/${product.id}`]); // Navega a la página de edición con el ID del producto
-  // }
+  deleteProducto(id: number) {
+    const confirmed = window.confirm(
+      '¿Estás seguro de que deseas eliminar este ítem del menú?'
+    );
+    if (confirmed) {
+      this.menuService.deleteMenuItem(id.toString()).subscribe(
+        (response) => {
+          // console.log('Producto eliminado:', response);
+          // Aquí puedes agregar lógica para actualizar la vista
+          setTimeout(() => {
+            alert('Producto eliminado correctamente.');
+            this.loadMenu(); // Por ejemplo, recargar el menú
+          }, 500);
+        },
+        (error) => {
+          console.error('Error al eliminar el producto:', error);
+        }
+      );
+    }
+  }
 }
