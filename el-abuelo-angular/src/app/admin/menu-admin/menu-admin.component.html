@@ -1,7 +1,10 @@
 <div class="bg-menu">
     <div class="menu container">
-        <h1 class="encabezado">Administrar Menú</h1>
-        <h2 class="subtitulo">Edita los elementos del menú</h2>
+        <div class="header">
+            <h1 class="encabezado">Administrar Menú</h1>
+            <button class="add-button">+</button>
+        </div>
+        <h2 class="subtitulo">Edita o agrega elementos al menú</h2>
 
         <!-- Menú de selección en móvil -->
         <div class="mobile-seleccion">
@@ -30,7 +33,11 @@
         <!-- Productos filtrados -->
         <div class="grid">
             <div class="box" *ngFor="let product of filteredProducts">
+                <!-- <div class="producto-top"> -->
                 <h1>{{ product.namee }}</h1>
+                <img src="./../../../assets/basura.png" alt="basura" class="btn-delete"
+                    (click)="deleteProducto(product.id)">
+                <!-- </div> -->
                 <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
                 <p class="precio">{{ product.precio | currency }}</p>
                 <button class="button add" [routerLink]="['edit', product.id]">EDITAR</button>

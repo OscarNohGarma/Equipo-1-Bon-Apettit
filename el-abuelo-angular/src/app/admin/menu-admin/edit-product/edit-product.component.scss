@@ -96,6 +96,11 @@
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
+@media (min-width: 992px) {
+  .submit-button {
+    font-size: 16px;
+  }
+}
 
 .submit-button:hover {
   color: white;
