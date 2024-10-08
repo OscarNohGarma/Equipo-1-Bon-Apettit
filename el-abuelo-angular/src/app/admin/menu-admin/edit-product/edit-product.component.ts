@@ -64,6 +64,9 @@ export class EditProductComponent implements OnInit {
       this.imagePreviewUrl = this.imageUrl; // Establecer la vista previa
     });
   }
+  generateUniqueId(): string {
+    return Math.random().toString(36).substr(2, 9);
+  }
 
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -73,7 +76,7 @@ export class EditProductComponent implements OnInit {
       const validTypes = ['image/jpeg', 'image/png', 'image/gif', 'image/webp']; // Tipos de imagen válidos
 
       if (validTypes.includes(file.type)) {
-        const newFileName = file.name.replace(/ /g, '-'); // Reemplaza todos los espacios por guiones
+        const newFileName = this.generateUniqueId() + '.png';
 
         // Crear un nuevo archivo con el nombre modificado
         this.selectedFile = new File([file], newFileName, { type: file.type });
