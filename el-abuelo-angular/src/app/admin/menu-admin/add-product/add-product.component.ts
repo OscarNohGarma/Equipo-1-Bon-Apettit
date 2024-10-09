@@ -102,26 +102,57 @@ export class AddProductComponent {
   onUpload() {
     return new Observable((observer) => {
       if (this.selectedFile) {
-        // Primero sube la imagen
         this.uploadService.uploadImage(this.selectedFile).subscribe(
           (response) => {
             const fileName = this.selectedFile!.name;
+            console.log('Subida exitosa:', fileName);
 
-            // Usar setTimeout para esperar un tiempo antes de obtener la imagen
-            setTimeout(() => {
+            // Lógica para reintentar el GET hasta 5 veces con un intervalo de 1 segundo
+            let attempts = 0;
+            const maxAttempts = 10;
+            const retryInterval = 1000; // 1 segundo
+
+            const checkImage = () => {
               this.uploadService.getImage(fileName).subscribe(
                 (imageResponse) => {
-                  this.imageUrl = imageResponse.url; // Almacenar la URL de la imagen
-                  //! console.log(this.imageUrl);
-                  observer.next(); // Notificar que la operación fue exitosa
-                  observer.complete(); // Completar el observable
+                  if (imageResponse && imageResponse.url) {
+                    this.imageUrl = imageResponse.url;
+                    // console.log('Imagen obtenida:', this.imageUrl);
+                    observer.next(); // Notificar que la operación fue exitosa
+                    observer.complete(); // Completar el observable
+                  } else {
+                    if (attempts < maxAttempts) {
+                      attempts++;
+                      console.log(
+                        `Reintentando obtener la imagen... (Intento ${attempts})`
+                      );
+                      setTimeout(checkImage, retryInterval); // Reintentar después de 1 segundo
+                    } else {
+                      console.error(
+                        'Error: No se pudo obtener la imagen después de varios intentos.'
+                      );
+                      observer.error(
+                        'Error al obtener la imagen después de varios intentos.'
+                      );
+                    }
+                  }
                 },
                 (error) => {
                   console.error('Error al obtener la imagen', error);
-                  observer.error(error); // Notificar el error
+                  if (attempts < maxAttempts) {
+                    attempts++;
+                    setTimeout(checkImage, retryInterval); // Reintentar después de 1 segundo
+                  } else {
+                    observer.error(
+                      'Error al obtener la imagen después de varios intentos.'
+                    );
+                  }
                 }
               );
-            }, 1000); // Retrasar 1000 ms (1 segundo)
+            };
+
+            // Iniciar el primer intento de obtener la imagen
+            setTimeout(checkImage, retryInterval);
           },
           (error) => {
             console.error('Error al subir la imagen', error);
@@ -129,8 +160,8 @@ export class AddProductComponent {
           }
         );
       } else {
-        console.error('No hay archivo seleccionado');
-        observer.error('No hay archivo seleccionado'); // Notificar el error
+        alert('No hay archivo seleccionado.');
+        observer.error('No hay archivo seleccionado.');
       }
     });
   }
