@@ -23,6 +23,7 @@ export class EditProductComponent implements OnInit {
 
   selectedFile: File | null = null;
   imageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL de la imagen
+  oldImageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL vieja de la imagen
   isValidImage: boolean = true; // Agregar esta propiedad
   imagePreviewUrl: string | null = null; // Propiedad para la vista previa
 
@@ -61,7 +62,9 @@ export class EditProductComponent implements OnInit {
         categoria: product.categoria,
       });
       this.imageUrl = product.image; // Suponiendo que product.image es la URL de la imagen
+      this.oldImageUrl = product.image; // Suponiendo que product.image es la URL de la imagen
       this.imagePreviewUrl = this.imageUrl; // Establecer la vista previa
+      console.log(this.oldImageUrl);
     });
   }
   generateUniqueId(): string {
@@ -113,11 +116,21 @@ export class EditProductComponent implements OnInit {
           .updateMenuItem(this.productId!, updatedProduct)
           .subscribe(
             (response) => {
-              console.log('Producto actualizado exitosamente:', response);
-              setTimeout(() => {
-                alert('El producto se ha actualizado correctamente.'); // Muestra la alerta
-                this.router.navigate(['/admin/menu']); // Redirige al menú (ajusta la ruta según tu configuración)
-              }, 1000);
+              //! console.log('Producto actualizado exitosamente:', response);
+              if (this.selectedFile) {
+                this.uploadService
+                  .deleteImage(this.getFileNameFromUrl(this.oldImageUrl!)!)
+                  .subscribe(
+                    (response) => {
+                      console.log('Imagen eliminada.');
+                    },
+                    (error) => {
+                      console.error('Error al eliminar imagen:', error);
+                    }
+                  );
+              }
+              alert('El producto se ha actualizado correctamente.'); // Muestra la alerta
+              this.router.navigate(['/admin/menu']); // Redirige al menú (ajusta la ruta según tu configuración)
 
               // Aquí puedes redirigir o mostrar un mensaje de éxito
             },
@@ -134,26 +147,69 @@ export class EditProductComponent implements OnInit {
   onUpload() {
     return new Observable((observer) => {
       if (this.selectedFile) {
-        // Primero sube la imagen
         this.uploadService.uploadImage(this.selectedFile).subscribe(
           (response) => {
             const fileName = this.selectedFile!.name;
+            console.log('Subida exitosa:', fileName);
 
-            // Usar setTimeout para esperar un tiempo antes de obtener la imagen
-            setTimeout(() => {
+            // Lógica para reintentar el GET hasta 5 veces con un intervalo de 1 segundo
+            let attempts = 0;
+            const maxAttempts = 10;
+            const retryInterval = 1000; // 1 segundo
+
+            const checkImage = () => {
               this.uploadService.getImage(fileName).subscribe(
                 (imageResponse) => {
-                  this.imageUrl = imageResponse.url; // Almacenar la URL de la imagen
-                  //! console.log(this.imageUrl);
-                  observer.next(); // Notificar que la operación fue exitosa
-                  observer.complete(); // Completar el observable
+                  if (imageResponse && imageResponse.url) {
+                    console.log(this.oldImageUrl);
+                    // this.uploadService
+                    //   .deleteImage(this.getFileNameFromUrl(this.oldImageUrl!)!)
+                    //   .subscribe(
+                    //     (response) => {
+                    //       console.log('Imagen eliminada.');
+                    //     },
+                    //     (error) => {
+                    //       console.error('Error al eliminar imagen:', error);
+                    //     }
+                    //   );
+                    this.imageUrl = imageResponse.url;
+                    // console.log('Imagen obtenida:', this.imageUrl);
+
+                    observer.next(); // Notificar que la operación fue exitosa
+                    observer.complete(); // Completar el observable
+                  } else {
+                    if (attempts < maxAttempts) {
+                      attempts++;
+                      console.log(
+                        `Reintentando obtener la imagen... (Intento ${attempts})`
+                      );
+                      setTimeout(checkImage, retryInterval); // Reintentar después de 1 segundo
+                    } else {
+                      console.error(
+                        'Error: No se pudo obtener la imagen después de varios intentos.'
+                      );
+                      observer.error(
+                        'Error al obtener la imagen después de varios intentos.'
+                      );
+                    }
+                  }
                 },
                 (error) => {
                   console.error('Error al obtener la imagen', error);
-                  observer.error(error); // Notificar el error
+                  if (attempts < maxAttempts) {
+                    attempts++;
+                    setTimeout(checkImage, retryInterval); // Reintentar después de 1 segundo
+                  } else {
+                    observer.error(
+                      'Error al obtener la imagen después de varios intentos.'
+                    );
+                  }
                 }
               );
-            }, 1000); // Retrasar 1000 ms (1 segundo)
+            };
+
+            // Iniciar el primer intento de obtener la imagen
+            setTimeout(checkImage, retryInterval);
           },
           (error) => {
             console.error('Error al subir la imagen', error);
@@ -161,9 +217,18 @@ export class EditProductComponent implements OnInit {
           }
         );
       } else {
-        console.error('No hay archivo seleccionado');
-        observer.error('No hay archivo seleccionado'); // Notificar el error
+        // console.error('No hay archivo seleccionado.');
+        // observer.error('No hay archivo seleccionado.');
+        observer.next(); // Notificar que la operación fue exitosa
+        observer.complete(); // Completar el observable
       }
     });
+  }
+  getFileNameFromUrl(url: string): string | null {
+    // Usar una expresión regular para extraer el nombre del archivo completo (ID + extensión)
+    const match = url.match(/\/([^\/]+\.[a-zA-Z]+)$/);
+
+    // Retornar el nombre del archivo si se encuentra, de lo contrario retornar null
+    return match ? match[1] : null;
   }
 }

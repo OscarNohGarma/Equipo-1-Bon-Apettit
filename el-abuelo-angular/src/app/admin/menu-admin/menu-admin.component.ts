@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../core/services/menu.service';
 import { MenuProduct } from '../../core/models/menuProduct';
 import { Router, RouterModule } from '@angular/router';
+import { UploadService } from '../../core/services/upload.service';
+import { response } from 'express';
 
 @Component({
   selector: 'app-menu-admin',
@@ -11,7 +13,7 @@ import { Router, RouterModule } from '@angular/router';
   imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: './menu-admin.component.html',
   styleUrl: './menu-admin.component.scss',
-  providers: [MenuService],
+  providers: [MenuService, UploadService],
 })
 export class MenuAdminComponent implements OnInit {
   selectedCategory: string = 'TODOS'; // Categoría por defecto
@@ -20,7 +22,11 @@ export class MenuAdminComponent implements OnInit {
   menuItems: MenuProduct[] = [];
   expandedImage: string | null = null; // Controla la imagen expandida
 
-  constructor(private menuService: MenuService, private router: Router) {} // Inyectar el servicio
+  constructor(
+    private uploadService: UploadService,
+    private menuService: MenuService,
+    private router: Router
+  ) {} // Inyectar el servicio
 
   ngOnInit(): void {
     // this.http.get('http://localhost:3000/firebase/menu/getmenu').subscribe(
@@ -65,11 +71,21 @@ export class MenuAdminComponent implements OnInit {
   closeImage() {
     this.expandedImage = null;
   }
-  deleteProducto(id: number) {
+  deleteProducto(id: number, image: string) {
+    console.log(this.getFileNameFromUrl(image));
+
     const confirmed = window.confirm(
       '¿Estás seguro de que deseas eliminar este ítem del menú?'
     );
     if (confirmed) {
+      this.uploadService.deleteImage(this.getFileNameFromUrl(image)!).subscribe(
+        (response) => {
+          console.log('Imagen eliminada.');
+        },
+        (error) => {
+          console.error('Error al eliminar imagen:', error);
+        }
+      );
       this.menuService.deleteMenuItem(id.toString()).subscribe(
         (response) => {
           // console.log('Producto eliminado:', response);
@@ -84,5 +100,12 @@ export class MenuAdminComponent implements OnInit {
         }
       );
     }
+  }
+  getFileNameFromUrl(url: string): string | null {
+    // Usar una expresión regular para extraer el nombre del archivo completo (ID + extensión)
+    const match = url.match(/\/([^\/]+\.[a-zA-Z]+)$/);
+
+    // Retornar el nombre del archivo si se encuentra, de lo contrario retornar null
+    return match ? match[1] : null;
   }
 }

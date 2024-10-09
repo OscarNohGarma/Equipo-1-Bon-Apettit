@@ -36,7 +36,7 @@
                 <!-- <div class="producto-top"> -->
                 <h1>{{ product.namee }}</h1>
                 <img src="./../../../assets/basura.png" alt="basura" class="btn-delete"
-                    (click)="deleteProducto(product.id)">
+                    (click)="deleteProducto(product.id, product.image)">
                 <!-- </div> -->
                 <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
                 <p class="precio">{{ product.precio | currency }}</p>
