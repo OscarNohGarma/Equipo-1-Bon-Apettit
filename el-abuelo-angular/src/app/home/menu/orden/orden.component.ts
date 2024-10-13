@@ -63,11 +63,28 @@ export class OrdenComponent implements OnInit {
   enviarPedido() {
     if (this.clienteNombre) {
       // Lógica para enviar el pedido con el nombre del cliente
+
+      // Obtener la fecha en formato YYYY-MM-DD
+      const fechaActual = new Date();
+
+      // Obtener la fecha en formato YYYY-MM-DD
+      const fecha = fechaActual.toLocaleDateString('es-ES'); // Formato: 12/10/2024
+
+      // Usar toLocaleString para obtener la hora en formato de 12 horas con a.m./p.m.
+      const hora = fechaActual.toLocaleString('es-ES', {
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        hour12: true,
+      });
+
       const newOrden = {
         id: 0,
         namee: this.clienteNombre,
         total: this.total,
         productos: this.productosEnOrden,
+        fecha, // Fecha separada
+        hora, // Hora separada
       };
       console.log(`Pedido confirmado para: ${this.clienteNombre}`);
       console.log(newOrden);
