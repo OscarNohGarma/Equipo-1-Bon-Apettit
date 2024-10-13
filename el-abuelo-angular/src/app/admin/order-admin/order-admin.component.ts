@@ -25,7 +25,27 @@ export class OrderAdminComponent implements OnInit {
   loadOrders(): void {
     this.orderMenuService.getOrden().subscribe((data) => {
       this.orderItems = data;
-      console.log(this.orderItems);
+      // console.log(this.orderItems);
     });
+  }
+  completar(id: number): void {
+    const confirmed = window.confirm(
+      '¿Deseas marcar como completado la orden?'
+    );
+    if (confirmed) {
+      this.orderMenuService.deleteOrderItem(id.toString()).subscribe(
+        (response) => {
+          // console.log('Producto eliminado:', response);
+          // Aquí puedes agregar lógica para actualizar la vista
+          setTimeout(() => {
+            alert('Orden completada correctamente.');
+            this.loadOrders();
+          }, 500);
+        },
+        (error) => {
+          console.error('Error al completar la orden', error);
+        }
+      );
+    }
   }
 }
