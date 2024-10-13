@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="header">
+        <h1 class="encabezado">Administrar Órdenes</h1>
+    </div>
+    <div class="grid">
+        <div class="box" *ngFor="let order of orderItems">
+            <div class="enc">
+                <h2>Cliente: {{order.namee}}</h2>
+                <p class="subtitulo">Productos ordenados:</p>
+            </div>
+            <div class="productos">
+                <div class="producto" *ngFor="let producto of order.productos">
+                    <p> <span class="vin">• </span> ({{producto.quantity}}) </p>
+                    <p class="nombre-producto">{{producto.namee}}<span class="precio"> (${{producto.subtotal}})</span>
+                    </p>
+                </div>
+            </div>
+            <div class="div-total">
+                <p class="total">Total a pagar: <span>${{order.total}}</span></p>
+                <div class="fecha">
+                    <p>{{order.fecha}}</p>
+                    <p>{{order.hora}}</p>
+                </div>
+            </div>
+
+            <button class="button add">COMPLETAR</button>
+        </div>
+
+    </div>
+</div>
