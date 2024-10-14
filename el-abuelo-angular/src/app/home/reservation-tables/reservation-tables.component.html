@@ -1,0 +1,231 @@
+
+<div id="page" class="site">
+  <h2 style="margin-bottom: 4rem;text-align:center;">¡Reserva Tú Mesa Ahora!</h2>
+  <h4 style="margin-bottom: 1rem;text-align:center; margin-top: -2.5rem;">Solo Completa El Formulario Con Los Datos Solicitantes</h4>
+  <div class="container2">
+    <div class="form-box">
+      <div class="progress2">
+        <div class="logo">
+          <a href="/"><span><img src="../../../assets/ela.png"></span></a>
+        </div>
+        <ul class="progress2-steps">
+          <li class="step active">
+            <span>1</span>
+            <p>Personal<br><span>Información Cliente</span></p>
+          </li>
+          <li class="step">
+            <span>2</span>
+            <p>Reservar<br><span>Reservación Mesa</span></p>
+          </li>
+          <li class="step">
+            <span>3</span>
+            <p>Pagos<br><span>Metodos De Pago</span></p>
+          </li>
+          <li class="step">
+            <span>4</span>
+            <p>¡Listo!<br><span>Reservación Lista</span></p>
+          </li>
+        </ul>
+      </div>
+      <form action="">
+        <div class="form-one form-step active">
+          <div class="bg-svg"></div>
+          <h2> Información Del Cliente</h2>
+          <p>Complete todos los campos con la información que se solicite.</p>
+          <div>
+            <label>Nombres</label>
+            <input type="text" name="Nombres" placeholder="Sus Nombres" required>
+          </div>
+          <div>
+            <label> Apellidos</label>
+            <input type="text" name="Apellidos" placeholder="Sus Apellidos" required>
+          </div>
+
+          <div>
+            <label> Número Telefónico </label>
+            <input type="tel" name="Telefono" placeholder="Su Número De Teléfono" maxlength="10" required>
+          </div>
+          <!-- <div class="birth">
+                          <label>Date of Birth</label>
+                          <div class="grouping">
+                              <input type="text" patter="[0-9]*" name="day" value="" min="0" max="31" placeholder="DD">
+                              <input type="text" patter="[0-9]*" name="month" value="" min="0" max="12" placeholder="MM">
+                              <input type="text" patter="[0-9]*" name="year" value="" min="0" max="2050" placeholder="YYYY">
+                          </div>
+                      </div> -->
+        </div>
+        <div class="form-two form-step">
+          <div class="bg-svg"></div>
+          <h2> Datos Reservación Mesa</h2>
+          <p>Complete todos los campos con la información que se solicite.</p>
+
+          <div>
+            <label>Fecha A Reservar</label>
+            <input type="date" name="Fecha" [(ngModel)]="fechaReservada" (change)="validarFecha()" [min]="fechaMinima"
+              [attr.max]="fechaMaxima" appDisableDates required>
+            <span *ngIf="fechaInvalida" style="color: red;">
+              Solo se permiten fechas de miércoles a domingo.
+            </span>
+          </div>
+
+          <div>
+            <label>Horario A Reservar</label>
+            <input type="time" name="Horario" [(ngModel)]="horarioReservado" (change)="validarHorario()" [min]="'19:00'"
+              [max]="'23:59'" [disabled]="fechaInvalida" required>
+            <span *ngIf="horarioInvalido" style="color: red;">
+              El horario debe ser de 7:00 p.m. a 12:00 a.m.
+            </span>
+          </div>
+
+
+
+          <div>
+            <label>Lugar De La Mesa</label>
+            <select name="Lugar" id="Lugar" required (change)="onLugarChange($event)">
+              <option value="" selected disabled> Seleccione una opción</option>
+              <option value="Interior"> Interior </option>
+              <option value="Exterior"> Exterior</option>
+            </select>
+          </div>
+
+          <!-- Selector para mesas del interior -->
+          <div *ngIf="lugarSeleccionado === 'Interior'">
+            <label>Mesa A Eligir</label>
+            <select name="MesaInterior" id="MesaInterior" required>
+              <option value="" selected disabled> Seleccione una opción</option>
+              <option value="Mesa 1"> Mesa 1 </option>
+              <option value="Mesa 2"> Mesa 2</option>
+              <option value="Mesa 3"> Mesa 3</option>
+              <option value="Mesa 4"> Mesa 4</option>
+              <option value="Mesa 5"> Mesa 5</option>
+              <option value="Mesa 6"> Mesa 6</option>
+              <option value="Mesa 7"> Mesa 7 </option>
+            </select>
+          </div>
+
+          <!-- Selector para mesas del exterior -->
+          <div *ngIf="lugarSeleccionado === 'Exterior'">
+            <label>Mesa A Eligir</label>
+            <select name="MesaExterior" id="MesaExterior" required>
+              <option value="" selected disabled> Seleccione una opción</option>
+              <option value="Mesa 8"> Mesa 8 </option>
+              <option value="Mesa 9"> Mesa 9</option>
+              <option value="Mesa 10"> Mesa 10</option>
+              <option value="Mesa 11"> Mesa 11</option>
+              <option value="Mesa 12"> Mesa 12</option>
+              <option value="Mesa 13"> Mesa 13</option>
+              <option value="Mesa 14"> Mesa 14</option>
+              <option value="Mesa 15"> Mesa 15</option>
+            </select>
+          </div>
+
+
+          <div>
+            <label for="cantidadMesas">Cantidad De Mesas A Reservar</label>
+            <input type="number" id="cantidadMesas" #cantidadMesas name="cantidadMesas"
+              placeholder="Cantidad De Mesas A Reservar" min="1" required>
+          </div>
+
+          <div>
+            <label for="costoMesa">Costo Por Mesa (Sin Decoración)</label>
+            <input type="number" id="costoMesa" #costoMesa name="Costo" placeholder="$120 MXN" required readonly>
+          </div>
+
+
+          <div>
+            <label>Decoración De la Mesa</label>
+            <select name="Decoracion" id="decoracion" (change)="onDecoracionChange($event)" required>
+              <option value="" selected disabled>Seleccione una opción</option>
+              <option value="Ninguna">Ninguna</option>
+              <option value="Normal">Normal</option>
+              <option value="San Valentin">San Valentín</option>
+              <option value="Independencia">Independencia</option>
+              <option value="Parejas">Parejas</option>
+              <option value="Navideño">Navideño</option>
+              <option value="DiaDeMuerto">Día De Muerto</option>
+              <option value="MomentoAmigos">Momento Amigos</option>
+              <option value="Cumpleaños">Cumpleaños</option>
+              <option value="Despedida">Despedida De Soltera/o</option>
+            </select>
+          </div>
+
+          <!-- Div para mostrar el precio de la decoración seleccionada -->
+          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna'">
+            <p style="color: black; margin-bottom: 1em;">Precio de decoración: {{
+              costoDecoraciones[decoracionSeleccionada] | currency:'MXN' }}</p>
+          </div>
+          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna'">
+            <label>Costo Por Mesa (Incluyendo Decoración)</label>
+            <input type="number" [value]="costoConDecoracion" readonly>
+          </div>
+        </div>
+
+        <div class="form-three form-step">
+          <div class="bg-svg"></div>
+          <h2>Metodos De Pagos</h2>
+          <div>
+            <label>Mesas Reservadas: </label>
+            <input type="text" [value]="cantidadMesasReservadas" readonly>
+            <!-- <span>{{ cantidadMesasReservadas }} mesa(s)</span> -->
+          </div>
+          <div>
+            <label>Total A Pagar Por La Reservación: </label>
+            <input type="text" [value]="mensajeTotalPago" readonly>
+          </div>
+          <p>A continuación, realice el pago por:</p>
+          <div>
+            <label>Por Transferencia Bancaria</label>
+            <input type="text" placeholder="5555555555555555" readonly>
+          </div>
+
+          <div>
+            <p>Ya realizado el pago de la reservación. Suba el baucher del pago para que lo comprobemos en sistema.</p>
+            <label for="file-upload">Subir Comprobante De Pago</label>
+            <input type="file" id="file-upload" #fileUpload accept="image/*">
+
+            <!-- Contenedor para previsualización de la imagen -->
+            <div id="preview-container">
+              <img #imagePreview id="image-preview" [src]="" alt="Previsualización de la imagen"
+                style="display: none; max-width: 100%; height: auto; margin-top: 1em;">
+            </div>
+          </div>
+
+          <!-- <div>
+                          <label>Password</label>
+                          <input type="password" placeholder="Your Password">
+                      </div> -->
+          <!-- <div class="checkbox">
+
+                          <input type="checkbox">
+                          <label> Receive our news letter and special offers</label>
+                      </div> -->
+
+        </div>
+
+        <div class="form-four form-step">
+          <div class="bg-svg"></div>
+          <h2>¡Listo! Reservación Finalizada</h2>
+
+          <p style="color: black;">En un plazo de 30 minutos recibirás un mensaje de confirmación. En caso que no lo
+            reciba contactenos al:
+            996 105 9860
+          </p>
+        </div>
+
+
+        <div *ngIf="!showReservarOtraMesa" class="btn-group">
+          <button type="button" class="btn-prev" #prevButton disabled>Regresar</button>
+          <button type="button" class="btn-next" #nextButton>Siguiente</button>
+          <button type="button" class="btn-submit" (click)="reservarMesa()">Reservar Mesa</button>
+        </div>
+
+        <!-- Agrega este botón para reservar otra mesa -->
+        <div *ngIf="showReservarOtraMesa" class="btn-group">
+          <button type="button" class="btn-next" (click)="reservarOtraMesa()">Reservar otra mesa</button>
+        </div>
+
+
+      </form>
+    </div>
+  </div>
+</div>
