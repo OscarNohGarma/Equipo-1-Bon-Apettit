@@ -1,6 +1,7 @@
-export class MenuProduct {
-  id: number; // Asegúrate de tener un identificador único
-  namee: string;
+// PRIMERO: MenuProduct
+import { BaseModel } from './baseModel';
+
+export class MenuProduct extends BaseModel {
   image: string;
   precio: number;
   categoria: string;
@@ -14,8 +15,7 @@ export class MenuProduct {
     precio: number,
     categoria: string
   ) {
-    this.id = id;
-    this.namee = namee;
+    super(id, namee); // Hereda id y namee de BaseModel
     this.image = image;
     this.precio = precio;
     this.categoria = categoria;
