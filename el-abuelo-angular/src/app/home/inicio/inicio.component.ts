@@ -4,6 +4,7 @@ import { CarruselClienteComponent } from './carrusel-cliente/carrusel-cliente.co
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';
 import { NavbarComponent } from '../../shared/navbar/navbar.component';
+import { MenuWelcomeComponent } from './menu-welcome/menu-welcome.component';
 
 @Component({
   selector: 'app-inicio',
@@ -14,6 +15,7 @@ import { NavbarComponent } from '../../shared/navbar/navbar.component';
     FooterComponent,
     NosotrosComponent,
     NavbarComponent,
+    MenuWelcomeComponent,
   ],
   templateUrl: './inicio.component.html',
   styleUrl: './inicio.component.scss',
