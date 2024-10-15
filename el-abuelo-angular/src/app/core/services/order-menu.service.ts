@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MenuProduct } from '../models/menuProduct';
-import { GenericService } from './generic.service';
 import { Observable } from 'rxjs';
 import { OrderMenu } from '../models/orderMenu';
+import { GenericService } from '../../shared/generic.service';
 
 @Injectable({
   providedIn: 'root',

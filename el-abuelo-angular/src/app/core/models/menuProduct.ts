@@ -1,5 +1,5 @@
 // PRIMERO: MenuProduct
-import { BaseModel } from './baseModel';
+import { BaseModel } from '../../shared/baseModel';
 
 export class MenuProduct extends BaseModel {
   image: string;

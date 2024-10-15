@@ -1,5 +1,5 @@
 // SEGUNDO: OrderMenu
-import { BaseModel } from './baseModel';
+import { BaseModel } from '../../shared/baseModel';
 import { MenuProduct } from './menuProduct';
 
 export class OrderMenu extends BaseModel {
