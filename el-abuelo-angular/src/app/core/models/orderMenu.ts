@@ -1,8 +1,8 @@
+// SEGUNDO: OrderMenu
+import { BaseModel } from '../../shared/baseModel';
 import { MenuProduct } from './menuProduct';
 
-export class OrderMenu {
-  id: number; // Asegúrate de tener un identificador único
-  namee: string;
+export class OrderMenu extends BaseModel {
   fecha: string;
   hora: string;
   total: number;
@@ -16,11 +16,10 @@ export class OrderMenu {
     total: number,
     productos: MenuProduct[]
   ) {
-    this.id = id;
-    this.namee = namee;
-    this.total = total;
-    this.productos = productos;
+    super(id, namee); // Hereda id y namee de BaseModel
     this.fecha = fecha;
     this.hora = hora;
+    this.total = total;
+    this.productos = productos;
   }
 }

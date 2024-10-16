@@ -1,7 +1,7 @@
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing'; // Importar el módulo de pruebas de HttpClient
 import { GenericService } from './generic.service';
-import { MenuProduct } from '../models/menuProduct'; // Asegúrate de importar tu modelo
+import { MenuProduct } from '../core/models/menuProduct';
 
 describe('GenericService', () => {
   let service: GenericService<MenuProduct>; // Especificar el tipo aquí
