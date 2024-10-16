@@ -15,6 +15,13 @@ export class Menu extends ModeloPrincipal {
     categoria: string;  
    
 }
+export class Usuario extends ModeloPrincipal {
+    tipocollection: string = "usuario";
+    rol: string;
+    user: string;
+    password : string;
+   
+}
 export class Orden extends ModeloPrincipal {
     tipocollection: string = "orden";
     productos: Array<Map<string, number>>;

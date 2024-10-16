@@ -1,7 +1,10 @@
+import { Injectable } from '@nestjs/common';
 
-export class ModeloPrincipal{
-    static collectionName : string = 'bs';
+@Injectable() // Asegúrate de agregar este decorador
+export class ModeloPrincipal {
+    static collectionName: string = 'bs';
     id: string;
     namee: string;
+
     
 }

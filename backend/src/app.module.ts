@@ -8,15 +8,21 @@ import { AppService } from './app.service';
 import { ConfigModule, ConfigService} from '@nestjs/config';
 
 import { FirestoreModule } from './module/firestore/firestore.module';
-import { FirestoreMenuModule } from './module/firestoremenu/firestoremenu.module';
+import { FirestoreMenuModule } from './module/firestoreconfig/firestoreconfig.module';
 import { StorageService } from './services/storage-service/storage.service';
 import { UploadController } from './controllers/upload/upload.controller';
 import { FirestorageModule } from './module/firestore/firestorage/firestorage.module';
-import { FirebaseMenuService } from './services/firebase_menu/firebase_menu.service';
+import { FirebaseProductoService } from './services/firebase_producto/firebase_producto.service';
 import { FirebaseCitaController } from './controllers/firebase-cita/firebase-cita.controller';
 import { FirebaseCitasService } from './services/firebase-citas/firebase-citas.service';
 import { FirebaseOrdenService } from './services/firebase-orden/firebase-orden.service';
 import { FirebaseOrdenController } from './controllers/firebase-orden/firebase-orden.controller';
+import { FireAuthController } from './controllers/fire-auth/fire-auth.controller';
+import { FireAuthService } from './services/fire-auth/fire-auth.service';
+import { GenericFirebaseController } from './controllers/generic/generic.controller';
+import { FirebaseGenericService } from './services/firebase_generic/firebase_generic.service';
+import { FirebaseUsuarioService } from './services/firebase-usuario/firebase-usuario.service';
+import { FirebaseUsuarioController } from './controllers/firebase-usuario/firebase-usuario.controller';
 
 
 @Module({
@@ -35,7 +41,7 @@ import { FirebaseOrdenController } from './controllers/firebase-orden/firebase-o
     
 
     FirestoreModule,FirestorageModule],
-  controllers: [AppController, UploadController, FirebaseCitaController, FirebaseOrdenController],
-  providers: [AppService,StorageService, FirebaseMenuService, FirebaseCitasService, FirebaseOrdenService],
+  controllers: [AppController, UploadController, FirebaseCitaController, FirebaseOrdenController, FireAuthController, GenericFirebaseController, FirebaseUsuarioController],
+  providers: [AppService,StorageService, FirebaseProductoService, FirebaseCitasService, FirebaseOrdenService, FireAuthService,FirebaseGenericService, FirebaseUsuarioService],
 })
 export class AppModule {}

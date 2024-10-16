@@ -1,31 +1,41 @@
 import { Module } from '@nestjs/common';
 import { FirebaseProductoController } from 'src/controllers/firebase-producto/firebase-producto.controller';
-import { FirebaseProductoService } from 'src/services/firebase_producto/firebase_producto.service';
+import { FirebaseGenericService } from 'src/services/firebase_generic/firebase_generic.service';
 import { FirestorageModule} from './firestorage/firestorage.module';
 import { StorageService } from '../../services/storage-service/storage.service';
 import { upload } from '@google-cloud/storage/build/cjs/src/resumable-upload';
 import { UploadController } from 'src/controllers/upload/upload.controller';
 import { FirebaseCitaController } from 'src/controllers/firebase-cita/firebase-cita.controller';
 import { FirebaseCitasService } from 'src/services/firebase-citas/firebase-citas.service';
-import { FirebaseMenuService } from 'src/services/firebase_menu/firebase_menu.service';
+import { FirebaseProductoService } from 'src/services/firebase_producto/firebase_producto.service';
 import { FirebaseOrdenController } from 'src/controllers/firebase-orden/firebase-orden.controller';
 import { FirebaseOrdenService } from 'src/services/firebase-orden/firebase-orden.service';
+import { FireAuthModule } from './fire-auth/fire-auth.module';
+import { FireAuthService } from 'src/services/fire-auth/fire-auth.service';
+import { FireAuthController } from 'src/controllers/fire-auth/fire-auth.controller';
+import { GenericFirebaseController } from 'src/controllers/generic/generic.controller';
+import { ModeloPrincipal } from 'src/document/modelo_principal';
 
 
 @Module({
-    providers: [FirebaseProductoService,
+    providers: [
+        
+        FirebaseGenericService,
         StorageService,
         FirebaseCitasService, 
-        FirebaseMenuService,
-        FirebaseOrdenService],
+        FirebaseProductoService,
+        FirebaseOrdenService,
+        FireAuthService],
     controllers: [
         FirebaseProductoController,
         UploadController, 
         FirebaseCitaController,
-        FirebaseOrdenController
+        FirebaseOrdenController,
+        FireAuthController,
+        GenericFirebaseController
                     
     ],
-    imports: [FirestorageModule],
+    imports: [FirestorageModule, FireAuthModule],
 }) 
 export class FirestoreModule{
     
