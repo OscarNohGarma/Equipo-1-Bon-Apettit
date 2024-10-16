@@ -6,7 +6,7 @@
         </div>
         <h2 class="subtitulo">Edita o agrega elementos al menú</h2>
 
-        <!-- Menú de selección en móvil -->
+        <!-- Menú de selección en móvil
         <div class="mobile-seleccion">
             <div class="selected-category" (click)="toggleMenu()">
                 {{ selectedCategory }}
@@ -21,14 +21,30 @@
             </div>
         </div>
 
-        <!-- Menú de selección en pantallas grandes -->
-        <div class="seleccion">
+        Menú de selección en pantallas grandes -->
+        <!-- <div class="seleccion">
             <div class="opcion button" (click)="selectCategory('TODOS')">TODOS</div>
             <div class="opcion button" (click)="selectCategory('COMIDA')">COMIDA</div>
             <div class="opcion button" (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
             <div class="opcion button" (click)="selectCategory('POSTRES')">POSTRES</div>
             <div class="opcion button" (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
+        </div> -->
+        <div class="filter-bar">
+            <input type="text" placeholder="Buscar producto" class="search-bar" (input)="updateSearch($event)">
+            <select class="category-filter" (change)="updateCategory($event)">
+                <option value="TODOS">Todas las categorías</option>
+                <option value="COMIDA">Comida</option>
+                <option value="BEBIDAS">Bebidas</option>
+                <option value="POSTRES">Postres</option>
+                <option value="ESPECIALES">Especiales</option>
+            </select>
+            <select class="stock-filter" (change)="updateStock($event)">
+                <option value="">Todos</option>
+                <option value="activo">En stock</option>
+                <option value="inactivo">Sin stock</option>
+            </select>
         </div>
+
         <!-- Productos filtrados -->
         <div class="grid">
             <div class="box" *ngFor="let product of filteredProducts">

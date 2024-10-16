@@ -21,6 +21,8 @@ export class MenuAdminComponent implements OnInit {
   showOrder: boolean = false; // Controla la visibilidad de la orden
   menuItems: MenuProduct[] = [];
   expandedImage: string | null = null; // Controla la imagen expandida
+  searchTerm: string = ''; // Término de búsqueda
+  stockFilter: string = ''; // Filtro de stock (activo/inactivo)
 
   constructor(
     private uploadService: UploadService,
@@ -47,12 +49,20 @@ export class MenuAdminComponent implements OnInit {
   }
 
   get filteredProducts(): MenuProduct[] {
-    if (this.selectedCategory === 'TODOS') {
-      return this.menuItems;
-    }
-    return this.menuItems.filter(
-      (product) => product.categoria === this.selectedCategory
-    );
+    return this.menuItems.filter((product) => {
+      const matchesCategory =
+        this.selectedCategory === 'TODOS' ||
+        product.categoria === this.selectedCategory;
+      const matchesSearch = product.namee
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
+      const matchesStock =
+        this.stockFilter === '' ||
+        (this.stockFilter === 'activo' && product.stock === true) ||
+        (this.stockFilter === 'inactivo' && product.stock === false);
+
+      return matchesCategory && matchesSearch && matchesStock;
+    });
   }
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
@@ -107,5 +117,22 @@ export class MenuAdminComponent implements OnInit {
 
     // Retornar el nombre del archivo si se encuentra, de lo contrario retornar null
     return match ? match[1] : null;
+  }
+  // Método para actualizar la búsqueda
+  updateSearch(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchTerm = inputElement.value;
+  }
+
+  // Método para actualizar la categoría seleccionada
+  updateCategory(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedCategory = selectElement.value;
+  }
+
+  // Método para actualizar el filtro de stock
+  updateStock(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.stockFilter = selectElement.value;
   }
 }
