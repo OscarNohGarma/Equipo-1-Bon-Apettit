@@ -29,20 +29,33 @@
             <div class="opcion button" (click)="selectCategory('POSTRES')">POSTRES</div>
             <div class="opcion button" (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
         </div>
-
         <!-- Productos filtrados -->
         <div class="grid">
             <div class="box" *ngFor="let product of filteredProducts">
-                <!-- <div class="producto-top"> -->
+                <!-- Nombre del producto -->
                 <h1>{{ product.namee }}</h1>
+
+                <!-- Botón para eliminar el producto -->
                 <img src="./../../../assets/basura.png" alt="basura" class="btn-delete"
                     (click)="deleteProducto(product.id, product.image)">
-                <!-- </div> -->
+
+                <!-- Imagen del producto -->
                 <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
+
+                <!-- Precio del producto -->
                 <p class="precio">{{ product.precio | currency }}</p>
+
+                <!-- Indicador de estado del producto -->
+                <div class="stock-status" [ngClass]="product.stock ? 'activo' : 'inactivo'">
+                    <span *ngIf="product.stock" class="stock-indicator">🟢 Activo</span>
+                    <span *ngIf="!product.stock" class="stock-indicator">🔴 Inactivo</span>
+                </div>
+
+                <!-- Botón para editar el producto -->
                 <button class="button add" [routerLink]="['edit', product.id]">EDITAR</button>
             </div>
         </div>
+
 
         <!-- Modal para la imagen expandida -->
         <div class="image-modal" [ngClass]="{ 'show': expandedImage !== null }" (click)="closeImage()">

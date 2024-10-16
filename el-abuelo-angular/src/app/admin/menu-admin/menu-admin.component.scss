@@ -156,7 +156,7 @@ h3 {
 
 @media (min-width: 768px) {
   .grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     // grid-template-rows: repeat(3, 1fr);
   }
 }
@@ -365,4 +365,57 @@ h3 {
 .add-button:hover {
   background-color: #343a40;
   color: white;
+}
+
+.box .stock-status {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.stock-status.activo {
+  color: green;
+}
+
+.stock-status.inactivo {
+  color: red;
+}
+
+.stock-indicator {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Barra de filtros en pantallas grandes */
+.filter-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  gap: 10px; /* Añadir espacio entre los filtros */
+}
+
+.search-bar,
+.category-filter,
+.stock-filter {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  width: 30%;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column; /* Apilar los filtros verticalmente */
+  }
+
+  .search-bar,
+  .category-filter,
+  .stock-filter {
+    width: 100%; /* Ajustar al ancho completo */
+    margin-bottom: 10px; /* Añadir espacio entre los filtros */
+  }
 }

@@ -78,7 +78,11 @@ export class AddProductComponent {
   saveProduct() {
     if (this.productForm.valid) {
       this.onUpload().subscribe(() => {
-        const newProduct = { ...this.productForm.value, image: this.imageUrl }; // Agregar la URL de la imagen
+        const newProduct = {
+          ...this.productForm.value,
+          image: this.imageUrl,
+          stock: true,
+        }; // Agregar la URL de la imagen
         // console.log(newProduct);
 
         this.menuService.addMenuItem(newProduct).subscribe(

@@ -33,9 +33,17 @@
                 <h1>{{ product.namee }}</h1>
                 <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
                 <p class="precio">{{ product.precio | currency }}</p>
-                <button class="button add" (click)="agregarProducto(product)">AGREGAR</button>
+
+                <!-- Condicional para mostrar el botón o el texto de "Sin existencia" -->
+                <ng-container *ngIf="product.stock; else noStock">
+                    <button class="button add" (click)="agregarProducto(product)">AGREGAR</button>
+                </ng-container>
+                <ng-template #noStock>
+                    <p class="sin-stock" style="color: red;">Sin existencia</p>
+                </ng-template>
             </div>
         </div>
+
 
         <!-- Modal para la imagen expandida -->
         <div class="image-modal" [ngClass]="{ 'show': expandedImage !== null }" (click)="closeImage()">

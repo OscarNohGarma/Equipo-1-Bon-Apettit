@@ -307,3 +307,14 @@ h3 {
 .image-modal:hover {
   cursor: pointer;
 }
+
+.sin-stock {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .sin-stock {
+    font-size: 18px;
+  }
+}
