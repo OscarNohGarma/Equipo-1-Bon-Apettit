@@ -1,0 +1,35 @@
+<div class="container mb-10">
+    <h2 style="margin-bottom: 4rem;text-align: center;">¡Bienvenido!</h2>
+
+    <div class="grid">
+
+        <div class="contenido">
+            <h1 class="titulo">Nuestra comida</h1>
+            <p class="text">Conoce nuestros deliciosos platillos y prueba su sabor exquisito</p>
+            <button [routerLink]="['menu']" class="button">
+                VER MENÚ
+            </button>
+        </div>
+        <div class="imagenes">
+            <div id="carousel-1" class="carousel slide carousel-fade " data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li *ngFor="let img of carrusel1; let i = index" [attr.data-target]="'#carousel-1'"
+                        [attr.data-slide-to]="i" [class.active]="i === 0"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div *ngFor="let img of carrusel1; let i = index" class="carousel-item" [class.active]="i === 0">
+                        <img class="d-block w-100" [src]="img" [alt]="'Slide ' + (i + 1)">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carousel-1" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carousel-1" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
