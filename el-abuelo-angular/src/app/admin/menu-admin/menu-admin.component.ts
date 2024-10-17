@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../core/services/menu.service';
+import { ProductService } from '../../core/services/product.service';
 import { MenuProduct } from '../../core/models/menuProduct';
 import { Router, RouterModule } from '@angular/router';
 import { UploadService } from '../../core/services/upload.service';
@@ -13,7 +13,7 @@ import { response } from 'express';
   imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: './menu-admin.component.html',
   styleUrl: './menu-admin.component.scss',
-  providers: [MenuService, UploadService],
+  providers: [ProductService, UploadService],
 })
 export class MenuAdminComponent implements OnInit {
   selectedCategory: string = 'TODOS'; // Categoría por defecto
@@ -26,7 +26,7 @@ export class MenuAdminComponent implements OnInit {
 
   constructor(
     private uploadService: UploadService,
-    private menuService: MenuService,
+    private productService: ProductService,
     private router: Router
   ) {} // Inyectar el servicio
 
@@ -42,7 +42,7 @@ export class MenuAdminComponent implements OnInit {
     this.loadMenu();
   }
   loadMenu(): void {
-    this.menuService.getMenu().subscribe((data) => {
+    this.productService.getAll().subscribe((data) => {
       this.menuItems = data;
       // console.log(this.menuItems);
     });
@@ -96,7 +96,7 @@ export class MenuAdminComponent implements OnInit {
           console.error('Error al eliminar imagen:', error);
         }
       );
-      this.menuService.deleteMenuItem(id.toString()).subscribe(
+      this.productService.delete(id.toString()).subscribe(
         (response) => {
           // console.log('Producto eliminado:', response);
           // Aquí puedes agregar lógica para actualizar la vista

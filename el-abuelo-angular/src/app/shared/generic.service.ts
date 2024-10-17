@@ -14,27 +14,27 @@ export class GenericService<T> {
   }
 
   // Método para obtener todos los elementos
-  getAll(endpoint: string): Observable<T[]> {
-    return this.http.get<T[]>(`${this.getBaseUrl()}/${endpoint}`);
+  getAll(): Observable<T[]> {
+    return this.http.get<T[]>(`${this.getBaseUrl()}`);
   }
 
   // Método para obtener un elemento por ID
-  getById(endpoint: string, id: string): Observable<T> {
-    return this.http.get<T>(`${this.getBaseUrl()}/${endpoint}/${id}`);
+  getById(id: string): Observable<T> {
+    return this.http.get<T>(`${this.getBaseUrl()}/${id}`);
   }
 
   // Método para agregar un elemento
-  add(endpoint: string, item: T): Observable<any> {
-    return this.http.post(`${this.getBaseUrl()}/${endpoint}`, item);
+  add(item: T): Observable<any> {
+    return this.http.post(`${this.getBaseUrl()}`, item);
   }
 
   // Método para actualizar un elemento
-  update(endpoint: string, id: string, item: T): Observable<any> {
-    return this.http.put(`${this.getBaseUrl()}/${endpoint}/${id}`, item);
+  update(id: string, item: T): Observable<any> {
+    return this.http.put(`${this.getBaseUrl()}/${id}`, item);
   }
 
   // Método para eliminar un elemento
-  delete(endpoint: string, id: string): Observable<any> {
-    return this.http.delete(`${this.getBaseUrl()}/${endpoint}/${id}`);
+  delete(id: string): Observable<any> {
+    return this.http.delete(`${this.getBaseUrl()}/${id}`);
   }
 }

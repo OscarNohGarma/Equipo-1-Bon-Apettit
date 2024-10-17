@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MenuService } from '../../../core/services/menu.service';
+import { ProductService } from '../../../core/services/product.service';
 import { MenuProduct } from '../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 import { UploadService } from '../../../core/services/upload.service';
@@ -12,7 +12,7 @@ import { Observable } from 'rxjs';
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss',
-  providers: [MenuService, UploadService],
+  providers: [ProductService, UploadService],
 })
 export class AddProductComponent {
   productForm: FormGroup;
@@ -25,7 +25,7 @@ export class AddProductComponent {
   imagePreviewUrl: string | null = null; // Propiedad para la vista previa
 
   constructor(
-    private menuService: MenuService,
+    private productService: ProductService,
     private fb: FormBuilder,
     private router: Router,
     private uploadService: UploadService
@@ -85,7 +85,7 @@ export class AddProductComponent {
         }; // Agregar la URL de la imagen
         // console.log(newProduct);
 
-        this.menuService.addMenuItem(newProduct).subscribe(
+        this.productService.add(newProduct).subscribe(
           (response) => {
             //! console.log('Producto añadido exitosamente:', response);
 

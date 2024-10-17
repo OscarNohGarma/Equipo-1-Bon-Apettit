@@ -3,7 +3,7 @@ import { MenuProduct } from '../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 import { OrderService } from '../../core/services/order.service';
 import { OrdenComponent } from './orden/orden.component';
-import { MenuService } from '../../core/services/menu.service';
+import { ProductService } from '../../core/services/product.service';
 import { HttpClientModule } from '@angular/common/http';
 
 @Component({
@@ -12,7 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, OrdenComponent, HttpClientModule],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
-  providers: [MenuService],
+  providers: [ProductService],
 })
 export class MenuComponent implements OnInit {
   selectedCategory: string = 'TODOS'; // Categoría por defecto
@@ -23,7 +23,7 @@ export class MenuComponent implements OnInit {
 
   constructor(
     private ordenService: OrderService,
-    private menuService: MenuService
+    private productService: ProductService
   ) {} // Inyectar el servicio
 
   ngOnInit(): void {
@@ -38,7 +38,7 @@ export class MenuComponent implements OnInit {
     this.loadMenu();
   }
   loadMenu(): void {
-    this.menuService.getMenu().subscribe((data) => {
+    this.productService.getAll().subscribe((data) => {
       this.menuItems = data;
       console.log(this.menuItems);
     });
