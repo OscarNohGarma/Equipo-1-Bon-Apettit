@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MenuService } from '../../../core/services/menu.service';
+import { ProductService } from '../../../core/services/product.service';
 import { MenuProduct } from '../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 import { UploadService } from '../../../core/services/upload.service';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss',
-  providers: [MenuService, UploadService],
+  providers: [ProductService, UploadService],
 })
 export class EditProductComponent implements OnInit {
   productForm: FormGroup;
@@ -29,7 +29,7 @@ export class EditProductComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private menuService: MenuService,
+    private productService: ProductService,
     private fb: FormBuilder,
     private router: Router,
     private uploadService: UploadService
@@ -53,7 +53,7 @@ export class EditProductComponent implements OnInit {
 
   loadProduct(id: string) {
     // Usar el método getMenuById que ya tienes en tu servicio
-    this.menuService.getMenuById(id).subscribe((product: MenuProduct) => {
+    this.productService.getById(id).subscribe((product: MenuProduct) => {
       this.product = product;
       // Rellenar el formulario con los datos del producto
       this.productForm.patchValue({
@@ -114,33 +114,31 @@ export class EditProductComponent implements OnInit {
           image: this.imageUrl,
         }; // Agregar el ID al objeto
 
-        this.menuService
-          .updateMenuItem(this.productId!, updatedProduct)
-          .subscribe(
-            (response) => {
-              //! console.log('Producto actualizado exitosamente:', response);
-              if (this.selectedFile) {
-                this.uploadService
-                  .deleteImage(this.getFileNameFromUrl(this.oldImageUrl!)!)
-                  .subscribe(
-                    (response) => {
-                      console.log('Imagen eliminada.');
-                    },
-                    (error) => {
-                      console.error('Error al eliminar imagen:', error);
-                    }
-                  );
-              }
-              alert('El producto se ha actualizado correctamente.'); // Muestra la alerta
-              this.router.navigate(['/admin/menu']); // Redirige al menú (ajusta la ruta según tu configuración)
-
-              // Aquí puedes redirigir o mostrar un mensaje de éxito
-            },
-            (error) => {
-              console.error('Error al actualizar el producto:', error);
-              // Manejo de errores aquí
+        this.productService.update(this.productId!, updatedProduct).subscribe(
+          (response) => {
+            //! console.log('Producto actualizado exitosamente:', response);
+            if (this.selectedFile) {
+              this.uploadService
+                .deleteImage(this.getFileNameFromUrl(this.oldImageUrl!)!)
+                .subscribe(
+                  (response) => {
+                    console.log('Imagen eliminada.');
+                  },
+                  (error) => {
+                    console.error('Error al eliminar imagen:', error);
+                  }
+                );
             }
-          );
+            alert('El producto se ha actualizado correctamente.'); // Muestra la alerta
+            this.router.navigate(['/admin/menu']); // Redirige al menú (ajusta la ruta según tu configuración)
+
+            // Aquí puedes redirigir o mostrar un mensaje de éxito
+          },
+          (error) => {
+            console.error('Error al actualizar el producto:', error);
+            // Manejo de errores aquí
+          }
+        );
       });
     } else {
       console.error('Formulario inválido o ID de producto no encontrado.');

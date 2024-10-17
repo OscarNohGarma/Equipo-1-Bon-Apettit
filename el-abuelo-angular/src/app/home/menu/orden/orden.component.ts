@@ -90,7 +90,7 @@ export class OrdenComponent implements OnInit {
       console.log(newOrden);
 
       //
-      this.ordenMenuService.addOrdenItem(newOrden).subscribe(
+      this.ordenMenuService.add(newOrden).subscribe(
         (response) => {
           //! console.log('Producto añadido exitosamente:', response);
 

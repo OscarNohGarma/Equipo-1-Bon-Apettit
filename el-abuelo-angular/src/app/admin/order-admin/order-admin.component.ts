@@ -23,7 +23,7 @@ export class OrderAdminComponent implements OnInit {
     this.loadOrders();
   }
   loadOrders(): void {
-    this.orderMenuService.getOrden().subscribe((data) => {
+    this.orderMenuService.getAll().subscribe((data) => {
       this.orderItems = data;
       // console.log(this.orderItems);
     });
@@ -33,7 +33,7 @@ export class OrderAdminComponent implements OnInit {
       '¿Deseas marcar como completado la orden?'
     );
     if (confirmed) {
-      this.orderMenuService.deleteOrderItem(id.toString()).subscribe(
+      this.orderMenuService.delete(id.toString()).subscribe(
         (response) => {
           // console.log('Producto eliminado:', response);
           // Aquí puedes agregar lógica para actualizar la vista
