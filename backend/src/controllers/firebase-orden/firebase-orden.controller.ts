@@ -13,7 +13,7 @@ export class FirebaseOrdenController extends GenericFirebaseController{
     this.collectionName = "orden"; // Asigna el nombre de colección específico para esta clase
   }
 
-  @Get('/get/:id')
+  @Get('/:id')
   async getOrdenById(@Param('id') ordenId: string) {
     var nombres: string[];
       const orden = await this.servicio.getEntityById(ordenId,"orden");

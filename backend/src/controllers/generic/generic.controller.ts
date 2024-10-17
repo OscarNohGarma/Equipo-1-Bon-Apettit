@@ -14,31 +14,31 @@ export class GenericFirebaseController {
     
   }
 
-  @Post('/add')
+  @Post('')
   async createNewEntity(@Body() newEntity: ModeloPrincipal): Promise<{ message: string }> {
     
     await this.firebaseService.createEntity(newEntity, this.collectionName);
     return { message: 'Entidad creada con éxito' };
   }
 
-  @Get('/getall')
+  @Get('')
   async getAllEntities() {
     return await this.firebaseService.getAllEntities(this.collectionName);
   }
 
-  @Get('/get/:id')
+  @Get('/:id')
   async getEntityById(@Param('id') entityId: string) {
     return await this.firebaseService.getEntityById(entityId, this.collectionName);
   }
 
-  @Delete('/delete/:id')
+  @Delete('/:id')
   async deleteEntityById(@Param('id') entityId: string) {
 
     await this.firebaseService.deleteEntityById(entityId, this.collectionName);
     return { message: 'Entidad eliminada con éxito' };
   }
 
-  @Put('/update/:id')
+  @Put('/:id')
   async updateEntity(@Param('id') entityId: string, @Body() updatedEntity: ModeloPrincipal) {
     
     await this.firebaseService.updateEntity(entityId, updatedEntity, this.collectionName);
