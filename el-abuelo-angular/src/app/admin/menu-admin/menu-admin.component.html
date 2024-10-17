@@ -6,29 +6,6 @@
         </div>
         <h2 class="subtitulo">Edita o agrega elementos al menú</h2>
 
-        <!-- Menú de selección en móvil
-        <div class="mobile-seleccion">
-            <div class="selected-category" (click)="toggleMenu()">
-                {{ selectedCategory }}
-                <p class="toggle-menu">▼</p>
-            </div>
-            <div class="submenu-mobile" [class.show]="isMenuOpen">
-                <div (click)="selectCategory('TODOS')">TODOS</div>
-                <div (click)="selectCategory('COMIDA')">COMIDA</div>
-                <div (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
-                <div (click)="selectCategory('POSTRES')">POSTRES</div>
-                <div (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
-            </div>
-        </div>
-
-        Menú de selección en pantallas grandes -->
-        <!-- <div class="seleccion">
-            <div class="opcion button" (click)="selectCategory('TODOS')">TODOS</div>
-            <div class="opcion button" (click)="selectCategory('COMIDA')">COMIDA</div>
-            <div class="opcion button" (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
-            <div class="opcion button" (click)="selectCategory('POSTRES')">POSTRES</div>
-            <div class="opcion button" (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
-        </div> -->
         <div class="filter-bar">
             <input type="text" placeholder="Buscar producto" class="search-bar" (input)="updateSearch($event)">
             <select class="category-filter" (change)="updateCategory($event)">
@@ -49,14 +26,22 @@
         <div class="grid">
             <div class="box" *ngFor="let product of filteredProducts">
                 <!-- Nombre del producto -->
-                <h1>{{ product.namee }}</h1>
+                <div class="name-img">
+                    <div class="name">
+                        <h1>{{ product.namee }}</h1>
+                    </div>
+                    <div>
+
+                        <img [src]="product.image" [alt]="product.namee" class="imagen"
+                            (click)="openImage(product.image)" />
+                    </div>
+                </div>
 
                 <!-- Botón para eliminar el producto -->
                 <img src="./../../../assets/basura.png" alt="basura" class="btn-delete"
                     (click)="deleteProducto(product.id, product.image)">
 
                 <!-- Imagen del producto -->
-                <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
 
                 <!-- Precio del producto -->
                 <p class="precio">{{ product.precio | currency }}</p>
