@@ -1,7 +1,31 @@
-.mb-10 {
+/* Asegura que el html y body ocupen toda la altura de la página */
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/* Contenedor principal que ocupará toda la altura */
+.container-principal {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Garantiza que ocupe al menos toda la ventana */
+}
+
+/* El header no tiene flex y se mostrará en su tamaño natural */
+.header {
+  /* Si quieres agregar padding o estilos al header */
   margin-bottom: 3rem;
 }
 
-.mt-10 {
+/* El contenido crece y ocupa el espacio restante */
+.content {
+  flex: 1; /* Toma todo el espacio disponible entre el header y el footer */
+}
+
+/* El footer siempre estará en la parte inferior */
+.footer {
   margin-top: 3rem;
+  background: #151414;
+  text-align: center;
 }
