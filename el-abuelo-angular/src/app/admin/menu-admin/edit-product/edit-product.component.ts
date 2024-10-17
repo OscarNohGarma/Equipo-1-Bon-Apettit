@@ -39,6 +39,7 @@ export class EditProductComponent implements OnInit {
       precio: [''],
       image: [''],
       categoria: [''],
+      stock: [false],
       // Otros campos que tengas en MenuProduct
     });
   }
@@ -60,6 +61,7 @@ export class EditProductComponent implements OnInit {
         precio: product.precio,
         image: product.image, // Dependiendo de los campos de tu modelo
         categoria: product.categoria,
+        stock: product.stock,
       });
       this.imageUrl = product.image; // Suponiendo que product.image es la URL de la imagen
       this.oldImageUrl = product.image; // Suponiendo que product.image es la URL de la imagen
