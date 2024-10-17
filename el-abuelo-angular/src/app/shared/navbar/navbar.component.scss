@@ -1,0 +1,171 @@
+h1,
+h2,
+h3 {
+  font-weight: 900;
+  line-height: 1.2;
+  margin: 1rem 0 4rem 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.header {
+  background-image: url(../../../assets/menu.jpg);
+  background-color: rgba(0, 0, 0, 0.41);
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 30%;
+  padding: 7rem 0;
+}
+
+.contenido-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--blanco);
+}
+
+.nombre-sitio {
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  font-size: 40px;
+}
+
+@media (min-width: 768px) {
+  .nombre-sitio {
+    font-size: 70px;
+  }
+}
+
+.nombre-sitio span {
+  font-weight: 900;
+}
+
+@media (min-width: 992px) {
+  .barra {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.header a {
+  color: var(--blanco);
+  font-size: 2rem;
+}
+
+.slogan {
+  text-align: center;
+  color: white;
+}
+@media (min-width: 768px) {
+  .slogan {
+    text-align: right;
+  }
+}
+.slogan h1 {
+  font-size: 30px;
+  margin: 0;
+}
+@media (min-width: 768px) {
+  .slogan h1 {
+    font-size: 3rem;
+  }
+  .slogan {
+    text-align: center;
+  }
+}
+@media (min-width: 1280px) {
+  .slogan h1 {
+    font-size: 5rem;
+  }
+  .slogan {
+    text-align: end;
+  }
+}
+
+.slogan p {
+  margin: 0;
+  line-height: 1;
+}
+
+// NAVEGACION
+
+.navegacion,
+.nav-phone {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 50px;
+  padding: 20px;
+}
+.navegacion {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+@media (min-width: 768px) {
+  .nav-phone {
+    display: none;
+  }
+}
+
+.navegacion img {
+  height: 80px;
+  margin-bottom: 20px;
+}
+
+.navegacion a,
+.nav-phone a {
+  text-decoration: none;
+  color: white;
+  padding: 5px;
+  transition: all 0.2s ease-in-out;
+  border-radius: 3px;
+}
+
+.navegacion a:hover,
+.nav-phone a:hover {
+  text-decoration: none;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.nav-phone a {
+  font-size: 20px;
+}
+
+.navegacion {
+  display: none;
+  font-size: 16px;
+  background-color: #161616;
+}
+
+@media (min-width: 768px) {
+  .navegacion {
+    display: flex;
+    gap: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  .navegacion img {
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
+}
+
+@media (min-width: 1280px) {
+  .navegacion {
+    gap: 50px;
+  }
+}

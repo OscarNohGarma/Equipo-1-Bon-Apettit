@@ -1,0 +1,54 @@
+<form [formGroup]="productForm" (ngSubmit)="saveProduct()" class="edit-product-form">
+    <div class="header">
+        <button class="button back-button" [routerLink]="['/admin/menu']"></button>
+        <h2>Editar Producto</h2>
+
+        <label class="switch">
+            <input type="checkbox" id="stock" formControlName="stock">
+            <span class="slider round"></span>
+        </label>
+
+    </div>
+
+    <div class="form-group">
+        <label for="namee">Nombre del Producto:</label>
+        <input type="text" id="namee" formControlName="namee" class="form-control"
+            placeholder="Ingresa el nombre del producto" required />
+    </div>
+
+    <div class="form-group">
+        <label for="precio">Precio:</label>
+        <input type="number" id="precio" formControlName="precio" class="form-control" placeholder="Ingresa el precio"
+            required />
+    </div>
+
+    <div class="form-group">
+        <label for="image">Imagen del Producto:</label>
+        <div class="cont-imagen">
+            <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Vista previa"
+                style="max-width: 100%; margin-top: 10px;">
+            <input type="file" id="image" (change)="onFileSelected($event)" accept="image/*" id="fileInput">
+            <label for="fileInput" class="submit-button">
+                Seleccionar archivo
+            </label>
+            <p *ngIf="!isValidImage" style="color: red;">Por favor, selecciona un archivo de imagen válido (JPEG, PNG,
+                GIF, WEBP).</p>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" formControlName="categoria" class="form-control" required>
+            <option value="" disabled selected>Selecciona una categoría</option>
+            <option value="COMIDA">COMIDA</option>
+            <option value="BEBIDAS">BEBIDAS</option>
+            <option value="POSTRES">POSTRES</option>
+            <option value="ESPECIALES">ESPECIALES</option>
+        </select>
+    </div>
+
+    <!-- Interruptor para activar/desactivar stock -->
+
+
+    <button type="submit" class="button submit-button">ACTUALIZAR</button>
+</form>

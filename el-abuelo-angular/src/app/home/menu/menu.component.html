@@ -1,0 +1,58 @@
+<div class="bg-menu">
+    <div class="menu container">
+        <h1 class="encabezado">Menú</h1>
+        <h2 class="subtitulo">¡Disfruta de nuestra deliciosa comida!</h2>
+
+        <!-- Menú de selección en móvil -->
+        <div class="mobile-seleccion">
+            <div class="selected-category" (click)="toggleMenu()">
+                {{ selectedCategory }}
+                <p class="toggle-menu">▼</p>
+            </div>
+            <div class="submenu-mobile" [class.show]="isMenuOpen">
+                <div (click)="selectCategory('TODOS')">TODOS</div>
+                <div (click)="selectCategory('COMIDA')">COMIDA</div>
+                <div (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
+                <div (click)="selectCategory('POSTRES')">POSTRES</div>
+                <div (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
+            </div>
+        </div>
+
+        <!-- Menú de selección en pantallas grandes -->
+        <div class="seleccion">
+            <div class="opcion button" (click)="selectCategory('TODOS')">TODOS</div>
+            <div class="opcion button" (click)="selectCategory('COMIDA')">COMIDA</div>
+            <div class="opcion button" (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
+            <div class="opcion button" (click)="selectCategory('POSTRES')">POSTRES</div>
+            <div class="opcion button" (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
+        </div>
+
+        <!-- Productos filtrados -->
+        <div class="grid">
+            <div class="box" *ngFor="let product of filteredProducts">
+                <h1>{{ product.namee }}</h1>
+                <img [src]="product.image" [alt]="product.namee" class="imagen" (click)="openImage(product.image)" />
+                <p class="precio">{{ product.precio | currency }}</p>
+
+                <!-- Condicional para mostrar el botón o el texto de "Sin existencia" -->
+                <ng-container *ngIf="product.stock; else noStock">
+                    <button class="button add" (click)="agregarProducto(product)">AGREGAR</button>
+                </ng-container>
+                <ng-template #noStock>
+                    <p class="sin-stock" style="color: red;">Sin existencia</p>
+                </ng-template>
+            </div>
+        </div>
+
+
+        <!-- Modal para la imagen expandida -->
+        <div class="image-modal" [ngClass]="{ 'show': expandedImage !== null }" (click)="closeImage()">
+            <div class="image-modal-content">
+                <img [src]="expandedImage" alt="Expanded" class="expanded-image" />
+            </div>
+        </div>
+
+
+        <app-orden />
+    </div>
+</div>
