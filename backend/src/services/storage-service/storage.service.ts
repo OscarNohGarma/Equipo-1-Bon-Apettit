@@ -10,7 +10,7 @@ export class StorageService {
     @Inject('GCLOUD_STORAGE') private readonly storage: Storage,
     private readonly configService: ConfigService,
   ) {
-    const bucketName = this.configService.get<string>('BUCKET_NAME') || 'ejemplo_buckend2';
+    const bucketName = this.configService.get<string>('BUCKET_NAME') || 'myweb-b3462.appspot.com';
 
     // Verifica que el bucketName no sea undefined o null
     if (!bucketName) {
