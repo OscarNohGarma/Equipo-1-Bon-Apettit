@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { FirebaseProductoService } from '../firebase_producto/firebase_producto.service';
+import { FirebaseGenericService } from '../firebase_generic/firebase_generic.service';
 
 @Injectable()
-export class FirebaseOrdenService extends FirebaseProductoService{}
+export class FirebaseOrdenService extends FirebaseGenericService{}
