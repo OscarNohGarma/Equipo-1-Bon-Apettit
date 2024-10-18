@@ -44,9 +44,15 @@ a {
 .nombre-sitio span {
   font-weight: 900;
 }
-
+.barra {
+  // display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
 @media (min-width: 992px) {
   .barra {
+    flex-direction: row;
     // display: flex;
     justify-content: space-between;
     align-items: center;
@@ -100,7 +106,16 @@ a {
 .usuario {
   text-align: center;
   color: white;
-  font-size: 20px;
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+@media (min-width: 768px) {
+  .usuario {
+    text-align: center;
+    color: white;
+    font-size: 20px;
+  }
 }
 
 .logo {
