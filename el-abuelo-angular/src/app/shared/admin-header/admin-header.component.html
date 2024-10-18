@@ -1,6 +1,6 @@
 <div class="header">
     <div class="container contenido-header">
-        <div class="barra">
+        <div class="barra" [class.d-flex]="currentUser">
             <div class="abuelo">
                 <img src="../../../assets/ela.png" alt="logo" class="logo">
                 <h1 class="slogan">Panel de administrador</h1>
@@ -9,9 +9,11 @@
                 </div> -->
             </div>
 
-            <div class="usuario">
-                Usuario
+            <div *ngIf="currentUser" class="usuario">
+                ¡Bienvenido {{ currentUser }}!
             </div>
+
+            <p *ngIf="currentUser" class="logout" (click)="onLogout()">Cerrar sesión</p>
         </div>
 
     </div>
