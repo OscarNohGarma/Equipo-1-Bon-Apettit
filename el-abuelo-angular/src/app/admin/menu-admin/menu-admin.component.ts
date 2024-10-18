@@ -22,7 +22,7 @@ export class MenuAdminComponent implements OnInit {
   menuItems: MenuProduct[] = [];
   expandedImage: string | null = null; // Controla la imagen expandida
   searchTerm: string = ''; // Término de búsqueda
-  stockFilter: string = ''; // Filtro de stock (activo/inactivo)
+  stockFilter: string = 'activo'; // Filtro de stock (activo/inactivo)
 
   constructor(
     private uploadService: UploadService,
@@ -31,14 +31,6 @@ export class MenuAdminComponent implements OnInit {
   ) {} // Inyectar el servicio
 
   ngOnInit(): void {
-    // this.http.get('http://localhost:3000/firebase/menu/getmenu').subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
     this.loadMenu();
   }
   loadMenu(): void {

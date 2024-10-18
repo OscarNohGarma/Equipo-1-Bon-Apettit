@@ -16,9 +16,9 @@
                 <option value="ESPECIALES">Especiales</option>
             </select>
             <select class="stock-filter" (change)="updateStock($event)">
+                <option value="activo">Disponibles</option>
+                <option value="inactivo">No disponibles</option>
                 <option value="">Todos</option>
-                <option value="activo">En stock</option>
-                <option value="inactivo">Sin stock</option>
             </select>
         </div>
 
@@ -48,8 +48,8 @@
 
                 <!-- Indicador de estado del producto -->
                 <div class="stock-status" [ngClass]="product.stock ? 'activo' : 'inactivo'">
-                    <span *ngIf="product.stock" class="stock-indicator">🟢 Activo</span>
-                    <span *ngIf="!product.stock" class="stock-indicator">🔴 Inactivo</span>
+                    <span *ngIf="product.stock" class="stock-indicator">🟢 Disponible</span>
+                    <span *ngIf="!product.stock" class="stock-indicator">🔴 No disponible</span>
                 </div>
 
                 <!-- Botón para editar el producto -->
