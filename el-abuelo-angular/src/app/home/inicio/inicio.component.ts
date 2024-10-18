@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { GaleriaInstalacionesComponent } from './galeria-instalaciones/galeria-instalaciones.component';
+import { GaleriaInstalacionesComponent } from '../../shared/galeria-instalaciones/galeria-instalaciones.component';
 import { CarruselClienteComponent } from './carrusel-cliente/carrusel-cliente.component';
 import { FooterComponent } from '../../shared/footer/footer.component';
 import { NosotrosComponent } from './nosotros/nosotros.component';

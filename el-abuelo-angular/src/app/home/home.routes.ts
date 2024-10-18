@@ -1,6 +1,6 @@
 // feature.routes.ts
 import { Routes } from '@angular/router';
-import { GaleriaInstalacionesComponent } from './inicio/galeria-instalaciones/galeria-instalaciones.component';
+import { GaleriaInstalacionesComponent } from '../shared/galeria-instalaciones/galeria-instalaciones.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { MenuComponent } from './menu/menu.component';
 import { ReservationTablesComponent } from './reservation-tables/reservation-tables.component';
