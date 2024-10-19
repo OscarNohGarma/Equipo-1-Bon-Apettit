@@ -161,8 +161,13 @@ a {
   padding: 0;
   justify-content: space-around;
   color: #4b4b4b;
+  display: none; /* Ocultar en pantallas grandes */
 }
-
+@media (min-width: 768px) {
+  .navbar {
+    display: flex; /* Ocultar en pantallas grandes */
+  }
+}
 .elemento-nav {
   font-size: 18px;
   font-weight: 600;
@@ -186,4 +191,75 @@ a {
 }
 .logout:hover {
   background-color: rgb(255, 255, 255, 0.2);
+}
+//mobile Menu nav
+.mobile-seleccion {
+  // display: none; /* Oculto por defecto */
+  text-align: center;
+  position: relative;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .mobile-seleccion {
+    display: none; /* Ocultar en pantallas grandes */
+  }
+}
+.selected-category {
+  display: inline-block;
+  font-size: 18px;
+  font-weight: 300;
+  color: #343a40;
+  // background-color: rgba(255, 255, 255, 0.3);
+  padding: 10px 20px;
+  // border: 1px solid #343a40;
+  position: relative;
+  transition: background-color 0.2s;
+}
+
+.selected-category:hover {
+  cursor: pointer;
+  background-color: #343a40;
+  color: white;
+}
+.toggle-menu {
+  all: unset;
+  padding: 0 4px;
+  font-size: 16px;
+  margin-left: 10px;
+  color: #343a40;
+}
+
+.submenu-mobile {
+  display: block; /* Mostrar bloque, pero ajustar la visibilidad con la transición */
+  position: absolute;
+  background-color: #fff;
+  color: #343a40;
+  width: 100%;
+  z-index: 1000;
+  max-height: 0; /* Altura inicial cero */
+  overflow: hidden; /* Ocultar contenido mientras está colapsado */
+  opacity: 0; /* Inicia invisible */
+  transition: max-height 1s ease, opacity 0.5s ease; /* Animación de altura y opacidad */
+}
+
+.submenu-mobile.show {
+  max-height: 500px; /* Ajustar según el contenido, o poner un valor alto */
+  opacity: 1; /* Totalmente visible */
+}
+
+.submenu-mobile div {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.2s;
+  font-weight: 600;
+  color: #343a40;
+}
+
+.submenu-mobile div:hover {
+  background-color: rgba(102, 102, 102, 0.2);
+}
+
+.submenu-mobile.opcion {
+  color: rebeccapurple;
 }

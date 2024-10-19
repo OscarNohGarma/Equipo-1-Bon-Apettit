@@ -21,21 +21,33 @@
 </div>
 <div class="box" *ngIf="currentUser">
     <div class="container navbar">
-        <div class="elemento-nav" [routerLink]="['/admin']">
+        <div class="elemento-nav" [routerLink]="['/admin']" (click)="selectCategory('Inicio')">
             Inicio
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/menu']">
+        <div class="elemento-nav" [routerLink]="['/admin/menu']" (click)="selectCategory('Administrar Menú')">
             Administrar Menú
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/ordenes']">
+        <div class="elemento-nav" [routerLink]="['/admin/ordenes']" (click)="selectCategory('Órdenes')">
             Órdenes
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/reservaciones']">
+        <div class="elemento-nav" [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">
             Reservaciones
-
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/roles']">
+        <div class="elemento-nav" [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">
             Roles de Usuario
+        </div>
+    </div>
+    <div class="mobile-seleccion">
+        <div class="elemento-nav" (click)="toggleMenu()">
+            {{ selectedCategory }}
+            <p class="toggle-menu">▼</p>
+        </div>
+        <div class="submenu-mobile box" [class.show]=" isMenuOpen">
+            <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')">Inicio</div>
+            <div [routerLink]="['/admin/menu']" (click)="selectCategory('Administrar Menú')">Administrar Menú</div>
+            <div [routerLink]="['/admin/ordenes']" (click)="selectCategory('Órdenes')">Órdenes</div>
+            <div [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">Reservaciones</div>
+            <div [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">Roles de Usuario</div>
         </div>
     </div>
 </div>

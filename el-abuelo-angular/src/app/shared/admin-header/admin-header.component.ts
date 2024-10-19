@@ -12,6 +12,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminHeaderComponent implements OnInit {
   currentUser: string | null = null;
+  selectedCategory: string = 'TODOS'; // Categoría por defecto
+  isMenuOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
 
   constructor(
     private adminAuthService: AdminAuthService,
@@ -20,6 +22,10 @@ export class AdminHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.adminAuthService.getUsername(); // Obtener el nombre del usuario
+    const savedCategory = localStorage.getItem('selectedCategory');
+    if (savedCategory) {
+      this.selectedCategory = savedCategory; // Restaurar la categoría seleccionada
+    }
   }
 
   onLogout() {
@@ -28,5 +34,15 @@ export class AdminHeaderComponent implements OnInit {
       // Forzar la recarga de la página después de la navegación
       window.location.reload();
     });
+  }
+
+  toggleMenu() {
+    this.isMenuOpen = !this.isMenuOpen;
+  }
+
+  selectCategory(category: string) {
+    this.selectedCategory = category;
+    this.isMenuOpen = false; // Cierra el menú después de seleccionar una opción
+    localStorage.setItem('selectedCategory', category); // Guardar en localStorage
   }
 }
