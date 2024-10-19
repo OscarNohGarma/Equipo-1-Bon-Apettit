@@ -10,7 +10,7 @@
             </div>
 
             <div *ngIf="currentUser" class="usuario">
-                ¡Bienvenido {{ currentUser }}!
+                ¡Bienvenido(a) {{ currentUser }}!
             </div>
 
             <p *ngIf="currentUser" class="logout" (click)="onLogout()">Cerrar sesión</p>
@@ -33,7 +33,8 @@
         <div class="elemento-nav" [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">
             Reservaciones
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">
+        <div *ngIf="rol === 'ADMINISTRADOR'" class="elemento-nav" [routerLink]="['/admin/roles']"
+            (click)="selectCategory('Roles de Usuarios')">
             Roles de Usuario
         </div>
     </div>
@@ -47,7 +48,8 @@
             <div [routerLink]="['/admin/menu']" (click)="selectCategory('Administrar Menú')">Administrar Menú</div>
             <div [routerLink]="['/admin/ordenes']" (click)="selectCategory('Órdenes')">Órdenes</div>
             <div [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">Reservaciones</div>
-            <div [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">Roles de Usuario</div>
+            <div *ngIf="rol === 'ADMINISTRADOR'" [routerLink]="['/admin/roles']"
+                (click)="selectCategory('Roles de Usuarios')">Roles de Usuario</div>
         </div>
     </div>
 </div>
