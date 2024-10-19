@@ -74,7 +74,7 @@ export class MenuAdminComponent implements OnInit {
     this.expandedImage = null;
   }
   deleteProducto(id: number, image: string) {
-    console.log(this.getFileNameFromUrl(image));
+    // console.log(this.getFileNameFromUrl(image));
 
     const confirmed = window.confirm(
       '¿Estás seguro de que deseas eliminar este ítem del menú?'

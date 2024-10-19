@@ -9,6 +9,7 @@ import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { RolesAdminComponent } from './roles-admin/roles-admin.component';
 import { AddUserComponent } from './roles-admin/add-user/add-user.component';
+import { EditUserComponent } from './roles-admin/edit-user/edit-user.component';
 
 export const adminRoutes: Routes = [
   {
@@ -51,6 +52,12 @@ export const adminRoutes: Routes = [
     path: 'roles/add',
     title: 'Agregar Usuario - El abuelo',
     component: AddUserComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'roles/edit/:id',
+    title: 'Editar Usuario - El abuelo',
+    component: EditUserComponent,
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {

@@ -18,10 +18,33 @@ export class RolesAdminComponent implements OnInit {
   constructor(private router: Router, private usuarioService: UsuarioService) {}
 
   ngOnInit(): void {
+    this.loadUser();
+  }
+
+  loadUser() {
     this.usuarioService.getAll().subscribe((data) => {
       this.usuarioItems = data;
       console.log(this.usuarioItems);
     });
   }
-  deleteUsuario() {}
+  deleteUser(id: number) {
+    const confirmed = window.confirm(
+      '¿Estás seguro de que deseas eliminar este usuario?'
+    );
+    if (confirmed) {
+      this.usuarioService.delete(id.toString()).subscribe(
+        (response) => {
+          // console.log('Producto eliminado:', response);
+          // Aquí puedes agregar lógica para actualizar la vista
+          setTimeout(() => {
+            alert('Usuario eliminado correctamente.');
+            this.loadUser(); // Por ejemplo, recargar el menú
+          }, 500);
+        },
+        (error) => {
+          console.error('Error al eliminar el usuario:', error);
+        }
+      );
+    }
+  }
 }

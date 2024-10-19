@@ -1,0 +1,173 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 4rem auto;
+  // position: relative;
+}
+.encabezado {
+  font-size: 40px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+.back-button {
+  //   background-color: #343a40; /* Color oscuro elegante */
+  color: #343a40;
+  padding: 10px 15px;
+  height: 35px;
+  width: 35px;
+  border: none;
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 800;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  // position: absolute;
+  left: 30px;
+  top: 35px;
+  background-color: transparent;
+}
+
+.back-button:hover {
+  background-color: #343a40; /* Color más oscuro al pasar el ratón */
+  color: white;
+  cursor: pointer;
+}
+
+.back-button:before {
+  content: "←"; /* Flecha antes del texto */
+}
+.dis {
+  opacity: 0;
+  height: 35px;
+  width: 35px;
+}
+.dis:hover {
+  cursor: default;
+}
+.edit-product-form {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  position: relative;
+}
+
+.edit-product-form h2 {
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  // margin-bottom: 5px;
+  font-weight: bold;
+}
+.form-group img {
+  max-width: 100%;
+}
+.form-group input,
+.form-group select {
+  text-align: center;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: none;
+}
+
+.submit-button {
+  all: unset;
+  text-align: center;
+  width: 100%;
+  padding: 6px 0;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+@media (min-width: 992px) {
+  .submit-button {
+    font-size: 16px;
+  }
+}
+
+.submit-button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
+
+.image-preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.image-thumbnail {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+input[type="file"] {
+  display: none; /* Ocultar el input */
+}
+
+.cont-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+//
+/* Estilo para el interruptor (toggle switch) */
+
+.button {
+  width: 100%;
+  padding: 10px;
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.button:hover {
+  background-color: #212529;
+}
+
+.warning {
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}

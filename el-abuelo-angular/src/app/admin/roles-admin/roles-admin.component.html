@@ -23,24 +23,12 @@
         </div> -->
         <div class="grid">
             <div class="box" *ngFor="let usuario of usuarioItems">
-                <!-- Nombre del producto -->
                 <div class="name">
                     <h1>{{ usuario.namee }}</h1>
                 </div>
-
-
-                <!-- Botón para eliminar el producto -->
-                <img src="./../../../assets/basura.png" alt="basura" class="btn-delete">
-
-                <!-- Imagen del producto -->
-
-                <!-- Precio del producto -->
+                <img src="./../../../assets/basura.png" alt="basura" class="btn-delete"
+                    (click)="deleteUser(usuario.id)">
                 <p class="rol">{{ usuario.rol }}</p>
-
-                <!-- Indicador de estado del producto -->
-
-
-                <!-- Botón para editar el producto -->
                 <button class="button add" [routerLink]="['edit', usuario.id]">EDITAR</button>
             </div>
         </div>
