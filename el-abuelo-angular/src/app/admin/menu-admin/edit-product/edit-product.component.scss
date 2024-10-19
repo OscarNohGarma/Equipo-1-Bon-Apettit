@@ -1,11 +1,19 @@
 .header {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-  gap: 50px;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 4rem auto;
+  // position: relative;
 }
-
+.encabezado {
+  font-size: 40px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: 900;
+  margin-bottom: 0;
+}
 .back-button {
   //   background-color: #343a40; /* Color oscuro elegante */
   color: #343a40;
@@ -21,7 +29,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  position: absolute;
+  // position: absolute;
   left: 30px;
   top: 35px;
   background-color: transparent;
@@ -36,7 +44,14 @@
 .back-button:before {
   content: "←"; /* Flecha antes del texto */
 }
-
+.dis {
+  opacity: 0;
+  height: 35px;
+  width: 35px;
+}
+.dis:hover {
+  cursor: default;
+}
 .edit-product-form {
   width: 500px;
   margin: auto;
@@ -135,6 +150,11 @@ input[type="file"] {
 }
 //
 /* Estilo para el interruptor (toggle switch) */
+.switch-cont {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
 .switch {
   position: relative;
   display: inline-block;
