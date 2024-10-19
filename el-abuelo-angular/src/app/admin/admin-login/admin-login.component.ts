@@ -6,13 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../../core/models/usuario';
+import { SpinnerComponent } from '../../shared/spinner/spinner.component';
 
 @Component({
   selector: 'app-admin-login',
   templateUrl: './admin-login.component.html',
   styleUrls: ['./admin-login.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule],
+  imports: [CommonModule, FormsModule, HttpClientModule, SpinnerComponent],
   providers: [AdminAuthService, UsuarioService],
 })
 export class AdminLoginComponent implements OnInit {
@@ -20,6 +21,7 @@ export class AdminLoginComponent implements OnInit {
   password: string = '';
   errorMessage: string = '';
   usuarioItems: Usuario[] = [];
+  loading: boolean = false;
 
   constructor(
     private adminAuthService: AdminAuthService,
@@ -35,27 +37,33 @@ export class AdminLoginComponent implements OnInit {
   }
 
   login() {
+    this.errorMessage = '';
+    this.loading = true;
     // Buscar si el usuario ingresado existe en la lista de usuarios
     const foundUser = this.usuarioItems.find(
       (user) => user.user === this.username
     );
-
-    if (foundUser) {
-      // Validar si la contraseña coincide
-      if (foundUser.password === this.password) {
-        // Login exitoso, simula el almacenamiento del token
-        this.adminAuthService.login('fake-token', foundUser.namee); // Aquí podrías pasar un token real si lo tienes
-        this.router.navigate(['/admin']).then(() => {
-          // Forzar la recarga de la página después de la navegación
-          window.location.reload();
-        });
+    setTimeout(() => {
+      if (foundUser) {
+        // Validar si la contraseña coincide
+        if (foundUser.password === this.password) {
+          // Login exitoso, simula el almacenamiento del token
+          this.adminAuthService.login('fake-token', foundUser.namee); // Aquí podrías pasar un token real si lo tienes
+          this.loading = false;
+          this.router.navigate(['/admin']).then(() => {
+            // Forzar la recarga de la página después de la navegación
+            window.location.reload();
+          });
+        } else {
+          // Contraseña incorrecta
+          this.errorMessage = 'Contraseña incorrecta. Inténtalo de nuevo.';
+          this.loading = false;
+        }
       } else {
-        // Contraseña incorrecta
-        this.errorMessage = 'Contraseña incorrecta. Inténtalo de nuevo.';
+        // Usuario no encontrado
+        this.errorMessage = 'Usuario no encontrado. Inténtalo de nuevo.';
+        this.loading = false;
       }
-    } else {
-      // Usuario no encontrado
-      this.errorMessage = 'Usuario no encontrado. Inténtalo de nuevo.';
-    }
+    }, 2000);
   }
 }

@@ -17,6 +17,7 @@
         <div *ngIf="errorMessage" class="error-message">
             {{ errorMessage }}
         </div>
+        <app-spinner *ngIf="loading" />
 
         <button type="submit" class="btn-login">Iniciar Sesión</button>
     </form>
