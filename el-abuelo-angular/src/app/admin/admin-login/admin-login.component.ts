@@ -50,6 +50,9 @@ export class AdminLoginComponent implements OnInit {
           // Login exitoso, simula el almacenamiento del token
           this.adminAuthService.login(
             'fake-token',
+            foundUser.id.toString(),
+            foundUser.user,
+            foundUser.password,
             foundUser.namee,
             foundUser.rol
           ); // Aquí podrías pasar un token real si lo tienes

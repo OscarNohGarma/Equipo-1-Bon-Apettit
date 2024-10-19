@@ -14,9 +14,19 @@ export class AdminAuthService {
     return false;
   }
 
-  login(token: string, username: string, rol: string): void {
+  login(
+    token: string,
+    id: string,
+    user: string,
+    password: string,
+    username: string,
+    rol: string
+  ): void {
     if (typeof window !== 'undefined' && localStorage) {
       localStorage.setItem('auth_token', token);
+      localStorage.setItem('id', id); // Almacenar el nombre del usuario
+      localStorage.setItem('user', user); // Almacenar el nombre del usuario
+      localStorage.setItem('password', password); // Almacenar el nombre del usuario
       localStorage.setItem('username', username); // Almacenar el nombre del usuario
       localStorage.setItem('rol', rol); // Almacenar el nombre del usuario
     }
@@ -29,7 +39,12 @@ export class AdminAuthService {
       localStorage.removeItem('rol'); // Almacenar el nombre del usuario
     }
   }
-
+  getId(): string | null {
+    if (typeof window !== 'undefined' && localStorage) {
+      return localStorage.getItem('id'); // Obtener el nombre del usuario desde localStorage
+    }
+    return null;
+  }
   getUsername(): string | null {
     if (typeof window !== 'undefined' && localStorage) {
       return localStorage.getItem('username'); // Obtener el nombre del usuario desde localStorage
@@ -37,6 +52,18 @@ export class AdminAuthService {
     return null;
   }
 
+  getUser(): string | null {
+    if (typeof window !== 'undefined' && localStorage) {
+      return localStorage.getItem('user'); // Obtener el nombre del usuario desde localStorage
+    }
+    return null;
+  }
+  getPassword(): string | null {
+    if (typeof window !== 'undefined' && localStorage) {
+      return localStorage.getItem('password'); // Obtener el nombre del usuario desde localStorage
+    }
+    return null;
+  }
   getRol(): string | null {
     if (typeof window !== 'undefined' && localStorage) {
       return localStorage.getItem('rol'); // Obtener el nombre del usuario desde localStorage
