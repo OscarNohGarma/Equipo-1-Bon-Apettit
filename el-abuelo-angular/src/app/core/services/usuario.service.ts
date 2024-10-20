@@ -1,18 +1,17 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { OrderMenu } from '../models/orderMenu';
 import { GenericService } from '../../shared/generic.service';
+import { Usuario } from '../models/usuario';
+import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class OrderMenuService extends GenericService<OrderMenu> {
+export class UsuarioService extends GenericService<Usuario> {
   constructor(http: HttpClient) {
     super(http);
   }
-
   protected override getBaseUrl(): string {
-    return `${environment.apiUrl}/orden`;
+    return `${environment.apiUrl}/usuario`;
   }
 }

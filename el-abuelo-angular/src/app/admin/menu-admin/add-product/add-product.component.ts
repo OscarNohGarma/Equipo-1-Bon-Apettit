@@ -16,9 +16,6 @@ import { Observable } from 'rxjs';
 })
 export class AddProductComponent {
   productForm: FormGroup;
-  productId: string | null = null;
-  product: MenuProduct | null = null;
-
   selectedFile: File | null = null;
   imageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL de la imagen
   isValidImage: boolean = true; // Agregar esta propiedad

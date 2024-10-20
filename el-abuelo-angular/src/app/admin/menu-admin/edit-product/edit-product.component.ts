@@ -20,7 +20,6 @@ export class EditProductComponent implements OnInit {
   productForm: FormGroup;
   productId: string | null = null;
   product: MenuProduct | null = null;
-
   selectedFile: File | null = null;
   imageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL de la imagen
   oldImageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL vieja de la imagen

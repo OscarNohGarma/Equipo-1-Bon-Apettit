@@ -1,0 +1,36 @@
+<div class="bg-menu">
+    <div class="container">
+        <div class="header">
+            <h1 class="encabezado">Roles de Usuario</h1>
+            <button class="add-button" [routerLink]="['add']">+</button>
+        </div>
+        <h2 class="subtitulo">Administra quién puede editar los elementos de la página</h2>
+
+        <!-- <div class="filter-bar">
+            <input type="text" placeholder="Buscar producto" class="search-bar" (input)="updateSearch($event)">
+            <select class="category-filter" (change)="updateCategory($event)">
+                <option value="TODOS">Todas las categorías</option>
+                <option value="COMIDA">Comida</option>
+                <option value="BEBIDAS">Bebidas</option>
+                <option value="POSTRES">Postres</option>
+                <option value="ESPECIALES">Especiales</option>
+            </select>
+            <select class="stock-filter" (change)="updateStock($event)">
+                <option value="activo">Disponibles</option>
+                <option value="inactivo">No disponibles</option>
+                <option value="">Todos</option>
+            </select>
+        </div> -->
+        <div class="grid">
+            <div class="box" *ngFor="let usuario of usuarioItems">
+                <div class="name">
+                    <h1>{{ usuario.namee }}</h1>
+                </div>
+                <img src="./../../../assets/basura.png" alt="basura" class="btn-delete"
+                    (click)="deleteUser(usuario.id)">
+                <p class="rol">{{ usuario.rol }}</p>
+                <button class="button add" [routerLink]="['edit', usuario.id]">EDITAR</button>
+            </div>
+        </div>
+    </div>
+</div>

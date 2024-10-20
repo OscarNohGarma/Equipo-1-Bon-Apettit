@@ -88,9 +88,9 @@ h3 {
 
 /* Estilos para desktop (1024px y superior) */
 @media (min-width: 1024px) {
-  h2 {
-    text-align: start;
-  }
+  // h2 {
+  //   text-align: start;
+  // }
 
   .modelo {
     grid-template-columns: repeat(2, 1fr);

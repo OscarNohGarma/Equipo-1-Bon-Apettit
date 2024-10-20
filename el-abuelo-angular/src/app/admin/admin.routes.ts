@@ -5,31 +5,64 @@ import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { EditProductComponent } from './menu-admin/edit-product/edit-product.component';
 import { AddProductComponent } from './menu-admin/add-product/add-product.component';
 import { OrderAdminComponent } from './order-admin/order-admin.component';
+import { AdminAuthGuard } from '../auth/admin-auth.guard';
+import { AdminLoginComponent } from './admin-login/admin-login.component';
+import { RolesAdminComponent } from './roles-admin/roles-admin.component';
+import { AddUserComponent } from './roles-admin/add-user/add-user.component';
+import { EditUserComponent } from './roles-admin/edit-user/edit-user.component';
 
 export const adminRoutes: Routes = [
   {
-    path: '', // Ruta para cargar el componente FeatureComponent
+    path: '',
     title: 'Administrador - El abuelo',
     component: InicioAdminComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
-    path: 'menu', // Ruta para cargar el componente FeatureComponent
+    path: 'menu',
     title: 'Administrar Menú - El abuelo',
     component: MenuAdminComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
-    path: 'menu/edit/:id', // Nueva ruta para editar productos
+    path: 'menu/edit/:id',
     title: 'Editar Producto - El abuelo',
     component: EditProductComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
-    path: 'menu/add', // Nueva ruta para editar productos
+    path: 'menu/add',
     title: 'Agregar Producto - El abuelo',
     component: AddProductComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
-    path: 'ordenes', // Nueva ruta para editar productos
+    path: 'ordenes',
     title: 'Órdenes - El abuelo',
     component: OrderAdminComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'roles',
+    title: 'Usuarios - El abuelo',
+    component: RolesAdminComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'roles/add',
+    title: 'Agregar Usuario - El abuelo',
+    component: AddUserComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'roles/edit/:id',
+    title: 'Editar Usuario - El abuelo',
+    component: EditUserComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'login',
+    title: 'Login - Administrador',
+    component: AdminLoginComponent, // Componente de login del admin
   },
 ];
