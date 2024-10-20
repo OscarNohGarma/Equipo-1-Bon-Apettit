@@ -6,13 +6,16 @@
         <div class="box" *ngFor="let order of orderItems">
             <div class="enc">
                 <h2>Cliente: {{order.namee}}</h2>
-                <p class="subtitulo">Productos ordenados:</p>
             </div>
-            <div class="productos">
-                <div class="producto" *ngFor="let producto of order.productos">
-                    <p> <span class="vin">• </span> ({{producto.quantity}}) </p>
-                    <p class="nombre-producto">{{producto.namee}}<span class="precio"> (${{producto.subtotal}})</span>
-                    </p>
+            <div class="box-details">
+                <p class="subtitulo button" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">DETALLES
+                    ▼</p>
+                <div class="productos" [class.show]="order.isDetailsOpen">
+                    <div class="producto" *ngFor="let producto of order.productos">
+                        <p><span class="vin">• </span> ({{producto.quantity}})</p>
+                        <p class="nombre-producto">{{producto.namee}}<span class="precio">
+                                (${{producto.subtotal}})</span></p>
+                    </div>
                 </div>
             </div>
             <div class="div-total">
@@ -22,9 +25,8 @@
                     <p>{{order.hora}}</p>
                 </div>
             </div>
-
             <button class="button add" (click)="completar(order.id)">COMPLETAR</button>
         </div>
-
     </div>
+
 </div>

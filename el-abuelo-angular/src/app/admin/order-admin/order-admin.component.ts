@@ -15,6 +15,7 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class OrderAdminComponent implements OnInit {
   orderItems: OrderMenu[] = [];
+  isDetailsOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
   constructor(
     private orderMenuService: OrderMenuService,
     private router: Router
@@ -24,8 +25,11 @@ export class OrderAdminComponent implements OnInit {
   }
   loadOrders(): void {
     this.orderMenuService.getAll().subscribe((data) => {
-      this.orderItems = data;
-      // console.log(this.orderItems);
+      // Añadir la propiedad `isDetailsOpen` a cada orden
+      this.orderItems = data.map((order) => ({
+        ...order,
+        isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio
+      }));
     });
   }
   completar(id: number): void {
@@ -47,5 +51,8 @@ export class OrderAdminComponent implements OnInit {
         }
       );
     }
+  }
+  toggleDetails(order: OrderMenu): void {
+    order.isDetailsOpen = !order.isDetailsOpen; // Alternar el estado de visibilidad de los detalles para esa orden
   }
 }

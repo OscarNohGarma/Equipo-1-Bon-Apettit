@@ -7,6 +7,7 @@ export class OrderMenu extends BaseModel {
   hora: string;
   total: number;
   productos: MenuProduct[];
+  isDetailsOpen?: boolean;
 
   constructor(
     id: number,

@@ -78,19 +78,18 @@ h3 {
   flex-direction: column;
   gap: 10px;
   width: 100%;
-
-  // grid-template-columns: 1fr 1fr 1fr 1fr;
-  // flex-direction: column;
-  // justify-content: space-between;
   align-items: center;
   position: relative;
 }
 @media (min-width: 992px) {
   .box {
     display: grid;
-
-    width: 80%;
     grid-template-columns: 2fr 2fr 1fr;
+  }
+}
+@media (min-width: 1280px) {
+  .box {
+    width: 80%;
   }
 }
 
@@ -114,10 +113,6 @@ h3 {
   .grid {
     gap: 10px;
     // grid-template-columns: repeat(3, 1fr);
-  }
-  .name-img {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
   }
 }
 .btn-delete {
@@ -173,4 +168,7 @@ h3 {
   .rol {
     margin-bottom: 0;
   }
+}
+.name {
+  margin-bottom: 0;
 }
