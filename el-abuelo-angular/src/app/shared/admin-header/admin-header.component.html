@@ -19,11 +19,10 @@
                     <p class="current-rol">▼</p>
                 </div>
                 <div class="user-menu box" [class.show]=" isUserMenuOpen">
-                    <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')" class="elemento-menu-user"
-                        *ngIf="rol === 'ADMINISTRADOR'">
+                    <div (click)="onEdit()" class="elemento-menu-user" *ngIf="rol === 'ADMINISTRADOR'">
                         Editar perfil
                     </div>
-                    <div [routerLink]="['/admin/menu']" (click)="onLogout()" class="elemento-menu-user logout">
+                    <div (click)="onLogout()" class="elemento-menu-user logout">
                         Cerrar sesión
                     </div>
                 </div>
