@@ -12,9 +12,11 @@ import { CommonModule } from '@angular/common';
 })
 export class AdminHeaderComponent implements OnInit {
   currentUser: string | null = null;
+  currentRol: string | null = null;
   rol: string | null = null;
   selectedCategory: string = 'TODOS'; // Categoría por defecto
   isMenuOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
+  isUserMenuOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
 
   constructor(
     private adminAuthService: AdminAuthService,
@@ -23,6 +25,7 @@ export class AdminHeaderComponent implements OnInit {
 
   ngOnInit() {
     this.currentUser = this.adminAuthService.getUsername(); // Obtener el nombre del usuario
+    this.currentRol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
     this.rol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
     const savedCategory = localStorage.getItem('selectedCategory');
     if (savedCategory) {
@@ -40,6 +43,9 @@ export class AdminHeaderComponent implements OnInit {
 
   toggleMenu() {
     this.isMenuOpen = !this.isMenuOpen;
+  }
+  toggleUserMenu() {
+    this.isUserMenuOpen = !this.isUserMenuOpen;
   }
 
   selectCategory(category: string) {

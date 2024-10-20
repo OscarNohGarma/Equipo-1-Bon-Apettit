@@ -106,15 +106,18 @@ a {
 .usuario {
   text-align: center;
   color: white;
-  font-size: 24px;
+  font-size: 26px;
   margin-bottom: 10px;
+  font-weight: 600;
+
+  padding: 0 10px;
 }
 
 @media (min-width: 768px) {
   .usuario {
     text-align: center;
     color: white;
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 0;
   }
 }
@@ -181,14 +184,6 @@ a {
   cursor: pointer;
 }
 
-.logout {
-  color: white;
-  margin-bottom: 0;
-  cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: all 0.1s ease-in-out;
-}
 .logout:hover {
   background-color: rgb(255, 255, 255, 0.2);
 }
@@ -262,4 +257,81 @@ a {
 
 .submenu-mobile.opcion {
   color: rebeccapurple;
+}
+.current-rol {
+  text-align: center;
+  color: white;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+@media (min-width: 992px) {
+  .current-rol {
+    text-align: end;
+    font-size: 16px;
+  }
+}
+.div-cont-user {
+  position: relative;
+}
+.cont-user {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-radius: 5px;
+  transition: all 0.1s ease-in-out;
+  flex-direction: column;
+  padding: 0 10px;
+}
+@media (min-width: 992px) {
+  .cont-user {
+    text-align: end;
+    flex-direction: row;
+  }
+}
+.cont-user:hover {
+  cursor: pointer;
+  background-color: rgba(212, 212, 212, 0.2);
+}
+
+/* Evita que los elementos dentro de .user-menu afecten el hover en .cont-user */
+.cont-user:hover > .user-menu div:hover {
+  background-color: transparent; /* O ajusta el estilo según sea necesario */
+}
+
+.user-menu {
+  position: absolute;
+  background-color: #fff;
+  color: #343a40;
+  z-index: 1000;
+  overflow: hidden;
+  max-height: 0; /* Altura inicial cero */
+  opacity: 0; /* Inicia invisible */
+  transition: max-height 1s ease, opacity 0.5s ease; /* Animación de altura y opacidad */
+  width: 100%;
+  border-radius: 5px;
+}
+@media (min-width: 992px) {
+  .user-menu {
+    right: 0;
+    width: 160px;
+  }
+}
+.user-menu.show {
+  max-height: 500px; /* Ajustar según el contenido, o poner un valor alto */
+  opacity: 1; /* Totalmente visible */
+}
+.elemento-menu-user {
+  padding: 10px;
+  font-weight: 600;
+}
+.user-menu div {
+  width: 100%;
+  transition: all 0.2s ease; /* Animación de altura y opacidad */
+}
+.user-menu div:hover {
+  background-color: rgb(52, 58, 64, 0.2);
+  cursor: pointer;
+}
+.logout {
+  color: red;
 }

@@ -8,14 +8,27 @@
                     <h1 class="nombre-sitio">El<span>Abuelo</span></h1>
                 </div> -->
             </div>
-
-            <div *ngIf="currentUser" class="usuario">
-                ¡Bienvenido(a) {{ currentUser }}!
+            <div class="div-cont-user" *ngIf="currentUser">
+                <div class="cont-user" (click)="toggleUserMenu()">
+                    <div>
+                        <div class="usuario">
+                            ¡Bienvenido(a) {{ currentUser }}!
+                        </div>
+                        <p class="current-rol">{{currentRol}}</p>
+                    </div>
+                    <p class="current-rol">▼</p>
+                </div>
+                <div class="user-menu box" [class.show]=" isUserMenuOpen">
+                    <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')" class="elemento-menu-user"
+                        *ngIf="rol === 'ADMINISTRADOR'">
+                        Editar perfil
+                    </div>
+                    <div [routerLink]="['/admin/menu']" (click)="onLogout()" class="elemento-menu-user logout">
+                        Cerrar sesión
+                    </div>
+                </div>
             </div>
-
-            <p *ngIf="currentUser" class="logout" (click)="onLogout()">Cerrar sesión</p>
         </div>
-
     </div>
 
 </div>
