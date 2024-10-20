@@ -7,6 +7,7 @@ export class OrderMenu extends BaseModel {
   hora: string;
   total: number;
   productos: MenuProduct[];
+  status: string;
   isDetailsOpen?: boolean;
 
   constructor(
@@ -15,12 +16,14 @@ export class OrderMenu extends BaseModel {
     fecha: string,
     hora: string,
     total: number,
-    productos: MenuProduct[]
+    productos: MenuProduct[],
+    status: string
   ) {
     super(id, namee); // Hereda id y namee de BaseModel
     this.fecha = fecha;
     this.hora = hora;
     this.total = total;
     this.productos = productos;
+    this.status = status;
   }
 }

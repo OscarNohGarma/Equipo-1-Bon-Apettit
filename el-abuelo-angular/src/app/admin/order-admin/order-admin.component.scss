@@ -195,7 +195,6 @@ p {
   color: #343a40;
   margin-bottom: 10px;
   display: flex;
-  align-items: flex-end;
   justify-content: center;
   flex-direction: column;
 }
@@ -206,4 +205,60 @@ p {
 }
 .fecha p {
   margin-bottom: 0;
+}
+
+//? Estado de la orden
+.order-status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.circle {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out, transform 0.1s ease-in-out;
+  border: 2px solid rgb(52, 58, 64, 0.5);
+}
+
+/* Estado seleccionado */
+.circle.current-selected {
+  // box-shadow: 0 0 3px 5px #b0e2ff; /* Lavanda */
+  transform: scale(1.2);
+}
+
+.circle:nth-child(1).selected {
+  background-color: #e92929; /* Gris claro (En fila) */
+}
+
+.circle:nth-child(2).selected {
+  background-color: #f7c70a; /* Amarillo dorado suave (En preparación) */
+}
+
+.circle:nth-child(3).selected {
+  background-color: #489c2b; /* Verde pastel (Lista) */
+}
+.status {
+  margin-top: 15px;
+  font-weight: 600;
+  color: #343a40;
+}
+@media (min-width: 992px) {
+  .status {
+    margin-top: 10px;
+  }
+}
+
+.ready {
+  color: #225f0d;
+  font-weight: 700;
+  opacity: 0;
+  transition: all 0.1s ease-in-out;
+}
+.ready.show {
+  opacity: 1;
 }

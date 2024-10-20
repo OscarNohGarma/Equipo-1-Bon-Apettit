@@ -25,7 +25,26 @@
                     <p>{{order.hora}}</p>
                 </div>
             </div>
-            <button class="button add" (click)="completar(order.id)">COMPLETAR</button>
+            <!-- <button class="button add" (click)="completar(order.id)">COMPLETAR</button> -->
+            <div>
+                <div class="order-status">
+                    <div class="circle"
+                        [class.selected]="order.status === 'queue' ||order.status === 'preparation' ||order.status === 'ready'"
+                        [class.current-selected]="order.status === 'queue'" (click)="setStatus('queue', order)">
+                    </div>
+                    <div class="circle" [class.selected]="order.status === 'preparation' || order.status === 'ready'"
+                        [class.current-selected]="order.status === 'preparation'"
+                        (click)="setStatus('preparation', order)">
+                    </div>
+                    <div class="circle" [class.selected]="order.status === 'ready'"
+                        [class.current-selected]="order.status === 'ready'" (click)="setStatus('ready', order)">
+                        <p class="ready" [class.show]="order.status === 'ready'">✓</p>
+                    </div>
+                </div>
+                <p class="status" *ngIf="order.status==='queue'">Orden en fila</p>
+                <p class="status" *ngIf="order.status==='preparation'">Preparándose</p>
+                <p class="status" *ngIf="order.status==='ready'" style="color: #4daf2d;">Listo</p>
+            </div>
         </div>
     </div>
 

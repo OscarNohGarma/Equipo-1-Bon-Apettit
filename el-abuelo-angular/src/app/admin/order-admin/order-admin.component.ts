@@ -14,8 +14,11 @@ import { Router, RouterModule } from '@angular/router';
   providers: [OrderMenuService],
 })
 export class OrderAdminComponent implements OnInit {
+  selectedStatus: string = 'queue'; // Estado por defecto (gris)
   orderItems: OrderMenu[] = [];
   isDetailsOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
+  currentStatus: string = 'queue'; // Para controlar la visibilidad del menú desplegable
+
   constructor(
     private orderMenuService: OrderMenuService,
     private router: Router
@@ -54,5 +57,24 @@ export class OrderAdminComponent implements OnInit {
   }
   toggleDetails(order: OrderMenu): void {
     order.isDetailsOpen = !order.isDetailsOpen; // Alternar el estado de visibilidad de los detalles para esa orden
+  }
+
+  setStatus(status: string, order: OrderMenu) {
+    this.selectedStatus = status;
+    order.status = status;
+    const newOrder = {
+      ...order,
+      status: this.selectedStatus,
+    };
+    this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
+      (response) => {
+        //! console.log('Producto actualizado exitosamente:', response);
+        // Aquí puedes redirigir o mostrar un mensaje de éxito
+      },
+      (error) => {
+        console.error('Error al actualizar la orden:', error);
+        // Manejo de errores aquí
+      }
+    );
   }
 }

@@ -85,6 +85,7 @@ export class OrdenComponent implements OnInit {
         productos: this.productosEnOrden,
         fecha, // Fecha separada
         hora, // Hora separada
+        status: 'queue', // Hora separada
       };
       console.log(`Pedido confirmado para: ${this.clienteNombre}`);
       console.log(newOrden);
