@@ -1,3 +1,6 @@
+.orders {
+  margin-bottom: 50px;
+}
 .encabezado {
   font-size: 40px;
   font-weight: bolder;
@@ -62,6 +65,16 @@ h2 {
   background-color: #343a40;
   cursor: pointer;
 }
+.button.details {
+  border-radius: 5px;
+  background-color: #3d4247;
+  color: white;
+}
+.button.details:hover {
+  border-radius: 5px;
+  background-color: #26282b;
+  color: white;
+}
 
 .box {
   padding: 30px 50px;
@@ -83,10 +96,10 @@ h2 {
   .box {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr 2fr 1fr 0.1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
   .box.no-status {
-    grid-template-columns: 2fr 1fr 2fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
   }
 }
 @media (min-width: 1280px) {
@@ -147,16 +160,20 @@ p {
   }
 }
 .productos.show {
-  max-height: 500px; /* Ajustar según el contenido, o poner un valor alto */
+  max-height: 230px; /* Ajustar según el contenido, o poner un valor alto */
   opacity: 1; /* Totalmente visible */
+  overflow: auto;
 }
 .producto {
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 0.5fr 1fr 4fr;
   gap: 10px;
   text-align: end;
   align-items: center;
   padding: 10px 0;
+}
+.producto.no-status {
+  grid-template-columns: 1fr 4fr;
 }
 
 .producto p {
@@ -188,6 +205,8 @@ p {
 .total {
   font-size: 20px;
   margin-bottom: 20px;
+  padding-top: 10px;
+  border-top: 1px solid rgb(52, 58, 64, 0.3);
 }
 
 @media (min-width: 992px) {
@@ -314,5 +333,20 @@ p {
   display: none;
 }
 .button.no-status {
+  display: none;
+}
+.sta.no-status {
+  display: none;
+}
+.completed {
+  color: #349613;
+  display: none;
+  font-weight: 600;
+}
+.completed.show {
+  display: block;
+}
+
+.check.no-status {
   display: none;
 }

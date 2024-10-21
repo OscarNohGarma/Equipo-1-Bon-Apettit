@@ -1,4 +1,4 @@
-<div class="container">
+<div class="orders container">
     <div class="header">
         <h1 class="encabezado">Administrar Órdenes</h1>
         <h2 class="subtitulo">Administra el estado de las órdenes</h2>
@@ -22,27 +22,25 @@
     <div class="grid">
         <div [class.no-status]="order.status==='completed'" class="box" *ngFor="let order of filteredOrders">
             <div class="enc">
-                <h2>{{order.namee}}</h2>
+                <h2>Nombre: {{order.namee}}</h2>
             </div>
             <div class="box-details">
-                <p class="button" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">DETALLES
+                <p class="button details" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">Detalles
                     ▼</p>
                 <div class="productos" [class.show]="order.isDetailsOpen">
-                    <div class="producto" *ngFor="let producto of order.productos">
+                    <div class="producto" *ngFor="let producto of order.productos"
+                        [class.no-status]="order.status==='completed'">
+                        <input type="checkbox" [class.no-status]="order.status==='completed'" class="check">
                         <p><span class="vin">• </span> ({{producto.quantity}})</p>
                         <p class="nombre-producto">{{producto.namee}}<span class="precio">
                                 (${{producto.subtotal}})</span></p>
                     </div>
+
+                    <p class="total">Total a pagar: <span>${{order.total}}</span></p>
                 </div>
             </div>
-            <div class="div-total">
-                <p class="total">Total a pagar: <span>${{order.total}}</span></p>
-                <div class="fecha">
-                    <p>{{order.fecha}}</p>
-                    <p>{{order.hora}}</p>
-                </div>
-            </div>
-            <div>
+
+            <div class="sta" [class.no-status]="order.status==='completed'">
                 <div [class.no-status]="order.status==='completed'" class="order-status">
                     <div class="circle"
                         [class.selected]="order.status === 'queue' ||order.status === 'preparation' ||order.status === 'ready'"
@@ -64,6 +62,11 @@
             <button [class.no-status]="order.status==='completed'" [disabled]="order.status!== 'ready'"
                 [class.disabled]="order.status!== 'ready'" class="button add"
                 (click)="completar(order)">COMPLETAR</button>
+            <p [class.show]="order.status==='completed'" class="completed">Orden completada</p>
+            <div class="fecha">
+                <p>{{order.fecha}}</p>
+                <p>{{order.hora}}</p>
+            </div>
         </div>
     </div>
 
