@@ -29,9 +29,11 @@ export class AdminHeaderComponent implements OnInit {
     this.currentRol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
     this.currentId = this.adminAuthService.getId(); // Obtener el nombre del usuario
     this.rol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
-    const savedCategory = localStorage.getItem('selectedCategory');
-    if (savedCategory) {
-      this.selectedCategory = savedCategory; // Restaurar la categoría seleccionada
+    if (typeof window !== 'undefined' && localStorage) {
+      const savedCategory = localStorage.getItem('selectedCategory');
+      if (savedCategory) {
+        this.selectedCategory = savedCategory; // Restaurar la categoría seleccionada
+      }
     }
   }
 
@@ -58,6 +60,8 @@ export class AdminHeaderComponent implements OnInit {
   selectCategory(category: string) {
     this.selectedCategory = category;
     this.isMenuOpen = false; // Cierra el menú después de seleccionar una opción
-    localStorage.setItem('selectedCategory', category); // Guardar en localStorage
+    if (typeof window !== 'undefined' && localStorage) {
+      localStorage.setItem('selectedCategory', category); // Guardar en localStorage
+    }
   }
 }

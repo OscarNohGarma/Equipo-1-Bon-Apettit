@@ -14,7 +14,13 @@ import { Router, RouterModule } from '@angular/router';
   providers: [OrderMenuService],
 })
 export class OrderAdminComponent implements OnInit {
+  selectedStatus: string = 'queue'; // Estado por defecto (gris)
   orderItems: OrderMenu[] = [];
+  isDetailsOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
+  currentStatus: string = 'queue'; // Para controlar la visibilidad del menú desplegable
+  statusFilter: string = ''; // Filtro de stock (activo/inactivo)
+  copmpleteFilter: string = 'active'; // Filtro de stock (activo/inactivo)
+  disableStatusFilter: boolean = false; // Nueva propiedad para desactivar el select
   constructor(
     private orderMenuService: OrderMenuService,
     private router: Router
@@ -24,13 +30,92 @@ export class OrderAdminComponent implements OnInit {
   }
   loadOrders(): void {
     this.orderMenuService.getAll().subscribe((data) => {
-      this.orderItems = data;
-      // console.log(this.orderItems);
+      // Añadir la propiedad `isDetailsOpen` a cada orden
+      this.orderItems = data.map((order) => ({
+        ...order,
+        isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio
+      }));
     });
   }
-  completar(id: number): void {
+
+  get filteredOrders(): OrderMenu[] {
+    return this.orderItems.filter((order) => {
+      const matchesStatus =
+        this.statusFilter === '' || order.status === this.statusFilter;
+      const matchesComplete =
+        this.copmpleteFilter === '' ||
+        (this.copmpleteFilter === 'completed' &&
+          order.status === 'completed') ||
+        (this.copmpleteFilter === 'active' && order.status !== 'completed');
+
+      return matchesStatus && matchesComplete;
+    });
+  }
+
+  completar(order: OrderMenu): void {
     const confirmed = window.confirm(
       '¿Deseas marcar como completado la orden?'
+    );
+    if (confirmed) {
+      const newOrder = {
+        ...order,
+        status: 'completed',
+      };
+      this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
+        (response) => {
+          //! console.log('Producto actualizado exitosamente:', response);
+          // Aquí puedes redirigir o mostrar un mensaje de éxito
+        },
+        (error) => {
+          console.error('Error al actualizar la orden:', error);
+          // Manejo de errores aquí
+        }
+      );
+    }
+    window.location.reload();
+  }
+  toggleDetails(order: OrderMenu): void {
+    order.isDetailsOpen = !order.isDetailsOpen; // Alternar el estado de visibilidad de los detalles para esa orden
+  }
+
+  setStatus(status: string, order: OrderMenu) {
+    this.selectedStatus = status;
+    order.status = status;
+    const newOrder = {
+      ...order,
+      status: this.selectedStatus,
+    };
+    this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
+      (response) => {
+        //! console.log('Producto actualizado exitosamente:', response);
+        // Aquí puedes redirigir o mostrar un mensaje de éxito
+      },
+      (error) => {
+        console.error('Error al actualizar la orden:', error);
+        // Manejo de errores aquí
+      }
+    );
+  }
+  updateStatus(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.statusFilter = selectElement.value;
+  }
+
+  // Método para actualizar el filtro de stock
+  updateComplete(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.copmpleteFilter = selectElement.value;
+    if (this.copmpleteFilter === 'completed') {
+      this.statusFilter = ''; // Mostrará todas las órdenes completadas, sin importar el estado
+      this.disableStatusFilter = true; // Desactiva el select del filtro de estado
+    } else {
+      this.disableStatusFilter = false; // Activa el filtro de estado si no están completadas
+    }
+  }
+
+  deleteOrder(id: number) {
+    const confirmed = window.confirm(
+      '¿Estás seguro de que deseas eliminar esta orden?'
     );
     if (confirmed) {
       this.orderMenuService.delete(id.toString()).subscribe(
@@ -38,12 +123,12 @@ export class OrderAdminComponent implements OnInit {
           // console.log('Producto eliminado:', response);
           // Aquí puedes agregar lógica para actualizar la vista
           setTimeout(() => {
-            alert('Orden completada correctamente.');
-            this.loadOrders();
+            alert('Orden eliminada correctamente.');
+            this.loadOrders(); // Por ejemplo, recargar el menú
           }, 500);
         },
         (error) => {
-          console.error('Error al completar la orden', error);
+          console.error('Error al eliminar la orden: ', error);
         }
       );
     }
