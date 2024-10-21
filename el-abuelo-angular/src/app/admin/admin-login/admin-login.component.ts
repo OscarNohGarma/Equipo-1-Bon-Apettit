@@ -7,6 +7,7 @@ import { UsuarioService } from '../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../../core/models/usuario';
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
+declare var Swal: any;
 
 @Component({
   selector: 'app-admin-login',
@@ -32,7 +33,6 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.getAll().subscribe((data) => {
       this.usuarioItems = data;
-      console.log(this.usuarioItems);
     });
   }
 
@@ -61,19 +61,83 @@ export class AdminLoginComponent implements OnInit {
             foundUser.rol
           ); // Aquí podrías pasar un token real si lo tienes
           this.loading = false;
-          this.router.navigate(['/admin']).then(() => {
-            // Forzar la recarga de la página después de la navegación
-            window.location.reload();
+          Swal.fire({
+            icon: 'success',
+            title: '¡Inicio de sesión exitoso!',
+            text: 'Bienvenido al panel de administrador',
+            confirmButtonText: 'Aceptar',
+            didOpen: () => {
+              // Aplicar estilos directamente
+              const confirmButton = Swal.getConfirmButton();
+
+              if (confirmButton) {
+                confirmButton.style.backgroundColor = '#343a40';
+                confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+
+                confirmButton.onmouseover = () => {
+                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                };
+                confirmButton.onmouseout = () => {
+                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                };
+              }
+            },
+          }).then((result: any) => {
+            this.router.navigate(['/admin']).then(() => {
+              // Forzar la recarga de la página después de la navegación
+              window.location.reload();
+            });
           });
         } else {
           // Contraseña incorrecta
-          this.errorMessage = 'Contraseña incorrecta. Inténtalo de nuevo.';
           this.loading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Contraseña incorrecta.',
+            text: 'Revisa que la contraseña es correcta.',
+            confirmButtonText: 'Entendido',
+            didOpen: () => {
+              // Aplicar estilos directamente
+              const confirmButton = Swal.getConfirmButton();
+
+              if (confirmButton) {
+                confirmButton.style.backgroundColor = '#343a40';
+                confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+
+                confirmButton.onmouseover = () => {
+                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                };
+                confirmButton.onmouseout = () => {
+                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                };
+              }
+            },
+          });
         }
       } else {
         // Usuario no encontrado
-        this.errorMessage = 'Usuario no encontrado. Inténtalo de nuevo.';
         this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Usuario no encontrado.',
+          text: 'Revisa que el usuario es correcto.',
+          confirmButtonText: 'Entendido',
+          didOpen: () => {
+            // Aplicar estilos directamente
+            const confirmButton = Swal.getConfirmButton();
+
+            if (confirmButton) {
+              confirmButton.style.backgroundColor = '#343a40';
+
+              confirmButton.onmouseover = () => {
+                confirmButton.style.backgroundColor = '#212529'; // Color en hover
+              };
+              confirmButton.onmouseout = () => {
+                confirmButton.style.backgroundColor = '#343a40'; // Color normal
+              };
+            }
+          },
+        });
       }
     }, 2000);
   }

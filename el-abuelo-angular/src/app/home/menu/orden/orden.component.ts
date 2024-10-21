@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { OrderMenu } from '../../../core/models/orderMenu';
 import { OrderMenuService } from '../../../core/services/order-menu.service';
+declare var Swal: any;
 
 @Component({
   selector: 'app-orden',
@@ -87,32 +88,39 @@ export class OrdenComponent implements OnInit {
         hora, // Hora separada
         status: 'queue', // Hora separada
       };
-      console.log(`Pedido confirmado para: ${this.clienteNombre}`);
-      console.log(newOrden);
-
       //
       this.ordenMenuService.add(newOrden).subscribe(
         (response) => {
-          //! console.log('Producto añadido exitosamente:', response);
-
-          alert('La orden se ha añadido correctamente.');
+          // Muestra el SweetAlert y espera a que el usuario confirme antes de continuar
+          Swal.fire({
+            icon: 'success',
+            title: '¡Pedido Exitoso!',
+            text: 'El pedido se añadió correctamente.',
+            confirmButtonText: 'Aceptar',
+          }).then((result: any) => {
+            if (result.isConfirmed) {
+              this.cerrarModal();
+              this.isVisible = false;
+              setTimeout(() => {
+                this.clienteNombre = '';
+                this.ordenService.eliminarTodosLosProductos();
+                this.router.navigate(['/menu']).then(() => {
+                  // Esperar a que la navegación esté completa antes de desplazar
+                  window.scrollTo(0, 0); // Desplazarse al principio de la página
+                });
+              }, 500); // Ajusta el tiempo según lo necesites
+            }
+          });
         },
         (error) => {
-          console.error('Error al agregar la orden:', error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Ocurrió un problema.',
+            text: 'Error al añadir la orden.',
+            confirmButtonText: 'Entendido',
+          });
         }
       );
-      //
-
-      this.cerrarModal();
-      this.isVisible = false;
-      setTimeout(() => {
-        this.clienteNombre = '';
-        this.ordenService.eliminarTodosLosProductos();
-        this.router.navigate(['/menu']).then(() => {
-          // Esperar a que la navegación esté completa antes de desplazar
-          window.scrollTo(0, 0); // Desplazarse al principio de la página
-        });
-      }, 500); // Ajusta el tiempo según lo necesites
     } else {
       alert('Por favor ingresa tu nombre.');
     }
