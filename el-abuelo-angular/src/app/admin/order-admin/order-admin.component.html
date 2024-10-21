@@ -1,14 +1,31 @@
 <div class="container">
     <div class="header">
         <h1 class="encabezado">Administrar Órdenes</h1>
+        <h2 class="subtitulo">Edita o agrega elementos al menú</h2>
     </div>
+
+    <div class="filter-bar">
+        <select class="status-filter" (change)="updateStatus($event)" [disabled]="disableStatusFilter">
+            <option value="">Todas las ordenes activas</option>
+            <option value="queue">En fila</option>
+            <option value="preparation">En preparación</option>
+            <option value="ready">Listas</option>
+        </select>
+
+        <select class="completed-filter" (change)="updateComplete($event)">
+            <option value="active">Activas</option>
+            <option value="completed">Completadas</option>
+            <option value="">Todas</option>
+        </select>
+    </div>
+
     <div class="grid">
-        <div class="box" *ngFor="let order of orderItems">
+        <div [class.no-status]="order.status==='completed'" class="box" *ngFor="let order of filteredOrders">
             <div class="enc">
-                <h2>Cliente: {{order.namee}}</h2>
+                <h2>{{order.namee}}</h2>
             </div>
             <div class="box-details">
-                <p class="subtitulo button" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">DETALLES
+                <p class="button" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">DETALLES
                     ▼</p>
                 <div class="productos" [class.show]="order.isDetailsOpen">
                     <div class="producto" *ngFor="let producto of order.productos">
@@ -25,9 +42,8 @@
                     <p>{{order.hora}}</p>
                 </div>
             </div>
-            <!-- <button class="button add" (click)="completar(order.id)">COMPLETAR</button> -->
             <div>
-                <div class="order-status">
+                <div [class.no-status]="order.status==='completed'" class="order-status">
                     <div class="circle"
                         [class.selected]="order.status === 'queue' ||order.status === 'preparation' ||order.status === 'ready'"
                         [class.current-selected]="order.status === 'queue'" (click)="setStatus('queue', order)">
@@ -45,6 +61,9 @@
                 <p class="status" *ngIf="order.status==='preparation'">Preparándose</p>
                 <p class="status" *ngIf="order.status==='ready'" style="color: #4daf2d;">Listo</p>
             </div>
+            <button [class.no-status]="order.status==='completed'" [disabled]="order.status!== 'ready'"
+                [class.disabled]="order.status!== 'ready'" class="button add"
+                (click)="completar(order)">COMPLETAR</button>
         </div>
     </div>
 
