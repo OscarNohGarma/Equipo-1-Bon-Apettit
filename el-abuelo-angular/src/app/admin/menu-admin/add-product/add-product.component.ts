@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
 import { MenuProduct } from '../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
@@ -29,7 +34,7 @@ export class AddProductComponent {
   ) {
     this.productForm = this.fb.group({
       namee: [''],
-      precio: [''],
+      precio: ['', [Validators.min(1)]], // Precio mayor a 0
       image: [''],
       categoria: [''],
       // Otros campos que tengas en MenuProduct
@@ -73,6 +78,15 @@ export class AddProductComponent {
   }
 
   saveProduct() {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      alert('Por favor llena todos los campos.');
+      return;
+    }
+    if (!this.selectedFile) {
+      alert('Por favor selecciona una imagen válida.');
+      return;
+    }
     if (this.productForm.valid) {
       this.onUpload().subscribe(() => {
         const newProduct = {
@@ -94,9 +108,6 @@ export class AddProductComponent {
           }
         );
       });
-    } else {
-      console.error('Formulario inválido o ID de producto no encontrado.');
-      alert('Por favor llena todos los campos.');
     }
   }
 

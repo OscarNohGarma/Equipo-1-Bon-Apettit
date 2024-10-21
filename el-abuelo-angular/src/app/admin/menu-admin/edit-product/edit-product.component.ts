@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ProductService } from '../../../core/services/product.service';
 import { MenuProduct } from '../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
@@ -35,7 +40,7 @@ export class EditProductComponent implements OnInit {
   ) {
     this.productForm = this.fb.group({
       namee: [''],
-      precio: [''],
+      precio: ['', [Validators.min(1)]], // Precio mayor a 0
       image: [''],
       categoria: [''],
       stock: [false],
@@ -105,6 +110,15 @@ export class EditProductComponent implements OnInit {
   }
 
   saveProduct() {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      alert('Por favor llena todos los campos.');
+      return;
+    }
+    if (!this.selectedFile) {
+      alert('Por favor selecciona una imagen válida.');
+      return;
+    }
     if (this.productForm.valid && this.productId) {
       this.onUpload().subscribe(() => {
         const updatedProduct = {

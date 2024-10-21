@@ -37,6 +37,10 @@ export class AdminLoginComponent implements OnInit {
   }
 
   login() {
+    if (this.username.trim() === '' || this.password.trim() === '') {
+      return; // Detener el envío si hay campos vacíos
+    }
+
     this.errorMessage = '';
     this.loading = true;
     // Buscar si el usuario ingresado existe en la lista de usuarios

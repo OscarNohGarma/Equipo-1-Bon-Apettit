@@ -15,7 +15,7 @@ import { AdminAuthService } from '../../../auth/admin-auth.service';
   providers: [UsuarioService, AdminAuthService],
 })
 export class EditUserComponent implements OnInit {
-  productForm: FormGroup;
+  userForm: FormGroup;
   userId: string | null = null;
   usuario: Usuario | null = null;
   currentId: string | null = null;
@@ -28,7 +28,7 @@ export class EditUserComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.productForm = this.fb.group({
+    this.userForm = this.fb.group({
       namee: [''],
       user: [''],
       password: [''],
@@ -45,7 +45,7 @@ export class EditUserComponent implements OnInit {
       this.loadUser(this.userId); // Cargar el producto con el ID
     }
     if (this.currentId === this.userId) {
-      this.productForm.get('rol')?.disable();
+      this.userForm.get('rol')?.disable();
       return;
     }
   }
@@ -55,7 +55,7 @@ export class EditUserComponent implements OnInit {
     this.usuarioService.getById(id).subscribe((usuario: Usuario) => {
       this.usuario = usuario;
       // Rellenar el formulario con los datos del producto
-      this.productForm.patchValue({
+      this.userForm.patchValue({
         namee: usuario.namee,
         user: usuario.user,
         password: usuario.password,
@@ -65,16 +65,21 @@ export class EditUserComponent implements OnInit {
   }
 
   saveUser() {
-    if (this.productForm.valid && this.userId) {
+    if (this.userForm.invalid) {
+      this.userForm.markAllAsTouched();
+      alert('Por favor llena todos los campos.');
+      return;
+    }
+    if (this.userForm.valid && this.userId) {
       const updateUser = {
-        ...this.productForm.value,
+        ...this.userForm.value,
       }; // Agregar la URL de la imagen
 
       this.usuarioService.update(this.userId, updateUser).subscribe(
         (response) => {
           if (this.currentId === this.userId) {
             const updateUser = {
-              ...this.productForm.value,
+              ...this.userForm.value,
               rol: this.currentRol,
             };
             const us = this.userId ?? '';
