@@ -264,11 +264,11 @@ p {
 }
 
 .circle:nth-child(2).selected {
-  background-color: #f7c70a; /* Amarillo dorado suave (En preparación) */
+  background-color: #ffcc00; /* Amarillo dorado suave (En preparación) */
 }
 
 .circle:nth-child(3).selected {
-  background-color: #489c2b; /* Verde pastel (Lista) */
+  background-color: rgb(72, 184, 35); /* Verde pastel (Lista) */
 }
 .status {
   margin-top: 15px;
@@ -282,7 +282,7 @@ p {
 }
 
 .ready {
-  color: #225f0d;
+  color: #267e09;
   font-weight: 700;
   opacity: 0;
   transition: all 0.1s ease-in-out;
