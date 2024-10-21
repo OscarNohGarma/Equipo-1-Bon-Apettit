@@ -17,34 +17,6 @@ h3 {
   text-align: center;
 }
 
-// @media (min-width: 1280px) {
-// .bg-menu::before {
-//   content: "";
-//   position: fixed;
-//   top: 0;
-//   right: 0;
-//   width: 100%; /* Ocupa el 70% del lado derecho */
-//   height: 100%;
-//   background-image: url("../../../assets/menu.jpg"); /* Ruta de la imagen */
-//   background-size: cover;
-//   background-position: center;
-//   z-index: -1; /* Coloca la imagen detrás del contenido */
-//   opacity: 0.6; /* Ajusta la opacidad de la imagen */
-
-//   /* Superposición de color morado */
-//   background-color: rgba(34, 0, 128, 0.6); /* Color morado con opacidad */
-//   background-blend-mode: overlay; /* Mezcla la imagen con el color morado */
-// }
-// // }
-
-// @media (min-width: 1280px) {
-//   .bg-menu::before {
-//     width: 70%; /* Ocupa el 70% del lado derecho */
-
-//     clip-path: polygon(0 50%, 15% 0, 100% 0, 100% 50%, 100% 100%, 15% 100%);
-//   }
-// }
-
 .encabezado {
   font-size: 40px;
   font-weight: bolder;

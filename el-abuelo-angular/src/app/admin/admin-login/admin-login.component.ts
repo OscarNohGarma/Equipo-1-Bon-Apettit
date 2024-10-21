@@ -7,6 +7,7 @@ import { UsuarioService } from '../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../../core/models/usuario';
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
+declare var Swal: any;
 
 @Component({
   selector: 'app-admin-login',
@@ -32,7 +33,6 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit(): void {
     this.usuarioService.getAll().subscribe((data) => {
       this.usuarioItems = data;
-      console.log(this.usuarioItems);
     });
   }
 
@@ -61,19 +61,36 @@ export class AdminLoginComponent implements OnInit {
             foundUser.rol
           ); // Aquí podrías pasar un token real si lo tienes
           this.loading = false;
-          this.router.navigate(['/admin']).then(() => {
-            // Forzar la recarga de la página después de la navegación
-            window.location.reload();
+          Swal.fire({
+            icon: 'success',
+            title: '¡Inicio de sesión exitoso!',
+            text: 'Bienvenido al panel de administrador',
+            confirmButtonText: 'Aceptar',
+          }).then((result: any) => {
+            this.router.navigate(['/admin']).then(() => {
+              // Forzar la recarga de la página después de la navegación
+              window.location.reload();
+            });
           });
         } else {
           // Contraseña incorrecta
-          this.errorMessage = 'Contraseña incorrecta. Inténtalo de nuevo.';
           this.loading = false;
+          Swal.fire({
+            icon: 'error',
+            title: 'Contraseña incorrecta.',
+            text: 'Revisa que la contraseña es correcta.',
+            confirmButtonText: 'Entendido',
+          });
         }
       } else {
         // Usuario no encontrado
-        this.errorMessage = 'Usuario no encontrado. Inténtalo de nuevo.';
         this.loading = false;
+        Swal.fire({
+          icon: 'error',
+          title: 'Usuario no encontrado.',
+          text: 'Revisa que el usuario es correcto.',
+          confirmButtonText: 'Entendido',
+        });
       }
     }, 2000);
   }

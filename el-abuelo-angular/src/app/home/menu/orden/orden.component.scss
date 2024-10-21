@@ -376,3 +376,23 @@ h2 {
     background-color: rgba(0, 0, 0, 0.8); /* Mantener fondo opaco */
   }
 }
+
+.my-swal-button {
+  all: unset !important;
+  text-align: center;
+  width: 100%;
+  padding: 5px 0px;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 15px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.my-swal-button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
