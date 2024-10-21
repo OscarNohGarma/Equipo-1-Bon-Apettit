@@ -52,5 +52,6 @@
         rol solo si estás completamente seguro.</p>
     <p *ngIf="currentId === userId" class="warning">No puedes editar tu
         propio rol</p>
+    <app-spinner *ngIf="loading" />
     <button type="submit" class="button ">ACTUALIZAR</button>
 </form>

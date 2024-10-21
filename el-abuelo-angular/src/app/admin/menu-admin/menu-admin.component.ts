@@ -83,11 +83,6 @@ export class MenuAdminComponent implements OnInit {
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar',
       buttonsStyling: false, // Desactivar estilos predeterminados de SweetAlert2
-
-      customClass: {
-        confirmButton: 'btn-confirm',
-        cancelButton: 'btn-cancel',
-      },
       didOpen: () => {
         // Aplicar estilos directamente
         const confirmButton = Swal.getConfirmButton();
@@ -155,6 +150,21 @@ export class MenuAdminComponent implements OnInit {
                 title: '¡Producto eliminado!',
                 text: 'El producto se eliminó correctamente.',
                 confirmButtonText: 'Aceptar',
+                didOpen: () => {
+                  // Aplicar estilos directamente
+                  const confirmButton = Swal.getConfirmButton();
+
+                  if (confirmButton) {
+                    confirmButton.style.backgroundColor = '#343a40';
+
+                    confirmButton.onmouseover = () => {
+                      confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                    };
+                    confirmButton.onmouseout = () => {
+                      confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                    };
+                  }
+                },
               }).then((result: any) => {
                 this.loadMenu(); // Recargar el menú después de eliminar el producto
               });
@@ -167,6 +177,21 @@ export class MenuAdminComponent implements OnInit {
               title: 'Ocurrió un problema.',
               text: 'Error al eliminar el producto.',
               confirmButtonText: 'Entendido',
+              didOpen: () => {
+                // Aplicar estilos directamente
+                const confirmButton = Swal.getConfirmButton();
+
+                if (confirmButton) {
+                  confirmButton.style.backgroundColor = '#343a40';
+
+                  confirmButton.onmouseover = () => {
+                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                  };
+                  confirmButton.onmouseout = () => {
+                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                  };
+                }
+              },
             });
           }
         );

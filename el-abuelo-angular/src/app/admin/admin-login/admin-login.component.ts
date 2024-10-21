@@ -66,6 +66,22 @@ export class AdminLoginComponent implements OnInit {
             title: '¡Inicio de sesión exitoso!',
             text: 'Bienvenido al panel de administrador',
             confirmButtonText: 'Aceptar',
+            didOpen: () => {
+              // Aplicar estilos directamente
+              const confirmButton = Swal.getConfirmButton();
+
+              if (confirmButton) {
+                confirmButton.style.backgroundColor = '#343a40';
+                confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+
+                confirmButton.onmouseover = () => {
+                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                };
+                confirmButton.onmouseout = () => {
+                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                };
+              }
+            },
           }).then((result: any) => {
             this.router.navigate(['/admin']).then(() => {
               // Forzar la recarga de la página después de la navegación
@@ -80,6 +96,22 @@ export class AdminLoginComponent implements OnInit {
             title: 'Contraseña incorrecta.',
             text: 'Revisa que la contraseña es correcta.',
             confirmButtonText: 'Entendido',
+            didOpen: () => {
+              // Aplicar estilos directamente
+              const confirmButton = Swal.getConfirmButton();
+
+              if (confirmButton) {
+                confirmButton.style.backgroundColor = '#343a40';
+                confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+
+                confirmButton.onmouseover = () => {
+                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                };
+                confirmButton.onmouseout = () => {
+                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                };
+              }
+            },
           });
         }
       } else {
@@ -90,6 +122,21 @@ export class AdminLoginComponent implements OnInit {
           title: 'Usuario no encontrado.',
           text: 'Revisa que el usuario es correcto.',
           confirmButtonText: 'Entendido',
+          didOpen: () => {
+            // Aplicar estilos directamente
+            const confirmButton = Swal.getConfirmButton();
+
+            if (confirmButton) {
+              confirmButton.style.backgroundColor = '#343a40';
+
+              confirmButton.onmouseover = () => {
+                confirmButton.style.backgroundColor = '#212529'; // Color en hover
+              };
+              confirmButton.onmouseout = () => {
+                confirmButton.style.backgroundColor = '#343a40'; // Color normal
+              };
+            }
+          },
         });
       }
     }, 2000);
