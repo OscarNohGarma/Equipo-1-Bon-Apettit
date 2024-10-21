@@ -2,27 +2,35 @@
     <button class="back-button" [routerLink]="['/admin/roles']"></button>
     <h2 class="encabezado" *ngIf="currentId !== userId">Editar Usuario</h2>
     <h2 class="encabezado" *ngIf="currentId === userId">Editar tu Perfil</h2>
-
     <button class="dis"></button>
 
 </div>
-<form [formGroup]="productForm" (ngSubmit)="saveUser()" class="edit-product-form">
+<form [formGroup]="userForm" (ngSubmit)="saveUser()" class="edit-product-form">
 
     <div class="form-group">
         <label for="namee">Nombre completo:</label>
         <input type="text" id="namee" formControlName="namee" class="form-control"
             placeholder="Ingresa el nombre completo" required />
+        <div *ngIf="userForm.get('namee')?.touched && userForm.get('namee')?.invalid" class="error-message">
+            El nombre es requerido.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="user">Usuario:</label>
         <input type="text" id="user" formControlName="user" class="form-control"
             placeholder="Ingresa usuario con el que se iniciará sesión" required />
+        <div *ngIf="userForm.get('user')?.touched && userForm.get('user')?.invalid" class="error-message">
+            El usuario es requerido.
+        </div>
     </div>
     <div class="form-group">
         <label for="password">Contraseña:</label>
         <input type="password" id="password" formControlName="password" class="form-control"
             placeholder="Ingresa una contraseña para este usuario" required />
+        <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.invalid" class="error-message">
+            La contraseña es requerida.
+        </div>
     </div>
 
 
@@ -33,8 +41,11 @@
             <option value="MODERADOR">Moderador</option>
             <option value="ADMINISTRADOR">Administrador</option>
         </select>
+        <div *ngIf="userForm.get('rol')?.touched && userForm.get('rol')?.invalid" class="error-message">
+            El rol es requerido.
+        </div>
     </div>
-    <p *ngIf="productForm.value.rol === 'ADMINISTRADOR' && currentId !== userId" class="warning">ADVERTENCIA: Los
+    <p *ngIf="userForm.value.rol === 'ADMINISTRADOR' && currentId !== userId" class="warning">ADVERTENCIA: Los
         administradores tienen total
         control sobre la información del página, esto incluye la creación y eliminación de roles de usuario. Asegúrate
         de asignar este

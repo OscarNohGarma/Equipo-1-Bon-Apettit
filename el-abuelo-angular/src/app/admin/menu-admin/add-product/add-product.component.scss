@@ -161,3 +161,12 @@ input[type="file"] {
 .button:hover {
   background-color: #212529;
 }
+.error-message {
+  color: red;
+  margin-top: 5px;
+  font-size: 14px;
+}
+.form-group input.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched {
+  border: 2px solid red;
+}

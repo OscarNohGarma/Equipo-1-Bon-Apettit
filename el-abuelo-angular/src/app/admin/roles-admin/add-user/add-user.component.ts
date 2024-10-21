@@ -13,13 +13,13 @@ import { UsuarioService } from '../../../core/services/usuario.service';
   providers: [UsuarioService],
 })
 export class AddUserComponent {
-  productForm: FormGroup;
+  userForm: FormGroup;
   constructor(
     private usuarioService: UsuarioService,
     private fb: FormBuilder,
     private router: Router
   ) {
-    this.productForm = this.fb.group({
+    this.userForm = this.fb.group({
       namee: [''],
       user: [''],
       password: [''],
@@ -28,9 +28,14 @@ export class AddUserComponent {
     });
   }
   saveUser() {
-    if (this.productForm.valid) {
+    if (this.userForm.invalid) {
+      this.userForm.markAllAsTouched();
+      alert('Por favor llena todos los campos.');
+      return;
+    }
+    if (this.userForm.valid) {
       const newUser = {
-        ...this.productForm.value,
+        ...this.userForm.value,
       }; // Agregar la URL de la imagen
 
       this.usuarioService.add(newUser).subscribe(
