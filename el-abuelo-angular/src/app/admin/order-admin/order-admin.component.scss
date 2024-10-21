@@ -350,3 +350,27 @@ p {
 .check.no-status {
   display: none;
 }
+
+.btn-delete {
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  opacity: 60%;
+  top: 15px;
+  right: 15px;
+  transition: all 0.2s ease-in;
+}
+@media (min-width: 768px) {
+  .btn-delete {
+    width: 32px;
+    height: 32px;
+  }
+}
+.btn-delete:hover {
+  opacity: 100%;
+  cursor: pointer;
+}
+
+.btn-delete.no-status {
+  display: none;
+}

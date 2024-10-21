@@ -112,4 +112,25 @@ export class OrderAdminComponent implements OnInit {
       this.disableStatusFilter = false; // Activa el filtro de estado si no están completadas
     }
   }
+
+  deleteOrder(id: number) {
+    const confirmed = window.confirm(
+      '¿Estás seguro de que deseas eliminar esta orden?'
+    );
+    if (confirmed) {
+      this.orderMenuService.delete(id.toString()).subscribe(
+        (response) => {
+          // console.log('Producto eliminado:', response);
+          // Aquí puedes agregar lógica para actualizar la vista
+          setTimeout(() => {
+            alert('Orden eliminada correctamente.');
+            this.loadOrders(); // Por ejemplo, recargar el menú
+          }, 500);
+        },
+        (error) => {
+          console.error('Error al eliminar la orden: ', error);
+        }
+      );
+    }
+  }
 }

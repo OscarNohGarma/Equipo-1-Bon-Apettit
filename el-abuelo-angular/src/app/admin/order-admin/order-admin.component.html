@@ -20,7 +20,10 @@
     </div>
 
     <div class="grid">
-        <div [class.no-status]="order.status==='completed'" class="box" *ngFor="let order of filteredOrders">
+        <div [class.no-status]="order.status=='completed'" class="box" *ngFor="let order of filteredOrders">
+            <img [class.no-status]="order.status!=='completed'" src="./../../../assets/basura.png" alt="basura"
+                class="btn-delete" (click)="deleteOrder(order.id)">
+
             <div class="enc">
                 <h2>Nombre: {{order.namee}}</h2>
             </div>
@@ -62,7 +65,7 @@
             <button [class.no-status]="order.status==='completed'" [disabled]="order.status!== 'ready'"
                 [class.disabled]="order.status!== 'ready'" class="button add"
                 (click)="completar(order)">COMPLETAR</button>
-            <p [class.show]="order.status==='completed'" class="completed">Orden completada</p>
+            <p [class.show]="order.status==='completed'" class="completed">Orden completada ✓</p>
             <div class="fecha">
                 <p>{{order.fecha}}</p>
                 <p>{{order.hora}}</p>
