@@ -115,14 +115,31 @@ h3 {
     // grid-template-columns: repeat(3, 1fr);
   }
 }
-.btn-delete {
+.btns {
   position: absolute;
-  width: 35px;
-  height: 35px;
-  opacity: 60%;
   top: 15px;
   right: 15px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column-reverse;
+}
+.btn-delete {
+  width: 35px;
+  height: 35px;
+  opacity: 45%;
   transition: all 0.2s ease-in;
+}
+.btn-edit {
+  width: 32px;
+  height: 32px;
+  opacity: 45%;
+  transition: all 0.2s ease-in;
+}
+@media (min-width: 768px) {
+  .btns {
+    gap: 15px;
+    flex-direction: row;
+  }
 }
 @media (min-width: 768px) {
   .btn-delete {
@@ -130,9 +147,19 @@ h3 {
     height: 32px;
   }
 }
+@media (min-width: 768px) {
+  .btn-edit {
+    width: 30px;
+    height: 30px;
+  }
+}
 
 .btn-delete:hover {
-  opacity: 100%;
+  opacity: 90%;
+  cursor: pointer;
+}
+.btn-edit:hover {
+  opacity: 90%;
   cursor: pointer;
 }
 

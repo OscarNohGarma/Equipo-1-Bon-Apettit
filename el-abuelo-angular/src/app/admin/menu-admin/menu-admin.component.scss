@@ -88,9 +88,9 @@ h3 {
 }
 @media (min-width: 992px) {
   .box {
+    padding: 30px 100px;
     display: grid;
-
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
   }
 }
 
@@ -300,13 +300,24 @@ h3 {
 //   position: relative;
 // }
 
-.btn-delete {
+.btns {
   position: absolute;
-  width: 35px;
-  height: 35px;
-  opacity: 60%;
   top: 15px;
   right: 15px;
+  display: flex;
+  gap: 20px;
+  flex-direction: column-reverse;
+}
+.btn-delete {
+  width: 35px;
+  height: 35px;
+  opacity: 45%;
+  transition: all 0.2s ease-in;
+}
+.btn-edit {
+  width: 32px;
+  height: 32px;
+  opacity: 45%;
   transition: all 0.2s ease-in;
 }
 @media (min-width: 768px) {
@@ -315,9 +326,25 @@ h3 {
     height: 32px;
   }
 }
+@media (min-width: 768px) {
+  .btn-edit {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (min-width: 768px) {
+  .btns {
+    gap: 15px;
+    flex-direction: row;
+  }
+}
 
 .btn-delete:hover {
-  opacity: 100%;
+  opacity: 90%;
+  cursor: pointer;
+}
+.btn-edit:hover {
+  opacity: 90%;
   cursor: pointer;
 }
 

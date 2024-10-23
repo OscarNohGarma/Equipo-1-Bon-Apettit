@@ -38,8 +38,12 @@
                 </div>
 
                 <!-- Botón para eliminar el producto -->
-                <img src="./../../../assets/basura.png" alt="basura" class="btn-delete"
-                    (click)="deleteProducto(product.id, product.image)">
+                <div class="btns">
+                    <img src="./../../../assets/edit.svg" alt="edit" class="btn-edit"
+                        [routerLink]="['edit', product.id]">
+                    <img src="./../../../assets/delete-button.svg" alt="basura" class="btn-delete"
+                        (click)="deleteProducto(product.id, product.image)">
+                </div>
 
                 <!-- Imagen del producto -->
 
@@ -53,7 +57,7 @@
                 </div>
 
                 <!-- Botón para editar el producto -->
-                <button class="button add" [routerLink]="['edit', product.id]">EDITAR</button>
+                <!-- <button class="button add" [routerLink]="['edit', product.id]">EDITAR</button> -->
             </div>
         </div>
 
