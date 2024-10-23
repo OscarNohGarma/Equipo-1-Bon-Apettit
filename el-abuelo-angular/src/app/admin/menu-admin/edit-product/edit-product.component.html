@@ -5,6 +5,7 @@
 </div>
 <form [formGroup]="productForm" (ngSubmit)="saveProduct()" class="edit-product-form">
     <div class="switch-cont">
+        <p class="disponible">Disponible:</p>
         <label class="switch">
             <input type="checkbox" id="stock" formControlName="stock">
             <span class="slider round"></span>
