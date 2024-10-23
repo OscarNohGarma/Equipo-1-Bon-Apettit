@@ -7,11 +7,12 @@ import { AddProductComponent } from './menu-admin/add-product/add-product.compon
 import { OrderAdminComponent } from '../admin/cocinero/order-admin/order-admin.component';
 import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
-import { RolesAdminComponent } from './roles-admin/roles-admin.component';
-import { AddUserComponent } from './roles-admin/add-user/add-user.component';
-import { EditUserComponent } from './roles-admin/edit-user/edit-user.component';
+import { RolesAdminComponent } from './owner/roles-admin/roles-admin.component';
+import { AddUserComponent } from './owner/roles-admin/add-user/add-user.component';
+import { EditUserComponent } from './owner/roles-admin/edit-user/edit-user.component';
 import { OrderReadyComponent } from './cajero/order-ready/order-ready.component';
 import { OrderPaidComponent } from './owner/order-paid/order-paid.component';
+import { ReportComponent } from './owner/report/report.component';
 
 export const adminRoutes: Routes = [
   {
@@ -78,6 +79,11 @@ export const adminRoutes: Routes = [
     path: 'login',
     title: 'Login - Administrador',
     component: AdminLoginComponent, // Componente de login del admin
+  },
+  {
+    path: 'report',
+    title: 'Rerpotes - Administrador',
+    component: ReportComponent, // Componente de login del admin
   },
   {
     path: '**', // Ruta comodín para capturar cualquier ruta no reconocida
