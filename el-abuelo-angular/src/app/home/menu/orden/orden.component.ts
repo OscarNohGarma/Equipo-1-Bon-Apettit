@@ -97,6 +97,21 @@ export class OrdenComponent implements OnInit {
             title: '¡Pedido Exitoso!',
             text: 'El pedido se añadió correctamente.',
             confirmButtonText: 'Aceptar',
+            didOpen: () => {
+              // Aplicar estilos directamente
+              const confirmButton = Swal.getConfirmButton();
+
+              if (confirmButton) {
+                confirmButton.style.backgroundColor = '#343a40';
+
+                confirmButton.onmouseover = () => {
+                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                };
+                confirmButton.onmouseout = () => {
+                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                };
+              }
+            },
           }).then((result: any) => {
             if (result.isConfirmed) {
               this.cerrarModal();

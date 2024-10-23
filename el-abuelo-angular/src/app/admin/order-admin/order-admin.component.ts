@@ -4,7 +4,7 @@ import { OrderMenuService } from '../../core/services/order-menu.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
-
+declare var Swal: any;
 @Component({
   selector: 'app-order-admin',
   standalone: true,
@@ -53,31 +53,126 @@ export class OrderAdminComponent implements OnInit {
   }
 
   completar(order: OrderMenu): void {
-    const confirmed = window.confirm(
-      '¿Deseas marcar como completado la orden?'
-    );
-    if (confirmed) {
-      const newOrder = {
-        ...order,
-        status: 'completed',
-      };
-      this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
-        (response) => {
-          //! console.log('Producto actualizado exitosamente:', response);
-          // Aquí puedes redirigir o mostrar un mensaje de éxito
-        },
-        (error) => {
-          console.error('Error al actualizar la orden:', error);
-          // Manejo de errores aquí
+    Swal.fire({
+      icon: 'warning',
+      title: '¿Deseas completar esta orden?',
+      text: 'Se colocará la orden la sección de "Completadas".',
+      showCancelButton: true,
+      confirmButtonText: 'Completar',
+      cancelButtonText: 'Cancelar',
+      buttonsStyling: false, // Desactivar estilos predeterminados de SweetAlert2
+      didOpen: () => {
+        // Aplicar estilos directamente
+        const confirmButton = Swal.getConfirmButton();
+        const cancelButton = Swal.getCancelButton();
+
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.style.color = '#fff';
+          confirmButton.style.padding = '10px 20px';
+          confirmButton.style.fontWeight = 'bold';
+          confirmButton.style.border = 'none';
+          confirmButton.style.border = '2px solid #343a40';
+          confirmButton.style.borderRadius = '5px';
+          confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+          confirmButton.style.marginRight = '10px'; // Agregar transición
+
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#24272b'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
         }
-      );
-    }
-    window.location.reload();
+
+        if (cancelButton) {
+          cancelButton.style.backgroundColor = '#fff';
+          cancelButton.style.color = '#dc3545';
+          cancelButton.style.padding = '10px 20px';
+          cancelButton.style.fontWeight = 'bold';
+          cancelButton.style.border = 'none';
+          cancelButton.style.border = '2px solid #dc3545';
+          cancelButton.style.borderRadius = '5px';
+          cancelButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+
+          cancelButton.onmouseover = () => {
+            cancelButton.style.color = '#fff';
+            cancelButton.style.backgroundColor = '#dc3545'; // Color en hover
+          };
+          cancelButton.onmouseout = () => {
+            cancelButton.style.backgroundColor = '#fff'; // Color normal
+            cancelButton.style.color = '#dc3545';
+          };
+        }
+      },
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        // El usuario confirmó la acción
+
+        const newOrder = {
+          ...order,
+          status: 'completed',
+        };
+        this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
+          (response) => {
+            // El producto fue eliminado exitosamente
+            setTimeout(() => {
+              Swal.fire({
+                icon: 'success',
+                title: '¡Orden completada!',
+                text: 'La orden se actualizó correctamente.',
+                confirmButtonText: 'Aceptar',
+                didOpen: () => {
+                  // Aplicar estilos directamente
+                  const confirmButton = Swal.getConfirmButton();
+
+                  if (confirmButton) {
+                    confirmButton.style.backgroundColor = '#343a40';
+
+                    confirmButton.onmouseover = () => {
+                      confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                    };
+                    confirmButton.onmouseout = () => {
+                      confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                    };
+                  }
+                },
+              }).then((result: any) => {
+                this.loadOrders(); // Recargar el menú después de eliminar el producto
+              });
+            }, 100);
+          },
+          (error) => {
+            // Ocurrió un error al eliminar el producto
+            Swal.fire({
+              icon: 'error',
+              title: 'Ocurrió un problema.',
+              text: 'Error al actualizar la orden.',
+              confirmButtonText: 'Entendido',
+              didOpen: () => {
+                // Aplicar estilos directamente
+                const confirmButton = Swal.getConfirmButton();
+
+                if (confirmButton) {
+                  confirmButton.style.backgroundColor = '#343a40';
+
+                  confirmButton.onmouseover = () => {
+                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
+                  };
+                  confirmButton.onmouseout = () => {
+                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
+                  };
+                }
+              },
+            });
+          }
+        );
+      }
+    });
   }
   toggleDetails(order: OrderMenu): void {
     order.isDetailsOpen = !order.isDetailsOpen; // Alternar el estado de visibilidad de los detalles para esa orden
   }
-
   setStatus(status: string, order: OrderMenu) {
     this.selectedStatus = status;
     order.status = status;
