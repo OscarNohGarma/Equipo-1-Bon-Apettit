@@ -55,10 +55,10 @@ export class OrderAdminComponent implements OnInit {
   completar(order: OrderMenu): void {
     Swal.fire({
       icon: 'warning',
-      title: '¿Deseas completar esta orden?',
-      text: 'Se colocará la orden la sección de "Completadas".',
+      title: '¿Deseas enviar esta orden?',
+      text: 'Esta orden desaparecerá de esta sección y pasará al repartidor/cajero.',
       showCancelButton: true,
-      confirmButtonText: 'Completar',
+      confirmButtonText: 'Enviar',
       cancelButtonText: 'Cancelar',
       buttonsStyling: false, // Desactivar estilos predeterminados de SweetAlert2
       didOpen: () => {
@@ -119,8 +119,8 @@ export class OrderAdminComponent implements OnInit {
             setTimeout(() => {
               Swal.fire({
                 icon: 'success',
-                title: '¡Orden completada!',
-                text: 'La orden se actualizó correctamente.',
+                title: '¡Orden enviada!',
+                text: 'La orden se envió correctamente. Ahora el repartidor/cajero podrá verla en su lista.',
                 confirmButtonText: 'Aceptar',
                 didOpen: () => {
                   // Aplicar estilos directamente

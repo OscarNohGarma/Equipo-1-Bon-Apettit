@@ -38,18 +38,17 @@
         <label for="rol">Rol:</label>
         <select id="rol" formControlName="rol" class="form-control" required>
             <option value="" disabled selected>Selecciona un rol para este usuario</option>
-            <option value="MODERADOR">Moderador</option>
+            <option value="COCINERO">Cocinero</option>
+            <option value="REPARTIDOR">Repartidor</option>
+            <option value="CAJERO">Cajero</option>
             <option value="ADMINISTRADOR">Administrador</option>
         </select>
         <div *ngIf="userForm.get('rol')?.touched && userForm.get('rol')?.invalid" class="error-message">
             El rol es requerido.
         </div>
     </div>
-    <p *ngIf="userForm.value.rol === 'ADMINISTRADOR' && currentId !== userId" class="warning">ADVERTENCIA: Los
-        administradores tienen total
-        control sobre la información del página, esto incluye la creación y eliminación de roles de usuario. Asegúrate
-        de asignar este
-        rol solo si estás completamente seguro.</p>
+    <p *ngIf="userForm.value.rol === 'ADMINISTRADOR'" class="warning">ADVERTENCIA: Los administradores tienen total
+        control sobre la información del página, como editar el menú y responder a comentarios.
     <p *ngIf="currentId === userId" class="warning">No puedes editar tu
         propio rol</p>
     <app-spinner *ngIf="loading" />

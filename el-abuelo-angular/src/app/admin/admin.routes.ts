@@ -65,4 +65,9 @@ export const adminRoutes: Routes = [
     title: 'Login - Administrador',
     component: AdminLoginComponent, // Componente de login del admin
   },
+  {
+    path: '**', // Ruta comodín para capturar cualquier ruta no reconocida
+    redirectTo: '', // Redirigir al inicio
+    pathMatch: 'full',
+  },
 ];
