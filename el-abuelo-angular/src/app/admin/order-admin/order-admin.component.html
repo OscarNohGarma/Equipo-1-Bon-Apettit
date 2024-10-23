@@ -21,7 +21,7 @@
 
     <div class="grid">
         <div [class.no-status]="order.status=='completed'" class="box" *ngFor="let order of filteredOrders">
-            <img [class.no-status]="order.status!=='completed'" src="./../../../assets/basura.png" alt="basura"
+            <img [class.no-status]="order.status!=='completed'" src="./../../../assets/delete-button.svg" alt="basura"
                 class="btn-delete" (click)="deleteOrder(order.id)">
 
             <div class="enc">
