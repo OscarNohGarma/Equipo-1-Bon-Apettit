@@ -1,26 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { OrderMenu } from '../../core/models/orderMenu';
-import { OrderMenuService } from '../../core/services/order-menu.service';
+import { OrderMenu } from '../../../core/models/orderMenu';
+import { OrderMenuService } from '../../../core/services/order-menu.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
 declare var Swal: any;
 @Component({
-  selector: 'app-order-admin',
+  selector: 'app-order-paid',
   standalone: true,
   imports: [CommonModule, HttpClientModule, RouterModule],
-  templateUrl: './order-admin.component.html',
-  styleUrl: './order-admin.component.scss',
+  templateUrl: './order-paid.component.html',
+  styleUrl: './order-paid.component.scss',
   providers: [OrderMenuService],
 })
-export class OrderAdminComponent implements OnInit {
-  selectedStatus: string = 'queue'; // Estado por defecto (gris)
+export class OrderPaidComponent {
   orderItems: OrderMenu[] = [];
   isDetailsOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
-  currentStatus: string = 'queue'; // Para controlar la visibilidad del menú desplegable
-  statusFilter: string = ''; // Filtro de stock (activo/inactivo)
-  copmpleteFilter: string = 'active'; // Filtro de stock (activo/inactivo)
-  disableStatusFilter: boolean = false; // Nueva propiedad para desactivar el select
   constructor(
     private orderMenuService: OrderMenuService,
     private router: Router
@@ -30,35 +25,23 @@ export class OrderAdminComponent implements OnInit {
   }
   loadOrders(): void {
     this.orderMenuService.getAll().subscribe((data) => {
-      // Añadir la propiedad `isDetailsOpen` a cada orden
-      this.orderItems = data.map((order) => ({
-        ...order,
-        isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio
-      }));
-    });
-  }
-
-  get filteredOrders(): OrderMenu[] {
-    return this.orderItems.filter((order) => {
-      const matchesStatus =
-        this.statusFilter === '' || order.status === this.statusFilter;
-      const matchesComplete =
-        this.copmpleteFilter === '' ||
-        (this.copmpleteFilter === 'completed' &&
-          order.status === 'completed') ||
-        (this.copmpleteFilter === 'active' && order.status !== 'completed');
-
-      return matchesStatus && matchesComplete;
+      // Filtrar las órdenes cuyo rol sea "completed"
+      this.orderItems = data
+        .filter((order) => order.status === 'paid')
+        .map((order) => ({
+          ...order,
+          isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio
+        }));
     });
   }
 
   completar(order: OrderMenu): void {
     Swal.fire({
       icon: 'warning',
-      title: '¿Deseas enviar esta orden?',
-      text: 'Esta orden desaparecerá de esta sección y pasará al repartidor/cajero.',
+      title: '¿Deseas marcar esta orden como pagada?',
+      text: 'Esta orden desaparecerá de esta sección y pasará al dueño.',
       showCancelButton: true,
-      confirmButtonText: 'Enviar',
+      confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar',
       buttonsStyling: false, // Desactivar estilos predeterminados de SweetAlert2
       didOpen: () => {
@@ -111,7 +94,7 @@ export class OrderAdminComponent implements OnInit {
 
         const newOrder = {
           ...order,
-          status: 'completed',
+          status: 'paid',
         };
         this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
           (response) => {
@@ -119,8 +102,8 @@ export class OrderAdminComponent implements OnInit {
             setTimeout(() => {
               Swal.fire({
                 icon: 'success',
-                title: '¡Orden enviada!',
-                text: 'La orden se envió correctamente. Ahora el repartidor/cajero podrá verla en su lista.',
+                title: '¡Orden pagada!',
+                text: 'El pago se registró correctamente.',
                 confirmButtonText: 'Aceptar',
                 didOpen: () => {
                   // Aplicar estilos directamente
@@ -147,7 +130,7 @@ export class OrderAdminComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Ocurrió un problema.',
-              text: 'Error al actualizar la orden.',
+              text: 'Error al pagar la orden.',
               confirmButtonText: 'Entendido',
               didOpen: () => {
                 // Aplicar estilos directamente
@@ -172,40 +155,6 @@ export class OrderAdminComponent implements OnInit {
   }
   toggleDetails(order: OrderMenu): void {
     order.isDetailsOpen = !order.isDetailsOpen; // Alternar el estado de visibilidad de los detalles para esa orden
-  }
-  setStatus(status: string, order: OrderMenu) {
-    this.selectedStatus = status;
-    order.status = status;
-    const newOrder = {
-      ...order,
-      status: this.selectedStatus,
-    };
-    this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
-      (response) => {
-        //! console.log('Producto actualizado exitosamente:', response);
-        // Aquí puedes redirigir o mostrar un mensaje de éxito
-      },
-      (error) => {
-        console.error('Error al actualizar la orden:', error);
-        // Manejo de errores aquí
-      }
-    );
-  }
-  updateStatus(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.statusFilter = selectElement.value;
-  }
-
-  // Método para actualizar el filtro de stock
-  updateComplete(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.copmpleteFilter = selectElement.value;
-    if (this.copmpleteFilter === 'completed') {
-      this.statusFilter = ''; // Mostrará todas las órdenes completadas, sin importar el estado
-      this.disableStatusFilter = true; // Desactiva el select del filtro de estado
-    } else {
-      this.disableStatusFilter = false; // Activa el filtro de estado si no están completadas
-    }
   }
 
   deleteOrder(id: number) {
