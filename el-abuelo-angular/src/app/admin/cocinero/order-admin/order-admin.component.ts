@@ -31,10 +31,14 @@ export class OrderAdminComponent implements OnInit {
   loadOrders(): void {
     this.orderMenuService.getAll().subscribe((data) => {
       // Añadir la propiedad `isDetailsOpen` a cada orden
-      this.orderItems = data.map((order) => ({
-        ...order,
-        isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio
-      }));
+      this.orderItems = data
+        .filter(
+          (order) => order.status !== 'completed' && order.status !== 'paid'
+        )
+        .map((order) => ({
+          ...order,
+          isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio
+        }));
     });
   }
 
