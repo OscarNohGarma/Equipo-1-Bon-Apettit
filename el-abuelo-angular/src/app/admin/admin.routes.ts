@@ -1,15 +1,17 @@
 // feature.routes.ts
 import { Routes } from '@angular/router';
-import { InicioAdminComponent } from './inicio-admin/inicio-admin.component';
+import { InicioAdminComponent } from './owner/inicio-admin/inicio-admin.component';
 import { MenuAdminComponent } from './menu-admin/menu-admin.component';
 import { EditProductComponent } from './menu-admin/edit-product/edit-product.component';
 import { AddProductComponent } from './menu-admin/add-product/add-product.component';
-import { OrderAdminComponent } from './order-admin/order-admin.component';
+import { OrderAdminComponent } from '../admin/cocinero/order-admin/order-admin.component';
 import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
 import { RolesAdminComponent } from './roles-admin/roles-admin.component';
 import { AddUserComponent } from './roles-admin/add-user/add-user.component';
 import { EditUserComponent } from './roles-admin/edit-user/edit-user.component';
+import { OrderReadyComponent } from './cajero/order-ready/order-ready.component';
+import { OrderPaidComponent } from './owner/order-paid/order-paid.component';
 
 export const adminRoutes: Routes = [
   {
@@ -37,9 +39,21 @@ export const adminRoutes: Routes = [
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
-    path: 'ordenes',
+    path: 'ordenes/paid',
+    title: 'Órdenes - El abuelo',
+    component: OrderPaidComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'ordenes/activas',
     title: 'Órdenes - El abuelo',
     component: OrderAdminComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'ordenes/listas',
+    title: 'Órdenes - El abuelo',
+    component: OrderReadyComponent,
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
@@ -64,5 +78,10 @@ export const adminRoutes: Routes = [
     path: 'login',
     title: 'Login - Administrador',
     component: AdminLoginComponent, // Componente de login del admin
+  },
+  {
+    path: '**', // Ruta comodín para capturar cualquier ruta no reconocida
+    redirectTo: '', // Redirigir al inicio
+    pathMatch: 'full',
   },
 ];

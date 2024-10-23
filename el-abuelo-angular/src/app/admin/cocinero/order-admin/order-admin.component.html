@@ -1,29 +1,21 @@
 <div class="orders container">
     <div class="header">
-        <h1 class="encabezado">Administrar Órdenes</h1>
+        <h1 class="encabezado">Órdenes</h1>
         <h2 class="subtitulo">Administra el estado de las órdenes</h2>
     </div>
 
     <div class="filter-bar">
         <select class="status-filter" (change)="updateStatus($event)" [disabled]="disableStatusFilter">
-            <option value="">Todas las ordenes activas</option>
+            <option value="">Todas las ordenes</option>
             <option value="queue">En fila</option>
             <option value="preparation">En preparación</option>
             <option value="ready">Listas</option>
         </select>
 
-        <select class="completed-filter" (change)="updateComplete($event)">
-            <option value="active">Activas</option>
-            <option value="completed">Completadas</option>
-            <option value="">Todas</option>
-        </select>
     </div>
 
     <div class="grid">
-        <div [class.no-status]="order.status=='completed'" class="box" *ngFor="let order of filteredOrders">
-            <img [class.no-status]="order.status!=='completed'" src="./../../../assets/delete-button.svg" alt="basura"
-                class="btn-delete" (click)="deleteOrder(order.id)">
-
+        <div class="box" *ngFor="let order of filteredOrders">
             <div class="enc">
                 <h2>Nombre: {{order.namee}}</h2>
             </div>
@@ -43,8 +35,8 @@
                 </div>
             </div>
 
-            <div class="sta" [class.no-status]="order.status==='completed'">
-                <div [class.no-status]="order.status==='completed'" class="order-status">
+            <div class="sta">
+                <div class="order-status">
                     <div class="circle"
                         [class.selected]="order.status === 'queue' ||order.status === 'preparation' ||order.status === 'ready'"
                         [class.current-selected]="order.status === 'queue'" (click)="setStatus('queue', order)">
@@ -63,9 +55,8 @@
                 <p class="status" *ngIf="order.status==='ready'" style="color: #4daf2d;">Listo</p>
             </div>
             <button [class.no-status]="order.status==='completed'" [disabled]="order.status!== 'ready'"
-                [class.disabled]="order.status!== 'ready'" class="button add"
-                (click)="completar(order)">COMPLETAR</button>
-            <p [class.show]="order.status==='completed'" class="completed">Orden completada ✓</p>
+                [class.disabled]="order.status!== 'ready'" class="button add" (click)="completar(order)">Listo para
+                entregar</button>
             <div class="fecha">
                 <p>{{order.fecha}}</p>
                 <p>{{order.hora}}</p>
