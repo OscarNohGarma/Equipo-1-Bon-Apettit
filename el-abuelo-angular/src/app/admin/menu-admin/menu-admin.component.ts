@@ -195,7 +195,6 @@ export class MenuAdminComponent implements OnInit {
             });
           }
         );
-      } else if (result.dismiss === Swal.DismissReason.cancel) {
       }
     });
   }

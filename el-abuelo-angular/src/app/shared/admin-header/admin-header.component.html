@@ -42,9 +42,9 @@
         <div class="elemento-nav" [routerLink]="['/admin/ordenes']" (click)="selectCategory('Órdenes')">
             Órdenes
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">
+        <!-- <div class="elemento-nav" [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">
             Reservaciones
-        </div>
+        </div> -->
         <div *ngIf="rol === 'ADMINISTRADOR'" class="elemento-nav" [routerLink]="['/admin/roles']"
             (click)="selectCategory('Roles de Usuarios')">
             Roles de Usuario

@@ -72,7 +72,6 @@ export class AdminLoginComponent implements OnInit {
 
               if (confirmButton) {
                 confirmButton.style.backgroundColor = '#343a40';
-                confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
 
                 confirmButton.onmouseover = () => {
                   confirmButton.style.backgroundColor = '#212529'; // Color en hover
