@@ -180,8 +180,13 @@ img {
   border-radius: 3px;
   transition: all 0.2s ease-in-out;
   font-weight: 600;
-  position: absolute;
+
   right: 0;
+}
+@media (min-width: 768px) {
+  .login {
+    position: absolute;
+  }
 }
 .login:hover {
   background-color: rgb(255, 255, 255, 0.3);
@@ -189,6 +194,7 @@ img {
 }
 .nav-back {
   background-color: #161616;
+  position: relative;
 }
 .user {
   font-size: 18px;
@@ -198,16 +204,21 @@ img {
   border-radius: 3px;
   transition: all 0.2s ease-in-out;
   font-weight: 600;
-  position: absolute;
+  // position: absolute;
   right: 0;
 }
 .user:hover {
   background-color: rgb(255, 255, 255, 0.2);
   cursor: pointer;
 }
+
 .div-cont-user {
   // position: absolute;
   right: 0;
+}
+.div-cont-user.phone {
+  left: 100%;
+  top: 0;
 }
 
 .cont-user:hover > .user-menu div:hover {
@@ -215,41 +226,64 @@ img {
 }
 
 .user-menu {
-  position: absolute;
   background-color: #fff;
+  position: absolute;
   color: #343a40;
-  z-index: 1000;
+  z-index: 2000;
   overflow: hidden;
   max-height: 0; /* Altura inicial cero */
   opacity: 0; /* Inicia invisible */
-  transition: max-height 1s ease, opacity 0.5s ease; /* Animación de altura y opacidad */
-  width: 100%;
+  transition: max-height 0.5s ease, opacity 0.5s ease; /* Animación rápida */
+  width: 100%; /* Ocupa el 100% del ancho en móvil */
   border-radius: 5px;
   top: 100%;
   text-align: center;
 }
-@media (min-width: 992px) {
+
+@media (min-width: 768px) {
   .user-menu {
+    position: absolute;
+
     right: 0;
-    width: 160px;
+    width: 160px; /* En pantallas más grandes */
   }
 }
+
 .user-menu.show {
-  max-height: 500px; /* Ajustar según el contenido, o poner un valor alto */
+  max-height: 300px; /* Ajusta según el contenido */
   opacity: 1; /* Totalmente visible */
 }
+
 .elemento-menu-user {
   padding: 10px;
   font-weight: 600;
 }
-.user-menu div {
-  width: 100%;
-  transition: all 0.2s ease; /* Animación de altura y opacidad */
-}
+
 .user-menu div:hover {
-  background-color: rgb(52, 58, 64, 0.2);
+  background-color: rgba(52, 58, 64, 0.2);
   cursor: pointer;
 }
+
+.div-cont-user.phone {
+  position: relative; /* Asegura que el menú se posicione correctamente */
+}
+
 .logout {
   color: red;
+}
+.cont-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 0;
+}
+@media (min-width: 768px) {
+  .login.phone,
+  .cont-login,
+  .user-menu.phone {
+    display: none;
+  }
+  .user {
+    position: absolute;
+  }
 }

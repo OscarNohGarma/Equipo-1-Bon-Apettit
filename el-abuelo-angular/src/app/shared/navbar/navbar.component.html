@@ -19,6 +19,26 @@
         </div>
     </div>
 </div>
+<div class="nav-back">
+    <div class="div-cont-user">
+
+    </div>
+    <div class="container">
+        <div class="cont-login">
+            <p *ngIf="!currentUser" (click)="onLoginMobile()" [routerLink]="['login']" class="login phone">Iniciar
+                Sesión</p>
+            <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
+        </div>
+    </div>
+    <div class="user-menu phone box" [class.show]=" isUserMenuOpen">
+        <div (click)="onEdit()" class="elemento-menu-user">
+            Editar perfil
+        </div>
+        <div (click)="onLogout()" class="elemento-menu-user logout">
+            Cerrar sesión
+        </div>
+    </div>
+</div>
 <div class="header">
     <div class="container contenido-header">
         <div class="barra">
