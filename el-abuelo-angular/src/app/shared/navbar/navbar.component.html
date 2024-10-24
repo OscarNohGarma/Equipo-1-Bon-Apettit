@@ -4,7 +4,7 @@
         <a [routerLink]="['menu']">Menú</a>
         <a [routerLink]="['Galeria']">Galería</a>
         <!-- <a [routerLink]="['Reservaciones']">Reservaciones</a> -->
-        <p *ngIf="!currentUser" [routerLink]="['login']" class="login">Iniciar Sesión</p>
+        <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar Sesión</p>
         <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
         <div class="div-cont-user">
             <div class="user-menu box" [class.show]=" isUserMenuOpen">

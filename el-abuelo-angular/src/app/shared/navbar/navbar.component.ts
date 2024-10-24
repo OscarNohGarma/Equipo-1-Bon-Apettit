@@ -48,4 +48,7 @@ export class NavbarComponent implements OnInit {
   onLoginMobile() {
     window.scroll(0, 700);
   }
+  onLogin() {
+    window.scroll(0, 400);
+  }
 }
