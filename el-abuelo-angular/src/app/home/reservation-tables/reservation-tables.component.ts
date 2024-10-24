@@ -15,6 +15,7 @@ interface FormStep extends HTMLElement {
   templateUrl: './reservation-tables.component.html',
   styleUrls: ['./reservation-tables.component.scss']
 })
+
 export class ReservationTablesComponent implements OnInit {
   @ViewChild('nextButton') nextButton!: ElementRef<HTMLButtonElement>;
   @ViewChild('prevButton') prevButton!: ElementRef<HTMLButtonElement>;
@@ -22,27 +23,46 @@ export class ReservationTablesComponent implements OnInit {
   @ViewChild('imagePreview') imagePreview!: ElementRef<HTMLImageElement>;
   @ViewChild('cantidadMesas') cantidadMesas!: ElementRef<HTMLInputElement>;
   @ViewChild('costoMesa') costoMesa!: ElementRef<HTMLInputElement>;
-  private costoPorMesa: number = 120; // Costo base por mesa
 
-  decoracionSeleccionada: string = ''; // Variable para la decoración seleccionada
-  costoDecoraciones: { [key: string]: number } = { // Precios de decoraciones
-    'Ninguna': 0,
-    'Normal': 40,
-    'San Valentin': 50,
-    'Independencia': 60,
-    'Parejas': 55,
-    'Navideño': 70,
-    'DiaDeMuerto': 65,
-    'MomentoAmigos': 45,
-    'Cumpleaños': 60,
-    'Despedida': 75
-  };
-  costoConDecoracion: number = this.costoPorMesa; // Precio inicial con decoración
+  @ViewChild('container') containerRef!: ElementRef;
+  @ViewChild('count') countRef!: ElementRef;
+  @ViewChild('total') totalRef!: ElementRef;
 
-  lugarSeleccionado: string = ''; // Variable para almacenar el lugar seleccionado
+  private costoPorMesa: number = 300; // Costo base por mesa
+  public TipoBancaria: string = "BBVA";
+  public cuentaBancaria: string = "4152 3143 1423 8885";
   public active: number = 1;
   private steps: NodeListOf<Element> | null = null;
   private formSteps: NodeListOf<FormStep> | null = null;
+  // Agregar una propiedad para los tipos de archivo permitidos
+  private allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic'];
+  // Asientos seleccionados para cada ubicación
+  selectedSeatsInterior: Set<number> = new Set();
+  selectedSeatsExterior: Set<number> = new Set();
+
+  // Totales por separado para cada ubicación
+  selectedSeatsCountInterior: number = 0;
+  selectedSeatsCountExterior: number = 0;
+  totalCostInterior: number = 300;
+  totalCostExterior: number = 300;
+  numeroTelefonico:string = "996 105 9860";
+  // Precio por mesa
+  readonly seatPrice: number = 300;
+  decoracionSeleccionadaInterior: string = 'Ninguna';
+  decoracionSeleccionadaExterior: string = 'Ninguna';
+  decoracionSeleccionada: string = ''; // Variable para la decoración seleccionada
+  costoDecoraciones: { [key: string]: number } = { // Precios de decoraciones
+    'Ninguna': 0,
+    'Romantica':0,
+    'Cumpleaños': 0,
+    'Personalizado':0,
+  };
+  costoConDecoracion: number = this.costoPorMesa; // Precio inicial con decoración
+  lugarSeleccionado: string = ''; // Variable para almacenar el lugar seleccionado
+  personasSeleccionadas: boolean = false; // Nueva variable para saber si se seleccionaron personas
+  cantidadPersonas: string = ''; // Variable para almacenar la cantidad de personas seleccionadas
+  public mostrarExterior: boolean = true;
+
   fechaReservada: string = '';
   horarioReservado: string = '';
   fechaInvalida: boolean = false;
@@ -53,6 +73,9 @@ export class ReservationTablesComponent implements OnInit {
   mensajeTotalPago: string = ''; // Para mostrar el mensaje en el form de métodos de pago
   cantidadMesasReservadas: number = 1; // Nueva variable para la cantidad de mesas reservadas
   showReservarOtraMesa: boolean = false; // Nueva variable para controlar la visibilidad del botón
+
+
+
   constructor(@Inject(PLATFORM_ID) private platformId: Object)  {
     // Establecer fecha mínima como hoy
     this.fechaMinima = this.formatDate(new Date());
@@ -75,21 +98,35 @@ export class ReservationTablesComponent implements OnInit {
     }
   }
 
-/*   ngOnInit(): void {
-     // Configurar la fecha mínima (hoy)
-     const hoy = new Date();
-     this.minDate = hoy.toISOString().split('T')[0];
-    setTimeout(() => {
-      this.initializeElements();
-      this.setupEventListeners();
-    });
-  } */
+  // Método para manejar el cambio en el selector de personas
+  onPersonasChange(event: any) {
+    this.cantidadPersonas = event.target.value;
+    this.personasSeleccionadas = true;
+
+    // Si se seleccionan 4 personas, no mostrar la opción "Exterior"
+    if (this.cantidadPersonas === '2Personas' || this.cantidadPersonas === '6Personas' ) {
+      this.mostrarExterior = false;
+    } else {
+      this.mostrarExterior = true;
+    }
+  }
+
 
   // Método para manejar el cambio de lugar (interior o exterior)
-  onLugarChange(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.lugarSeleccionado = selectElement.value;
+  onLugarChange(event: any) {
+    this.lugarSeleccionado = event.target.value;
+
+    if (this.lugarSeleccionado === 'Interior') {
+      // Establecer la decoración seleccionada previamente en Interior
+      this.decoracionSeleccionada = this.decoracionSeleccionadaInterior;
+      this.updateTotals('Interior');
+    } else if (this.lugarSeleccionado === 'Exterior') {
+      // Establecer la decoración seleccionada previamente en Exterior
+      this.decoracionSeleccionada = this.decoracionSeleccionadaExterior;
+      this.updateTotals('Exterior');
+    }
   }
+
 
   private initializeElements(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -103,6 +140,71 @@ export class ReservationTablesComponent implements OnInit {
     }
   }
 
+   //Inicio de la logica del croquis
+   // Método para manejar el clic en un asiento
+   toggleSeat(seatIndex: number) {
+    if (this.lugarSeleccionado === 'Interior') {
+      this.toggleSeatSelection(this.selectedSeatsInterior, seatIndex);
+      this.updateTotals('Interior');
+    } else if (this.lugarSeleccionado === 'Exterior') {
+      this.toggleSeatSelection(this.selectedSeatsExterior, seatIndex);
+      this.updateTotals('Exterior');
+    }
+  }
+
+  // Alterna la selección de un asiento en una lista específica
+  toggleSeatSelection(selectedSeats: Set<number>, seatIndex: number) {
+    if (selectedSeats.has(seatIndex)) {
+      selectedSeats.delete(seatIndex);
+    } else {
+      selectedSeats.add(seatIndex);
+    }
+
+    // Actualizar los totales después de modificar la selección
+    this.updateTotals(this.lugarSeleccionado);
+  }
+
+
+  // Actualiza los totales según la ubicación
+  updateTotals(location: string) {
+    let selectedSeatsCount: number;
+
+    if (location === 'Interior') {
+      this.selectedSeatsCountInterior = this.selectedSeatsInterior.size;
+      selectedSeatsCount = this.selectedSeatsCountInterior;
+    } else if (location === 'Exterior') {
+      this.selectedSeatsCountExterior = this.selectedSeatsExterior.size;
+      selectedSeatsCount = this.selectedSeatsCountExterior;
+    } else {
+      selectedSeatsCount = 0;
+      this.decoracionSeleccionada ='Ninguna';
+
+    }
+
+    // Actualizar la cantidad de mesas en el input
+    this.cantidadMesas.nativeElement.value = selectedSeatsCount.toString();
+
+
+    // Si no hay mesas seleccionadas, resetea los valores a 0
+    if (selectedSeatsCount === 0) {
+      this.cantidadMesas.nativeElement.value = 'Cantidad De Mesas A Reservar';
+      this.costoMesa.nativeElement.value = '300'; // Resetear el costo por mesa
+      this.decoracionSeleccionada ='Ninguna';
+
+
+
+    } else {
+      // Calcular el costo total por mesa
+      const costoTotal = selectedSeatsCount * this.seatPrice;
+      this.costoMesa.nativeElement.value = costoTotal.toString();
+      this.costoConDecoracion = costoTotal;
+
+    }
+  }
+
+  //Cierre de la logica del croquis
+
+  //Apartir de aqui es del formulario
   // Formatea la fecha al formato requerido por el input type="date"
   private formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -118,8 +220,8 @@ export class ReservationTablesComponent implements OnInit {
       const fecha = new Date(this.fechaReservada + 'T00:00:00');
       const dia = fecha.getDay(); // 0: domingo, 1: lunes, ..., 6: sábado
 
-      // Validar que sea de miércoles a domingo (3-6, 0)
-      this.fechaInvalida = dia === 1 || dia === 2; // Es inválido solo si es lunes o martes
+      // Validar que sea de viernes a domingo (5-6, 0)
+      this.fechaInvalida = dia === 1 || dia === 2 || dia === 3 || dia === 4; // Es inválido solo si es lunes a jueves
 
       // Si la fecha es inválida, limpiar el horario
       if (this.fechaInvalida) {
@@ -181,7 +283,17 @@ export class ReservationTablesComponent implements OnInit {
     const selectElement = event.target as HTMLSelectElement;
 
     this.decoracionSeleccionada = selectElement.value;
-    this.calcularCosto();
+     // Guardar la decoración seleccionada según la ubicación
+     if (this.lugarSeleccionado === 'Interior') {
+      this.decoracionSeleccionadaInterior = this.decoracionSeleccionada;
+      this.calcularCosto();
+
+    } else if (this.lugarSeleccionado === 'Exterior') {
+      this.decoracionSeleccionadaExterior = this.decoracionSeleccionada;
+      this.calcularCosto();
+
+    }
+     this.calcularCosto();
   }
 
   private calcularCosto(): void {
@@ -238,6 +350,9 @@ export class ReservationTablesComponent implements OnInit {
 
   reservarOtraMesa(): void {
     location.reload(); // Recarga la página para reiniciar los formularios
+     // Resetea el formulario para reservar otra mesa
+     this.active = 1;
+     this.showReservarOtraMesa = false;  // Ocultar el botón al volver al primer paso
   }
 
   private setupEventListeners(): void {
@@ -327,6 +442,7 @@ export class ReservationTablesComponent implements OnInit {
     return true;
   }
 
+
   private handleNext(): void {
     let isValid = true;
 
@@ -345,13 +461,28 @@ export class ReservationTablesComponent implements OnInit {
 
     // Solo avanzar si la validación es exitosa
     if (isValid) {
-      this.active++;
-      if (this.active > (this.steps?.length || 0)) {
-        this.active = this.steps?.length || 0;
+      // Verificar si estamos en el paso 2 y la decoración seleccionada es "Ninguna"
+      if (this.active === 2 && this.decoracionSeleccionada === 'Ninguna') {
+        this.active = 4;  // Saltar el step 3 y avanzar al paso 4
+        this.updateProgress();
+        this.showReservarOtraMesa = true;  // Mostrar el botón "Reservar otra mesa"
+        return;  // Salir de la función para evitar más procesamiento
       }
+
+      // Si no se salta ningún paso, avanzar normalmente
+      this.active++;
+
+      // Si llegamos al último paso (4 en este caso)
+      if (this.active === 4) {
+        this.showReservarOtraMesa = true;  // Mostrar el botón "Reservar otra mesa"
+      } else {
+        this.showReservarOtraMesa = false;  // Ocultar el botón si no estamos en el último paso
+      }
+
       this.updateProgress();
     }
   }
+
 
   private handlePrev(): void {
     this.active--;
@@ -391,6 +522,30 @@ export class ReservationTablesComponent implements OnInit {
     const file = input.files?.[0];
 
     if (file && this.imagePreview) {
+      // Validar el tipo de archivo
+      if (!this.allowedFileTypes.includes(file.type.toLowerCase())) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Tipo de archivo no permitido',
+          text: 'Por favor, seleccione una imagen en formato JPG, JPEG, PNG o HEIC.',
+          confirmButtonText: 'Entendido'
+        });
+        this.resetFileInput(input);
+        return;
+      }
+
+      // Validar el tamaño del archivo (20MB = 20 * 1024 * 1024 bytes)
+      if (file.size > 20 * 1024 * 1024) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Archivo demasiado grande',
+          text: 'Por favor, seleccione una imagen menor a 20MB.',
+          confirmButtonText: 'Entendido'
+        });
+        this.resetFileInput(input);
+        return;
+      }
+
       const reader = new FileReader();
 
       reader.onload = (e: ProgressEvent<FileReader>) => {
@@ -402,6 +557,14 @@ export class ReservationTablesComponent implements OnInit {
 
       reader.readAsDataURL(file);
     } else if (this.imagePreview) {
+      this.imagePreview.nativeElement.src = '';
+      this.imagePreview.nativeElement.style.display = 'none';
+    }
+  }
+
+  private resetFileInput(input: HTMLInputElement): void {
+    input.value = '';
+    if (this.imagePreview) {
       this.imagePreview.nativeElement.src = '';
       this.imagePreview.nativeElement.style.display = 'none';
     }
