@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from '../../../core/services/usuario.service';
+import { UsuarioService } from '../../../../core/services/usuario.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { Usuario } from '../../../core/models/usuario';
-import { AdminAuthService } from '../../../auth/admin-auth.service';
-import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
+import { Usuario } from '../../../../core/models/usuario';
+import { AdminAuthService } from '../../../../auth/admin-auth.service';
+import { SpinnerComponent } from '../../../../shared/spinner/spinner.component';
 declare var Swal: any;
 
 @Component({

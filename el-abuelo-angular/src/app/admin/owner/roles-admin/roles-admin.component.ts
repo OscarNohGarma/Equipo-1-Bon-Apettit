@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
-import { UsuarioService } from '../../core/services/usuario.service';
-import { Usuario } from '../../core/models/usuario';
-import { AdminAuthService } from '../../auth/admin-auth.service';
+import { UsuarioService } from '../../../core/services/usuario.service';
+import { Usuario } from '../../../core/models/usuario';
+import { AdminAuthService } from '../../../auth/admin-auth.service';
 declare var Swal: any;
 
 @Component({

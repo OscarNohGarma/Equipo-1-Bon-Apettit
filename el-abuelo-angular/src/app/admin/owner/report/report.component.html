@@ -1,0 +1,46 @@
+<div class="orders container">
+    <div class="header">
+        <h1 class="encabezado">Reporte</h1>
+        <h2 class="subtitulo">Vizualiza las ordenes completedas y genera un reporte de las ventas</h2>
+    </div>
+    <div class="filter-bar">
+        <!-- <input type="text" placeholder="Buscar producto" class="search-bar" (input)="updateSearch($event)"> -->
+        <select class="stock-filter" (change)="updateDate($event)">
+            <option value="hoy">Hoy</option>
+            <option value="semana">Última semana</option>
+            <option value="mes">Último mes</option>
+            <option value="">Todas</option>
+        </select>
+    </div>
+    <div class="grid">
+        <div class="box" *ngFor="let order of filteredOrders">
+            <!-- <img [class.no-status]="order.status!=='completed'" src="./../../../assets/delete-button.svg" alt="basura"
+                class="btn-delete" (click)="deleteOrder(order.id)"> -->
+
+            <div class="enc">
+                <h2>Nombre: {{order.namee}}</h2>
+            </div>
+            <div class="box-details">
+                <p class="button details" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">Detalles
+                    ▼</p>
+                <div class="productos" [class.show]="order.isDetailsOpen">
+                    <div class="producto" *ngFor="let producto of order.productos"
+                        [class.no-status]="order.status==='completed'">
+                        <input type="checkbox" [class.no-status]="order.status==='completed'" class="check">
+                        <p><span class="vin">• </span> ({{producto.quantity}})</p>
+                        <p class="nombre-producto">{{producto.namee}}<span class="precio">
+                                (${{producto.subtotal}})</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <p class="total">Total: <span>${{order.total}}</span></p>
+            <!-- <button class="button add" (click)="completar(order)">Marcar como pagado</button> -->
+            <div class="fecha">
+                <p>{{order.fecha}}</p>
+                <p>{{order.hora}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

@@ -4,6 +4,7 @@ import { GaleriaInstalacionesComponent } from '../shared/galeria-instalaciones/g
 import { InicioComponent } from './inicio/inicio.component';
 import { MenuComponent } from './menu/menu.component';
 import { ReservationTablesComponent } from './reservation-tables/reservation-tables.component';
+import { LoginComponent } from './login/login.component';
 
 export const homeRoutes: Routes = [
   {
@@ -25,5 +26,10 @@ export const homeRoutes: Routes = [
     path: 'Reservaciones',
     title: 'Reservaciones - El abuelo',
     component: ReservationTablesComponent,
+  },
+  {
+    path: 'login',
+    title: 'Login - Administrador',
+    component: LoginComponent, // Componente de login del admin
   },
 ];
