@@ -5,6 +5,7 @@ import { InicioComponent } from './inicio/inicio.component';
 import { MenuComponent } from './menu/menu.component';
 import { ReservationTablesComponent } from './reservation-tables/reservation-tables.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 
 export const homeRoutes: Routes = [
   {
@@ -29,7 +30,12 @@ export const homeRoutes: Routes = [
   },
   {
     path: 'login',
-    title: 'Login - Administrador',
+    title: 'Iniciar Sesión - El abuelo',
     component: LoginComponent, // Componente de login del admin
+  },
+  {
+    path: 'registro',
+    title: 'Registrarse - El abuelo',
+    component: RegisterComponent, // Componente de login del admin
   },
 ];

@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../../core/models/usuario';
@@ -10,9 +15,8 @@ import { AuthGuard } from '../../auth/auth.guard';
 import { AuthService } from '../../auth/auth.service';
 
 declare var Swal: any;
-
 @Component({
-  selector: 'app-login',
+  selector: 'app-register',
   standalone: true,
   imports: [
     CommonModule,
@@ -20,23 +24,35 @@ declare var Swal: any;
     HttpClientModule,
     SpinnerComponent,
     RouterLink,
+    ReactiveFormsModule,
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
+  templateUrl: './register.component.html',
+  styleUrl: './register.component.scss',
   providers: [UsuarioService, AuthGuard],
 })
-export class LoginComponent implements OnInit {
+export class RegisterComponent {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
   usuarioItems: Usuario[] = [];
   loading: boolean = false;
+  registerForm: FormGroup;
 
   constructor(
     private usuarioService: UsuarioService,
+    private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    this.registerForm = this.fb.group({
+      namee: [''],
+      username: [''],
+      phone: [''],
+      password: [''],
+      repassword: [''],
+      // Otros campos que tengas en MenuProduct
+    });
+  }
 
   ngOnInit(): void {
     this.usuarioService.getAll().subscribe((data) => {
@@ -45,9 +61,31 @@ export class LoginComponent implements OnInit {
     console.log(this.usuarioItems);
   }
 
-  login() {
-    if (this.username.trim() === '' || this.password.trim() === '') {
-      return; // Detener el envío si hay campos vacíos
+  register() {
+    if (this.registerForm.invalid) {
+      this.registerForm.markAllAsTouched();
+      Swal.fire({
+        icon: 'error',
+        title: 'Campos requeridos.',
+        text: 'Por favor llena todos los campos.',
+        confirmButtonText: 'Entendido',
+        didOpen: () => {
+          // Aplicar estilos directamente
+          const confirmButton = Swal.getConfirmButton();
+
+          if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529'; // Color en hover
+            };
+            confirmButton.onmouseout = () => {
+              confirmButton.style.backgroundColor = '#343a40'; // Color normal
+            };
+          }
+        },
+      });
+      return;
     }
 
     this.errorMessage = '';
