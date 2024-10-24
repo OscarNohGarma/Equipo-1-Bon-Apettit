@@ -1,23 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AdminAuthService } from '../../auth/admin-auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
 import { Usuario } from '../../core/models/usuario';
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
+import { AuthGuard } from '../../auth/auth.guard';
+import { AuthService } from '../../auth/auth.service';
+
 declare var Swal: any;
 
 @Component({
-  selector: 'app-admin-login',
-  templateUrl: './admin-login.component.html',
-  styleUrls: ['./admin-login.component.scss'],
+  selector: 'app-login',
   standalone: true,
   imports: [CommonModule, FormsModule, HttpClientModule, SpinnerComponent],
-  providers: [AdminAuthService, UsuarioService],
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.scss',
+  providers: [UsuarioService, AuthGuard],
 })
-export class AdminLoginComponent implements OnInit {
+export class LoginComponent implements OnInit {
   username: string = '';
   password: string = '';
   errorMessage: string = '';
@@ -25,15 +27,16 @@ export class AdminLoginComponent implements OnInit {
   loading: boolean = false;
 
   constructor(
-    private adminAuthService: AdminAuthService,
     private usuarioService: UsuarioService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
     this.usuarioService.getAll().subscribe((data) => {
-      this.usuarioItems = data.filter((usuario) => usuario.rol !== 'CLIENTE');
+      this.usuarioItems = data.filter((usuario) => usuario.rol === 'CLIENTE');
     });
+    console.log(this.usuarioItems);
   }
 
   login() {
@@ -52,19 +55,20 @@ export class AdminLoginComponent implements OnInit {
         // Validar si la contraseña coincide
         if (foundUser.password === this.password) {
           // Login exitoso, simula el almacenamiento del token
-          this.adminAuthService.login(
+          this.authService.login(
             'fake-token',
             foundUser.id.toString(),
             foundUser.user,
             foundUser.password,
             foundUser.namee,
-            foundUser.rol
+            foundUser.rol,
+            foundUser.phone
           ); // Aquí podrías pasar un token real si lo tienes
           this.loading = false;
           Swal.fire({
             icon: 'success',
             title: '¡Inicio de sesión exitoso!',
-            text: 'Bienvenido al panel de administrador',
+            text: 'Bienvenido a la página.',
             confirmButtonText: 'Aceptar',
             didOpen: () => {
               // Aplicar estilos directamente
@@ -82,9 +86,14 @@ export class AdminLoginComponent implements OnInit {
               }
             },
           }).then((result: any) => {
-            this.router.navigate(['/admin']).then(() => {
-              // Forzar la recarga de la página después de la navegación
-              window.location.reload();
+            this.router.navigate(['/']).then(() => {
+              // window.location.reload();
+              setTimeout(() => {
+                window.scroll(0, 0);
+                setTimeout(() => {
+                  window.location.reload();
+                }, 1000);
+              }, 500);
             });
           });
         } else {

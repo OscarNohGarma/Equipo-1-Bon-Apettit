@@ -1,10 +1,22 @@
 <div class="nav-back">
-
-    <div class="navegacion">
+    <div class="navegacion container">
         <a [routerLink]="['/']">Inicio</a>
         <a [routerLink]="['menu']">Menú</a>
         <a [routerLink]="['Galeria']">Galería</a>
         <!-- <a [routerLink]="['Reservaciones']">Reservaciones</a> -->
+        <p *ngIf="!currentUser" [routerLink]="['login']" class="login">Iniciar Sesión</p>
+        <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
+        <div class="div-cont-user">
+            <div class="user-menu box" [class.show]=" isUserMenuOpen">
+                <div (click)="onEdit()" class="elemento-menu-user">
+                    Editar perfil
+                </div>
+                <div (click)="onLogout()" class="elemento-menu-user logout">
+                    Cerrar sesión
+                </div>
+            </div>
+
+        </div>
     </div>
 </div>
 <div class="header">

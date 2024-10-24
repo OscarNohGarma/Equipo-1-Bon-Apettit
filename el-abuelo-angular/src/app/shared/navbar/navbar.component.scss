@@ -148,7 +148,8 @@ img {
 .navegacion {
   display: none;
   font-size: 16px;
-  background-color: #161616;
+  background-color: transparent;
+  position: relative;
 }
 
 @media (min-width: 768px) {
@@ -170,4 +171,85 @@ img {
   .navegacion {
     gap: 50px;
   }
+}
+.login {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 0;
+  padding: 5px;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+  position: absolute;
+  right: 0;
+}
+.login:hover {
+  background-color: rgb(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+.nav-back {
+  background-color: #161616;
+}
+.user {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 0;
+  padding: 5px;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+  position: absolute;
+  right: 0;
+}
+.user:hover {
+  background-color: rgb(255, 255, 255, 0.2);
+  cursor: pointer;
+}
+.div-cont-user {
+  // position: absolute;
+  right: 0;
+}
+
+.cont-user:hover > .user-menu div:hover {
+  background-color: transparent; /* O ajusta el estilo según sea necesario */
+}
+
+.user-menu {
+  position: absolute;
+  background-color: #fff;
+  color: #343a40;
+  z-index: 1000;
+  overflow: hidden;
+  max-height: 0; /* Altura inicial cero */
+  opacity: 0; /* Inicia invisible */
+  transition: max-height 1s ease, opacity 0.5s ease; /* Animación de altura y opacidad */
+  width: 100%;
+  border-radius: 5px;
+  top: 100%;
+  text-align: center;
+}
+@media (min-width: 992px) {
+  .user-menu {
+    right: 0;
+    width: 160px;
+  }
+}
+.user-menu.show {
+  max-height: 500px; /* Ajustar según el contenido, o poner un valor alto */
+  opacity: 1; /* Totalmente visible */
+}
+.elemento-menu-user {
+  padding: 10px;
+  font-weight: 600;
+}
+.user-menu div {
+  width: 100%;
+  transition: all 0.2s ease; /* Animación de altura y opacidad */
+}
+.user-menu div:hover {
+  background-color: rgb(52, 58, 64, 0.2);
+  cursor: pointer;
+}
+.logout {
+  color: red;
 }

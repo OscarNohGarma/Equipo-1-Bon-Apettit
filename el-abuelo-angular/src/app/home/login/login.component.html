@@ -1,0 +1,34 @@
+<div class="main-login-container">
+    <h2>Iniciar Sesión</h2>
+    <p class="subtitle">Inicia sesión para acceder a las opciones de la página.</p>
+    <div class="login-container">
+        <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+            <div class="form-group"
+                [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['username']?.invalid}">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control"
+                    placeholder="Ingrese su usuario" required />
+                <div *ngIf="loginForm.submitted && loginForm.controls['username']?.invalid" class="error-message">
+                    El usuario es requerido.
+                </div>
+            </div>
+
+            <div class="form-group"
+                [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['password']?.invalid}">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control"
+                    placeholder="Ingrese su contraseña" required />
+                <div *ngIf="loginForm.submitted && loginForm.controls['password']?.invalid" class="error-message">
+                    La contraseña es requerida.
+                </div>
+            </div>
+
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
+            <app-spinner *ngIf="loading" />
+
+            <button type="submit" class="btn-login">Iniciar Sesión</button>
+        </form>
+    </div>
+</div>
