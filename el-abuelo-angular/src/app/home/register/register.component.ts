@@ -117,7 +117,7 @@ export class RegisterComponent {
             '!Cuenta creada!',
             'Tu cuenta se creó correctamente.'
           ).then((result: any) => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/login']);
           });
         },
         (error) => {
