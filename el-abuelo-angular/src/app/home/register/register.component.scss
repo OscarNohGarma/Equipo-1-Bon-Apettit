@@ -52,7 +52,10 @@ h2 {
   margin-bottom: 10px;
   text-align: center;
 }
-
+.form-group input.ng-invalid.ng-touched,
+.form-group select.ng-invalid.ng-touched {
+  border: 2px solid red;
+}
 .btn-login {
   width: 100%;
   padding: 10px;

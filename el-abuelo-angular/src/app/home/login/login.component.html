@@ -4,7 +4,7 @@
     <div class="login-container">
         <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
             <div class="form-group"
-                [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['username']?.invalid}">
+                [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['username'].invalid}">
                 <label for="username">Usuario</label>
                 <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control"
                     placeholder="Ingrese su usuario" required />
@@ -14,7 +14,7 @@
             </div>
 
             <div class="form-group"
-                [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['password']?.invalid}">
+                [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['password'].invalid}">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" [(ngModel)]="password" name="password" class="form-control"
                     placeholder="Ingrese su contraseña" required />
@@ -31,4 +31,6 @@
             <button type="submit" class="btn-login">Iniciar Sesión</button>
         </form>
     </div>
+    <p class="question">No tienes una cuenta? <span [routerLink]="['/registro']"
+            routerLinkActive="router-link-active">Regístrate aquí.</span></p>
 </div>
