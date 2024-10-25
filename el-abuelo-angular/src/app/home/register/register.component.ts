@@ -6,6 +6,7 @@ import {
   FormGroup,
   FormsModule,
   ReactiveFormsModule,
+  Validators,
 } from '@angular/forms';
 import { UsuarioService } from '../../core/services/usuario.service';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,8 +14,8 @@ import { Usuario } from '../../core/models/usuario';
 import { SpinnerComponent } from '../../shared/spinner/spinner.component';
 import { AuthGuard } from '../../auth/auth.guard';
 import { AuthService } from '../../auth/auth.service';
-
 declare var Swal: any;
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -45,12 +46,11 @@ export class RegisterComponent {
     private authService: AuthService
   ) {
     this.registerForm = this.fb.group({
-      namee: [''],
+      namee: ['', Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/)],
       username: [''],
-      phone: [''],
-      password: [''],
+      phone: ['', Validators.pattern(/^[0-9]{10}$/)],
+      password: ['', Validators.minLength(10)],
       repassword: [''],
-      // Otros campos que tengas en MenuProduct
     });
   }
 
@@ -58,139 +58,97 @@ export class RegisterComponent {
     this.usuarioService.getAll().subscribe((data) => {
       this.usuarioItems = data.filter((usuario) => usuario.rol === 'CLIENTE');
     });
-    console.log(this.usuarioItems);
   }
 
   register() {
     if (this.registerForm.invalid) {
       this.registerForm.markAllAsTouched();
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos requeridos.',
-        text: 'Por favor llena todos los campos.',
-        confirmButtonText: 'Entendido',
-        didOpen: () => {
-          // Aplicar estilos directamente
-          const confirmButton = Swal.getConfirmButton();
-
-          if (confirmButton) {
-            confirmButton.style.backgroundColor = '#343a40';
-
-            confirmButton.onmouseover = () => {
-              confirmButton.style.backgroundColor = '#212529'; // Color en hover
-            };
-            confirmButton.onmouseout = () => {
-              confirmButton.style.backgroundColor = '#343a40'; // Color normal
-            };
-          }
-        },
-      });
+      this.showPopup(
+        'error',
+        'Campos incorrectos.',
+        'Por favor llena correctamente todos los campos.'
+      );
       return;
     }
 
     this.errorMessage = '';
     this.loading = true;
-    // Buscar si el usuario ingresado existe en la lista de usuarios
-    const foundUser = this.usuarioItems.find(
-      (user) => user.user === this.username
-    );
-    setTimeout(() => {
-      if (foundUser) {
-        // Validar si la contraseña coincide
-        if (foundUser.password === this.password) {
-          // Login exitoso, simula el almacenamiento del token
-          this.authService.login(
-            'fake-token',
-            foundUser.id.toString(),
-            foundUser.user,
-            foundUser.password,
-            foundUser.namee,
-            foundUser.rol,
-            foundUser.phone
-          ); // Aquí podrías pasar un token real si lo tienes
-          this.loading = false;
-          Swal.fire({
-            icon: 'success',
-            title: '¡Inicio de sesión exitoso!',
-            text: 'Bienvenido a la página.',
-            confirmButtonText: 'Aceptar',
-            didOpen: () => {
-              // Aplicar estilos directamente
-              const confirmButton = Swal.getConfirmButton();
 
-              if (confirmButton) {
-                confirmButton.style.backgroundColor = '#343a40';
-
-                confirmButton.onmouseover = () => {
-                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                };
-                confirmButton.onmouseout = () => {
-                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                };
-              }
-            },
-          }).then((result: any) => {
-            this.router.navigate(['/']).then(() => {
-              // window.location.reload();
-              setTimeout(() => {
-                window.scroll(0, 0);
-                setTimeout(() => {
-                  window.location.reload();
-                }, 1000);
-              }, 500);
-            });
-          });
-        } else {
-          // Contraseña incorrecta
-          this.loading = false;
-          Swal.fire({
-            icon: 'error',
-            title: 'Contraseña incorrecta.',
-            text: 'Revisa que la contraseña es correcta.',
-            confirmButtonText: 'Entendido',
-            didOpen: () => {
-              // Aplicar estilos directamente
-              const confirmButton = Swal.getConfirmButton();
-
-              if (confirmButton) {
-                confirmButton.style.backgroundColor = '#343a40';
-                confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
-
-                confirmButton.onmouseover = () => {
-                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                };
-                confirmButton.onmouseout = () => {
-                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                };
-              }
-            },
-          });
-        }
-      } else {
-        // Usuario no encontrado
+    if (this.registerForm.valid) {
+      if (
+        this.registerForm.value.password !== this.registerForm.value.repassword
+      ) {
         this.loading = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Usuario no encontrado.',
-          text: 'Revisa que el usuario es correcto.',
-          confirmButtonText: 'Entendido',
-          didOpen: () => {
-            // Aplicar estilos directamente
-            const confirmButton = Swal.getConfirmButton();
-
-            if (confirmButton) {
-              confirmButton.style.backgroundColor = '#343a40';
-
-              confirmButton.onmouseover = () => {
-                confirmButton.style.backgroundColor = '#212529'; // Color en hover
-              };
-              confirmButton.onmouseout = () => {
-                confirmButton.style.backgroundColor = '#343a40'; // Color normal
-              };
-            }
-          },
-        });
+        this.showPopup(
+          'error',
+          'Contraseñas erróneas.',
+          'Las contraseñas no coinciden.'
+        );
+        return;
       }
-    }, 2000);
+
+      const newUser = {
+        ...this.registerForm.value,
+        user: this.registerForm.value.username,
+        rol: 'CLIENTE',
+      };
+      delete newUser.username;
+      delete newUser.repassword;
+
+      const foundUser = this.usuarioItems.find(
+        (user) => user.user === newUser.user
+      );
+
+      if (foundUser) {
+        this.loading = false;
+        this.showPopup(
+          'error',
+          'Usuario existente',
+          'Ya existe una cuenta con este usuario'
+        );
+        return;
+      }
+
+      this.usuarioService.add(newUser).subscribe(
+        (response) => {
+          this.loading = false;
+          this.showPopup(
+            'success',
+            '!Cuenta creada!',
+            'Tu cuenta se creó correctamente.'
+          ).then((result: any) => {
+            this.router.navigate(['/']);
+          });
+        },
+        (error) => {
+          this.loading = false;
+          this.showPopup(
+            'error',
+            'Ocurrió un problema.',
+            'Error al crear tu cuenta.'
+          );
+        }
+      );
+    }
+  }
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
   }
 }

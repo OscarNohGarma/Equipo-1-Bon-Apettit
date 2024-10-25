@@ -10,16 +10,26 @@
 
                 <div *ngIf="registerForm.get('namee')?.touched && registerForm.get('namee')?.invalid"
                     class="error-message">
-                    El nombre es requerido.
+                    <p *ngIf="registerForm.get('namee')?.errors?.['required']">
+                        El nombre es requerido.
+                    </p>
+                    <p *ngIf="registerForm.get('namee')?.errors?.['pattern']">
+                        El nombre solo debe contener letras.
+                    </p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="phone">Teléfono</label>
-                <input type="text" id="phone" formControlName="phone" class="form-control"
-                    placeholder="Ingresa tu número de teléfono" required />
+                <input type="text" id="phone" formControlName="phone" class="form-control" maxlength="10"
+                    inputmode="numeric" placeholder="Ingresa tu número de teléfono" required />
                 <div *ngIf="registerForm.get('phone')?.touched && registerForm.get('phone')?.invalid"
                     class="error-message">
-                    El teléfono es requerido.
+                    <p *ngIf="registerForm.get('phone')?.errors?.['required']">
+                        El teléfono es requerido.
+                    </p>
+                    <p *ngIf="registerForm.get('phone')?.errors?.['pattern']">
+                        El teléfono debe tener 10 números.
+                    </p>
                 </div>
             </div>
 
@@ -39,7 +49,12 @@
                     placeholder="Crea una contraseña" required />
                 <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
                     class="error-message">
-                    La contraseña es requerida
+                    <small *ngIf="registerForm.get('password')?.errors?.['required']">
+                        La contraseña es requerida
+                    </small>
+                    <small *ngIf="registerForm.get('password')?.errors?.['minlength']">
+                        La contraseña debe tener al menos 10 caracteres.
+                    </small>
                 </div>
             </div>
 
