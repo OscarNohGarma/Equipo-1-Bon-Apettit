@@ -14,6 +14,7 @@ export class Reservaciones extends ModeloPrincipal {
     tipo_banco: string;
     numero_cuenta: string;
     numero_contacto: string;
+    posicion: Array;
 
 }
 
