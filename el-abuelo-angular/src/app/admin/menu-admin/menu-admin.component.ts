@@ -75,10 +75,101 @@ export class MenuAdminComponent implements OnInit {
   }
   deleteProducto(id: number, image: string) {
     // Muestra un popup de confirmación con SweetAlert2
-    Swal.fire({
+    this.showConfirmPopup(
+      '¿Deseas eliminar este producto?',
+      'Esta acción eliminará el elemento del menú.'
+    ).then((result: any) => {
+      if (result.isConfirmed) {
+        // El usuario confirmó la acción
+        this.uploadService
+          .deleteImage(this.getFileNameFromUrl(image)!)
+          .subscribe(
+            (response) => {
+              console.log('Imagen eliminada.');
+            },
+            (error) => {
+              console.error('Error al eliminar imagen:', error);
+            }
+          );
+
+        this.productService.delete(id.toString()).subscribe(
+          (response) => {
+            // El producto fue eliminado exitosamente
+            setTimeout(() => {
+              this.showPopup(
+                'success',
+                '¡Producto eliminado!',
+                'El producto se eliminó correctamente.'
+              ).then((result: any) => {
+                this.loadMenu(); // Recargar el menú después de eliminar el producto
+              });
+            }, 100);
+          },
+          (error) => {
+            // Ocurrió un error al eliminar el producto
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al eliminar el producto.'
+            );
+          }
+        );
+      }
+    });
+  }
+
+  getFileNameFromUrl(url: string): string | null {
+    // Usar una expresión regular para extraer el nombre del archivo completo (ID + extensión)
+    const match = url.match(/\/([^\/]+\.[a-zA-Z]+)$/);
+
+    // Retornar el nombre del archivo si se encuentra, de lo contrario retornar null
+    return match ? match[1] : null;
+  }
+  // Método para actualizar la búsqueda
+  updateSearch(event: Event): void {
+    const inputElement = event.target as HTMLInputElement;
+    this.searchTerm = inputElement.value;
+  }
+
+  // Método para actualizar la categoría seleccionada
+  updateCategory(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.selectedCategory = selectElement.value;
+  }
+
+  // Método para actualizar el filtro de stock
+  updateStock(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.stockFilter = selectElement.value;
+  }
+
+  //POPUP
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
+  }
+  //CONFIRM POPUP
+  showConfirmPopup(title: string, text: string) {
+    return Swal.fire({
       icon: 'warning',
-      title: '¿Deseas eliminar este producto?',
-      text: 'Esta acción eliminará el elemento del menú.',
+      title,
+      text,
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar',
@@ -127,100 +218,6 @@ export class MenuAdminComponent implements OnInit {
           };
         }
       },
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        // El usuario confirmó la acción
-        this.uploadService
-          .deleteImage(this.getFileNameFromUrl(image)!)
-          .subscribe(
-            (response) => {
-              console.log('Imagen eliminada.');
-            },
-            (error) => {
-              console.error('Error al eliminar imagen:', error);
-            }
-          );
-
-        this.productService.delete(id.toString()).subscribe(
-          (response) => {
-            // El producto fue eliminado exitosamente
-            setTimeout(() => {
-              Swal.fire({
-                icon: 'success',
-                title: '¡Producto eliminado!',
-                text: 'El producto se eliminó correctamente.',
-                confirmButtonText: 'Aceptar',
-                didOpen: () => {
-                  // Aplicar estilos directamente
-                  const confirmButton = Swal.getConfirmButton();
-
-                  if (confirmButton) {
-                    confirmButton.style.backgroundColor = '#343a40';
-
-                    confirmButton.onmouseover = () => {
-                      confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                    };
-                    confirmButton.onmouseout = () => {
-                      confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                    };
-                  }
-                },
-              }).then((result: any) => {
-                this.loadMenu(); // Recargar el menú después de eliminar el producto
-              });
-            }, 100);
-          },
-          (error) => {
-            // Ocurrió un error al eliminar el producto
-            Swal.fire({
-              icon: 'error',
-              title: 'Ocurrió un problema.',
-              text: 'Error al eliminar el producto.',
-              confirmButtonText: 'Entendido',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            });
-          }
-        );
-      }
     });
-  }
-
-  getFileNameFromUrl(url: string): string | null {
-    // Usar una expresión regular para extraer el nombre del archivo completo (ID + extensión)
-    const match = url.match(/\/([^\/]+\.[a-zA-Z]+)$/);
-
-    // Retornar el nombre del archivo si se encuentra, de lo contrario retornar null
-    return match ? match[1] : null;
-  }
-  // Método para actualizar la búsqueda
-  updateSearch(event: Event): void {
-    const inputElement = event.target as HTMLInputElement;
-    this.searchTerm = inputElement.value;
-  }
-
-  // Método para actualizar la categoría seleccionada
-  updateCategory(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.selectedCategory = selectElement.value;
-  }
-
-  // Método para actualizar el filtro de stock
-  updateStock(event: Event): void {
-    const selectElement = event.target as HTMLSelectElement;
-    this.stockFilter = selectElement.value;
   }
 }

@@ -40,27 +40,11 @@ export class AddUserComponent implements OnInit {
   saveUser() {
     if (this.userForm.invalid) {
       this.userForm.markAllAsTouched();
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos requeridos.',
-        text: 'Por favor llena todos los campos.',
-        confirmButtonText: 'Entendido',
-        didOpen: () => {
-          // Aplicar estilos directamente
-          const confirmButton = Swal.getConfirmButton();
-
-          if (confirmButton) {
-            confirmButton.style.backgroundColor = '#343a40';
-
-            confirmButton.onmouseover = () => {
-              confirmButton.style.backgroundColor = '#212529'; // Color en hover
-            };
-            confirmButton.onmouseout = () => {
-              confirmButton.style.backgroundColor = '#343a40'; // Color normal
-            };
-          }
-        },
-      });
+      this.showPopup(
+        'error',
+        'Campos requeridos.',
+        'Por favor llena correctamente todos los campos.'
+      );
       return;
     }
     if (this.userForm.valid) {
@@ -73,27 +57,11 @@ export class AddUserComponent implements OnInit {
       );
       if (find.length == 1) {
         this.loading = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Usuario existente.',
-          text: 'Ya existe un perfil con este usuario.',
-          confirmButtonText: 'Entendido',
-          didOpen: () => {
-            // Aplicar estilos directamente
-            const confirmButton = Swal.getConfirmButton();
-
-            if (confirmButton) {
-              confirmButton.style.backgroundColor = '#343a40';
-
-              confirmButton.onmouseover = () => {
-                confirmButton.style.backgroundColor = '#212529'; // Color en hover
-              };
-              confirmButton.onmouseout = () => {
-                confirmButton.style.backgroundColor = '#343a40'; // Color normal
-              };
-            }
-          },
-        });
+        this.showPopup(
+          'error',
+          'Usuario existente.',
+          'Ya existe un perfil con este usuario.'
+        );
         return;
       }
 
@@ -101,55 +69,43 @@ export class AddUserComponent implements OnInit {
         (response) => {
           //! console.log('Producto añadido exitosamente:', response);
           this.loading = false;
-          Swal.fire({
-            icon: 'success',
-            title: '¡Usuario agregado!',
-            text: 'El usuario se ha creado exitosamente.',
-            confirmButtonText: 'Aceptar',
-            didOpen: () => {
-              // Aplicar estilos directamente
-              const confirmButton = Swal.getConfirmButton();
-
-              if (confirmButton) {
-                confirmButton.style.backgroundColor = '#343a40';
-
-                confirmButton.onmouseover = () => {
-                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                };
-                confirmButton.onmouseout = () => {
-                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                };
-              }
-            },
-          }).then((result: any) => {
+          this.showPopup(
+            'success',
+            '¡Usuario agregado!',
+            'El usuario se ha creado exitosamente.'
+          ).then((result: any) => {
             this.router.navigate(['/admin/roles']);
           });
         },
         (error) => {
           this.loading = false;
-          Swal.fire({
-            icon: 'error',
-            title: 'Ocurrió un problema.',
-            text: 'Error al crear el usuario.',
-            confirmButtonText: 'Entendido',
-            didOpen: () => {
-              // Aplicar estilos directamente
-              const confirmButton = Swal.getConfirmButton();
-
-              if (confirmButton) {
-                confirmButton.style.backgroundColor = '#343a40';
-
-                confirmButton.onmouseover = () => {
-                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                };
-                confirmButton.onmouseout = () => {
-                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                };
-              }
-            },
-          });
+          this.showPopup(
+            'error',
+            'Ocurrió un problema.',
+            'Error al crear el usuario.'
+          );
         }
       );
     }
+  }
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
   }
 }

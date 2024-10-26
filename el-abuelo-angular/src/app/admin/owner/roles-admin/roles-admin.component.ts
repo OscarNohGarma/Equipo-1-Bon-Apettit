@@ -30,15 +30,67 @@ export class RolesAdminComponent implements OnInit {
   loadUser() {
     this.usuarioService.getAll().subscribe((data) => {
       this.usuarioItems = data.filter(
-        (usuario) => usuario.id.toString() !== this.adminAuthService.getId()
+        (usuario) =>
+          usuario.id.toString() !== this.adminAuthService.getId() &&
+          usuario.rol !== 'CLIENTE'
       );
     });
   }
   deleteUser(id: number) {
-    Swal.fire({
+    this.showConfirmPopup(
+      '¿Deseas eliminar este usuario?',
+      'Esta acción eliminará este usuario para siempre.'
+    ).then((result: any) => {
+      if (result.isConfirmed) {
+        this.usuarioService.delete(id.toString()).subscribe(
+          (response) => {
+            setTimeout(() => {
+              this.showPopup(
+                'success',
+                'Usuario eliminado!',
+                'El Usuario se eliminó correctamente.'
+              ).then((result: any) => {
+                this.loadUser(); // Recargar el menú después de eliminar el producto
+              });
+            }, 100);
+          },
+          (error) => {
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al eliminar el usuario.'
+            );
+          }
+        );
+      }
+    });
+  }
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
+  }
+  //CONFIRM POPUP
+  showConfirmPopup(title: string, text: string) {
+    return Swal.fire({
       icon: 'warning',
-      title: '¿Deseas eliminar este usuario?',
-      text: 'Esta acción eliminará este usuario para siempre.',
+      title,
+      text,
       showCancelButton: true,
       confirmButtonText: 'Eliminar',
       cancelButtonText: 'Cancelar',
@@ -87,41 +139,6 @@ export class RolesAdminComponent implements OnInit {
           };
         }
       },
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        this.usuarioService.delete(id.toString()).subscribe(
-          (response) => {
-            setTimeout(() => {
-              Swal.fire({
-                icon: 'success',
-                title: 'Usuario eliminado!',
-                text: 'El Usuario se eliminó correctamente.',
-                confirmButtonText: 'Aceptar',
-                didOpen: () => {
-                  // Aplicar estilos directamente
-                  const confirmButton = Swal.getConfirmButton();
-
-                  if (confirmButton) {
-                    confirmButton.style.backgroundColor = '#343a40';
-
-                    confirmButton.onmouseover = () => {
-                      confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                    };
-                    confirmButton.onmouseout = () => {
-                      confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                    };
-                  }
-                },
-              }).then((result: any) => {
-                this.loadUser(); // Recargar el menú después de eliminar el producto
-              });
-            }, 100);
-          },
-          (error) => {
-            console.error('Error al eliminar el usuario:', error);
-          }
-        );
-      }
     });
   }
 }

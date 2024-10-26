@@ -102,27 +102,12 @@ export class EditProductComponent implements OnInit {
         reader.readAsDataURL(file); // Leer el archivo como una URL de datos
       } else {
         this.isValidImage = false; // Archivo no válido
-        Swal.fire({
-          icon: 'error',
-          title: 'Imagen no válida.',
-          text: 'Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP).',
-          confirmButtonText: 'Entendido',
-          didOpen: () => {
-            // Aplicar estilos directamente
-            const confirmButton = Swal.getConfirmButton();
-
-            if (confirmButton) {
-              confirmButton.style.backgroundColor = '#343a40';
-
-              confirmButton.onmouseover = () => {
-                confirmButton.style.backgroundColor = '#212529'; // Color en hover
-              };
-              confirmButton.onmouseout = () => {
-                confirmButton.style.backgroundColor = '#343a40'; // Color normal
-              };
-            }
-          },
-        });
+        this,
+          this.showPopup(
+            'error',
+            'Imagen no válida.',
+            'Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP).'
+          );
         input.value = ''; // Limpiar el input para que no retenga el archivo no válido
         this.imagePreviewUrl = null; // Reiniciar la vista previa
       }
@@ -132,51 +117,19 @@ export class EditProductComponent implements OnInit {
   saveProduct() {
     if (this.productForm.invalid) {
       this.productForm.markAllAsTouched();
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos requeridos.',
-        text: 'Por favor llena todos los campos.',
-        confirmButtonText: 'Entendido',
-        didOpen: () => {
-          // Aplicar estilos directamente
-          const confirmButton = Swal.getConfirmButton();
-
-          if (confirmButton) {
-            confirmButton.style.backgroundColor = '#343a40';
-
-            confirmButton.onmouseover = () => {
-              confirmButton.style.backgroundColor = '#212529'; // Color en hover
-            };
-            confirmButton.onmouseout = () => {
-              confirmButton.style.backgroundColor = '#343a40'; // Color normal
-            };
-          }
-        },
-      });
+      this.showPopup(
+        'error',
+        'Campos requeridos.',
+        'Por favor llena todos los campos.'
+      );
       return;
     }
     if (this.imagePreviewUrl === null) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Imagen no válida.',
-        text: 'Por favor selecciona una imagen válida.',
-        confirmButtonText: 'Entendido',
-        didOpen: () => {
-          // Aplicar estilos directamente
-          const confirmButton = Swal.getConfirmButton();
-
-          if (confirmButton) {
-            confirmButton.style.backgroundColor = '#343a40';
-
-            confirmButton.onmouseover = () => {
-              confirmButton.style.backgroundColor = '#212529'; // Color en hover
-            };
-            confirmButton.onmouseout = () => {
-              confirmButton.style.backgroundColor = '#343a40'; // Color normal
-            };
-          }
-        },
-      });
+      this.showPopup(
+        'error',
+        'Imagen no válida.',
+        'Por favor selecciona una imagen válida.'
+      );
       return;
     }
     this.loading = true;
@@ -204,53 +157,21 @@ export class EditProductComponent implements OnInit {
                 );
             }
             this.loading = false;
-            Swal.fire({
-              icon: 'success',
-              title: '¡Producto actualizado!',
-              text: 'El producto se actualizó correctamente.',
-              confirmButtonText: 'Aceptar',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            }).then((result: any) => {
+            this.showPopup(
+              'success',
+              '¡Producto actualizado!',
+              'El producto se actualizó correctamente.'
+            ).then((result: any) => {
               this.router.navigate(['/admin/menu']);
             });
           },
           (error) => {
             this.loading = false;
-            Swal.fire({
-              icon: 'error',
-              title: 'Ocurrió un problema.',
-              text: 'Error al actualizar el producto.',
-              confirmButtonText: 'Entendido',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            });
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al actualizar el producto.'
+            );
           }
         );
       });
@@ -324,27 +245,11 @@ export class EditProductComponent implements OnInit {
             setTimeout(checkImage, retryInterval);
           },
           (error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Ocurrió un problema.',
-              text: 'Error al subir la imagen.',
-              confirmButtonText: 'Entendido',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            });
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al subir la imagen.'
+            );
             observer.error(error); // Notificar el error
           }
         );
@@ -362,5 +267,26 @@ export class EditProductComponent implements OnInit {
 
     // Retornar el nombre del archivo si se encuentra, de lo contrario retornar null
     return match ? match[1] : null;
+  }
+  //POPUP
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
   }
 }

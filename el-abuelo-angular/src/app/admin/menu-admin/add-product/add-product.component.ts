@@ -71,27 +71,11 @@ export class AddProductComponent {
         reader.readAsDataURL(file); // Leer el archivo como una URL de datos
       } else {
         this.isValidImage = false; // Archivo no válido
-        Swal.fire({
-          icon: 'error',
-          title: 'Imagen no válida.',
-          text: 'Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP).',
-          confirmButtonText: 'Entendido',
-          didOpen: () => {
-            // Aplicar estilos directamente
-            const confirmButton = Swal.getConfirmButton();
-
-            if (confirmButton) {
-              confirmButton.style.backgroundColor = '#343a40';
-
-              confirmButton.onmouseover = () => {
-                confirmButton.style.backgroundColor = '#212529'; // Color en hover
-              };
-              confirmButton.onmouseout = () => {
-                confirmButton.style.backgroundColor = '#343a40'; // Color normal
-              };
-            }
-          },
-        });
+        this.showPopup(
+          'error',
+          'Imagen no válida.',
+          'Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP).'
+        );
         input.value = ''; // Limpiar el input para que no retenga el archivo no válido
         this.imagePreviewUrl = null; // Reiniciar la vista previa
       }
@@ -101,51 +85,19 @@ export class AddProductComponent {
   saveProduct() {
     if (this.productForm.invalid) {
       this.productForm.markAllAsTouched();
-      Swal.fire({
-        icon: 'error',
-        title: 'Campos requeridos.',
-        text: 'Por favor llena todos los campos.',
-        confirmButtonText: 'Entendido',
-        didOpen: () => {
-          // Aplicar estilos directamente
-          const confirmButton = Swal.getConfirmButton();
-
-          if (confirmButton) {
-            confirmButton.style.backgroundColor = '#343a40';
-
-            confirmButton.onmouseover = () => {
-              confirmButton.style.backgroundColor = '#212529'; // Color en hover
-            };
-            confirmButton.onmouseout = () => {
-              confirmButton.style.backgroundColor = '#343a40'; // Color normal
-            };
-          }
-        },
-      });
+      this.showPopup(
+        'error',
+        'Campos requeridos.',
+        'Por favor llena correctamente todos los campos.'
+      );
       return;
     }
     if (!this.selectedFile) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Imagen no válida.',
-        text: 'Por favor selecciona una imagen válida.',
-        confirmButtonText: 'Entendido',
-        didOpen: () => {
-          // Aplicar estilos directamente
-          const confirmButton = Swal.getConfirmButton();
-
-          if (confirmButton) {
-            confirmButton.style.backgroundColor = '#343a40';
-
-            confirmButton.onmouseover = () => {
-              confirmButton.style.backgroundColor = '#212529'; // Color en hover
-            };
-            confirmButton.onmouseout = () => {
-              confirmButton.style.backgroundColor = '#343a40'; // Color normal
-            };
-          }
-        },
-      });
+      this.showPopup(
+        'error',
+        'Imagen no válida.',
+        'Por favor selecciona una imagen válida.'
+      );
       return;
     }
     this.loading = true;
@@ -163,53 +115,21 @@ export class AddProductComponent {
             //! console.log('Producto añadido exitosamente:', response);
 
             this.loading = false;
-            Swal.fire({
-              icon: 'success',
-              title: '¡Producto agregado!',
-              text: 'El producto se agregó correctamente.',
-              confirmButtonText: 'Aceptar',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            }).then((result: any) => {
+            this.showPopup(
+              'success',
+              '¡Producto agregado!',
+              'El producto se agregó correctamente.'
+            ).then((result: any) => {
               this.router.navigate(['/admin/menu']);
             });
           },
           (error) => {
             this.loading = false;
-            Swal.fire({
-              icon: 'error',
-              title: 'Ocurrió un problema.',
-              text: 'Error al agregar el producto.',
-              confirmButtonText: 'Entendido',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            });
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al agregar el producto.'
+            );
           }
         );
       });
@@ -272,27 +192,11 @@ export class AddProductComponent {
             setTimeout(checkImage, retryInterval);
           },
           (error) => {
-            Swal.fire({
-              icon: 'error',
-              title: 'Ocurrió un problema.',
-              text: 'Error al subir la imagen.',
-              confirmButtonText: 'Entendido',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            });
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al subir la imagen.'
+            );
             observer.error(error); // Notificar el error
           }
         );
@@ -300,6 +204,27 @@ export class AddProductComponent {
         alert('No hay archivo seleccionado.');
         observer.error('No hay archivo seleccionado.');
       }
+    });
+  }
+  //POPUP
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
     });
   }
 }
