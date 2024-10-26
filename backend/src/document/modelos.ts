@@ -25,6 +25,14 @@ export class Menu extends ModeloPrincipal {
     categoria: string;  
    
 }
+export class Comentario extends ModeloPrincipal {
+    tipocollection: string = "comentario";
+    description: string;
+    calification: string;
+    fecha : string;  
+    hora : string;  
+   
+}
 export class Usuario extends ModeloPrincipal {
     tipocollection: string = "usuario";
     rol: string;

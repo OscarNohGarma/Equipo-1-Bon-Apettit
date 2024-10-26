@@ -25,6 +25,8 @@ import { FirebaseUsuarioService } from './services/firebase-usuario/firebase-usu
 import { FirebaseUsuarioController } from './controllers/firebase-usuario/firebase-usuario.controller';
 import { FirebaseComprobanteService } from './services/firebase-comprobante/firebase-comprobante.service';
 import { FirebaseComprobanteController } from './controllers/firebase-comprobante/firebase-comprobante.controller';
+import { FireComentariosController } from './controllers/fire-comentarios/fire-comentarios.controller';
+import { FireComentariosService } from './services/fire-comentarios/fire-comentarios.service';
 
 
 @Module({
@@ -43,7 +45,7 @@ import { FirebaseComprobanteController } from './controllers/firebase-comprobant
     
 
     FirestoreModule,FirestorageModule],
-  controllers: [AppController, UploadController, FirebaseCitaController, FirebaseOrdenController, FireAuthController, GenericFirebaseController, FirebaseUsuarioController, FirebaseComprobanteController],
-  providers: [AppService,StorageService, FirebaseProductoService, FirebaseCitasService, FirebaseOrdenService, FireAuthService,FirebaseGenericService, FirebaseUsuarioService, FirebaseComprobanteService],
+  controllers: [AppController, UploadController, FirebaseCitaController, FirebaseOrdenController, FireAuthController, GenericFirebaseController, FirebaseUsuarioController, FirebaseComprobanteController, FireComentariosController],
+  providers: [AppService,StorageService, FirebaseProductoService, FirebaseCitasService, FirebaseOrdenService, FireAuthService,FirebaseGenericService, FirebaseUsuarioService, FirebaseComprobanteService, FireComentariosService],
 })
 export class AppModule {}
