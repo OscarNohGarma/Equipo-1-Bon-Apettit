@@ -135,25 +135,26 @@ h2 {
   font-weight: 700;
   font-size: 20px;
 }
-
 .button {
-  all: unset;
-  text-align: center;
   width: 100%;
-  padding: 5px 0px;
-  border: none;
-  border: 1px solid #343a40;
-  color: #343a40;
-  font-weight: 400;
-  font-size: 15px;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
-}
-
-.button:hover {
-  color: white;
+  padding: 10px 20px;
   background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  font-size: 18px;
+}
+.button:hover {
+  background-color: #212529;
+}
+@media (min-width: 768px) {
+  .button {
+    margin-top: 5px;
+    font-size: 16px;
+    margin-bottom: 0;
+  }
 }
 
 .nombre {
@@ -308,6 +309,7 @@ h2 {
   padding: 20px;
   // border-radius: 10px;
   text-align: center;
+  color: #343a40;
   width: 90%;
   max-width: 400px;
 }
@@ -354,7 +356,7 @@ h2 {
   background-color: #fff;
   font-size: 20px;
   color: #c71527;
-  border-color: #c71527;
+  border: 1px solid #c71527;
 }
 .button.cancel:hover {
   background-color: #c71527;

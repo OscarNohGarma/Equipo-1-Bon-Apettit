@@ -51,29 +51,25 @@ h1 {
 }
 
 .button {
-  all: unset;
-  text-align: center;
-  width: auto;
-  padding: 6px 25px;
+  // width: 100%;
+  padding: 10px 20px;
+  background-color: #343a40;
+  color: #fff;
   border: none;
-  border: 1px solid #343a40;
-  color: #343a40;
-  font-weight: 400;
-  font-size: 20px;
-  text-decoration: none;
-  transition: all 0.2s ease-in-out;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+  font-size: 18px;
 }
-@media (min-width: 768px) {
-  .button {
-    font-size: 18px;
-    margin-bottom: 0;
-  }
+.button:hover {
+  background-color: #212529;
 }
 
-.button:hover {
-  color: white;
-  background-color: #343a40;
-  cursor: pointer;
+@media (min-width: 768px) {
+  .button {
+    font-size: 16px;
+    margin-bottom: 0;
+  }
 }
 .contenido {
   text-align: center;
