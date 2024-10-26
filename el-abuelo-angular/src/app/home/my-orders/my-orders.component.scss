@@ -1,0 +1,174 @@
+.encabezado {
+  //   font-size: 40px;
+  font-size: 55px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 3px;
+  font-weight: 900;
+  margin-bottom: 40px;
+}
+
+.subtitulo {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+.enc {
+  width: 100%;
+  border-bottom: 1px solid rgb(52, 58, 64, 0.2);
+}
+@media (min-width: 992px) {
+  .subtitulo {
+    font-size: 22px;
+  }
+}
+.button {
+  all: unset;
+  text-align: center;
+  width: auto;
+  padding: 6px 25px;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+@media (min-width: 768px) {
+  .button {
+    font-size: 15px;
+  }
+}
+
+.button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
+
+.box {
+  padding: 30px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+}
+
+.box h1 {
+  font-weight: 600;
+  font-size: 30px;
+}
+@media (min-width: 768px) {
+  .box h1 {
+    font-size: 25px;
+  }
+}
+
+.grid {
+  display: grid;
+  gap: 30px;
+}
+@media (min-width: 992px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (min-width: 1280px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+//PRODUCTOS
+
+.productos {
+  width: 100%;
+  font-size: 18px;
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  border-bottom: 1px solid rgb(52, 58, 64, 0.2);
+  padding-bottom: 10px;
+  height: 150px;
+  overflow: auto;
+}
+.producto {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 10px;
+  text-align: end;
+  align-items: center;
+  padding: 10px 0;
+}
+.producto p {
+  margin-bottom: 0;
+  // padding-bottom: 10px;
+}
+.vin {
+  font-weight: 800;
+  font-size: 20px;
+}
+.nombre-producto {
+  text-align: start;
+}
+.precio {
+  font-weight: 600;
+}
+.div-total {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 3fr 2fr;
+  align-items: center;
+  margin-top: 10px;
+}
+.total {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+.total span {
+  font-weight: 800;
+  font-size: 22px;
+}
+.fecha {
+  width: 100%;
+  color: #343a40;
+  margin-bottom: 0;
+}
+.fecha p {
+  margin-bottom: 0;
+}
+.estado {
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-size: 18px;
+}
+.estado span {
+  font-weight: 600;
+}
+
+.estado-red {
+  color: red;
+}
+
+.estado-yellow {
+  color: #ebbe0e;
+}
+
+.estado-green {
+  color: #48b823;
+}
+
+.estado-blue {
+  color: rgb(28, 28, 199);
+}

@@ -138,9 +138,9 @@ export class OrdenComponent implements OnInit {
               this.direccion = '';
               this.tipoEntrega = '';
               this.ordenService.eliminarTodosLosProductos();
-              this.router.navigate(['/menu']).then(() => {
+              this.router.navigate(['/mis-ordenes']).then(() => {
                 // Esperar a que la navegación esté completa antes de desplazar
-                window.scrollTo(0, 0); // Desplazarse al principio de la página
+                // window.scrollTo(0, 0); // Desplazarse al principio de la página
               });
             }, 500); // Ajusta el tiempo según lo necesites
           }
