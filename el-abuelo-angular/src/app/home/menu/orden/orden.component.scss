@@ -37,9 +37,11 @@ p {
   width: 100%; /* Hacer que ocupe todo el ancho de la pantalla */
 
   padding: 20px;
-  background-color: #f8f9fa;
-  border: 1px solid #92979c;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+
   z-index: 1000;
   transition: transform 0.5s ease; /* Transición para el deslizamiento */
   transform: translateY(
@@ -250,38 +252,27 @@ h2 {
   margin-bottom: 15px; /* Añade un margen para separar del título */
   position: absolute;
 
-  background-color: #f8f9fa;
-  border: 1px solid #92979c;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px 0px 0px 10px;
+  color: #343a40;
+
   left: 50%;
   top: -36px;
   // border-right: 1px solid #f8f9fa;
   padding: 10px 10px;
   font-weight: 700;
-  color: #343a40;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   transform: translate(-50%, -50%) rotate(90deg);
 }
 @media (min-width: 1280px) {
   .toggle-button {
-    left: -67px;
+    left: -65px;
     top: 150px;
     transform: rotate(0deg);
   }
 }
-// @media (max-width: 768px) {
-//   .sticky-box {
-//     width: 100%; /* Ajusta el ancho para pantallas pequeñas */
-//     padding: 20px; /* Reduce el padding */
-//   }
 
-//   .button {
-//     font-size: 14px; /* Reduce el tamaño de la fuente */
-//   }
-
-//   .toggle-button {
-//     font-size: 18px; /* Reduce el tamaño de la fuente del botón */
-//   }
-// }
 .modal-overlay {
   position: fixed;
   top: 0;
