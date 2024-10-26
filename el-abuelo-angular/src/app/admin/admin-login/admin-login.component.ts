@@ -61,27 +61,11 @@ export class AdminLoginComponent implements OnInit {
             foundUser.rol
           ); // Aquí podrías pasar un token real si lo tienes
           this.loading = false;
-          Swal.fire({
-            icon: 'success',
-            title: '¡Inicio de sesión exitoso!',
-            text: 'Bienvenido al panel de administrador',
-            confirmButtonText: 'Aceptar',
-            didOpen: () => {
-              // Aplicar estilos directamente
-              const confirmButton = Swal.getConfirmButton();
-
-              if (confirmButton) {
-                confirmButton.style.backgroundColor = '#343a40';
-
-                confirmButton.onmouseover = () => {
-                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                };
-                confirmButton.onmouseout = () => {
-                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                };
-              }
-            },
-          }).then((result: any) => {
+          this.showPopup(
+            'success',
+            '¡Inicio de sesión exitoso!',
+            'Bienvenido al panel de administrador'
+          ).then((result: any) => {
             this.router.navigate(['/admin']).then(() => {
               // Forzar la recarga de la página después de la navegación
               window.location.reload();
@@ -90,54 +74,42 @@ export class AdminLoginComponent implements OnInit {
         } else {
           // Contraseña incorrecta
           this.loading = false;
-          Swal.fire({
-            icon: 'error',
-            title: 'Contraseña incorrecta.',
-            text: 'Revisa que la contraseña es correcta.',
-            confirmButtonText: 'Entendido',
-            didOpen: () => {
-              // Aplicar estilos directamente
-              const confirmButton = Swal.getConfirmButton();
-
-              if (confirmButton) {
-                confirmButton.style.backgroundColor = '#343a40';
-                confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
-
-                confirmButton.onmouseover = () => {
-                  confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                };
-                confirmButton.onmouseout = () => {
-                  confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                };
-              }
-            },
-          });
+          this.showPopup(
+            'error',
+            'Contraseña incorrecta.',
+            'Revisa que la contraseña es correcta.'
+          );
         }
       } else {
         // Usuario no encontrado
         this.loading = false;
-        Swal.fire({
-          icon: 'error',
-          title: 'Usuario no encontrado.',
-          text: 'Revisa que el usuario es correcto.',
-          confirmButtonText: 'Entendido',
-          didOpen: () => {
-            // Aplicar estilos directamente
-            const confirmButton = Swal.getConfirmButton();
-
-            if (confirmButton) {
-              confirmButton.style.backgroundColor = '#343a40';
-
-              confirmButton.onmouseover = () => {
-                confirmButton.style.backgroundColor = '#212529'; // Color en hover
-              };
-              confirmButton.onmouseout = () => {
-                confirmButton.style.backgroundColor = '#343a40'; // Color normal
-              };
-            }
-          },
-        });
+        this.showPopup(
+          'error',
+          'Usuario no encontrado.',
+          'Revisa que el usuario es correcto.'
+        );
       }
     }, 2000);
+  }
+  //POPUP PERSONALIZABLE
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
   }
 }

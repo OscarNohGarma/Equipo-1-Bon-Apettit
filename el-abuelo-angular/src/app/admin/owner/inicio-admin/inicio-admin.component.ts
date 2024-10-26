@@ -14,12 +14,5 @@ export class InicioAdminComponent implements OnInit {
     private adminAuthService: AdminAuthService,
     private router: Router
   ) {}
-  ngOnInit(): void {
-    const userRole = this.adminAuthService.getRol();
-
-    if (userRole === 'COCINERO') {
-      console.log('Redirigiendo a /admin/ordenes para el rol de COCINERO');
-      this.router.navigate(['/admin/ordenes']);
-    }
-  }
+  ngOnInit(): void {}
 }

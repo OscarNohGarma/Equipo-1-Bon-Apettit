@@ -3,7 +3,7 @@ import { OrderMenu } from '../../../core/models/orderMenu';
 import { OrderMenuService } from '../../../core/services/order-menu.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 declare var Swal: any;
 
 @Component({
@@ -17,10 +17,7 @@ declare var Swal: any;
 export class OrderReadyComponent {
   orderItems: OrderMenu[] = [];
   isDetailsOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
-  constructor(
-    private orderMenuService: OrderMenuService,
-    private router: Router
-  ) {} // Inyectar el servicio
+  constructor(private orderMenuService: OrderMenuService) {} // Inyectar el servicio
   ngOnInit(): void {
     this.loadOrders();
   }
@@ -37,10 +34,92 @@ export class OrderReadyComponent {
   }
 
   completar(order: OrderMenu): void {
-    Swal.fire({
+    this.showConfirmPopup(
+      '¿Deseas marcar esta orden como pagada?',
+      'Esta orden desaparecerá de esta sección y pasará al dueño.'
+    ).then((result: any) => {
+      if (result.isConfirmed) {
+        // El usuario confirmó la acción
+        const newOrder = {
+          ...order,
+          status: 'paid',
+        };
+        this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
+          (response) => {
+            // El producto fue eliminado exitosamente
+            setTimeout(() => {
+              this.showPopup(
+                'success',
+                '¡Orden pagada!',
+                'El pago se registró correctamente.'
+              ).then((result: any) => {
+                this.loadOrders(); // Recargar el menú después de eliminar el producto
+              });
+            }, 100);
+          },
+          (error) => {
+            // Ocurrió un error al eliminar el producto
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al pagar la orden.'
+            );
+          }
+        );
+      }
+    });
+  }
+  toggleDetails(order: OrderMenu): void {
+    order.isDetailsOpen = !order.isDetailsOpen; // Alternar el estado de visibilidad de los detalles para esa orden
+  }
+
+  deleteOrder(id: number) {
+    const confirmed = window.confirm(
+      '¿Estás seguro de que deseas eliminar esta orden?'
+    );
+    if (confirmed) {
+      this.orderMenuService.delete(id.toString()).subscribe(
+        (response) => {
+          // console.log('Producto eliminado:', response);
+          // Aquí puedes agregar lógica para actualizar la vista
+          setTimeout(() => {
+            alert('Orden eliminada correctamente.');
+            this.loadOrders(); // Por ejemplo, recargar el menú
+          }, 500);
+        },
+        (error) => {
+          console.error('Error al eliminar la orden: ', error);
+        }
+      );
+    }
+  }
+  //POPUP
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
+  }
+  //CONFIRM POPUP
+  showConfirmPopup(title: string, text: string) {
+    return Swal.fire({
       icon: 'warning',
-      title: '¿Deseas marcar esta orden como pagada?',
-      text: 'Esta orden desaparecerá de esta sección y pasará al dueño.',
+      title,
+      text,
       showCancelButton: true,
       confirmButtonText: 'Confirmar',
       cancelButtonText: 'Cancelar',
@@ -89,93 +168,6 @@ export class OrderReadyComponent {
           };
         }
       },
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        // El usuario confirmó la acción
-
-        const newOrder = {
-          ...order,
-          status: 'paid',
-        };
-        this.orderMenuService.update(order.id.toString(), newOrder).subscribe(
-          (response) => {
-            // El producto fue eliminado exitosamente
-            setTimeout(() => {
-              Swal.fire({
-                icon: 'success',
-                title: '¡Orden pagada!',
-                text: 'El pago se registró correctamente.',
-                confirmButtonText: 'Aceptar',
-                didOpen: () => {
-                  // Aplicar estilos directamente
-                  const confirmButton = Swal.getConfirmButton();
-
-                  if (confirmButton) {
-                    confirmButton.style.backgroundColor = '#343a40';
-
-                    confirmButton.onmouseover = () => {
-                      confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                    };
-                    confirmButton.onmouseout = () => {
-                      confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                    };
-                  }
-                },
-              }).then((result: any) => {
-                this.loadOrders(); // Recargar el menú después de eliminar el producto
-              });
-            }, 100);
-          },
-          (error) => {
-            // Ocurrió un error al eliminar el producto
-            Swal.fire({
-              icon: 'error',
-              title: 'Ocurrió un problema.',
-              text: 'Error al pagar la orden.',
-              confirmButtonText: 'Entendido',
-              didOpen: () => {
-                // Aplicar estilos directamente
-                const confirmButton = Swal.getConfirmButton();
-
-                if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-
-                  confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529'; // Color en hover
-                  };
-                  confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40'; // Color normal
-                  };
-                }
-              },
-            });
-          }
-        );
-      }
     });
-  }
-  toggleDetails(order: OrderMenu): void {
-    order.isDetailsOpen = !order.isDetailsOpen; // Alternar el estado de visibilidad de los detalles para esa orden
-  }
-
-  deleteOrder(id: number) {
-    const confirmed = window.confirm(
-      '¿Estás seguro de que deseas eliminar esta orden?'
-    );
-    if (confirmed) {
-      this.orderMenuService.delete(id.toString()).subscribe(
-        (response) => {
-          // console.log('Producto eliminado:', response);
-          // Aquí puedes agregar lógica para actualizar la vista
-          setTimeout(() => {
-            alert('Orden eliminada correctamente.');
-            this.loadOrders(); // Por ejemplo, recargar el menú
-          }, 500);
-        },
-        (error) => {
-          console.error('Error al eliminar la orden: ', error);
-        }
-      );
-    }
   }
 }

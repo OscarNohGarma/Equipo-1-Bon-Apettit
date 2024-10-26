@@ -20,11 +20,16 @@
 
         <!-- Menú de selección en pantallas grandes -->
         <div class="seleccion">
-            <div class="opcion button" (click)="selectCategory('TODOS')">TODOS</div>
-            <div class="opcion button" (click)="selectCategory('COMIDA')">COMIDA</div>
-            <div class="opcion button" (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
-            <div class="opcion button" (click)="selectCategory('POSTRES')">POSTRES</div>
-            <div class="opcion button" (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
+            <div class="opcion btn-nav" [class.selected]="selectedCategory==='TODOS'" (click)="selectCategory('TODOS')">
+                TODOS</div>
+            <div class="opcion btn-nav" [class.selected]="selectedCategory==='COMIDA'"
+                (click)="selectCategory('COMIDA')">COMIDA</div>
+            <div class="opcion btn-nav" [class.selected]="selectedCategory==='BEBIDAS'"
+                (click)="selectCategory('BEBIDAS')">BEBIDAS</div>
+            <div class="opcion btn-nav" [class.selected]="selectedCategory==='POSTRES'"
+                (click)="selectCategory('POSTRES')">POSTRES</div>
+            <div class="opcion btn-nav" [class.selected]="selectedCategory==='ESPECIALES'"
+                (click)="selectCategory('ESPECIALES')">ESPECIALES</div>
         </div>
 
         <!-- Productos filtrados -->
@@ -36,7 +41,7 @@
 
                 <!-- Condicional para mostrar el botón o el texto de "Sin existencia" -->
                 <ng-container *ngIf="product.stock; else noStock">
-                    <button class="button add" (click)="agregarProducto(product)">AGREGAR</button>
+                    <button class="button add" (click)="agregarProducto(product)">Agregar</button>
                 </ng-container>
                 <ng-template #noStock>
                     <p class="sin-stock" style="color: red;">Sin existencia</p>

@@ -136,7 +136,7 @@ export class RegisterComponent {
       icon,
       title,
       text,
-      confirmButtonText: 'Entendido',
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
       didOpen: () => {
         const confirmButton = Swal.getConfirmButton();
         if (confirmButton) {
