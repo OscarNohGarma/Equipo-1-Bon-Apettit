@@ -11,7 +11,7 @@
         </select>
 
     </div>
-    <div class="grid">
+    <div class="grid" [class.one-col]="filteredOrders.length===1" [class.two-col]="filteredOrders.length===2">
         <div class="box" *ngFor="let order of filteredOrders">
             <div class="enc">
                 <p class="subtitulo">Productos ordenados:</p>
@@ -33,9 +33,10 @@
             <p class="estado">Estado: <span [ngClass]="{
                     'estado-red': order.status === 'queue',
                     'estado-yellow': order.status === 'preparation',
-                    'estado-green': order.status === 'ready',
+                    'estado-green': order.status === 'ready' || order.status === 'completed',
                     'estado-blue': order.status === 'paid'
-                  }"> {{order.status=== "queue" ? "🔴 En fila": order.status=== "preparation" ? "🟡 En preparación":order.status=== "paid" ? "🔵 Entregada": " 🟢 Listo para la entrega"}}</span>
+                  }"> {{order.status=== "queue" ? "🔴 En fila": order.status=== "preparation" ? "🟡 En
+                    preparación":order.status=== "paid" ? "🔵 Entregada": " 🟢 Listo para la entrega"}}</span>
             </p>
             <!-- 🔴🟠🟡🟢🔵 -->
         </div>
