@@ -1,9 +1,18 @@
 <div class="container">
     <div class="header">
         <h1 class="encabezado">Tus Órdenes</h1>
+        <h2 class="subtitulo-encabezado">¡Sigue el estado de tu orden!</h2>
+    </div>
+    <div class="filter-bar">
+        <select class="status-filter" (change)="updateStatus($event)">
+            <option value="active">Activas</option>
+            <option value="paid">Anteriores</option>
+            <option value="">Todas las ordenes</option>
+        </select>
+
     </div>
     <div class="grid">
-        <div class="box" *ngFor="let order of orderItems">
+        <div class="box" *ngFor="let order of filteredOrders">
             <div class="enc">
                 <p class="subtitulo">Productos ordenados:</p>
             </div>
@@ -26,7 +35,7 @@
                     'estado-yellow': order.status === 'preparation',
                     'estado-green': order.status === 'ready',
                     'estado-blue': order.status === 'paid'
-                  }"> {{order.status=== "queue" ? "🔴 En fila": order.status=== "preparation" ? "🟡 En preparación":order.status=== "paid" ? "Tu orden fue entregada": " 🟢 Listo para la entrega"}}</span>
+                  }"> {{order.status=== "queue" ? "🔴 En fila": order.status=== "preparation" ? "🟡 En preparación":order.status=== "paid" ? "🔵 Entregada": " 🟢 Listo para la entrega"}}</span>
             </p>
             <!-- 🔴🟠🟡🟢🔵 -->
         </div>

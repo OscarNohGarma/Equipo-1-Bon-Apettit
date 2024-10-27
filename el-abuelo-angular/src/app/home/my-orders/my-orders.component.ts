@@ -14,6 +14,7 @@ import { CommonModule } from '@angular/common';
 export class MyOrdersComponent implements OnInit {
   orderItems: OrderMenu[] = [];
   currentUser: string = '';
+  statusFilter: string = 'active'; // Filtro de stock (activo/inactivo)
   constructor(
     private orderMenuService: OrderMenuService,
     private authService: AuthService
@@ -21,7 +22,23 @@ export class MyOrdersComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.authService.getUser()!;
     this.orderMenuService.getAll().subscribe((data) => {
-      this.orderItems = data.filter((order) => order.user === this.currentUser);
+      this.orderItems = data
+        .filter((order) => order.user === this.currentUser)
+        .reverse();
+    });
+  }
+  updateStatus(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    this.statusFilter = selectElement.value;
+    console.log(this.orderItems);
+  }
+  get filteredOrders(): OrderMenu[] {
+    return this.orderItems.filter((order) => {
+      const matchesStatus =
+        this.statusFilter === '' ||
+        order.status === this.statusFilter ||
+        (this.statusFilter === 'active' && order.status !== 'paid');
+      return matchesStatus;
     });
   }
 }

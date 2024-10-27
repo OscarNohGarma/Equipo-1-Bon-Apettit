@@ -6,13 +6,22 @@
   margin-bottom: 20px;
   margin-top: 3px;
   font-weight: 900;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .subtitulo {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 20px;
+}
+.subtitulo-encabezado {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px;
+  margin-top: 2.5rem;
 }
 .enc {
   width: 100%;
@@ -104,9 +113,8 @@
 }
 .producto {
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 4fr;
   gap: 10px;
-  text-align: end;
   align-items: center;
   padding: 10px 0;
 }
@@ -170,5 +178,34 @@
 }
 
 .estado-blue {
-  color: rgb(28, 28, 199);
+  color: #0874bc;
+}
+//ESTILOS FILTROS
+.filter-bar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+  gap: 10px; /* Añadir espacio entre los filtros */
+}
+
+.status-filter,
+.completed-filter {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #c9c9c9;
+  border-radius: 5px;
+  width: 30%;
+}
+
+/* Estilos para pantallas pequeñas */
+@media (max-width: 768px) {
+  .filter-bar {
+    flex-direction: column; /* Apilar los filtros verticalmente */
+  }
+
+  .status-filter,
+  .completed-filter {
+    width: 100%; /* Ajustar al ancho completo */
+    margin-bottom: 10px; /* Añadir espacio entre los filtros */
+  }
 }
