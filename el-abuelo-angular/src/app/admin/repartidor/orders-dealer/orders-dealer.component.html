@@ -1,0 +1,39 @@
+<div class="orders container">
+    <div class="header">
+        <h1 class="encabezado">Órdenes por repartir</h1>
+        <h2 class="subtitulo">Marca las ordenes que sean entregadas</h2>
+    </div>
+    <div class="grid">
+        <div class="box" *ngFor="let order of orderItems">
+            <!-- <img [class.no-status]="order.status!=='completed'" src="./../../../assets/delete-button.svg" alt="basura"
+                class="btn-delete" (click)="deleteOrder(order.id)"> -->
+
+            <div class="enc">
+                <h2>{{order.namee}}</h2>
+                <p>{{order.user}}</p>
+            </div>
+            <div class="box-details">
+                <p class="button details" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">Detalles
+                    ▼</p>
+                <div class="productos" [class.show]="order.isDetailsOpen">
+                    <p class="direccion">Dirección: {{order.direccion}}</p>
+                    <div class="producto" *ngFor="let producto of order.productos"
+                        [class.no-status]="order.status==='completed'">
+                        <input type="checkbox" [class.no-status]="order.status==='completed'" class="check">
+                        <p><span class="vin">• </span> ({{producto.quantity}})</p>
+                        <p class="nombre-producto">{{producto.namee}}<span class="precio">
+                                (${{producto.subtotal}})</span></p>
+                    </div>
+
+                </div>
+            </div>
+            <p class="total">Total a pagar: <span>${{order.total}}</span></p>
+            <button class="button add" (click)="completar(order)">Marcar como pagado</button>
+            <div class="fecha">
+                <p>{{order.fecha}}</p>
+                <p>{{order.hora}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>
