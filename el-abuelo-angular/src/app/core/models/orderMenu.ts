@@ -12,7 +12,7 @@ export class OrderMenu extends BaseModel {
   status: string;
   isDetailsOpen?: boolean;
   tipoEntrega: string;
-  domicilio?: string;
+  direccion?: string;
 
   constructor(
     id: number,
@@ -25,7 +25,7 @@ export class OrderMenu extends BaseModel {
     productos: MenuProduct[],
     status: string,
     tipoEntrega: string,
-    domicilio?: string
+    direccion?: string
   ) {
     super(id, namee); // Hereda id y namee de BaseModel
     this.user = user;
@@ -36,6 +36,6 @@ export class OrderMenu extends BaseModel {
     this.productos = productos;
     this.status = status;
     this.tipoEntrega = tipoEntrega;
-    this.domicilio = domicilio;
+    this.direccion = direccion;
   }
 }

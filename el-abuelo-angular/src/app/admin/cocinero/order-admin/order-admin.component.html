@@ -1,6 +1,6 @@
 <div class="orders container">
     <div class="header">
-        <h1 class="encabezado">Órdenes</h1>
+        <h1 class="encabezado">Órdenes por preparar</h1>
         <h2 class="subtitulo">Administra el estado de las órdenes</h2>
     </div>
 
@@ -17,7 +17,8 @@
     <div class="grid">
         <div class="box" *ngFor="let order of filteredOrders">
             <div class="enc">
-                <h2>Nombre: {{order.namee}}</h2>
+                <h2>{{order.namee}}</h2>
+                <p>{{order.user}}</p>
             </div>
             <div class="box-details">
                 <p class="button details" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">Detalles

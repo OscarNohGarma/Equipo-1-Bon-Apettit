@@ -25,7 +25,10 @@ export class OrderReadyComponent {
     this.orderMenuService.getAll().subscribe((data) => {
       // Filtrar las órdenes cuyo rol sea "completed"
       this.orderItems = data
-        .filter((order) => order.status === 'completed')
+        .filter(
+          (order) =>
+            order.status === 'completed' && order.tipoEntrega === 'local'
+        )
         .map((order) => ({
           ...order,
           isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio

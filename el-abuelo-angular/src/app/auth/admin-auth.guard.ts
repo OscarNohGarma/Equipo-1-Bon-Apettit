@@ -34,7 +34,13 @@ export class AdminAuthGuard implements CanActivate {
         this.router.navigate(['/admin/ordenes/listas']);
         return false; // Bloquear la navegación original
       }
-
+      if (
+        userRole === 'REPARTIDOR' &&
+        state.url !== '/admin/ordenes/repartidor'
+      ) {
+        this.router.navigate(['/admin/ordenes/repartidor']);
+        return false; // Bloquear la navegación original
+      }
       return true; // Si no es cocinero o ya está en /admin/ordenes, permitir el acceso
     } else {
       // Redirigir al login si no está autenticado
