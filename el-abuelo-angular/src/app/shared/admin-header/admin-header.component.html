@@ -19,7 +19,7 @@
                     <p class="current-rol">▼</p>
                 </div>
                 <div class="user-menu box" [class.show]=" isUserMenuOpen">
-                    <div (click)="onEdit()" class="elemento-menu-user" *ngIf="rol === 'ADMINISTRADOR'">
+                    <div (click)="onEdit()" class="elemento-menu-user" *ngIf="rol === 'DUEÑO'">
                         Editar perfil
                     </div>
                     <div (click)="onLogout()" class="elemento-menu-user logout">
@@ -45,6 +45,9 @@
         <div class="elemento-nav" [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">
             Reporte
         </div>
+        <div class="elemento-nav" [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">
+            Clientes
+        </div>
 
     </div>
     <div class="mobile-seleccion">
@@ -57,6 +60,7 @@
             <div [routerLink]="['/admin/menu']" (click)="selectCategory('Menú')">Menú</div>
             <div [routerLink]="['/admin/roles']" (click)="selectCategory('Usuarios')">Usuarios</div>
             <div [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">Reporte</div>
+            <div [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">Clientes</div>
         </div>
     </div>
 </div>
