@@ -65,32 +65,22 @@ h2 {
   background-color: #26282b;
   cursor: pointer;
 }
-.button.disabled {
-  opacity: 0.5;
-  cursor: default;
-  background-color: white;
-  color: #343a40;
-}
-.button.disabled:hover {
-  background-color: white;
-  color: #343a40;
-}
+
 .button.details {
   border-radius: 5px;
   background-color: white;
-  color: #3d4247;
-}
-.button.details.active {
-  color: white;
-  background-color: #343a40;
-  cursor: pointer;
+  color: #343a40;
 }
 .button.details:hover {
   border-radius: 5px;
   background-color: #343a40;
   color: white;
 }
-
+.button.details.active {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
 .box {
   padding: 30px 50px;
   margin: 0 auto 10px;
@@ -111,10 +101,7 @@ h2 {
   .box {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  }
-  .box.no-status {
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
   }
 }
 @media (min-width: 1280px) {
@@ -221,7 +208,6 @@ p {
   font-size: 20px;
   margin-bottom: 20px;
   padding-top: 10px;
-  border-top: 1px solid rgb(52, 58, 64, 0.3);
 }
 
 @media (min-width: 992px) {
@@ -336,6 +322,14 @@ p {
   }
 }
 
+.button.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.button.disabled:hover {
+  background-color: #fff;
+  color: #343a40;
+}
 .order-status.no-status {
   display: none;
 }
@@ -380,4 +374,15 @@ p {
 
 .btn-delete.no-status {
   display: none;
+}
+.direccion {
+  font-weight: 800;
+  font-size: 20px;
+  border-bottom: 1px solid rgb(52, 58, 64, 0.4);
+  padding-bottom: 10px;
+}
+@media (min-width: 992px) {
+  .direccion {
+    font-size: 18px;
+  }
 }

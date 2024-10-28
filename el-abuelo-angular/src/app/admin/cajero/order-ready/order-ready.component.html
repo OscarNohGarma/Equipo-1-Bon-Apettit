@@ -1,6 +1,6 @@
 <div class="orders container">
     <div class="header">
-        <h1 class="encabezado">Órdenes listas</h1>
+        <h1 class="encabezado">Órdenes por entregar</h1>
         <h2 class="subtitulo">Marca las ordenes que sean pagadas</h2>
     </div>
     <div class="grid">
@@ -9,7 +9,8 @@
                 class="btn-delete" (click)="deleteOrder(order.id)"> -->
 
             <div class="enc">
-                <h2>Nombre: {{order.namee}}</h2>
+                <h2>{{order.namee}}</h2>
+                <p>{{order.user}}</p>
             </div>
             <div class="box-details">
                 <p class="button details" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">Detalles

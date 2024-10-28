@@ -13,6 +13,7 @@ import { EditUserComponent } from './owner/roles-admin/edit-user/edit-user.compo
 import { OrderReadyComponent } from './cajero/order-ready/order-ready.component';
 import { OrderPaidComponent } from './owner/order-paid/order-paid.component';
 import { ReportComponent } from './owner/report/report.component';
+import { OrdersDealerComponent } from './repartidor/orders-dealer/orders-dealer.component';
 
 export const adminRoutes: Routes = [
   {
@@ -55,6 +56,12 @@ export const adminRoutes: Routes = [
     path: 'ordenes/listas',
     title: 'Órdenes - El abuelo',
     component: OrderReadyComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'ordenes/repartidor',
+    title: 'Órdenes - El abuelo',
+    component: OrdersDealerComponent,
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {

@@ -68,8 +68,8 @@ h3 {
 .btn-nav {
   // width: 100%;
   padding: 10px 20px;
-  border: 1px solid #343a40;
   color: #343a40;
+  border: 1px solid #b9b9b9;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
@@ -77,10 +77,12 @@ h3 {
 }
 .btn-nav:hover {
   background-color: #343a40;
+  border: 1px solid #343a40;
   color: #fff;
 }
 .btn-nav.selected {
   background-color: #343a40;
+  border: 1px solid #343a40;
   color: #fff;
 }
 

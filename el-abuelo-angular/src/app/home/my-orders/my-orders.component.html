@@ -1,0 +1,45 @@
+<div class="container">
+    <div class="header">
+        <h1 class="encabezado">Tus Órdenes</h1>
+        <h2 class="subtitulo-encabezado">¡Sigue el estado de tu orden!</h2>
+    </div>
+    <div class="filter-bar">
+        <select class="status-filter" (change)="updateStatus($event)">
+            <option value="active">Activas</option>
+            <option value="paid">Anteriores</option>
+            <option value="">Todas las ordenes</option>
+        </select>
+
+    </div>
+    <div class="grid" [class.one-col]="filteredOrders.length===1" [class.two-col]="filteredOrders.length===2">
+        <div class="box" *ngFor="let order of filteredOrders">
+            <div class="enc">
+                <p class="subtitulo">Productos ordenados:</p>
+            </div>
+            <div class="productos">
+                <div class="producto" *ngFor="let producto of order.productos">
+                    <p> <span class="vin">• </span> ({{producto.quantity}}) </p>
+                    <p class="nombre-producto">{{producto.namee}}<span class="precio"> (${{producto.subtotal}})</span>
+                    </p>
+                </div>
+            </div>
+            <div class="div-total">
+                <p class="total">Total: <span>${{order.total}}</span></p>
+                <div class="fecha">
+                    <p>{{order.fecha}}</p>
+                    <p>{{order.hora}}</p>
+                </div>
+            </div>
+            <p class="estado">Estado: <span [ngClass]="{
+                    'estado-red': order.status === 'queue',
+                    'estado-yellow': order.status === 'preparation',
+                    'estado-green': order.status === 'ready' || order.status === 'completed',
+                    'estado-blue': order.status === 'paid'
+                  }"> {{order.status=== "queue" ? "🔴 En fila": order.status=== "preparation" ? "🟡 En
+                    preparación":order.status=== "paid" ? "🔵 Entregada": " 🟢 Listo para la entrega"}}</span>
+            </p>
+            <!-- 🔴🟠🟡🟢🔵 -->
+        </div>
+
+    </div>
+</div>
