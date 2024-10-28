@@ -412,7 +412,7 @@ form > .form-four .bg-svg{
 
 /*Reservation Tables*/
 
-.movie-container {
+/* .movie-container {
   margin: 20px 0;
 }
 
@@ -444,14 +444,22 @@ form > .form-four .bg-svg{
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-
-
-
+ */
+/*
 .seat.selected {
   background-color: green;
 }
+.seat.not {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.seat.nearby {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+} */
 
-.seat.sold {
+
+/* .seat.sold {
   background-color: blue;
 }
 
@@ -475,9 +483,11 @@ form > .form-four .bg-svg{
 .showcase .seat:not(.sold):hover {
   cursor: default;
   transform: scale(1);
-}
+} */
 
-.showcase {
+
+
+/* .showcase {
   background: rgba(0, 0, 0, 0.1);
   padding: 5px 10px;
   border-radius: 5px;
@@ -497,7 +507,7 @@ form > .form-four .bg-svg{
 }
 .showcase li small {
   margin-left: 2px;
-}
+} */
 
 .row {
   display: flex;
@@ -569,24 +579,24 @@ p.text span{
 
 
 
-.container3 {
+/* .container3 {
   perspective: 1000px;
   margin-bottom: 30px;
   margin-top: 1rem;
   width: 100%;
-  max-width: 600px; /* Ajusta según necesites */
+  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
-}
+} */
 
 /* Hacemos que los asientos sean flexibles */
-.row {
+/* .row {
   display: flex;
   justify-content: center;
   margin-top: 0.5rem;
 }
-
-.seat {
+ */
+/* .seat {
   background-color: #444451;
   height: 1.5rem;
   width: 1.5rem;
@@ -608,9 +618,10 @@ p.text span{
   cursor: pointer;
   transform: scale(1.1);
 }
+ */
 
 /* Ajustamos el showcase para que sea más compacto en móviles */
-.showcase {
+/* .showcase {
   display: flex;
   justify-content: space-around;
   list-style-type: none;
@@ -629,10 +640,10 @@ p.text span{
 .showcase .seat {
   margin-right: 0.25rem;
   padding-left: 1.5rem;
-}
+} */
 
 /* Media queries para ajustar tamaños en diferentes dispositivos */
-@media screen and (max-width: 768px) {
+/* @media screen and (max-width: 768px) {
   .seat {
     height: 1.2rem;
     width: 1.2rem;
@@ -658,4 +669,7 @@ p.text span{
   .container3 {
     padding: 0 0.5rem;
   }
-}
+} */
+
+
+

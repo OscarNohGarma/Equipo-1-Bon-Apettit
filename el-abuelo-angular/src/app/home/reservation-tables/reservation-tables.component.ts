@@ -7,6 +7,14 @@ declare var Swal:any;
 interface FormStep extends HTMLElement {
   classList: DOMTokenList;
 }
+interface TableInventory {
+  interior: {
+    [key: string]: number; // key will be '2Personas', '4Personas', '6Personas'
+  };
+  exterior: {
+    [key: string]: number;
+  };
+}
 
 @Component({
   selector: 'app-reservation-tables',
@@ -36,9 +44,6 @@ export class ReservationTablesComponent implements OnInit {
   private formSteps: NodeListOf<FormStep> | null = null;
   // Agregar una propiedad para los tipos de archivo permitidos
   private allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic'];
-  // Asientos seleccionados para cada ubicación
-  selectedSeatsInterior: Set<number> = new Set();
-  selectedSeatsExterior: Set<number> = new Set();
 
   // Totales por separado para cada ubicación
   selectedSeatsCountInterior: number = 0;
@@ -57,6 +62,7 @@ export class ReservationTablesComponent implements OnInit {
     'Cumpleaños': 0,
     'Personalizado':0,
   };
+
   costoConDecoracion: number = this.costoPorMesa; // Precio inicial con decoración
   lugarSeleccionado: string = ''; // Variable para almacenar el lugar seleccionado
   personasSeleccionadas: boolean = false; // Nueva variable para saber si se seleccionaron personas
@@ -73,8 +79,43 @@ export class ReservationTablesComponent implements OnInit {
   mensajeTotalPago: string = ''; // Para mostrar el mensaje en el form de métodos de pago
   cantidadMesasReservadas: number = 1; // Nueva variable para la cantidad de mesas reservadas
   showReservarOtraMesa: boolean = false; // Nueva variable para controlar la visibilidad del botón
+  isTableForTwo: boolean = false;
+  decoracionesDisponibles: string[] = ['Ninguna', 'Cumpleaños', 'Personalizado'];
 
 
+  private tableInventory: TableInventory = {
+    interior: {
+      '2Personas': 2, // 2 mesas de 2 personas
+      '4Personas': 2, // 2 mesas de 4 personas
+      '6Personas': 4  // 4 mesas de 6 personas
+    },
+    exterior: {
+      '2Personas': 1, // si hay mesas de 2 personas en exterior
+      '4Personas': 8, // 8 mesas de 4 personas
+      '6Personas': 2  // 2 mesas de 6 personas
+    }
+  };
+
+  cantidadMesasDisponibles: number = 0;
+  selectedCapacity: string = '';
+  private calcularTotalMesas(): void {
+    let total = 0;
+
+    // Sumar todas las mesas del interior
+    Object.values(this.tableInventory.interior).forEach(cantidad => {
+      total += cantidad;
+    });
+
+    // Sumar todas las mesas del exterior
+    Object.values(this.tableInventory.exterior).forEach(cantidad => {
+      total += cantidad;
+    });
+
+    this.cantidadMesasDisponibles = total;
+  }
+    // Agregar propiedades para controlar la visualización de las imágenes
+    mostrarPreviewInterior: boolean = false;
+    mostrarPreviewExterior: boolean = false;
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object)  {
     // Establecer fecha mínima como hoy
@@ -84,6 +125,7 @@ export class ReservationTablesComponent implements OnInit {
     const maxDate = new Date();
     maxDate.setMonth(maxDate.getMonth() + 6);
     this.fechaMaxima = this.formatDate(maxDate);
+    this.calcularTotalMesas(); // Inicializar con el total de mesas
   }
 
   ngOnInit(): void {
@@ -96,37 +138,8 @@ export class ReservationTablesComponent implements OnInit {
         this.setupEventListeners();
       });
     }
+    this.calcularTotalMesas();
   }
-
-  // Método para manejar el cambio en el selector de personas
-  onPersonasChange(event: any) {
-    this.cantidadPersonas = event.target.value;
-    this.personasSeleccionadas = true;
-
-    // Si se seleccionan 4 personas, no mostrar la opción "Exterior"
-    if (this.cantidadPersonas === '2Personas' || this.cantidadPersonas === '6Personas' ) {
-      this.mostrarExterior = false;
-    } else {
-      this.mostrarExterior = true;
-    }
-  }
-
-
-  // Método para manejar el cambio de lugar (interior o exterior)
-  onLugarChange(event: any) {
-    this.lugarSeleccionado = event.target.value;
-
-    if (this.lugarSeleccionado === 'Interior') {
-      // Establecer la decoración seleccionada previamente en Interior
-      this.decoracionSeleccionada = this.decoracionSeleccionadaInterior;
-      this.updateTotals('Interior');
-    } else if (this.lugarSeleccionado === 'Exterior') {
-      // Establecer la decoración seleccionada previamente en Exterior
-      this.decoracionSeleccionada = this.decoracionSeleccionadaExterior;
-      this.updateTotals('Exterior');
-    }
-  }
-
 
   private initializeElements(): void {
     if (isPlatformBrowser(this.platformId)) {
@@ -137,74 +150,139 @@ export class ReservationTablesComponent implements OnInit {
 
       this.steps = document.querySelectorAll('.step');
       this.formSteps = document.querySelectorAll('.form-step');
+      this.updateButtonVisibility();
     }
   }
 
-   //Inicio de la logica del croquis
-   // Método para manejar el clic en un asiento
-   toggleSeat(seatIndex: number) {
-    if (this.lugarSeleccionado === 'Interior') {
-      this.toggleSeatSelection(this.selectedSeatsInterior, seatIndex);
-      this.updateTotals('Interior');
-    } else if (this.lugarSeleccionado === 'Exterior') {
-      this.toggleSeatSelection(this.selectedSeatsExterior, seatIndex);
-      this.updateTotals('Exterior');
+
+  private resetSelections(): void {
+    this.lugarSeleccionado = '';
+    this.decoracionSeleccionada = 'Ninguna';
+    this.decoracionSeleccionadaInterior = 'Ninguna';
+    this.decoracionSeleccionadaExterior = 'Ninguna';
+
+    if (this.cantidadMesas) {
+      this.cantidadMesas.nativeElement.value = 'Cantidad De Mesas A Reservar';
     }
+    if (this.costoMesa) {
+      this.costoMesa.nativeElement.value = '300';
+    }
+
+    this.mensajeTotalPago = '';
+    this.selectedCapacity = '';
+    // Agregar reset de los previews
+    this.mostrarPreviewInterior = false;
+    this.mostrarPreviewExterior = false;
+    this.calcularTotalMesas(); // Mostrar el total de mesas al resetear
   }
 
-  // Alterna la selección de un asiento en una lista específica
-  toggleSeatSelection(selectedSeats: Set<number>, seatIndex: number) {
-    if (selectedSeats.has(seatIndex)) {
-      selectedSeats.delete(seatIndex);
+
+  // Método para manejar el cambio en el selector de personas
+  onPersonasChange(event: any) {
+    this.resetSelections();
+
+    if (!event.target.value || event.target.value === "") {
+      this.calcularTotalMesas();
+      return;
+    }
+
+    const previousPersonas = this.cantidadPersonas;
+    this.cantidadPersonas = event.target.value;
+    this.selectedCapacity = this.cantidadPersonas;
+    this.personasSeleccionadas = true;
+
+    // Check if selected option is for 2 people
+    this.isTableForTwo = this.cantidadPersonas === '2Personas';
+
+    // Update available decorations based on table size
+    this.updateDecoracionesDisponibles();
+
+    switch(this.cantidadPersonas) {
+      case '2Personas':
+        this.mostrarExterior = true; // Changed to true to allow exterior selection for 2 people
+        this.updateAvailableTables('Interior');
+        break;
+      case '4Personas':
+      case '6Personas':
+        this.mostrarExterior = true;
+        this.cantidadMesasDisponibles = this.tableInventory.interior[this.cantidadPersonas] +
+                                       this.tableInventory.exterior[this.cantidadPersonas];
+        break;
+      default:
+        this.mostrarExterior = true;
+        this.calcularTotalMesas();
+    }
+
+    // Reset selections
+    const lugarSelect = document.getElementById('Lugar') as HTMLSelectElement;
+    const decoracionSelect = document.getElementById('decoracion') as HTMLSelectElement;
+    if (lugarSelect) lugarSelect.value = '';
+    if (decoracionSelect) decoracionSelect.value = 'Ninguna';
+  }
+
+  private updateDecoracionesDisponibles(): void {
+    if (this.isTableForTwo) {
+      this.decoracionesDisponibles = ['Ninguna', 'Romantica', 'Personalizado'];
     } else {
-      selectedSeats.add(seatIndex);
+      this.decoracionesDisponibles = ['Ninguna', 'Cumpleaños', 'Personalizado'];
+    }
+  }
+
+  // Método para manejar el cambio de lugar (interior o exterior)
+  onLugarChange(event: any) {
+    const decoracionSelect = document.getElementById('decoracion') as HTMLSelectElement;
+    if (decoracionSelect) {
+      decoracionSelect.value = 'Ninguna';
     }
 
-    // Actualizar los totales después de modificar la selección
-    this.updateTotals(this.lugarSeleccionado);
+    this.decoracionSeleccionada = 'Ninguna';
+    this.decoracionSeleccionadaInterior = 'Ninguna';
+    this.decoracionSeleccionadaExterior = 'Ninguna';
+
+    // Resetear los previews
+    this.mostrarPreviewInterior = false;
+    this.mostrarPreviewExterior = false;
+
+    if (!event.target.value || event.target.value === "") {
+      if (this.selectedCapacity) {
+        this.cantidadMesasDisponibles = this.tableInventory.interior[this.selectedCapacity] +
+                                       this.tableInventory.exterior[this.selectedCapacity];
+      } else {
+        this.calcularTotalMesas();
+      }
+      return;
+    }
+
+    this.lugarSeleccionado = event.target.value;
+    this.updateAvailableTables(this.lugarSeleccionado);
+
+    if (this.cantidadMesas) {
+      this.cantidadMesas.nativeElement.value = '1';
+      this.calcularCosto();
+    }
   }
 
 
-  // Actualiza los totales según la ubicación
-  updateTotals(location: string) {
-    let selectedSeatsCount: number;
+  private updateAvailableTables(location: string): void {
+    if (!this.selectedCapacity) {
+      this.calcularTotalMesas();
+      return;
+    }
 
     if (location === 'Interior') {
-      this.selectedSeatsCountInterior = this.selectedSeatsInterior.size;
-      selectedSeatsCount = this.selectedSeatsCountInterior;
+      this.cantidadMesasDisponibles = this.tableInventory.interior[this.selectedCapacity];
     } else if (location === 'Exterior') {
-      this.selectedSeatsCountExterior = this.selectedSeatsExterior.size;
-      selectedSeatsCount = this.selectedSeatsCountExterior;
+      this.cantidadMesasDisponibles = this.tableInventory.exterior[this.selectedCapacity];
     } else {
-      selectedSeatsCount = 0;
-      this.decoracionSeleccionada ='Ninguna';
-
-    }
-
-    // Actualizar la cantidad de mesas en el input
-    this.cantidadMesas.nativeElement.value = selectedSeatsCount.toString();
-
-
-    // Si no hay mesas seleccionadas, resetea los valores a 0
-    if (selectedSeatsCount === 0) {
-      this.cantidadMesas.nativeElement.value = 'Cantidad De Mesas A Reservar';
-      this.costoMesa.nativeElement.value = '300'; // Resetear el costo por mesa
-      this.decoracionSeleccionada ='Ninguna';
-
-
-
-    } else {
-      // Calcular el costo total por mesa
-      const costoTotal = selectedSeatsCount * this.seatPrice;
-      this.costoMesa.nativeElement.value = costoTotal.toString();
-      this.costoConDecoracion = costoTotal;
-
+      this.cantidadMesasDisponibles = this.tableInventory.interior[this.selectedCapacity] +
+                                     this.tableInventory.exterior[this.selectedCapacity];
     }
   }
 
-  //Cierre de la logica del croquis
+
 
   //Apartir de aqui es del formulario
+
   // Formatea la fecha al formato requerido por el input type="date"
   private formatDate(date: Date): string {
     const year = date.getFullYear();
@@ -281,19 +359,30 @@ export class ReservationTablesComponent implements OnInit {
 
   onDecoracionChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
-
     this.decoracionSeleccionada = selectElement.value;
-     // Guardar la decoración seleccionada según la ubicación
-     if (this.lugarSeleccionado === 'Interior') {
-      this.decoracionSeleccionadaInterior = this.decoracionSeleccionada;
-      this.calcularCosto();
 
+    // Reset previews
+    this.mostrarPreviewInterior = false;
+    this.mostrarPreviewExterior = false;
+
+    if (this.decoracionSeleccionada === 'Romantica' && this.isTableForTwo) {
+      if (this.lugarSeleccionado === 'Interior') {
+        this.mostrarPreviewInterior = true;
+        this.mostrarPreviewExterior = false;
+      } else if (this.lugarSeleccionado === 'Exterior') {
+        this.mostrarPreviewInterior = false;
+        this.mostrarPreviewExterior = true;
+      }
+    }
+
+    if (this.lugarSeleccionado === 'Interior') {
+      this.decoracionSeleccionadaInterior = this.decoracionSeleccionada;
     } else if (this.lugarSeleccionado === 'Exterior') {
       this.decoracionSeleccionadaExterior = this.decoracionSeleccionada;
-      this.calcularCosto();
-
     }
-     this.calcularCosto();
+
+    this.calcularCosto();
+    this.updateButtonVisibility();
   }
 
   private calcularCosto(): void {
@@ -328,25 +417,66 @@ export class ReservationTablesComponent implements OnInit {
 
   }
 
-  reservarMesa(): void {
-    if (!this.validateFormThree()) {
-      return; // Si la validación falla, no continuamos con la reserva
-    }
+  private updateButtonVisibility(): void {
+    const nextButton = document.querySelector('.btn-next') as HTMLButtonElement;
+    const submitButton = document.querySelector('.btn-submit') as HTMLButtonElement;
 
-    // Si la validación es exitosa, procedemos con la reserva
-    Swal.fire({
-      icon: 'success',
-      title: '¡Reservación Exitosa!',
-      text: 'Su reservación ha sido procesada correctamente.',
-      confirmButtonText: 'Aceptar'
-    }).then((result:any) => {
-      if (result.isConfirmed) {
-        this.active = 4;  // Cambia el valor de 'active' al paso 4
-        this.showReservarOtraMesa = true; // Muestra el botón para reservar otra mesa
-        this.updateProgress();  // Llama a la función para actualizar la interfaz
+    if (nextButton && submitButton) {
+      // En form-three (active === 3), ocultar siguiente y mostrar reservar
+      if (this.active === 3) {
+        nextButton.style.display = 'none';
+        submitButton.style.display = 'block';
+      } else if (this.active === 2 && (this.decoracionSeleccionada === 'Ninguna' || this.decoracionSeleccionada === 'Personalizado')) {
+        // En form-two con decoración Ninguna o Personalizado
+        nextButton.style.display = 'none';
+        submitButton.style.display = 'block';
+      } else {
+        // En otros casos
+        nextButton.style.display = 'block';
+        submitButton.style.display = 'none';
       }
-    });
+    }
   }
+
+  private procesarReservaDirecta(): void {
+    if (this.validateFormOne() && this.validateFormTwo()) {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reservación Exitosa!',
+        text: 'Su reservación ha sido procesada correctamente.',
+        confirmButtonText: 'Aceptar'
+      }).then((result: any) => {
+        if (result.isConfirmed) {
+          this.active = 4;
+          this.showReservarOtraMesa = true;
+          this.updateProgress();
+        }
+      });
+    }
+  }
+
+  reservarMesa(): void {
+    if (this.active === 2 && (this.decoracionSeleccionada === 'Ninguna' || this.decoracionSeleccionada === 'Personalizado')) {
+      this.procesarReservaDirecta();
+    } else if (this.active === 3) {
+      if (!this.validateFormThree()) {
+        return;
+      }
+      Swal.fire({
+        icon: 'success',
+        title: '¡Reservación Exitosa!',
+        text: 'Su reservación ha sido procesada correctamente.',
+        confirmButtonText: 'Aceptar'
+      }).then((result: any) => {
+        if (result.isConfirmed) {
+          this.active = 4;
+          this.showReservarOtraMesa = true;
+          this.updateProgress();
+        }
+      });
+    }
+  }
+
 
   reservarOtraMesa(): void {
     location.reload(); // Recarga la página para reiniciar los formularios
@@ -446,42 +576,32 @@ export class ReservationTablesComponent implements OnInit {
   private handleNext(): void {
     let isValid = true;
 
-    // Validar según el paso actual
     switch (this.active) {
       case 1:
         isValid = this.validateFormOne();
         break;
       case 2:
         isValid = this.validateFormTwo();
-        break;
-      case 3:
-        isValid = this.validateFormThree();
+        if (isValid && (this.decoracionSeleccionada === 'Ninguna' || this.decoracionSeleccionada === 'Personalizado')) {
+          this.procesarReservaDirecta();
+          return;
+        }
         break;
     }
 
-    // Solo avanzar si la validación es exitosa
     if (isValid) {
-      // Verificar si estamos en el paso 2 y la decoración seleccionada es "Ninguna"
-      if (this.active === 2 && this.decoracionSeleccionada === 'Ninguna') {
-        this.active = 4;  // Saltar el step 3 y avanzar al paso 4
-        this.updateProgress();
-        this.showReservarOtraMesa = true;  // Mostrar el botón "Reservar otra mesa"
-        return;  // Salir de la función para evitar más procesamiento
-      }
-
-      // Si no se salta ningún paso, avanzar normalmente
       this.active++;
-
-      // Si llegamos al último paso (4 en este caso)
-      if (this.active === 4) {
-        this.showReservarOtraMesa = true;  // Mostrar el botón "Reservar otra mesa"
-      } else {
-        this.showReservarOtraMesa = false;  // Ocultar el botón si no estamos en el último paso
-      }
-
       this.updateProgress();
+      this.updateButtonVisibility();
+      if (this.active === 4) {
+        this.showReservarOtraMesa = true;
+      } else {
+        this.showReservarOtraMesa = false;
+      }
     }
   }
+
+
 
 
   private handlePrev(): void {
@@ -490,6 +610,7 @@ export class ReservationTablesComponent implements OnInit {
       this.active = 1;
     }
     this.updateProgress();
+    this.updateButtonVisibility();
   }
 
   private updateProgress(): void {

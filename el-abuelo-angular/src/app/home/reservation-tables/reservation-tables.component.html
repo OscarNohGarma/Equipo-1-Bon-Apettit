@@ -1,6 +1,6 @@
 
 <div id="page" class="site">
-  <h2 style="margin-bottom: 4rem;text-align:center;">¡Reserva Tú Mesa Ahora!</h2>
+  <h2 style="margin-bottom: 4rem; margin-top: -2rem; text-align:center;">¡Reserva Tú Mesa Ahora!</h2>
   <h4 style="margin-bottom: 1rem;text-align:center; margin-top: -2.5rem;">Solo Completa El Formulario Con Los Datos Solicitantes</h4>
   <div class="container2">
     <div class="form-box">
@@ -70,7 +70,6 @@
             </span>
           </div>
 
-
           <!-- <div>
             <label>Lugar De La Mesa</label>
             <select name="Lugar" id="Lugar" required (change)="onLugarChange($event)">
@@ -87,11 +86,9 @@
               <option value="2Personas">2 Personas</option>
               <option value="4Personas">4 Personas</option>
               <option value="6Personas">6 Personas</option>
-              <option value="PersonalizadoPersonas">Personalizado</option>
             </select>
           </div>
-
-
+          <p class="text" style="font-weight: bold;">Cantidad De Mesas Disponibles: {{cantidadMesasDisponibles}}</p>
           <!-- Solo mostrar el lugar de la mesa si ya se seleccionaron personas -->
           <div *ngIf="personasSeleccionadas">
             <label>Lugar De La Mesa</label>
@@ -101,199 +98,6 @@
               <option value="Exterior" *ngIf="mostrarExterior">Exterior</option>
             </select>
           </div>
-
-
-          <div *ngIf="lugarSeleccionado === 'Interior'">
-            <label>Mesa A Eligir (Interior)</label>
-            <ul class="showcase">
-              <li>
-                <div class="seat not"></div>
-                <small>No Disponible</small>
-              </li>
-              <li>
-                <div class="seat"></div>
-                <small>Disponibles</small>
-              </li>
-              <li>
-                <div class="seat selected"></div>
-                <small>Reservar</small>
-              </li>
-              <li>
-                <div class="seat sold"></div>
-                <small>Reservados</small>
-              </li>
-            </ul>
-            <div class="container3">
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(1)}" (click)="toggleSeat(1)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(2)}" (click)="toggleSeat(2)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(3)}" (click)="toggleSeat(3)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(4)}" (click)="toggleSeat(4)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(5)}" (click)="toggleSeat(5)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(6)}" (click)="toggleSeat(6)"></div>
-                <div class="seat not" [ngClass]="{'selected': selectedSeatsInterior.has(7)}" (click)="toggleSeat(7)"></div>
-                <div class="seat not" [ngClass]="{'selected': selectedSeatsInterior.has(8)}" (click)="toggleSeat(8)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(9)}" (click)="toggleSeat(9)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(10)}" (click)="toggleSeat(10)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(11)}" (click)="toggleSeat(11)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(12)}" (click)="toggleSeat(12)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(13)}" (click)="toggleSeat(13)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(14)}" (click)="toggleSeat(14)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(15)}" (click)="toggleSeat(15)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(16)}" (click)="toggleSeat(16)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(17)}" (click)="toggleSeat(17)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(18)}" (click)="toggleSeat(18)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(19)}" (click)="toggleSeat(19)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(20)}" (click)="toggleSeat(20)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(21)}" (click)="toggleSeat(21)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(22)}" (click)="toggleSeat(22)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(23)}" (click)="toggleSeat(23)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(24)}" (click)="toggleSeat(24)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(25)}" (click)="toggleSeat(25)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(26)}" (click)="toggleSeat(26)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(27)}" (click)="toggleSeat(27)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(28)}" (click)="toggleSeat(28)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(29)}" (click)="toggleSeat(29)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(30)}" (click)="toggleSeat(30)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(31)}" (click)="toggleSeat(31)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(32)}" (click)="toggleSeat(32)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(33)}" (click)="toggleSeat(33)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(34)}" (click)="toggleSeat(34)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(35)}" (click)="toggleSeat(35)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(36)}" (click)="toggleSeat(36)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(37)}" (click)="toggleSeat(37)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(38)}" (click)="toggleSeat(38)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsInterior.has(39)}" (click)="toggleSeat(39)"></div>
-
-              </div>
-
-
-            </div>
-            <p class="text">
-              Tú has seleccionado <span>{{ selectedSeatsCountInterior }}</span> mesa(s)
-              . Cada Mesa Tiene un costo de  <span>{{ totalCostInterior }}</span> MXN.
-            </p>
-          </div>
-
-          <div *ngIf="lugarSeleccionado === 'Exterior'">
-            <label>Mesa A Eligir (Exterior)</label>
-            <ul class="showcase">
-              <li>
-                <div class="seat not"></div>
-                <small>No Disponible</small>
-              </li>
-              <li>
-                <div class="seat"></div>
-                <small>Disponible</small>
-              </li>
-              <li>
-                <div class="seat selected"></div>
-                <small>Reservar</small>
-              </li>
-              <li>
-                <div class="seat sold"></div>
-                <small>Reservados</small>
-              </li>
-            </ul>
-            <div class="container3">
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(1)}" (click)="toggleSeat(1)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(2)}" (click)="toggleSeat(2)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(3)}" (click)="toggleSeat(3)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(4)}" (click)="toggleSeat(4)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(5)}" (click)="toggleSeat(5)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(6)}" (click)="toggleSeat(6)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(7)}" (click)="toggleSeat(7)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(8)}" (click)="toggleSeat(8)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(9)}" (click)="toggleSeat(9)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(10)}" (click)="toggleSeat(10)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(11)}" (click)="toggleSeat(11)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(12)}" (click)="toggleSeat(12)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(13)}" (click)="toggleSeat(13)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(14)}" (click)="toggleSeat(14)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(15)}" (click)="toggleSeat(15)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(16)}" (click)="toggleSeat(16)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(17)}" (click)="toggleSeat(17)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(18)}" (click)="toggleSeat(18)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(19)}" (click)="toggleSeat(19)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(20)}" (click)="toggleSeat(20)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(21)}" (click)="toggleSeat(21)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(22)}" (click)="toggleSeat(22)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(23)}" (click)="toggleSeat(23)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(24)}" (click)="toggleSeat(24)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(25)}" (click)="toggleSeat(25)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(26)}" (click)="toggleSeat(26)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(27)}" (click)="toggleSeat(27)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(28)}" (click)="toggleSeat(28)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(29)}" (click)="toggleSeat(29)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(30)}" (click)="toggleSeat(30)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(31)}" (click)="toggleSeat(31)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(32)}" (click)="toggleSeat(32)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(33)}" (click)="toggleSeat(33)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(34)}" (click)="toggleSeat(34)"></div>
-              </div>
-
-              <div class="row">
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(35)}" (click)="toggleSeat(35)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(36)}" (click)="toggleSeat(36)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(37)}" (click)="toggleSeat(37)"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(38)}" (click)="toggleSeat(38)"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat sold"></div>
-                <div class="seat" [ngClass]="{'selected': selectedSeatsExterior.has(39)}" (click)="toggleSeat(39)"></div>
-
-              </div>
-
-            </div>
-            <p class="text">
-              Tú has seleccionado <span>{{ selectedSeatsCountExterior }}</span> mesa(s)
-              por un precio de <span>{{ totalCostExterior }}</span> MXN.
-            </p>
-          </div>
-
 
           <div>
             <label for="cantidadMesas">Cantidad De Mesas A Reservar</label>
@@ -307,14 +111,13 @@
           </div>
 
 
-          <div>
+          <div *ngIf="lugarSeleccionado">
             <label>Decoración De la Mesa</label>
             <select name="Decoracion" id="decoracion" (change)="onDecoracionChange($event)" required>
               <option value="" selected disabled>Seleccione una opción</option>
-              <option value="Ninguna">Ninguna</option>
-              <option value="Romantica">Romántica</option>
-              <option value="Cumpleaños">Cumpleaños</option>
-              <option value="Personalizado">Personalizado</option>
+              <option *ngFor="let decoracion of decoracionesDisponibles" [value]="decoracion">
+                {{decoracion}}
+              </option>
             </select>
           </div>
 
@@ -326,14 +129,16 @@
           justify-content: space-around;
           align-items: center;
           margin-left: 2rem;" class="decoracion-imagenes" *ngIf="decoracionSeleccionada === 'Romantica' || decoracionSeleccionada === 'Cumpleaños'">
-            <img *ngIf="decoracionSeleccionada === 'Romantica'" src="../../../assets/imgDecoracionesReservaciones/RomanticaPreview1.jpeg" alt="Decoración Romántica 1">
-            <img *ngIf="decoracionSeleccionada === 'Romantica'" src="../../../assets/imgDecoracionesReservaciones/RomanticaPreview2.jpeg" alt="Decoración Romántica 2">
+            <img *ngIf="decoracionSeleccionada === 'Romantica' && mostrarPreviewInterior"
+            src="../../../assets/imgDecoracionesReservaciones/RomanticaPreview2.jpeg"
+            alt="Decoración Romántica Interior">
+
+            <img *ngIf="decoracionSeleccionada === 'Romantica' && mostrarPreviewExterior"
+            src="../../../assets/imgDecoracionesReservaciones/RomanticaPreview1.jpeg"
+            alt="Decoración Romántica Exterior">
             <img *ngIf="decoracionSeleccionada === 'Cumpleaños'" src="../../../assets/imgDecoracionesReservaciones/cumpleañosPreview1.jpeg"  alt="Decoración Cumpleaños 1">
             <img *ngIf="decoracionSeleccionada === 'Cumpleaños'" src="../../../assets/imgDecoracionesReservaciones/cumpleañosPreview2.jpeg" alt="Decoración Cumpleaños 2">
           </div>
-
-
-
 
           <!-- Div para mostrar el precio de la decoración seleccionada -->
           <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
@@ -343,13 +148,13 @@
           </div>
 
 
-          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna'">
+          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
             <label>Costo Por Mesa (Incluyendo Decoración)</label>
             <input type="number" [value]="costoConDecoracion" readonly>
           </div>
 
           <div *ngIf="decoracionSeleccionada && decoracionSeleccionada === 'Personalizado'">
-            <p style="color: black; margin-bottom: 1em;">Ponerse en contacto con el administrador para acortar la decoración y precios a tratar, al número:</p>
+            <p style="color: black; margin-bottom: 1em;">Primero finalice el proceso de reservación y posteriormente contacte al dueño de la cafetería para acordar la decoración y precios a tratar, al número telefónico:</p>
             <input type="text" [value]="numeroTelefonico" readonly>
           </div>
 
@@ -412,7 +217,6 @@
         <div *ngIf="showReservarOtraMesa" class="btn-group">
           <button type="button" class="btn-next" (click)="reservarOtraMesa()">Reservar otra mesa</button>
         </div>
-
 
       </form>
     </div>
