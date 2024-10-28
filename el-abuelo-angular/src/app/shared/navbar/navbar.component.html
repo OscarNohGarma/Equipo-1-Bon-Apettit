@@ -5,8 +5,13 @@
         <a [routerLink]="['Galeria']">Galería</a>
         <a [routerLink]="['comunidad']">Comunidad</a>
         <!-- <a [routerLink]="['Reservaciones']">Reservaciones</a> -->
+
         <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar Sesión</p>
-        <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
+        <div *ngIf="currentUser" class="cont-pc">
+            <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
+            <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
+        </div>
+
         <div class="div-cont-user">
             <div class="user-menu box" [class.show]=" isUserMenuOpen">
                 <div (click)="onEdit()" class="elemento-menu-user">
@@ -28,6 +33,7 @@
         <div class="cont-login">
             <p *ngIf="!currentUser" (click)="onLoginMobile()" [routerLink]="['login']" class="login phone">Iniciar
                 Sesión</p>
+            <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
             <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
         </div>
     </div>

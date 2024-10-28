@@ -30,6 +30,9 @@ h2 {
 .enc {
   width: 100%;
 }
+.enc h2 {
+  margin-top: 0;
+}
 // @media (min-width: 992px) {
 //   .subtitulo {
 //     margin-bottom: 0;
@@ -43,11 +46,13 @@ h2 {
   padding: 6px 25px;
   border: none;
   border: 1px solid #343a40;
-  color: #343a40;
+  background-color: #343a40;
+  color: white;
   font-weight: 400;
   font-size: 18px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
+  border-radius: 5px;
 }
 @media (min-width: 768px) {
   .button {
@@ -57,22 +62,32 @@ h2 {
 
 .button:hover {
   color: white;
-  background-color: #343a40;
+  background-color: #26282b;
   cursor: pointer;
 }
-.button.active {
-  color: white;
-  background-color: #343a40;
-  cursor: pointer;
+.button.disabled {
+  opacity: 0.5;
+  cursor: default;
+  background-color: white;
+  color: #343a40;
+}
+.button.disabled:hover {
+  background-color: white;
+  color: #343a40;
 }
 .button.details {
   border-radius: 5px;
-  background-color: #3d4247;
+  background-color: white;
+  color: #3d4247;
+}
+.button.details.active {
   color: white;
+  background-color: #343a40;
+  cursor: pointer;
 }
 .button.details:hover {
   border-radius: 5px;
-  background-color: #26282b;
+  background-color: #343a40;
   color: white;
 }
 
@@ -321,14 +336,6 @@ p {
   }
 }
 
-.button.disabled {
-  opacity: 0.5;
-  cursor: default;
-}
-.button.disabled:hover {
-  background-color: #fff;
-  color: #343a40;
-}
 .order-status.no-status {
   display: none;
 }

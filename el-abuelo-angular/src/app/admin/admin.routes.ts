@@ -11,8 +11,9 @@ import { RolesAdminComponent } from './owner/roles-admin/roles-admin.component';
 import { AddUserComponent } from './owner/roles-admin/add-user/add-user.component';
 import { EditUserComponent } from './owner/roles-admin/edit-user/edit-user.component';
 import { OrderReadyComponent } from './cajero/order-ready/order-ready.component';
-import { OrderPaidComponent } from './owner/order-paid/order-paid.component';
 import { ReportComponent } from './owner/report/report.component';
+import { OrdersDealerComponent } from './repartidor/orders-dealer/orders-dealer.component';
+import { ClientsComponent } from './owner/clients/clients.component';
 
 export const adminRoutes: Routes = [
   {
@@ -40,12 +41,6 @@ export const adminRoutes: Routes = [
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
-    path: 'ordenes/paid',
-    title: 'Órdenes - El abuelo',
-    component: OrderPaidComponent,
-    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
-  },
-  {
     path: 'ordenes/activas',
     title: 'Órdenes - El abuelo',
     component: OrderAdminComponent,
@@ -55,6 +50,12 @@ export const adminRoutes: Routes = [
     path: 'ordenes/listas',
     title: 'Órdenes - El abuelo',
     component: OrderReadyComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'ordenes/repartidor',
+    title: 'Órdenes - El abuelo',
+    component: OrdersDealerComponent,
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
@@ -82,8 +83,13 @@ export const adminRoutes: Routes = [
   },
   {
     path: 'report',
-    title: 'Rerpotes - Administrador',
+    title: 'Reportes - Administrador',
     component: ReportComponent, // Componente de login del admin
+  },
+  {
+    path: 'clientes',
+    title: 'Clientes - Administrador',
+    component: ClientsComponent, // Componente de login del admin
   },
   {
     path: '**', // Ruta comodín para capturar cualquier ruta no reconocida

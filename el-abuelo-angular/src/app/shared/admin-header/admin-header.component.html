@@ -19,7 +19,7 @@
                     <p class="current-rol">▼</p>
                 </div>
                 <div class="user-menu box" [class.show]=" isUserMenuOpen">
-                    <div (click)="onEdit()" class="elemento-menu-user" *ngIf="rol === 'ADMINISTRADOR'">
+                    <div (click)="onEdit()" class="elemento-menu-user" *ngIf="rol === 'DUEÑO'">
                         Editar perfil
                     </div>
                     <div (click)="onLogout()" class="elemento-menu-user logout">
@@ -39,18 +39,16 @@
         <div class="elemento-nav" [routerLink]="['/admin/menu']" (click)="selectCategory('Administrar Menú')">
             Menú
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/ordenes/paid']" (click)="selectCategory('Órdenes')">
-            Órdenes
-        </div>
-        <!-- <div class="elemento-nav" [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">
-            Reservaciones
-        </div> -->
         <div class="elemento-nav" [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">
             Usuarios
         </div>
         <div class="elemento-nav" [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">
             Reporte
         </div>
+        <div class="elemento-nav" [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">
+            Clientes
+        </div>
+
     </div>
     <div class="mobile-seleccion">
         <div class="elemento-nav" (click)="toggleMenu()">
@@ -59,10 +57,10 @@
         </div>
         <div class="submenu-mobile box" [class.show]=" isMenuOpen">
             <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')">Inicio</div>
-            <div [routerLink]="['/admin/menu']" (click)="selectCategory('Administrar Menú')">Administrar Menú</div>
-            <div [routerLink]="['/admin/ordenes']" (click)="selectCategory('Órdenes')">Órdenes</div>
-            <div [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">Reservaciones</div>
-            <div [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">Roles de Usuario</div>
+            <div [routerLink]="['/admin/menu']" (click)="selectCategory('Menú')">Menú</div>
+            <div [routerLink]="['/admin/roles']" (click)="selectCategory('Usuarios')">Usuarios</div>
+            <div [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">Reporte</div>
+            <div [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">Clientes</div>
         </div>
     </div>
 </div>

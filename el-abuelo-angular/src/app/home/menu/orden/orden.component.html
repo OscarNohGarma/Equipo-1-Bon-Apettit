@@ -34,14 +34,41 @@
 
 <!-- Modal -->
 <div [class.show-bg]="modalVisible" class="modal-overlay">
-    <div class="modal-content">
+    <form (ngSubmit)="enviarPedido()" #sendForm="ngForm" novalidate class="modal-content">
         <h3>Confirmar Pedido</h3>
-        <p>Ingresa tu nombre para confirmar el pedido:</p>
-        <input type="text" [(ngModel)]="clienteNombre" placeholder="Tu nombre" class="input-name" />
+        <p>Selecciona la opción de entrega:</p>
 
-        <div class="modal-buttons">
-            <button (click)="enviarPedido()" class="button confirm">Confirmar</button>
-            <button (click)="cerrarModal()" class="button cancel">Cancelar</button>
+        <!-- Selección del tipo de entrega -->
+        <div class="delivery-options">
+            <label for="tipoEntregaLocal" [class.selected]="tipoEntrega === 'local'">
+                <input id="tipoEntregaLocal" name="tipoEntrega" type="radio" [(ngModel)]="tipoEntrega" value="local"
+                    required />
+                Entrega en el local
+            </label>
+            <label for="tipoEntregaDomicilio" [class.selected]="tipoEntrega === 'domicilio'">
+                <input id="tipoEntregaDomicilio" name="tipoEntrega" type="radio" [(ngModel)]="tipoEntrega"
+                    value="domicilio" required />
+                Envío a domicilio
+            </label>
         </div>
-    </div>
+        <div *ngIf="sendForm.submitted && sendForm.controls['tipoEntrega']?.invalid" class="error-message">
+            Por favor selecciona una opción de entrega.
+        </div>
+
+        <!-- Campo de dirección, visible solo si se selecciona "Envío a domicilio" -->
+        <div *ngIf="tipoEntrega === 'domicilio'"
+            [ngClass]="{'invalid': sendForm.submitted && sendForm.controls['direccion']?.invalid}">
+            <p>Ingresa la dirección donde se enviará el pedido:</p>
+            <input id="direccion" name="direccion" type="text" [(ngModel)]="direccion" placeholder="Tu dirección"
+                class="form-control" required />
+            <div *ngIf="sendForm.submitted && sendForm.controls['direccion']?.invalid" class="error-message">
+                La dirección es requerida.
+            </div>
+        </div>
+        <app-spinner *ngIf="loading" />
+        <div class="modal-buttons">
+            <button type="submit" class="button confirm">Confirmar</button>
+            <button type="button" (click)="cerrarModal()" class="button cancel">Cancelar</button>
+        </div>
+    </form>
 </div>

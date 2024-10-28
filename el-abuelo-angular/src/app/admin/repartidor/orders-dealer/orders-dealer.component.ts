@@ -7,14 +7,14 @@ import { RouterModule } from '@angular/router';
 declare var Swal: any;
 
 @Component({
-  selector: 'app-order-ready',
+  selector: 'app-orders-dealer',
   standalone: true,
   imports: [CommonModule, HttpClientModule, RouterModule],
-  templateUrl: './order-ready.component.html',
-  styleUrl: './order-ready.component.scss',
+  templateUrl: './orders-dealer.component.html',
+  styleUrl: './orders-dealer.component.scss',
   providers: [OrderMenuService],
 })
-export class OrderReadyComponent {
+export class OrdersDealerComponent {
   orderItems: OrderMenu[] = [];
   isDetailsOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
   constructor(private orderMenuService: OrderMenuService) {} // Inyectar el servicio
@@ -27,7 +27,7 @@ export class OrderReadyComponent {
       this.orderItems = data
         .filter(
           (order) =>
-            order.status === 'completed' && order.tipoEntrega === 'local'
+            order.status === 'completed' && order.tipoEntrega === 'domicilio'
         )
         .map((order) => ({
           ...order,

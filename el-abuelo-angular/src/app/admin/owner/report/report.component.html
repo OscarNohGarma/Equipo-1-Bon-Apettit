@@ -18,15 +18,16 @@
                 class="btn-delete" (click)="deleteOrder(order.id)"> -->
 
             <div class="enc">
-                <h2>Nombre: {{order.namee}}</h2>
+                <h2>{{order.namee}}</h2>
+                <p>{{order.user}}</p>
             </div>
             <div class="box-details">
                 <p class="button details" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">Detalles
                     ▼</p>
                 <div class="productos" [class.show]="order.isDetailsOpen">
+                    <p *ngIf="order.direccion" class="direccion">Dirección: {{order.direccion}}</p>
                     <div class="producto" *ngFor="let producto of order.productos"
                         [class.no-status]="order.status==='completed'">
-                        <input type="checkbox" [class.no-status]="order.status==='completed'" class="check">
                         <p><span class="vin">• </span> ({{producto.quantity}})</p>
                         <p class="nombre-producto">{{producto.namee}}<span class="precio">
                                 (${{producto.subtotal}})</span></p>
@@ -36,6 +37,7 @@
             </div>
             <p class="total">Total: <span>${{order.total}}</span></p>
             <!-- <button class="button add" (click)="completar(order)">Marcar como pagado</button> -->
+            <p class="entrega">{{order.tipoEntrega == "local" ? "ENTREGADO EN EL LOCAL" : "ENTREGADO A DOMICILIO"}}</p>
             <div class="fecha">
                 <p>{{order.fecha}}</p>
                 <p>{{order.hora}}</p>

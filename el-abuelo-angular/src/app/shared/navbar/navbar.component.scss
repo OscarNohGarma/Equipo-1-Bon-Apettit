@@ -161,10 +161,6 @@ img {
     justify-content: center;
     padding: 10px;
   }
-  .navegacion img {
-    margin-right: 30px;
-    margin-bottom: 0;
-  }
 }
 
 @media (min-width: 1280px) {
@@ -275,6 +271,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 5px;
   padding: 10px 0;
 }
 @media (min-width: 768px) {
@@ -283,7 +280,23 @@ img {
   .user-menu.phone {
     display: none;
   }
-  .user {
-    position: absolute;
-  }
+  // .user {
+  //   position: absolute;
+  // }
+}
+
+.img-bag {
+  width: 25px;
+  transition: all 0.1s ease-in-out;
+}
+.img-bag:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.cont-pc {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  gap: 5px;
+  right: 0;
 }
