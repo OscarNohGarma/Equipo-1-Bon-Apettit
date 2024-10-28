@@ -15,6 +15,8 @@ import { FireAuthService } from 'src/services/fire-auth/fire-auth.service';
 import { FireAuthController } from 'src/controllers/fire-auth/fire-auth.controller';
 import { GenericFirebaseController } from 'src/controllers/generic/generic.controller';
 import { ModeloPrincipal } from 'src/document/modelo_principal';
+import { FireComentariosService } from 'src/services/fire-comentarios/fire-comentarios.service';
+import { FireComentariosController } from 'src/controllers/fire-comentarios/fire-comentarios.controller';
 
 
 @Module({
@@ -25,13 +27,15 @@ import { ModeloPrincipal } from 'src/document/modelo_principal';
         FirebaseCitasService, 
         FirebaseProductoService,
         FirebaseOrdenService,
-        FireAuthService],
+        FireAuthService,
+        FireComentariosService],
     controllers: [
         FirebaseProductoController,
         UploadController, 
         FirebaseCitaController,
         FirebaseOrdenController,
         FireAuthController,
+        FireComentariosController,
         GenericFirebaseController
                     
     ],
