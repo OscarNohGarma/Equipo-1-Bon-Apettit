@@ -1,0 +1,19 @@
+<div class="bg-menu">
+    <div class="container">
+        <div class="header">
+            <h1 class="encabezado">Clientes</h1>
+        </div>
+        <h2 class="subtitulo">Visualiza los clientes registrados en tu página</h2>
+        <div class="grid">
+            <div class="box" *ngFor="let usuario of usuarioItems">
+
+
+                <h1 class="name">{{ usuario.namee }}</h1>
+
+                <p class="user">{{usuario.user}}</p>
+                <!-- <p class="rol">{{ usuario.rol }}</p> -->
+                <p class="phone">Tel. {{ usuario.phone }}</p>
+            </div>
+        </div>
+    </div>
+</div>
