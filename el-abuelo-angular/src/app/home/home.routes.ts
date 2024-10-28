@@ -6,6 +6,7 @@ import { MenuComponent } from './menu/menu.component';
 import { ReservationTablesComponent } from './reservation-tables/reservation-tables.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { CommunityComponent } from './community/community.component';
 
 export const homeRoutes: Routes = [
   {
@@ -37,5 +38,10 @@ export const homeRoutes: Routes = [
     path: 'registro',
     title: 'Registrarse - El abuelo',
     component: RegisterComponent, // Componente de login del admin
+  },
+  {
+    path: 'comunidad',
+    title: 'Comunidad - El abuelo',
+    component: CommunityComponent, // Componente de login del admin
   },
 ];
