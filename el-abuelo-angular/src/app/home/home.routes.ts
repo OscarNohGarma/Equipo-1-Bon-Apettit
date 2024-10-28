@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AuthGuard } from '../auth/auth.guard';
+import { CommunityComponent } from './community/community.component';
 
 export const homeRoutes: Routes = [
   {
@@ -46,5 +47,10 @@ export const homeRoutes: Routes = [
     title: 'Mis órdenes - El abuelo',
     component: MyOrdersComponent, // Componente de login del admin
     canActivate: [AuthGuard],
+  },
+  {
+    path: 'comunidad',
+    title: 'Comunidad - El abuelo',
+    component: CommunityComponent, // Componente de login del admin
   },
 ];

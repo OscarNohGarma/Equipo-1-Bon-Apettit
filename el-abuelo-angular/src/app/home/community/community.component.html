@@ -1,0 +1,44 @@
+<div class="main-login-container">
+    <h2>Comunidad</h2>
+    <p class="subtitle">¡Queremos saber tu opinión! Déjanos tu comentario y calificación sobre tu experiencia en nuestra cafetería para seguir mejorando y ofrecerte el mejor servicio.</p>
+    <div class="login-container">
+        <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
+            <div class="form-group"
+                [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['username'].invalid}">
+                <label for="username">Comentario</label>
+                <input type="text" id="username" [(ngModel)]="username" name="username" class="form-control"
+                    placeholder="Deje su comentario" required />
+                <div *ngIf="loginForm.submitted && loginForm.controls['username']?.invalid" class="error-message">
+                    El comentario es requerido.
+                </div>
+            </div>
+
+            <div class="form-group"
+            [ngClass]="{'invalid': loginForm.submitted && loginForm.controls['rating'].invalid}">
+           <label for="rating">Calificación</label>
+           <p class="clasificacion">
+               <input id="radio1" type="radio" name="rating" value="5" [(ngModel)]="rating" required><!--
+               --><label for="radio1">★</label><!--
+               --><input id="radio2" type="radio" name="rating" value="4" [(ngModel)]="rating"><!--
+               --><label for="radio2">★</label><!--
+               --><input id="radio3" type="radio" name="rating" value="3" [(ngModel)]="rating"><!--
+               --><label for="radio3">★</label><!--
+               --><input id="radio4" type="radio" name="rating" value="2" [(ngModel)]="rating"><!--
+               --><label for="radio4">★</label><!--
+               --><input id="radio5" type="radio" name="rating" value="1" [(ngModel)]="rating"><!--
+               --><label for="radio5">★</label>
+           </p>
+           <div *ngIf="loginForm.submitted && loginForm.controls['rating']?.invalid" class="error-message">
+               La calificación es requerida.
+           </div>
+       </div>
+       
+
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
+            <app-spinner *ngIf="loading" />
+
+            <button type="submit" class="btn-login">Dejar tu opinión</button>
+        </form>
+    </div>
