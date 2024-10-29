@@ -1,10 +1,20 @@
 import { ModeloPrincipal } from "./modelo_principal";
 
-export class Citas extends ModeloPrincipal {
+export class Reservaciones extends ModeloPrincipal {
     tipocollection: string = "cita";
+    apellido: string;
+    telefono: string;
     fecha: string;
     hora: string;
-    tipo_mesa: string;
+    cantidad: string;
+    ubicacion: string;
+    costo: string;
+    tipo_decoracion: string;
+    total: string;
+    tipo_banco: string;
+    numero_cuenta: string;
+    numero_contacto: string;
+    posicion: Array<string>;
 
 }
 
@@ -13,6 +23,14 @@ export class Menu extends ModeloPrincipal {
     image: string;
     precio: string;
     categoria: string;  
+   
+}
+export class Comentario extends ModeloPrincipal {
+    tipocollection: string = "comentario";
+    description: string;
+    calification: string;
+    fecha : string;  
+    hora : string;  
    
 }
 export class Usuario extends ModeloPrincipal {
