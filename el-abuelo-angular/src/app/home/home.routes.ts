@@ -9,6 +9,7 @@ import { RegisterComponent } from './register/register.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AuthGuard } from '../auth/auth.guard';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CommunityComponent } from './community/community.component';
 
 export const homeRoutes: Routes = [
@@ -31,6 +32,11 @@ export const homeRoutes: Routes = [
     path: 'Reservaciones',
     title: 'Reservaciones - El abuelo',
     component: ReservationTablesComponent,
+  },
+  {
+    path: 'profile/edit',
+    title: 'Editar perfil',
+    component: EditProfileComponent,
   },
   {
     path: 'login',

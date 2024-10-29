@@ -85,18 +85,15 @@ export class GenericService<T> {
   ): Observable<never> {
     let errorMessage = '';
 
-    if (error.error instanceof ErrorEvent) {
+    if (error.error && error.error.message) {
       // Error del lado del cliente o de la red
       errorMessage = `${operation} - Error del cliente o de la red: ${error.error.message}`;
     } else {
-      // El backend retornó un código de error no exitoso
+      // Error del servidor
       errorMessage = `${operation} - Error del servidor: Código ${error.status}, mensaje: ${error.message}`;
     }
 
-    // Aquí puedes agregar lógica para registrar el error, mostrarlo en la UI, etc.
     console.error(errorMessage);
-
-    // Retornar un observable con un mensaje de error personalizado
     return throwError(() => new Error(errorMessage));
   }
 }
