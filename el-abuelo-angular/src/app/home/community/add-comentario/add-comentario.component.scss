@@ -1,158 +1,163 @@
 .main-login-container {
-    margin: 70px auto;
-  }
-  .main-login-container h2 {
-    margin-bottom: 30px;
-  }
-  .subtitle {
-    text-align: center;
-    font-size: 18px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    max-width: 400px;
-  }
-  .login-container {
-    width: 350px;
-    padding: 20px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .invalid .form-control {
-    border-color: red;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 5px;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .btn-login {
-    width: 100%;
-    padding: 10px;
-    background-color: #343a40;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.1s ease-in-out;
-  }
-  
-  .btn-login:hover {
-    background-color: #212529;
-  }
-  .question {
-    text-align: center;
-    margin-top: 10px;
-  }
-  .question span {
-    color: #1a5ea2;
-  }
-  .question span:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
- 
-  #form {
-    width: 250px; /* Ancho del formulario */
-    margin: 0 auto; /* Centrar el formulario */
-    padding: 20px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde del formulario */
-    border-radius: 8px; /* Esquinas redondeadas */
-    background-color: #f9f9f9; /* Color de fondo del formulario */
-  }
-  
-  #form {
-    width: 250px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  #form p {
-    text-align: center;
-    margin: 0;
-  }
-  
-  #form label {
-    font-size: 20px; /* Puedes ajustar este tamaño según sea necesario */
-    cursor: pointer; 
-    transition: color 0.3s; 
-  }
-  
-  input[type="radio"] {
-    display: none;
-  }
-  
-  label {
-    color: grey; 
-  }
-  
-  .clasificacion {
-    direction: rtl; 
-    unicode-bidi: bidi-override; 
-    display: flex; /* Usar flex para el contenedor de estrellas */
-  justify-content: center;
-  }
-  
-  .clasificacion label {
-    font-size: 40px; /* Cambia el tamaño de las estrellas aquí */
-    transition: color 0.3s; 
-  }
-  
-  /* Cambiar el color de las estrellas al pasar el mouse */
-  .clasificacion label:hover,
-  .clasificacion label:hover ~ label {
-    color: orange; 
-  }
-  
-  /* Cambiar el color de las estrellas seleccionadas */
-  input[type="radio"]:checked ~ label {
-    color: orange; 
-  }
-  
-  .btn-primary {
-    display: block; 
-    width: 100%; 
-    padding: 10px; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
-  }
-  
-  .btn-primary:hover {
-    background-color: #0056b3; 
-  }
-  
+  margin: 70px auto;
+}
+.main-login-container h2 {
+  margin-bottom: 30px;
+}
+.subtitle {
+  text-align: center;
+  font-size: 18px;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+.login-container {
+  width: 350px;
+  padding: 20px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.invalid .form-control {
+  border-color: red;
+}
+
+.error-message {
+  color: red;
+  margin-top: 5px;
+}
+
+.error-message {
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.btn-login {
+  width: 100%;
+  padding: 10px;
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+
+.btn-login:hover {
+  background-color: #212529;
+}
+.question {
+  text-align: center;
+  margin-top: 10px;
+}
+.question span {
+  color: #1a5ea2;
+}
+.question span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#form {
+  width: 250px; /* Ancho del formulario */
+  margin: 0 auto; /* Centrar el formulario */
+  padding: 20px; /* Espaciado interno */
+  border: 1px solid #ccc; /* Borde del formulario */
+  border-radius: 8px; /* Esquinas redondeadas */
+  background-color: #f9f9f9; /* Color de fondo del formulario */
+}
+
+#form {
+  width: 250px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+#form p {
+  text-align: center;
+  margin: 0;
+}
+
+#form label {
+  font-size: 20px; /* Puedes ajustar este tamaño según sea necesario */
+  cursor: pointer; 
+  transition: color 0.3s; 
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: grey; 
+}
+
+.clasificacion {
+  direction: rtl; 
+  unicode-bidi: bidi-override; 
+  display: flex; /* Usar flex para el contenedor de estrellas */
+justify-content: center;
+}
+
+.clasificacion label {
+  font-size: 40px; /* Cambia el tamaño de las estrellas aquí */
+  transition: color 0.3s; 
+}
+
+/* Cambiar el color de las estrellas al pasar el mouse */
+.clasificacion label:hover,
+.clasificacion label:hover ~ label {
+  color: orange; 
+}
+
+/* Cambiar el color de las estrellas seleccionadas */
+input[type="radio"]:checked ~ label {
+  color: orange; 
+}
+
+.btn-primary {
+  display: block; 
+  width: 100%; 
+  padding: 10px; 
+  background-color: #007bff; 
+  color: white; 
+  border: none; 
+  border-radius: 5px; 
+  font-size: 16px; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+
+.btn-primary:hover {
+  background-color: #0056b3; 
+}
+
+textarea {
+  width: 100%; /* Para que ocupe todo el ancho del contenedor */
+  height: 100px; /* Ajusta la altura según lo necesites */
+  resize: vertical; /* Permite redimensionar verticalmente */
+}

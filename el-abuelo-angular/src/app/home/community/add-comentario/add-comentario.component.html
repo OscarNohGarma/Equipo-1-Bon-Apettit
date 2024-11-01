@@ -6,8 +6,9 @@
             <div class="form-group"
                 [ngClass]="{'invalid': commentForm.submitted && commentForm.controls['description'].invalid}">
                 <label for="description">Comentario</label>
-                <input type="text" id="description" [(ngModel)]="description" name="description" class="form-control"
-                    placeholder="Deje su comentario" required />
+                <textarea id="description" [(ngModel)]="description" name="description" class="form-control"
+                placeholder="Deje su comentario" required></textarea>
+                    
                 <div *ngIf="commentForm.submitted && commentForm.controls['description']?.invalid" class="error-message">
                     El comentario es requerido.
                 </div>
