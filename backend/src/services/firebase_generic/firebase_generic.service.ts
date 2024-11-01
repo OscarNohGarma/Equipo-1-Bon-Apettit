@@ -22,7 +22,7 @@ export class FirebaseGenericService {
       throw new BadRequestException('Se requiere un nombre');
     }
 
-    const nameQuerySnapshot: QuerySnapshot = await collection.where('namee', '==', entity.namee).get();
+    const nameQuerySnapshot: QuerySnapshot = await collection.where('id', '==', entity.namee).get();
     if (!nameQuerySnapshot.empty) {
       throw new ConflictException('La entidad ya está registrada');
     }
