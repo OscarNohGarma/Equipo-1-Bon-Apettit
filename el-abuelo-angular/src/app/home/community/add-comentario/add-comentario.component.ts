@@ -12,20 +12,16 @@ declare var Swal: any;
 @Component({
   selector: 'app-add-comentario',
   standalone: true,
-  imports: [
-    CommonModule,
-    HttpClientModule,
-    FormsModule,
-    SpinnerComponent
-  ],
+  imports: [CommonModule, HttpClientModule, FormsModule, SpinnerComponent],
   templateUrl: './add-comentario.component.html',
   styleUrls: ['./add-comentario.component.scss'],
-  providers: [CommunityService, AuthService]
+  providers: [CommunityService, AuthService],
 })
 export class AddComentarioComponent implements OnInit {
   description: string = '';
   calification: string | null = null;
   comments: Community[] = [];
+  currentName: string | null = null;
   currentUser: string | null = null;
   errorMessage: string | null = null;
   loading: boolean = false;
@@ -38,29 +34,15 @@ export class AddComentarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkAuthentication();
-    this.loadComments();
   }
 
   private checkAuthentication(): void {
     this.currentUser = this.authService.getUser();
+    this.currentName = this.authService.getUsername();
     if (!this.currentUser) {
       this.router.navigate(['/login']);
       return;
     }
-  }
-
-  loadComments(): void {
-    this.loading = true;
-    this.communityService.getAll().subscribe({
-      next: (data) => {
-        this.comments = data;
-        this.loading = false;
-      },
-      error: (error) => {
-        this.errorMessage = 'Error al cargar los comentarios';
-        this.loading = false;
-      }
-    });
   }
 
   submitComment(): void {
@@ -74,12 +56,12 @@ export class AddComentarioComponent implements OnInit {
 
     const newComment = new Community(
       0,
-      'Comentario',
+      this.currentName || '',
       this.description,
       this.calification,
       new Date().toLocaleDateString(),
       new Date().toLocaleTimeString(),
-      this.currentUser || 'Anónimo'
+      this.currentUser || ''
     );
 
     this.communityService.add(newComment).subscribe({
@@ -88,16 +70,11 @@ export class AddComentarioComponent implements OnInit {
       },
       error: (error) => {
         this.handleSubmissionError(error);
-      }
+      },
     });
   }
 
   private handleSuccessfulSubmission(): void {
-    this.description = '';
-    this.calification = null;
-    this.errorMessage = null;
-    this.loadComments();
-    
     // Configuración y visualización de SweetAlert al enviar el comentario exitosamente
     this.loading = false;
     Swal.fire({
@@ -118,20 +95,14 @@ export class AddComentarioComponent implements OnInit {
         }
       },
     }).then(() => {
-      this.router.navigate(['/']).then(() => {
-        setTimeout(() => {
-          window.scroll(0, 0);
-          setTimeout(() => {
-            window.location.reload();
-          }, 1000);
-        }, 500);
-      });
+      this.router.navigate(['/comunidad']).then(() => {});
     });
   }
 
   private handleSubmissionError(error: any): void {
     console.error('Error al crear el comentario:', error);
-    this.errorMessage = 'Ocurrió un error al enviar el comentario. Por favor intenta nuevamente.';
+    this.errorMessage =
+      'Ocurrió un error al enviar el comentario. Por favor intenta nuevamente.';
     this.loading = false;
   }
 }

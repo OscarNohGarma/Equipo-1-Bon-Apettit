@@ -3,33 +3,27 @@
         <div class="header">
             <h1 class="encabezado">Comunidad</h1>
         </div>
-        <h2 class="subtitulo">Visualiza los comentarios en tu página</h2>
+        <h2 class="subtitulo">Conoce lo que los clientes opinan de nosotros</h2>
         <div class="grid">
             <div class="box" *ngFor="let comentario of comentarioItems">
                 <h1 class="name">{{ comentario.usuario }}</h1>
                 <p class="description">{{ comentario.description }}</p>
-                
+
                 <!-- Mostrar calificación como estrellas -->
                 <div class="clasificacion">
                     <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-                        <input
-                            id="radio{{ star }}-{{ comentario.id }}"
-                            type="radio"
-                            name="calification-{{ comentario.id }}"
-                            value="{{ star }}"
-                            [checked]="comentario.calification >= star.toString()"
-                            disabled
-                        />
+                        <input id="radio{{ star }}-{{ comentario.id }}" type="radio"
+                            name="calification-{{ comentario.id }}" value="{{ star }}"
+                            [checked]="comentario.calification >= star.toString()" disabled />
                         <label for="radio{{ star }}-{{ comentario.id }}">★</label>
                     </ng-container>
                 </div>
             </div>
         </div>
-        
+
         <div class="feedback-section">
             <p>¿Te gustaría dejar tu opinión? ¡Nos encantaría escucharte!</p>
             <a routerLink="/agregar-comentarios" class="btn btn-black">Dejar Opinión</a>
         </div>
     </div>
 </div>
-
