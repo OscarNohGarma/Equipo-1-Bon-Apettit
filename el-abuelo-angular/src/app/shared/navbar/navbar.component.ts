@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
     });
   }
   onEdit() {
-    this.router.navigate(['/admin/roles/edit', this.currentId]).then(() => {
+    this.router.navigate(['/profile/edit']).then(() => {
       // Forzar la recarga de la página después de la navegación
       window.location.reload();
     });
