@@ -10,6 +10,7 @@ import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AuthGuard } from '../auth/auth.guard';
 import { CommunityComponent } from './community/community.component';
+import { AddComentarioComponent } from './community/add-comentario/add-comentario.component';
 
 export const homeRoutes: Routes = [
   {
@@ -53,4 +54,12 @@ export const homeRoutes: Routes = [
     title: 'Comunidad - El abuelo',
     component: CommunityComponent, // Componente de login del admin
   },
+  {
+    path: 'agregar-comentarios',
+    title: 'Agregar comentarios - El abuelo',
+    component: AddComentarioComponent, // Componente de login del admin
+  },
+  
+    
+
 ];

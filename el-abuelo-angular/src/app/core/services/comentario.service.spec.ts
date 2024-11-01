@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { CommunityService } from './community.service';
+import { CommunityService } from './comentario.service';
 
 describe('CommunityService', () => {
   let service: CommunityService;

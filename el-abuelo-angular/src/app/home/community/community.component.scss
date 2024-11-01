@@ -1,158 +1,170 @@
-.main-login-container {
-    margin: 70px auto;
-  }
-  .main-login-container h2 {
-    margin-bottom: 30px;
-  }
-  .subtitle {
-    text-align: center;
-    font-size: 18px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    max-width: 400px;
-  }
-  .login-container {
-    width: 350px;
-    padding: 20px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .invalid .form-control {
-    border-color: red;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 5px;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .btn-login {
-    width: 100%;
-    padding: 10px;
-    background-color: #343a40;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.1s ease-in-out;
-  }
-  
-  .btn-login:hover {
-    background-color: #212529;
-  }
-  .question {
-    text-align: center;
-    margin-top: 10px;
-  }
-  .question span {
-    color: #1a5ea2;
-  }
-  .question span:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
- 
-  #form {
-    width: 250px; /* Ancho del formulario */
-    margin: 0 auto; /* Centrar el formulario */
-    padding: 20px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde del formulario */
-    border-radius: 8px; /* Esquinas redondeadas */
-    background-color: #f9f9f9; /* Color de fondo del formulario */
-  }
-  
-  #form {
-    width: 250px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  #form p {
-    text-align: center;
-    margin: 0;
-  }
-  
-  #form label {
-    font-size: 20px; /* Puedes ajustar este tamaño según sea necesario */
-    cursor: pointer; 
-    transition: color 0.3s; 
-  }
-  
-  input[type="radio"] {
-    display: none;
-  }
-  
-  label {
-    color: grey; 
-  }
-  
-  .clasificacion {
-    direction: rtl; 
-    unicode-bidi: bidi-override; 
-    display: flex; /* Usar flex para el contenedor de estrellas */
+main {
+  margin: 50px auto;
+  width: 800px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+h3 {
+  text-align: center;
+}
+
+.encabezado {
+  font-size: 40px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: 900;
+}
+
+.subtitulo {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: black;
+  margin-bottom: 50px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+.box {
+  padding: 30px 100px;
+  margin: 0 auto 10px;
+  background-color: rgb(250, 250, 250);
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
+  position: relative;
+
+  @media (min-width: 992px) {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
   }
-  
-  .clasificacion label {
-    font-size: 40px; /* Cambia el tamaño de las estrellas aquí */
-    transition: color 0.3s; 
+}
+
+@media (min-width: 1280px) {
+  .box {
+    width: 80%;
   }
-  
-  /* Cambiar el color de las estrellas al pasar el mouse */
-  .clasificacion label:hover,
-  .clasificacion label:hover ~ label {
-    color: orange; 
+}
+
+.box h1 {
+  font-weight: 800;
+  font-size: 30px;
+  margin-top: 0;
+}
+
+@media (min-width: 992px) {
+  .box h1 {
+    font-size: 25px;
   }
-  
-  /* Cambiar el color de las estrellas seleccionadas */
-  input[type="radio"]:checked ~ label {
-    color: orange; 
+}
+
+.grid {
+  margin-top: 60px;
+  display: flex; // Cambiado a flexbox
+  flex-direction: column; // Coloca en columna
+  gap: 20px; // Espacio entre los comentarios
+
+  .comentarios-container {
+    max-height: 300px; // Altura máxima para los comentarios
+    overflow-y: auto; // Desplazamiento vertical si es necesario
   }
-  
-  .btn-primary {
-    display: block; 
-    width: 100%; 
-    padding: 10px; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
+}
+
+.rol {
+  margin-bottom: 5px;
+  font-weight: 600;
+  color: #343a40;
+
+  @media (min-width: 992px) {
+    margin-bottom: 0;
   }
-  
-  .btn-primary:hover {
-    background-color: #0056b3; 
+}
+
+.user {
+  margin-bottom: 0;
+  font-size: 18px;
+}
+
+.phone {
+  margin-bottom: 0;
+  font-weight: 600;
+  color: #343a40;
+  font-size: 18px;
+}
+
+// Estilo para el botón negro
+.btn-black {
+  background-color: black; // Color de fondo negro
+  color: white; // Color del texto en blanco
+  padding: 10px 20px; // Espaciado interno del botón
+  text-decoration: none; // Sin subrayado
+  border-radius: 5px; // Bordes redondeados del botón
+  transition: background-color 0.3s; // Transición suave para hover
+
+  &:hover {
+    background-color: #333; // Color más claro al pasar el mouse
   }
-  
+}
+
+// Asegúrate de que la sección de feedback tenga un estilo simple
+.feedback-section {
+  text-align: center; // Centrar el texto
+  margin-top: 20px; // Espacio superior para separar del contenedor de comentarios
+}
+
+
+.clasificacion {
+  display: flex;
+  justify-content: center;
+  font-size: 40px; /* Tamaño de las estrellas */
+}
+
+.clasificacion input {
+  display: none; /* Ocultar los botones de radio */
+}
+
+.clasificacion label {
+  color: orange; /* Color por defecto de las estrellas */
+  transition: color 0.3s; /* Suavizar el cambio de color */
+}
+
+/* Estrellas llenas basadas en la calificación */
+.clasificacion input:checked ~ label {
+  color: orange; /* Cambia el color a naranja para las estrellas a la izquierda */
+}
+
+/* Color de las estrellas llenas basado en la calificación */
+.clasificacion input:checked + label {
+  color: orange; /* Color de las estrellas llenas */
+}
+
+/* Cambiar el color de las estrellas vacías */
+.clasificacion input:checked {
+  & ~ input {
+      & + label {
+          color: lightgray; /* Color de las estrellas vacías a la derecha */
+      }
+  }
+}

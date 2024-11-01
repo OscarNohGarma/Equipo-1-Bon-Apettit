@@ -1,41 +1,35 @@
-<div class="main-login-container">
-    <h2>Comunidad</h2>
-    <p class="subtitle">¡Queremos saber tu opinión! Déjanos tu comentario y calificación sobre tu experiencia en nuestra cafetería para seguir mejorando y ofrecerte el mejor servicio.</p>
-    <div class="login-container">
-        <form (ngSubmit)="submitComment()" #commentForm="ngForm" novalidate>
-            <div class="form-group"
-                [ngClass]="{'invalid': commentForm.submitted && commentForm.controls['description'].invalid}">
-                <label for="description">Comentario</label>
-                <input type="text" id="description" [(ngModel)]="description" name="description" class="form-control"
-                    placeholder="Deje su comentario" required />
-                <div *ngIf="commentForm.submitted && commentForm.controls['description']?.invalid" class="error-message">
-                    El comentario es requerido.
+<div class="bg-menu">
+    <div class="container">
+        <div class="header">
+            <h1 class="encabezado">Comunidad</h1>
+        </div>
+        <h2 class="subtitulo">Visualiza los comentarios en tu página</h2>
+        <div class="grid">
+            <div class="box" *ngFor="let comentario of comentarioItems">
+                <h1 class="name">{{ comentario.usuario }}</h1>
+                <p class="description">{{ comentario.description }}</p>
+                
+                <!-- Mostrar calificación como estrellas -->
+                <div class="clasificacion">
+                    <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                        <input
+                            id="radio{{ star }}-{{ comentario.id }}"
+                            type="radio"
+                            name="calification-{{ comentario.id }}"
+                            value="{{ star }}"
+                            [checked]="comentario.calification >= star.toString()"
+                            disabled
+                        />
+                        <label for="radio{{ star }}-{{ comentario.id }}">★</label>
+                    </ng-container>
                 </div>
             </div>
-
-            <div class="form-group"
-                [ngClass]="{'invalid': commentForm.submitted && commentForm.controls['calification'].invalid}">
-                <label for="calification">Calificación</label>
-                <p class="clasificacion">
-                    <input id="radio1" type="radio" name="calification" value="5" [(ngModel)]="calification" required><!--
-                    --><label for="radio1">★</label><!--
-                    --><input id="radio2" type="radio" name="calification" value="4" [(ngModel)]="calification"><!--
-                    --><label for="radio2">★</label><!--
-                    --><input id="radio3" type="radio" name="calification" value="3" [(ngModel)]="calification"><!--
-                    --><label for="radio3">★</label><!--
-                    --><input id="radio4" type="radio" name="calification" value="2" [(ngModel)]="calification"><!--
-                    --><label for="radio4">★</label><!--
-                    --><input id="radio5" type="radio" name="calification" value="1" [(ngModel)]="calification"><!--
-                    --><label for="radio5">★</label>
-                </p>
-                <div *ngIf="commentForm.submitted && commentForm.controls['calification']?.invalid" class="error-message">
-                    La calificación es requerida.
-                </div>
-            </div>
-
-            <app-spinner *ngIf="loading"></app-spinner>
-
-            <button type="submit" class="btn-login">Dejar tu opinión</button>
-        </form>
+        </div>
+        
+        <div class="feedback-section">
+            <p>¿Te gustaría dejar tu opinión? ¡Nos encantaría escucharte!</p>
+            <a routerLink="/agregar-comentarios" class="btn btn-black">Dejar Opinión</a>
+        </div>
     </div>
 </div>
+
