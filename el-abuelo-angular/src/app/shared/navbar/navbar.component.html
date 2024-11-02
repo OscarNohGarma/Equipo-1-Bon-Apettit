@@ -33,7 +33,7 @@
         <div class="cont-login">
             <p *ngIf="!currentUser" (click)="onLoginMobile()" [routerLink]="['login']" class="login phone">Iniciar
                 Sesión</p>
-            <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
+            <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']" *ngIf="currentUser">
             <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
         </div>
     </div>
