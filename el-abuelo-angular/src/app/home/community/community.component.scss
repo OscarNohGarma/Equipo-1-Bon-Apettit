@@ -14,9 +14,10 @@ h2 {
 }
 
 .encabezado {
-  font-size: 40px;
+  font-size: 55px;
   font-weight: bolder;
   text-align: center;
+  margin-bottom: 20px;
   margin-top: 3px;
   font-weight: 900;
 }
@@ -26,7 +27,7 @@ h2 {
   font-size: 20px;
   font-weight: 400;
   text-align: center;
-  color: black;
+  color: #343a40;
   margin-bottom: 50px;
 }
 
@@ -62,8 +63,6 @@ h2 {
   }
 }
 
-
-
 .grid {
   margin-top: 60px;
   display: flex;
@@ -76,8 +75,8 @@ h2 {
   margin-top: 20px; // Espacio superior para separar del contenedor de comentarios
 }
 
-.btn-black {
-  background-color: black; // Color de fondo negro
+.btn {
+  background-color: #343a40; // Color de fondo negro
   color: white; // Color del texto en blanco
   padding: 10px 20px; // Espaciado interno del botón
   text-decoration: none; // Sin subrayado
@@ -85,7 +84,7 @@ h2 {
   transition: background-color 0.3s; // Transición suave para hover
 
   &:hover {
-    background-color: #333; // Color más claro al pasar el mouse
+    background-color: #212529; // Color más claro al pasar el mouse
   }
 }
 
@@ -123,7 +122,7 @@ h2 {
   }
 }
 
-.description{
+.description {
   text-align: justify; // Justifica el texto
   margin: 0 auto; // Centra el contenedor en la página
 }
@@ -146,7 +145,6 @@ h2 {
   }
 }
 
-
 .fecha-hora {
   display: flex; /* Usar flexbox para alinear */
   margin: 0 170px; /* Espacio lateral uniforme (izquierda y derecha) */
@@ -155,7 +153,8 @@ h2 {
   justify-content: flex-start; /* Alinear elementos al principio (izquierda) */
 }
 
-.fecha, .hora {
+.fecha,
+.hora {
   font-size: 14px; /* Tamaño de fuente para fecha y hora */
   color: #555; /* Color más tenue para la fecha y hora */
   margin-right: 15px; /* Espacio entre la fecha y la hora */
@@ -176,4 +175,3 @@ h2 {
     margin: 0 130px; /* Reduce el margen lateral en pantallas pequeñas */
   }
 }
-

@@ -1,15 +1,17 @@
 <div class="main-login-container">
-    <h2>Comunidad</h2>
-    <p class="subtitle">¡Queremos saber tu opinión! Déjanos tu comentario y calificación sobre tu experiencia en nuestra cafetería para seguir mejorando y ofrecerte el mejor servicio.</p>
+    <h2>Dejar opinión</h2>
+    <p class="subtitle">Déjanos tu comentario y calificación sobre tu experiencia en nuestra cafetería para seguir
+        mejorando y ofrecerte el mejor servicio.</p>
     <div class="login-container">
         <form (ngSubmit)="submitComment()" #commentForm="ngForm" novalidate>
             <div class="form-group"
                 [ngClass]="{'invalid': commentForm.submitted && commentForm.controls['description'].invalid}">
                 <label for="description">Comentario</label>
                 <textarea id="description" [(ngModel)]="description" name="description" class="form-control"
-                placeholder="Deje su comentario" required></textarea>
-                    
-                <div *ngIf="commentForm.submitted && commentForm.controls['description']?.invalid" class="error-message">
+                    placeholder="Deja tu comentario" required></textarea>
+
+                <div *ngIf="commentForm.submitted && commentForm.controls['description']?.invalid"
+                    class="error-message">
                     El comentario es requerido.
                 </div>
             </div>
@@ -29,7 +31,8 @@
                     --><input id="radio5" type="radio" name="calification" value="1" [(ngModel)]="calification"><!--
                     --><label for="radio5">★</label>
                 </p>
-                <div *ngIf="commentForm.submitted && commentForm.controls['calification']?.invalid" class="error-message">
+                <div *ngIf="commentForm.submitted && commentForm.controls['calification']?.invalid"
+                    class="error-message">
                     La calificación es requerida.
                 </div>
             </div>

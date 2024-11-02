@@ -8,7 +8,7 @@
   text-align: center;
   font-size: 18px;
   margin: 0 auto;
-  margin-bottom: 20px;
+  margin-bottom: 50px;
   max-width: 400px;
 }
 .login-container {
@@ -104,8 +104,8 @@ h2 {
 
 #form label {
   font-size: 20px; /* Puedes ajustar este tamaño según sea necesario */
-  cursor: pointer; 
-  transition: color 0.3s; 
+  cursor: pointer;
+  transition: color 0.3s;
 }
 
 input[type="radio"] {
@@ -113,51 +113,51 @@ input[type="radio"] {
 }
 
 label {
-  color: grey; 
+  color: grey;
 }
 
 .clasificacion {
-  direction: rtl; 
-  unicode-bidi: bidi-override; 
+  direction: rtl;
+  unicode-bidi: bidi-override;
   display: flex; /* Usar flex para el contenedor de estrellas */
-justify-content: center;
+  justify-content: center;
 }
 
 .clasificacion label {
   font-size: 40px; /* Cambia el tamaño de las estrellas aquí */
-  transition: color 0.3s; 
+  transition: color 0.3s;
 }
 
 /* Cambiar el color de las estrellas al pasar el mouse */
 .clasificacion label:hover,
 .clasificacion label:hover ~ label {
-  color: orange; 
+  color: orange;
 }
 
 /* Cambiar el color de las estrellas seleccionadas */
 input[type="radio"]:checked ~ label {
-  color: orange; 
+  color: orange;
 }
 
 .btn-primary {
-  display: block; 
-  width: 100%; 
-  padding: 10px; 
-  background-color: #007bff; 
-  color: white; 
-  border: none; 
-  border-radius: 5px; 
-  font-size: 16px; 
-  cursor: pointer; 
-  transition: background-color 0.3s; 
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-  background-color: #0056b3; 
+  background-color: #0056b3;
 }
 
 textarea {
   width: 100%; /* Para que ocupe todo el ancho del contenedor */
   height: 100px; /* Ajusta la altura según lo necesites */
-  resize: vertical; /* Permite redimensionar verticalmente */
+  resize: none; /* Permite redimensionar verticalmente */
 }
