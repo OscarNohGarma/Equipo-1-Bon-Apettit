@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CommunityComponent } from './community.component';
+import { AddComentarioComponent } from './add-comentario.component';
 
-describe('CommunityComponent', () => {
-  let component: CommunityComponent;
-  let fixture: ComponentFixture<CommunityComponent>;
+describe('AddComentarioComponent', () => {
+  let component: AddComentarioComponent;
+  let fixture: ComponentFixture<AddComentarioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CommunityComponent]
+      imports: [AddComentarioComponent]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(CommunityComponent);
+    
+    fixture = TestBed.createComponent(AddComentarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
