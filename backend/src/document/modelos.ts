@@ -8,13 +8,16 @@ export class Reservaciones extends ModeloPrincipal {
     hora: string;
     cantidad: string;
     ubicacion: string;
+    cantidadMesasReservada: string;
     costo: string;
     tipo_decoracion: string;
     total: string;
     tipo_banco: string;
     numero_cuenta: string;
+    image: string;
     numero_contacto: string;
     estados: string;
+  
 
 }
 

@@ -3,8 +3,8 @@
         <a [routerLink]="['/']">Inicio</a>
         <a [routerLink]="['menu']">Menú</a>
         <a [routerLink]="['Galeria']">Galería</a>
+        <a [routerLink]="['Reservaciones']">Reservaciones</a>
         <a [routerLink]="['comunidad']">Comunidad</a>
-        <!-- <a [routerLink]="['Reservaciones']">Reservaciones</a> -->
 
         <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar Sesión</p>
         <div *ngIf="currentUser" class="cont-pc">
@@ -57,8 +57,8 @@
                 <a [routerLink]="['/']">Inicio</a>
                 <a [routerLink]="['menu']">Menú</a>
                 <a [routerLink]="['Galeria']">Galería</a>
+                <a [routerLink]="['Reservaciones']">Reservaciones</a>
                 <a [routerLink]="['comunidad']">Comunidad</a>
-                <!-- <a [routerLink]="['Reservaciones']">Reservaciones</a>   -->
                 <!-- <a [routerLink]="['contacto']">Contacto</a> -->
             </div>
             <div class="slogan">
