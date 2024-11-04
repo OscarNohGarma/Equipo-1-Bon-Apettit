@@ -40,6 +40,10 @@
             (click)="selectCategory('Administrar Menú')">
             Menú
         </div>
+        <div *ngIf="rol==='ADMINISTRADOR'" class="elemento-nav" [routerLink]="['/admin/comentarios']"
+            (click)="selectCategory('Comentarios')">
+            Comentarios
+        </div>
         <div *ngIf="rol==='DUEÑO'" class="elemento-nav" [routerLink]="['/admin/roles']"
             (click)="selectCategory('Roles de Usuarios')">
             Usuarios
@@ -62,6 +66,9 @@
         <div class="submenu-mobile box" [class.show]=" isMenuOpen">
             <!-- <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')">Inicio</div> -->
             <div *ngIf="rol==='ADMINISTRADOR'" [routerLink]="['/admin/menu']" (click)="selectCategory('Menú')">Menú
+            </div>
+            <div *ngIf="rol==='ADMINISTRADOR'" [routerLink]="['/admin/comentarios']"
+                (click)="selectCategory('Comentarios')">Comentarios
             </div>
             <div *ngIf="rol==='DUEÑO'" [routerLink]="['/admin/roles']" (click)="selectCategory('Usuarios')">Usuarios
             </div>

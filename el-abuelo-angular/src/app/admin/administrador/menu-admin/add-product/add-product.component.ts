@@ -6,12 +6,12 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ProductService } from '../../../core/services/product.service';
-import { MenuProduct } from '../../../core/models/menuProduct';
+import { ProductService } from '../../../../core/services/product.service';
+import { MenuProduct } from '../../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
-import { UploadService } from '../../../core/services/upload.service';
+import { UploadService } from '../../../../core/services/upload.service';
 import { Observable } from 'rxjs';
-import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
+import { SpinnerComponent } from '../../../../shared/spinner/spinner.component';
 declare var Swal: any;
 @Component({
   selector: 'app-add-product',

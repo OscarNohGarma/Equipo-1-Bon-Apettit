@@ -14,6 +14,7 @@ import { OrderReadyComponent } from './cajero/order-ready/order-ready.component'
 import { ReportComponent } from './owner/report/report.component';
 import { OrdersDealerComponent } from './repartidor/orders-dealer/orders-dealer.component';
 import { ClientsComponent } from './owner/clients/clients.component';
+import { ComentariosComponent } from './administrador/comentarios/comentarios.component';
 
 export const adminRoutes: Routes = [
   {
@@ -38,6 +39,12 @@ export const adminRoutes: Routes = [
     path: 'menu/add',
     title: 'Agregar Producto - El abuelo',
     component: AddProductComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'comentarios',
+    title: 'Comentarios - El abuelo',
+    component: ComentariosComponent,
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
