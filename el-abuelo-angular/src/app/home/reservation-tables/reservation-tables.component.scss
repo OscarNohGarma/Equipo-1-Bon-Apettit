@@ -23,7 +23,7 @@ html{
   scroll-behavior: smooth;
 }
 body{
-  font-family:  "raleway", sans-serif;
+  font-family:  "Raleway", "sans-serif";
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8;
@@ -52,19 +52,40 @@ img{
   margin-top: -1.5em;
 }
 
-.container2{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2em;
-
+.encabezado {
+  font-size: 55px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 3px;
+  font-weight: 900;
+}
+.subtitulo {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px;
+  margin-top: 1rem;
 }
 
+// .container2{
+//   max-width: 1100px;
+//   margin: 0 auto;
+//   padding: 0 2em;
+
+// }
+.container{
+  margin: 0 auto;
+}
 .form-box{
   display: flex;
   flex-direction: column;
   margin-top: 5em;
-  border: 8px solid #e0e0e7;
-  border-radius: 15px;
+  border: 1px solid #b9b9b9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color:#faf9ff;
   margin-bottom: 5em;
 }
@@ -121,8 +142,8 @@ img{
 }
 .progress2 ul.progress2-steps li.active > span{
   color: white;
-  background-color: #6c5ce7;
-  border: 4px solid #a29bfe;
+  background-color: #343a40;
+  border: 4px solid #818181;
   z-index: 1;
 }
 .progress2 ul.progress2-steps li p span{
@@ -164,7 +185,8 @@ form > div > div:not(.checkbox){
 form :where(input,select){
   height: 40px;
   padding: 0 1em;
-  border-radius: 7px;
+  border: none;
+  border-radius: 5px;
   outline-color: #a29bfe;
   border: 1px solid #e0e0e7;
   background-color: transparent;
@@ -184,6 +206,7 @@ form .grouping input{
   max-width: 70px;
   text-align: center;
   margin-right: 1em;
+
 }
 
 form .checkbox input{
@@ -233,7 +256,40 @@ form > .form-four .bg-svg{
 
 
 /**Buttons*/
-
+.text-red {
+  color: red !important;
+}
+.submit-button{
+  all: unset;
+  text-align: center;
+  width: 100%;
+  padding: 6px 0;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.no-show.ex{
+  display: none;
+}
+.cont-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.submit-button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
+.input2[type="file"] {
+  display: none; /* Ocultar el input */
+}
 
 .btn-group{
   display: flex;
@@ -242,14 +298,14 @@ form > .form-four .bg-svg{
   margin-top: 2em;
 }
 .btn-group [class*="btn-"]{
-  background-color: #6c5ce7;
+  background-color: #343a40;
   color: white;
-  padding: 1em 2.5em;
-  border: 4px solid #a29bfe;
-  border-radius: 10px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  -webkit-transition: background-color .3s, border-color .3s ease-out;
-  transition: background-color .3s, border-color .3s ease-out;
+  -webkit-transition: background-color .3s, border-color all 0.1s ease-in-out;
+  transition: background-color .3s, border-color all 0.1s ease-in-out;
 }
 
 .btn-group [class*="btn-"]:disabled {
@@ -258,8 +314,8 @@ form > .form-four .bg-svg{
   cursor: text;
 }
 .btn-group [class*="btn-"]:hover:not(:disabled) {
-  background-color: #52505e;
-  border-color: #b0b0c0;
+  background-color: #212529;
+  border-color: #e0e0e7;
 }
 
 
@@ -278,9 +334,9 @@ form > .form-four .bg-svg{
 
 
 
-::placeholder{
-  color: #b0b0c0;
-}
+// ::placeholder{
+//   color: #343a40;
+// }
 
 @media screen and (min-width: 1024px){
   .form-box{
@@ -334,8 +390,8 @@ form > .form-four .bg-svg{
   .form-box{
       display: flex;
       overflow: hidden; /* Evita que los bordes redondeados se corten */
-      border: 8px solid #b0b0c0;
-      border-radius: 15px;
+      // border: 8px solid #b0b0c0;
+      // border-radius: 15px;
   }
 
   .progress2 ul li p{
@@ -408,6 +464,268 @@ form > .form-four .bg-svg{
       margin-left: -1em;
   }
 }
+
+
+/*Reservation Tables*/
+
+/* .movie-container {
+  margin: 20px 0;
+}
+
+.movie-container select {
+  background-color: #fff;
+  border: 0;
+  border-radius: 5px;
+  font-size: 16px;
+  margin-left: 10px;
+  padding: 5px 15px 5px 15px;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.container3 {
+  perspective: 1000px;
+  margin-bottom: 30px;
+  margin-top: 1rem;
+  margin-left: 2rem;
+}
+
+.seat {
+  background-color: #444451;
+  height: 26px;
+  width: 32px;
+  margin: 3px;
+  font-size: 50px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+ */
+/*
+.seat.selected {
+  background-color: green;
+}
+.seat.not {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+.seat.nearby {
+  background-color: #d3d3d3;
+  cursor: not-allowed;
+} */
+
+
+/* .seat.sold {
+  background-color: blue;
+}
+
+.seat.not {
+  background-color: rgb(135, 10, 50);
+}
+
+.seat:nth-of-type(2) {
+  margin-right: 18px;
+}
+
+.seat:nth-last-of-type(2) {
+  margin-left: 18px;
+}
+
+.seat:not(.sold):hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+.showcase .seat:not(.sold):hover {
+  cursor: default;
+  transform: scale(1);
+} */
+
+
+
+/* .showcase {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: #777;
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  margin: auto;
+}
+
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 10px;
+}
+.showcase li small {
+  margin-left: 2px;
+} */
+
+.row {
+  display: flex;
+  margin-top: 1rem;
+}
+
+/* .screen {
+  background-color: rgb(41, 174, 203);
+  height: 120px;
+  width: 100%;
+  margin: 15px 0;
+  transform: rotateX(-48deg);
+  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+} */
+
+p.text{
+    margin: 5px 0;
+    color: black;
+}
+
+.text{
+  color: black !important;
+}
+
+p.text span{
+    color: #6c5ce7;
+    font-weight: bold;
+}
+
+.decoracion-imagenes {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px; /* Espacio entre las imágenes */
+  margin-top: 10px;
+
+  img {
+    width: 45%; /* Las imágenes ocuparán el 45% del ancho del contenedor */
+    height: 200px; /* Forzar un alto uniforme para todas las imágenes */
+    object-fit: cover; /* Ajusta la imagen dentro del contenedor sin deformarla */
+    border-radius: 8px; /* Añade un borde redondeado */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para darle mejor apariencia */
+  }
+
+  @media (max-width: 600px) {
+    img {
+      width: 100%; /* En pantallas pequeñas, las imágenes ocuparán todo el ancho */
+      height: 200px; /* Mantener el mismo alto */
+      margin-bottom: 2rem;
+      margin-right: 2rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    img {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      flex-direction: row;
+      align-content: center;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+      margin-right: 2rem;
+    }
+  }
+}
+
+
+
+/* .container3 {
+  perspective: 1000px;
+  margin-bottom: 30px;
+  margin-top: 1rem;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+} */
+
+/* Hacemos que los asientos sean flexibles */
+/* .row {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5rem;
+}
+ */
+/* .seat {
+  background-color: #444451;
+  height: 1.5rem;
+  width: 1.5rem;
+  margin: 0.2rem;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.seat.selected {
+  background-color: green;
+}
+
+.seat.sold {
+  background-color: blue;
+}
+
+.seat:not(.sold):hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+ */
+
+/* Ajustamos el showcase para que sea más compacto en móviles */
+/* .showcase {
+  display: flex;
+  justify-content: space-around;
+  list-style-type: none;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.showcase li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0.5rem;
+}
+
+.showcase .seat {
+  margin-right: 0.25rem;
+  padding-left: 1.5rem;
+} */
+
+/* Media queries para ajustar tamaños en diferentes dispositivos */
+/* @media screen and (max-width: 768px) {
+  .seat {
+    height: 1.2rem;
+    width: 1.2rem;
+    margin: 0.15rem;
+  }
+
+  .showcase {
+    flex-wrap: wrap;
+  }
+
+  .showcase li {
+    margin: 0.25rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .seat {
+    height: 1rem;
+    width: 1rem;
+    margin: 0.1rem;
+  }
+
+  .container3 {
+    padding: 0 0.5rem;
+  }
+} */
 
 
 

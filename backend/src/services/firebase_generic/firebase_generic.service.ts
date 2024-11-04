@@ -1,5 +1,16 @@
-import { CollectionReference, DocumentData, DocumentSnapshot, Firestore, QuerySnapshot  } from '@google-cloud/firestore';
-import { BadRequestException, ConflictException, Inject, Injectable } from '@nestjs/common';
+import {
+  CollectionReference,
+  DocumentData,
+  DocumentSnapshot,
+  Firestore,
+  QuerySnapshot,
+} from '@google-cloud/firestore';
+import {
+  BadRequestException,
+  ConflictException,
+  Inject,
+  Injectable,
+} from '@nestjs/common';
 import { Menu } from 'src/document/modelos';
 import { ModeloPrincipal } from 'src/document/modelo_principal';
 //import { Menu } from 'src/document/modelmenu';
@@ -11,24 +22,27 @@ export class FirebaseGenericService {
     private readonly defaultCollection: CollectionReference<ModeloPrincipal>,
   ) {}
 
-  
-
-
   // Método genérico para crear una entidad (Menu o Cita)
-  async createEntity(entity: ModeloPrincipal, collectionName: string): Promise<any> {
+  async createEntity(
+    entity: ModeloPrincipal,
+    collectionName: string,
+  ): Promise<any> {
     const collection = this.getCollection(collectionName);
 
     if (!entity || !entity.namee) {
       throw new BadRequestException('Se requiere un nombre');
     }
 
-    const nameQuerySnapshot: QuerySnapshot = await collection.where('namee', '==', entity.namee).get();
+    const nameQuerySnapshot: QuerySnapshot = await collection
+      .where('id', '==', entity.namee)
+      .get();
+
     if (!nameQuerySnapshot.empty) {
       throw new ConflictException('La entidad ya está registrada');
     }
 
     const doc = await collection.doc();
-    entity.id = doc.id;  // Asigna un nuevo ID a la entidad
+    entity.id = doc.id; // Asigna un nuevo ID a la entidad
     await collection.doc(doc.id).set(entity);
     return entity;
   }
@@ -51,7 +65,10 @@ export class FirebaseGenericService {
   }
 
   // Método genérico para eliminar una entidad por ID
-  async deleteEntityById(entityId: string, collectionName: string): Promise<void> {
+  async deleteEntityById(
+    entityId: string,
+    collectionName: string,
+  ): Promise<void> {
     const collection = this.getCollection(collectionName);
     const entityDoc: DocumentSnapshot = await collection.doc(entityId).get();
     if (!entityDoc.exists) {
@@ -61,7 +78,11 @@ export class FirebaseGenericService {
   }
 
   // Método genérico para actualizar una entidad
-  async updateEntity(entityId: string, updatedEntity: Partial<ModeloPrincipal>, collectionName: string): Promise<any> {
+  async updateEntity(
+    entityId: string,
+    updatedEntity: Partial<ModeloPrincipal>,
+    collectionName: string,
+  ): Promise<any> {
     const collection = this.getCollection(collectionName);
     const entityDoc: DocumentSnapshot = await collection.doc(entityId).get();
     if (!entityDoc.exists) {
@@ -72,8 +93,12 @@ export class FirebaseGenericService {
   }
 
   // Método para obtener la colección correspondiente al nombre
-  private getCollection(collectionName: string): CollectionReference<ModeloPrincipal> {
+  private getCollection(
+    collectionName: string,
+  ): CollectionReference<ModeloPrincipal> {
     // Puedes implementar un mapeo para tus colecciones aquí si es necesario
-    return this.defaultCollection.firestore.collection(collectionName) as CollectionReference<ModeloPrincipal>;
+    return this.defaultCollection.firestore.collection(
+      collectionName,
+    ) as CollectionReference<ModeloPrincipal>;
   }
 }

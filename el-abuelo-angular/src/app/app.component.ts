@@ -1,7 +1,7 @@
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { InicioComponent } from './home/inicio/inicio.component';
-import { GaleriaInstalacionesComponent } from './home/inicio/galeria-instalaciones/galeria-instalaciones.component';
+import { GaleriaInstalacionesComponent } from './shared/galeria-instalaciones/galeria-instalaciones.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 

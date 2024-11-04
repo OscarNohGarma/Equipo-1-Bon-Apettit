@@ -1,6 +1,6 @@
 <div class="header">
     <div class="container contenido-header">
-        <div class="barra">
+        <div class="barra" [class.d-flex]="currentUser">
             <div class="abuelo">
                 <img src="../../../assets/ela.png" alt="logo" class="logo">
                 <h1 class="slogan">Panel de administrador</h1>
@@ -8,32 +8,59 @@
                     <h1 class="nombre-sitio">El<span>Abuelo</span></h1>
                 </div> -->
             </div>
-
-            <div class="usuario">
-                Usuario
+            <div class="div-cont-user" *ngIf="currentUser">
+                <div class="cont-user" (click)="toggleUserMenu()">
+                    <div>
+                        <div class="usuario">
+                            ¡Bienvenido(a) {{ currentUser }}!
+                        </div>
+                        <p class="current-rol">{{currentRol}}</p>
+                    </div>
+                    <p class="current-rol">▼</p>
+                </div>
+                <div class="user-menu box" [class.show]=" isUserMenuOpen">
+                    <div (click)="onEdit()" class="elemento-menu-user" *ngIf="rol === 'DUEÑO'">
+                        Editar perfil
+                    </div>
+                    <div (click)="onLogout()" class="elemento-menu-user logout">
+                        Cerrar sesión
+                    </div>
+                </div>
             </div>
         </div>
-
     </div>
 
 </div>
-<div class="box">
+<div class="box" *ngIf="currentUser &&  (rol === 'DUEÑO' || rol === 'ADMINISTRADOR')">
     <div class="container navbar">
-        <div class="elemento-nav" [routerLink]="['/admin']">
+        <div class="elemento-nav" [routerLink]="['/admin']" (click)="selectCategory('Inicio')">
             Inicio
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/menu']">
-            Administrar Menú
+        <div class="elemento-nav" [routerLink]="['/admin/menu']" (click)="selectCategory('Administrar Menú')">
+            Menú
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/ordenes']">
-            Órdenes
+        <div class="elemento-nav" [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">
+            Usuarios
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/reservaciones']">
-            Reservaciones
+        <div class="elemento-nav" [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">
+            Reporte
+        </div>
+        <div class="elemento-nav" [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">
+            Clientes
+        </div>
 
+    </div>
+    <div class="mobile-seleccion">
+        <div class="elemento-nav" (click)="toggleMenu()">
+            {{ selectedCategory }}
+            <p class="toggle-menu">▼</p>
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/roles']">
-            Roles de Usuario
+        <div class="submenu-mobile box" [class.show]=" isMenuOpen">
+            <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')">Inicio</div>
+            <div [routerLink]="['/admin/menu']" (click)="selectCategory('Menú')">Menú</div>
+            <div [routerLink]="['/admin/roles']" (click)="selectCategory('Usuarios')">Usuarios</div>
+            <div [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">Reporte</div>
+            <div [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">Clientes</div>
         </div>
     </div>
 </div>

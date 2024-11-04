@@ -1,42 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MenuService } from '../../../core/services/menu.service';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ProductService } from '../../../core/services/product.service';
 import { MenuProduct } from '../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 import { UploadService } from '../../../core/services/upload.service';
 import { Observable } from 'rxjs';
+import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
+declare var Swal: any;
 
 @Component({
   selector: 'app-edit-product',
-  imports: [CommonModule, ReactiveFormsModule, RouterLink], // Aquí es donde debes incluirlo
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SpinnerComponent], // Aquí es donde debes incluirlo
   standalone: true,
   templateUrl: './edit-product.component.html',
   styleUrl: './edit-product.component.scss',
-  providers: [MenuService, UploadService],
+  providers: [ProductService, UploadService],
 })
 export class EditProductComponent implements OnInit {
   productForm: FormGroup;
   productId: string | null = null;
   product: MenuProduct | null = null;
-
   selectedFile: File | null = null;
   imageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL de la imagen
   oldImageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL vieja de la imagen
   isValidImage: boolean = true; // Agregar esta propiedad
   imagePreviewUrl: string | null = null; // Propiedad para la vista previa
+  loading: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
-    private menuService: MenuService,
+    private productService: ProductService,
     private fb: FormBuilder,
     private router: Router,
     private uploadService: UploadService
   ) {
     this.productForm = this.fb.group({
       namee: [''],
-      precio: [''],
+      precio: ['', [Validators.min(1)]], // Precio mayor a 0
       image: [''],
       categoria: [''],
       stock: [false],
@@ -53,7 +59,7 @@ export class EditProductComponent implements OnInit {
 
   loadProduct(id: string) {
     // Usar el método getMenuById que ya tienes en tu servicio
-    this.menuService.getMenuById(id).subscribe((product: MenuProduct) => {
+    this.productService.getById(id).subscribe((product: MenuProduct) => {
       this.product = product;
       // Rellenar el formulario con los datos del producto
       this.productForm.patchValue({
@@ -96,9 +102,12 @@ export class EditProductComponent implements OnInit {
         reader.readAsDataURL(file); // Leer el archivo como una URL de datos
       } else {
         this.isValidImage = false; // Archivo no válido
-        console.error(
-          'Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP).'
-        );
+        this,
+          this.showPopup(
+            'error',
+            'Imagen no válida.',
+            'Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP).'
+          );
         input.value = ''; // Limpiar el input para que no retenga el archivo no válido
         this.imagePreviewUrl = null; // Reiniciar la vista previa
       }
@@ -106,6 +115,24 @@ export class EditProductComponent implements OnInit {
   }
 
   saveProduct() {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      this.showPopup(
+        'error',
+        'Campos requeridos.',
+        'Por favor llena todos los campos.'
+      );
+      return;
+    }
+    if (this.imagePreviewUrl === null) {
+      this.showPopup(
+        'error',
+        'Imagen no válida.',
+        'Por favor selecciona una imagen válida.'
+      );
+      return;
+    }
+    this.loading = true;
     if (this.productForm.valid && this.productId) {
       this.onUpload().subscribe(() => {
         const updatedProduct = {
@@ -114,36 +141,40 @@ export class EditProductComponent implements OnInit {
           image: this.imageUrl,
         }; // Agregar el ID al objeto
 
-        this.menuService
-          .updateMenuItem(this.productId!, updatedProduct)
-          .subscribe(
-            (response) => {
-              //! console.log('Producto actualizado exitosamente:', response);
-              if (this.selectedFile) {
-                this.uploadService
-                  .deleteImage(this.getFileNameFromUrl(this.oldImageUrl!)!)
-                  .subscribe(
-                    (response) => {
-                      console.log('Imagen eliminada.');
-                    },
-                    (error) => {
-                      console.error('Error al eliminar imagen:', error);
-                    }
-                  );
-              }
-              alert('El producto se ha actualizado correctamente.'); // Muestra la alerta
-              this.router.navigate(['/admin/menu']); // Redirige al menú (ajusta la ruta según tu configuración)
-
-              // Aquí puedes redirigir o mostrar un mensaje de éxito
-            },
-            (error) => {
-              console.error('Error al actualizar el producto:', error);
-              // Manejo de errores aquí
+        this.productService.update(this.productId!, updatedProduct).subscribe(
+          (response) => {
+            //! console.log('Producto actualizado exitosamente:', response);
+            if (this.selectedFile) {
+              this.uploadService
+                .deleteImage(this.getFileNameFromUrl(this.oldImageUrl!)!)
+                .subscribe(
+                  (response) => {
+                    console.log('Imagen eliminada.');
+                  },
+                  (error) => {
+                    console.error('Error al eliminar imagen:', error);
+                  }
+                );
             }
-          );
+            this.loading = false;
+            this.showPopup(
+              'success',
+              '¡Producto actualizado!',
+              'El producto se actualizó correctamente.'
+            ).then((result: any) => {
+              this.router.navigate(['/admin/menu']);
+            });
+          },
+          (error) => {
+            this.loading = false;
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al actualizar el producto.'
+            );
+          }
+        );
       });
-    } else {
-      console.error('Formulario inválido o ID de producto no encontrado.');
     }
   }
   onUpload() {
@@ -214,7 +245,11 @@ export class EditProductComponent implements OnInit {
             setTimeout(checkImage, retryInterval);
           },
           (error) => {
-            console.error('Error al subir la imagen', error);
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al subir la imagen.'
+            );
             observer.error(error); // Notificar el error
           }
         );
@@ -232,5 +267,26 @@ export class EditProductComponent implements OnInit {
 
     // Retornar el nombre del archivo si se encuentra, de lo contrario retornar null
     return match ? match[1] : null;
+  }
+  //POPUP
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
   }
 }

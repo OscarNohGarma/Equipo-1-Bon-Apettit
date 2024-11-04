@@ -32,16 +32,19 @@ img {
   color: var(--blanco);
 }
 
+.logo img {
+  width: 300px;
+}
+
 .nombre-sitio {
   color: white;
-  font-weight: 300;
   text-align: center;
-  font-size: 40px;
+  font-size: 50px;
 }
 
 @media (min-width: 768px) {
   .nombre-sitio {
-    font-size: 70px;
+    font-size: 76px;
   }
 }
 
@@ -77,7 +80,7 @@ img {
 }
 @media (min-width: 768px) {
   .slogan h1 {
-    font-size: 3rem;
+    font-size: 2rem;
   }
   .slogan {
     text-align: center;
@@ -85,7 +88,7 @@ img {
 }
 @media (min-width: 1280px) {
   .slogan h1 {
-    font-size: 5rem;
+    font-size: 3rem;
   }
   .slogan {
     text-align: end;
@@ -119,8 +122,7 @@ img {
 }
 
 .navegacion img {
-  height: 80px;
-  margin-bottom: 20px;
+  height: 60px;
 }
 
 .navegacion a,
@@ -146,7 +148,8 @@ img {
 .navegacion {
   display: none;
   font-size: 16px;
-  background-color: #161616;
+  background-color: transparent;
+  position: relative;
 }
 
 @media (min-width: 768px) {
@@ -155,12 +158,8 @@ img {
     gap: 30px;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 10px;
-  }
-  .navegacion img {
-    margin-right: 30px;
-    margin-bottom: 0;
   }
 }
 
@@ -168,4 +167,154 @@ img {
   .navegacion {
     gap: 50px;
   }
+}
+.login {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 0;
+  padding: 5px;
+  border-radius: 3px;
+  transition: all 0.2s ease-in-out;
+  font-weight: 600;
+
+  right: 0;
+}
+@media (min-width: 768px) {
+  .login {
+    position: absolute;
+  }
+}
+.login:hover {
+  background-color: rgb(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+.nav-back {
+  background-color: #161616;
+  position: relative;
+}
+.user {
+  font-size: 18px;
+  color: white;
+  margin-bottom: 0;
+  padding: 5px;
+  border-radius: 3px;
+  font-weight: 600;
+  // position: absolute;
+  right: 0;
+}
+
+.div-cont-user {
+  // position: absolute;
+  right: 0;
+}
+@media (min-width: 768px) {
+  .user {
+    text-align: end;
+    max-width: 100px;
+  }
+}
+@media (min-width: 996px) {
+  .user {
+    text-align: start;
+    max-width: 100%;
+  }
+}
+.div-cont-user.phone {
+  left: 100%;
+  top: 0;
+}
+
+.cont-user:hover > .user-menu div:hover {
+  background-color: transparent; /* O ajusta el estilo según sea necesario */
+}
+
+.user-menu {
+  background-color: #fff;
+  position: absolute;
+  color: #343a40;
+  z-index: 2000;
+  overflow: hidden;
+  max-height: 0; /* Altura inicial cero */
+  opacity: 0; /* Inicia invisible */
+  transition: max-height 0.5s ease, opacity 0.5s ease; /* Animación rápida */
+  width: 100%; /* Ocupa el 100% del ancho en móvil */
+  border-radius: 5px;
+  top: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .user-menu {
+    position: absolute;
+
+    right: 0;
+    width: 160px; /* En pantallas más grandes */
+  }
+}
+
+.user-menu.show {
+  max-height: 300px; /* Ajusta según el contenido */
+  opacity: 1; /* Totalmente visible */
+}
+
+.elemento-menu-user {
+  padding: 10px;
+  font-weight: 600;
+}
+
+.user-menu div:hover {
+  background-color: rgba(52, 58, 64, 0.2);
+  cursor: pointer;
+}
+
+.div-cont-user.phone {
+  position: relative; /* Asegura que el menú se posicione correctamente */
+}
+
+.logout {
+  color: red;
+}
+.cont-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 10px 0;
+}
+@media (min-width: 768px) {
+  .login.phone,
+  .cont-login,
+  .user-menu.phone {
+    display: none;
+  }
+  // .user {
+  //   position: absolute;
+  // }
+}
+
+.img-bag {
+  width: 25px;
+  transition: all 0.1s ease-in-out;
+}
+.img-bag:hover {
+  cursor: pointer;
+  transform: scale(1.1);
+}
+.cont-pc {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  gap: 5px;
+  right: 0;
+}
+.down {
+  margin: 0;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+.down:hover {
+  background-color: rgb(255, 255, 255, 0.2);
+  cursor: pointer;
 }

@@ -1,25 +1,67 @@
 <div class="nav-back">
-
-    <div class="navegacion">
+    <div class="navegacion container">
         <a [routerLink]="['/']">Inicio</a>
         <a [routerLink]="['menu']">Menú</a>
         <a [routerLink]="['Galeria']">Galería</a>
-        <a [routerLink]="['Reservaciones']">Reservaciones</a>
+        <a [routerLink]="['Reservaciones']">Reservación</a>
+        <a [routerLink]="['comunidad']">Comunidad</a>
+
+        <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar Sesión</p>
+        <div *ngIf="currentUser" class="cont-pc">
+            <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
+            <p *ngIf="currentUser" class="user">{{currentName}} </p>
+            <p class="down" (click)="toggleUserMenu()">▼</p>
+        </div>
+
+        <div class="div-cont-user">
+            <div class="user-menu box" [class.show]=" isUserMenuOpen">
+                <div (click)="onEdit()" class="elemento-menu-user">
+                    Editar perfil
+                </div>
+                <div (click)="onLogout()" class="elemento-menu-user logout">
+                    Cerrar sesión
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="nav-back">
+    <div class="div-cont-user">
+
+    </div>
+    <div class="container">
+        <div class="cont-login">
+            <p *ngIf="!currentUser" (click)="onLoginMobile()" [routerLink]="['login']" class="login phone">Iniciar
+                Sesión</p>
+            <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
+            <p *ngIf="currentUser" class="user">{{currentName}}</p>
+            <p (click)="toggleUserMenu()" class="down">▼</p>
+        </div>
+    </div>
+    <div class="user-menu phone box" [class.show]=" isUserMenuOpen">
+        <div (click)="onEdit()" class="elemento-menu-user">
+            Editar perfil
+        </div>
+        <div (click)="onLogout()" class="elemento-menu-user logout">
+            Cerrar sesión
+        </div>
     </div>
 </div>
 <div class="header">
     <div class="container contenido-header">
         <div class="barra">
             <div class="logo">
-                <h1 class="nombre-sitio">El<span>Abuelo</span></h1>
+                <h1 class="nombre-sitio">El Abuelo</h1>
             </div>
             <!-- <a class="telefono" href="tel:01-800-0000-000">01-800-0000-000</a> -->
             <div class="nav-phone">
                 <a [routerLink]="['/']">Inicio</a>
                 <a [routerLink]="['menu']">Menú</a>
                 <a [routerLink]="['Galeria']">Galería</a>
-                <a [routerLink]="['Reservaciones']">Reservaciones</a>
-                <a [routerLink]="['contacto']">Contacto</a>
+                <a [routerLink]="['Reservaciones']">Reservación</a>
+                <a [routerLink]="['comunidad']">Comunidad</a>
+                <!-- <a [routerLink]="['contacto']">Contacto</a> -->
             </div>
             <div class="slogan">
                 <h1>Ven a visitarnos</h1>

@@ -1,26 +1,33 @@
+<div class="header">
+    <button class="back-button" [routerLink]="['/admin/menu']"></button>
+    <h2 class="encabezado">Agregar Producto</h2>
+    <button class="dis"></button>
+</div>
 <form [formGroup]="productForm" (ngSubmit)="saveProduct()" class="edit-product-form">
-    <div class="header">
-        <button class="button back-button" [routerLink]="['/admin/menu']"></button>
-        <h2>Agregar Producto</h2>
-    </div>
 
     <div class="form-group">
         <label for="namee">Nombre del Producto:</label>
         <input type="text" id="namee" formControlName="namee" class="form-control"
             placeholder="Ingresa el nombre del producto" required />
+        <!-- Mensaje de error si el campo nombre está vacío -->
+        <div *ngIf="productForm.get('namee')?.touched && productForm.get('namee')?.invalid" class="error-message">
+            El nombre del producto es requerido.
+        </div>
     </div>
 
     <div class="form-group">
         <label for="precio">Precio:</label>
         <input type="number" id="precio" formControlName="precio" class="form-control" placeholder="Ingresa el precio"
             required />
+        <!-- Mensaje de error si el precio es inválido -->
+        <div *ngIf="productForm.get('precio')?.touched && productForm.get('precio')?.invalid" class="error-message">
+            <span *ngIf="productForm.get('precio')?.errors?.['required']">El precio es requerido.</span>
+            <span *ngIf="productForm.get('precio')?.errors?.['min']">El precio debe ser mayor a 0.</span>
+        </div>
     </div>
 
     <div class="form-group">
         <label for="image">Imagen del Producto:</label>
-        <!-- <div class="image-preview">
-            <img [src]="product?.image" *ngIf="product?.image" alt="Imagen del Producto" class="image-thumbnail" />
-        </div> -->
         <div class="cont-imagen">
             <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Vista previa"
                 style="max-width: 100%; margin-top: 10px;">
@@ -44,7 +51,12 @@
             <option value="POSTRES">POSTRES</option>
             <option value="ESPECIALES">ESPECIALES</option>
         </select>
+        <!-- Mensaje de error si la categoría no está seleccionada -->
+        <div *ngIf="productForm.get('categoria')?.touched && productForm.get('categoria')?.invalid"
+            class="error-message">
+            Selecciona una categoría.
+        </div>
     </div>
-
-    <button type="submit" class="button submit-button">AGREGAR</button>
+    <app-spinner *ngIf="loading" />
+    <button type="submit" class="button ">AGREGAR</button>
 </form>

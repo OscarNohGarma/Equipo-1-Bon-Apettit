@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -14,27 +15,85 @@ export class GenericService<T> {
   }
 
   // Método para obtener todos los elementos
-  getAll(endpoint: string): Observable<T[]> {
-    return this.http.get<T[]>(`${this.getBaseUrl()}/${endpoint}`);
+  getAll(): Observable<T[]> {
+    return this.http
+      .get<T[]>(`${this.getBaseUrl()}`)
+      .pipe(
+        catchError((error) =>
+          this.handleError(error, 'No se pudo obtener la lista de elementos')
+        )
+      );
   }
 
   // Método para obtener un elemento por ID
-  getById(endpoint: string, id: string): Observable<T> {
-    return this.http.get<T>(`${this.getBaseUrl()}/${endpoint}/${id}`);
+  getById(id: string): Observable<T> {
+    return this.http
+      .get<T>(`${this.getBaseUrl()}/${id}`)
+      .pipe(
+        catchError((error) =>
+          this.handleError(
+            error,
+            `No se pudo obtener el elemento con ID: ${id}`
+          )
+        )
+      );
   }
 
   // Método para agregar un elemento
-  add(endpoint: string, item: T): Observable<any> {
-    return this.http.post(`${this.getBaseUrl()}/${endpoint}`, item);
+  add(item: T): Observable<any> {
+    return this.http
+      .post(`${this.getBaseUrl()}`, item)
+      .pipe(
+        catchError((error) =>
+          this.handleError(error, 'No se pudo añadir el nuevo elemento')
+        )
+      );
   }
 
   // Método para actualizar un elemento
-  update(endpoint: string, id: string, item: T): Observable<any> {
-    return this.http.put(`${this.getBaseUrl()}/${endpoint}/${id}`, item);
+  update(id: string, item: T): Observable<any> {
+    return this.http
+      .put(`${this.getBaseUrl()}/${id}`, item)
+      .pipe(
+        catchError((error) =>
+          this.handleError(
+            error,
+            `No se pudo actualizar el elemento con ID: ${id}`
+          )
+        )
+      );
   }
 
   // Método para eliminar un elemento
-  delete(endpoint: string, id: string): Observable<any> {
-    return this.http.delete(`${this.getBaseUrl()}/${endpoint}/${id}`);
+  delete(id: string): Observable<any> {
+    return this.http
+      .delete(`${this.getBaseUrl()}/${id}`)
+      .pipe(
+        catchError((error) =>
+          this.handleError(
+            error,
+            `No se pudo eliminar el elemento con ID: ${id}`
+          )
+        )
+      );
+  }
+
+  // Método genérico para manejar errores
+  protected handleError(
+    error: HttpErrorResponse,
+    operation: string
+  ): Observable<never> {
+    let errorMessage = '';
+
+    if (error.error && error.error.message) {
+      // Error del lado del cliente o de la red
+      errorMessage = `${operation} - Error del cliente o de la red: ${error.error.message}`;
+    } else {
+      // Error del servidor
+      errorMessage = `${operation} - Error del servidor: Código ${error.status}, mensaje: ${error.message}`;
+    }
+
+    console.error(errorMessage);
+    return throwError(() => new Error(errorMessage));
   }
 }

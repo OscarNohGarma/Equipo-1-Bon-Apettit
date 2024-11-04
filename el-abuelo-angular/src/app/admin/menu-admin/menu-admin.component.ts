@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../core/services/menu.service';
+import { ProductService } from '../../core/services/product.service';
 import { MenuProduct } from '../../core/models/menuProduct';
 import { Router, RouterModule } from '@angular/router';
 import { UploadService } from '../../core/services/upload.service';
-import { response } from 'express';
+declare var Swal: any;
 
 @Component({
   selector: 'app-menu-admin',
@@ -13,7 +13,7 @@ import { response } from 'express';
   imports: [CommonModule, HttpClientModule, RouterModule],
   templateUrl: './menu-admin.component.html',
   styleUrl: './menu-admin.component.scss',
-  providers: [MenuService, UploadService],
+  providers: [ProductService, UploadService],
 })
 export class MenuAdminComponent implements OnInit {
   selectedCategory: string = 'TODOS'; // Categoría por defecto
@@ -22,27 +22,19 @@ export class MenuAdminComponent implements OnInit {
   menuItems: MenuProduct[] = [];
   expandedImage: string | null = null; // Controla la imagen expandida
   searchTerm: string = ''; // Término de búsqueda
-  stockFilter: string = ''; // Filtro de stock (activo/inactivo)
+  stockFilter: string = 'activo'; // Filtro de stock (activo/inactivo)
 
   constructor(
     private uploadService: UploadService,
-    private menuService: MenuService,
+    private productService: ProductService,
     private router: Router
   ) {} // Inyectar el servicio
 
   ngOnInit(): void {
-    // this.http.get('http://localhost:3000/firebase/menu/getmenu').subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
     this.loadMenu();
   }
   loadMenu(): void {
-    this.menuService.getMenu().subscribe((data) => {
+    this.productService.getAll().subscribe((data) => {
       this.menuItems = data;
       // console.log(this.menuItems);
     });
@@ -82,35 +74,50 @@ export class MenuAdminComponent implements OnInit {
     this.expandedImage = null;
   }
   deleteProducto(id: number, image: string) {
-    console.log(this.getFileNameFromUrl(image));
+    // Muestra un popup de confirmación con SweetAlert2
+    this.showConfirmPopup(
+      '¿Deseas eliminar este producto?',
+      'Esta acción eliminará el elemento del menú.'
+    ).then((result: any) => {
+      if (result.isConfirmed) {
+        // El usuario confirmó la acción
+        this.uploadService
+          .deleteImage(this.getFileNameFromUrl(image)!)
+          .subscribe(
+            (response) => {
+              console.log('Imagen eliminada.');
+            },
+            (error) => {
+              console.error('Error al eliminar imagen:', error);
+            }
+          );
 
-    const confirmed = window.confirm(
-      '¿Estás seguro de que deseas eliminar este ítem del menú?'
-    );
-    if (confirmed) {
-      this.uploadService.deleteImage(this.getFileNameFromUrl(image)!).subscribe(
-        (response) => {
-          console.log('Imagen eliminada.');
-        },
-        (error) => {
-          console.error('Error al eliminar imagen:', error);
-        }
-      );
-      this.menuService.deleteMenuItem(id.toString()).subscribe(
-        (response) => {
-          // console.log('Producto eliminado:', response);
-          // Aquí puedes agregar lógica para actualizar la vista
-          setTimeout(() => {
-            alert('Producto eliminado correctamente.');
-            this.loadMenu(); // Por ejemplo, recargar el menú
-          }, 500);
-        },
-        (error) => {
-          console.error('Error al eliminar el producto:', error);
-        }
-      );
-    }
+        this.productService.delete(id.toString()).subscribe(
+          (response) => {
+            // El producto fue eliminado exitosamente
+            setTimeout(() => {
+              this.showPopup(
+                'success',
+                '¡Producto eliminado!',
+                'El producto se eliminó correctamente.'
+              ).then((result: any) => {
+                this.loadMenu(); // Recargar el menú después de eliminar el producto
+              });
+            }, 100);
+          },
+          (error) => {
+            // Ocurrió un error al eliminar el producto
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al eliminar el producto.'
+            );
+          }
+        );
+      }
+    });
   }
+
   getFileNameFromUrl(url: string): string | null {
     // Usar una expresión regular para extraer el nombre del archivo completo (ID + extensión)
     const match = url.match(/\/([^\/]+\.[a-zA-Z]+)$/);
@@ -134,5 +141,83 @@ export class MenuAdminComponent implements OnInit {
   updateStock(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
     this.stockFilter = selectElement.value;
+  }
+
+  //POPUP
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
+  }
+  //CONFIRM POPUP
+  showConfirmPopup(title: string, text: string) {
+    return Swal.fire({
+      icon: 'warning',
+      title,
+      text,
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      buttonsStyling: false, // Desactivar estilos predeterminados de SweetAlert2
+      didOpen: () => {
+        // Aplicar estilos directamente
+        const confirmButton = Swal.getConfirmButton();
+        const cancelButton = Swal.getCancelButton();
+
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#fff';
+          confirmButton.style.color = '#dc3545';
+          confirmButton.style.padding = '10px 20px';
+          confirmButton.style.fontWeight = 'bold';
+          confirmButton.style.border = 'none';
+          confirmButton.style.border = '2px solid #dc3545';
+          confirmButton.style.borderRadius = '5px';
+          confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+          confirmButton.style.marginRight = '10px'; // Agregar transición
+
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#dc3545'; // Color en hover
+            confirmButton.style.color = '#fff';
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#fff'; // Color normal
+            confirmButton.style.color = '#dc3545';
+          };
+        }
+
+        if (cancelButton) {
+          cancelButton.style.backgroundColor = '#343a40';
+          cancelButton.style.color = '#fff';
+          cancelButton.style.padding = '10px 20px';
+          cancelButton.style.fontWeight = 'bold';
+          cancelButton.style.border = 'none';
+          cancelButton.style.border = '2px solid #343a40';
+          cancelButton.style.borderRadius = '5px';
+          cancelButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+
+          cancelButton.onmouseover = () => {
+            cancelButton.style.backgroundColor = '#24272b'; // Color en hover
+          };
+          cancelButton.onmouseout = () => {
+            cancelButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
   }
 }

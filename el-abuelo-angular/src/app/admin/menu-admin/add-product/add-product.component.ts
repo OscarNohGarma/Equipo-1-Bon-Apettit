@@ -1,38 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { MenuService } from '../../../core/services/menu.service';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { ProductService } from '../../../core/services/product.service';
 import { MenuProduct } from '../../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 import { UploadService } from '../../../core/services/upload.service';
 import { Observable } from 'rxjs';
+import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
+declare var Swal: any;
 @Component({
   selector: 'app-add-product',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, SpinnerComponent],
   templateUrl: './add-product.component.html',
   styleUrl: './add-product.component.scss',
-  providers: [MenuService, UploadService],
+  providers: [ProductService, UploadService],
 })
 export class AddProductComponent {
   productForm: FormGroup;
-  productId: string | null = null;
-  product: MenuProduct | null = null;
-
   selectedFile: File | null = null;
   imageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL de la imagen
   isValidImage: boolean = true; // Agregar esta propiedad
   imagePreviewUrl: string | null = null; // Propiedad para la vista previa
+  loading: boolean = false;
 
   constructor(
-    private menuService: MenuService,
+    private productService: ProductService,
     private fb: FormBuilder,
     private router: Router,
     private uploadService: UploadService
   ) {
     this.productForm = this.fb.group({
       namee: [''],
-      precio: [''],
+      precio: ['', [Validators.min(1)]], // Precio mayor a 0
       image: [''],
       categoria: [''],
       // Otros campos que tengas en MenuProduct
@@ -66,7 +71,9 @@ export class AddProductComponent {
         reader.readAsDataURL(file); // Leer el archivo como una URL de datos
       } else {
         this.isValidImage = false; // Archivo no válido
-        console.error(
+        this.showPopup(
+          'error',
+          'Imagen no válida.',
           'Por favor, selecciona un archivo de imagen válido (JPEG, PNG, GIF, WEBP).'
         );
         input.value = ''; // Limpiar el input para que no retenga el archivo no válido
@@ -76,6 +83,24 @@ export class AddProductComponent {
   }
 
   saveProduct() {
+    if (this.productForm.invalid) {
+      this.productForm.markAllAsTouched();
+      this.showPopup(
+        'error',
+        'Campos requeridos.',
+        'Por favor llena correctamente todos los campos.'
+      );
+      return;
+    }
+    if (!this.selectedFile) {
+      this.showPopup(
+        'error',
+        'Imagen no válida.',
+        'Por favor selecciona una imagen válida.'
+      );
+      return;
+    }
+    this.loading = true;
     if (this.productForm.valid) {
       this.onUpload().subscribe(() => {
         const newProduct = {
@@ -85,21 +110,29 @@ export class AddProductComponent {
         }; // Agregar la URL de la imagen
         // console.log(newProduct);
 
-        this.menuService.addMenuItem(newProduct).subscribe(
+        this.productService.add(newProduct).subscribe(
           (response) => {
             //! console.log('Producto añadido exitosamente:', response);
 
-            alert('El producto se ha añadido correctamente.');
-            this.router.navigate(['/admin/menu']);
+            this.loading = false;
+            this.showPopup(
+              'success',
+              '¡Producto agregado!',
+              'El producto se agregó correctamente.'
+            ).then((result: any) => {
+              this.router.navigate(['/admin/menu']);
+            });
           },
           (error) => {
-            console.error('Error al agregar el producto:', error);
+            this.loading = false;
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al agregar el producto.'
+            );
           }
         );
       });
-    } else {
-      console.error('Formulario inválido o ID de producto no encontrado.');
-      alert('Por favor llena todos los campos.');
     }
   }
 
@@ -159,7 +192,11 @@ export class AddProductComponent {
             setTimeout(checkImage, retryInterval);
           },
           (error) => {
-            console.error('Error al subir la imagen', error);
+            this.showPopup(
+              'error',
+              'Ocurrió un problema.',
+              'Error al subir la imagen.'
+            );
             observer.error(error); // Notificar el error
           }
         );
@@ -167,6 +204,27 @@ export class AddProductComponent {
         alert('No hay archivo seleccionado.');
         observer.error('No hay archivo seleccionado.');
       }
+    });
+  }
+  //POPUP
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
     });
   }
 }

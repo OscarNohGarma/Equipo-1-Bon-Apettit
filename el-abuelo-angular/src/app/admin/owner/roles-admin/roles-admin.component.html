@@ -1,0 +1,22 @@
+<div class="bg-menu">
+    <div class="container">
+        <div class="header">
+            <h1 class="encabezado">Usuarios</h1>
+            <button class="add-button" [routerLink]="['add']">+</button>
+        </div>
+        <h2 class="subtitulo">Administra quién puede editar los elementos de la página</h2>
+        <div class="grid">
+            <div class="box" *ngFor="let usuario of usuarioItems">
+                <h1 class="name">{{ usuario.namee }}</h1>
+                <div class="btns">
+                    <img src="./../../../assets/edit.svg" alt="edit" class="btn-edit"
+                        [routerLink]="['edit', usuario.id]">
+                    <img src="./../../../assets/delete-button.svg" alt="basura" class="btn-delete"
+                        (click)="deleteUser(usuario.id)">
+                </div>
+                <p class="rol">{{ usuario.rol }}</p>
+                <!-- <button class="button add" [routerLink]="['edit', usuario.id]">EDITAR</button> -->
+            </div>
+        </div>
+    </div>
+</div>

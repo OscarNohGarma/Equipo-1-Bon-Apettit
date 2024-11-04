@@ -1,9 +1,17 @@
 // feature.routes.ts
 import { Routes } from '@angular/router';
-import { GaleriaInstalacionesComponent } from './inicio/galeria-instalaciones/galeria-instalaciones.component';
+import { GaleriaInstalacionesComponent } from '../shared/galeria-instalaciones/galeria-instalaciones.component';
 import { InicioComponent } from './inicio/inicio.component';
 import { MenuComponent } from './menu/menu.component';
 import { ReservationTablesComponent } from './reservation-tables/reservation-tables.component';
+import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
+import { MyOrdersComponent } from './my-orders/my-orders.component';
+import { AdminAuthGuard } from '../auth/admin-auth.guard';
+import { AuthGuard } from '../auth/auth.guard';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
+import { CommunityComponent } from './community/community.component';
+import { AddComentarioComponent } from './community/add-comentario/add-comentario.component';
 
 export const homeRoutes: Routes = [
   {
@@ -26,4 +34,38 @@ export const homeRoutes: Routes = [
     title: 'Reservaciones - El abuelo',
     component: ReservationTablesComponent,
   },
+  {
+    path: 'profile/edit',
+    title: 'Editar perfil',
+    component: EditProfileComponent,
+  },
+  {
+    path: 'login',
+    title: 'Iniciar Sesión - El abuelo',
+    component: LoginComponent, // Componente de login del admin
+  },
+  {
+    path: 'registro',
+    title: 'Registrarse - El abuelo',
+    component: RegisterComponent, // Componente de login del admin
+  },
+  {
+    path: 'mis-ordenes',
+    title: 'Mis órdenes - El abuelo',
+    component: MyOrdersComponent, // Componente de login del admin
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'comunidad',
+    title: 'Comunidad - El abuelo',
+    component: CommunityComponent, // Componente de login del admin
+  },
+  {
+    path: 'agregar-comentarios',
+    title: 'Agregar comentarios - El abuelo',
+    component: AddComentarioComponent, // Componente de login del admin
+  },
+  
+    
+
 ];

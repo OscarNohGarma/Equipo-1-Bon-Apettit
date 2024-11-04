@@ -3,8 +3,10 @@ import { MenuProduct } from '../../core/models/menuProduct';
 import { CommonModule } from '@angular/common';
 import { OrderService } from '../../core/services/order.service';
 import { OrdenComponent } from './orden/orden.component';
-import { MenuService } from '../../core/services/menu.service';
+import { ProductService } from '../../core/services/product.service';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -12,7 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [CommonModule, OrdenComponent, HttpClientModule],
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
-  providers: [MenuService],
+  providers: [ProductService, AuthService],
 })
 export class MenuComponent implements OnInit {
   selectedCategory: string = 'TODOS'; // Categoría por defecto
@@ -20,28 +22,25 @@ export class MenuComponent implements OnInit {
   showOrder: boolean = false; // Controla la visibilidad de la orden
   menuItems: MenuProduct[] = [];
   expandedImage: string | null = null; // Controla la imagen expandida
+  currentUser: string | null = null; // Controla la imagen expandida
 
   constructor(
     private ordenService: OrderService,
-    private menuService: MenuService
+    private productService: ProductService,
+    private authService: AuthService,
+    private router: Router
   ) {} // Inyectar el servicio
 
   ngOnInit(): void {
-    // this.http.get('http://localhost:3000/firebase/menu/getmenu').subscribe(
-    //   (data) => {
-    //     console.log(data);
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
+    this.currentUser = this.authService.getUser();
+
     this.loadMenu();
   }
   loadMenu(): void {
-    this.menuService.getMenu().subscribe((data) => {
+    this.productService.getAll().subscribe((data) => {
       this.menuItems = data;
-      console.log(this.menuItems);
     });
+    console.log(this.menuItems);
   }
 
   get filteredProducts(): MenuProduct[] {
@@ -63,6 +62,9 @@ export class MenuComponent implements OnInit {
   }
 
   agregarProducto(product: MenuProduct) {
+    if (!this.currentUser) {
+      this.router.navigate(['/login']);
+    }
     this.ordenService.agregarProducto(product); // Usar el servicio para agregar productos
     this.showOrder = true; // Muestra la orden cuando se añade un producto
   }

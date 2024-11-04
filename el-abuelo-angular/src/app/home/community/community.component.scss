@@ -1,0 +1,177 @@
+main {
+  margin: 50px auto;
+  width: 800px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+.encabezado {
+  font-size: 55px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 3px;
+  font-weight: 900;
+}
+
+.subtitulo {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box {
+  padding: 30px 20px; /* Espaciado interno */
+  margin: 10px auto; /* Margen superior e inferior, centrado */
+  background-color: #fff; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde de la caja */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  text-align: center; /* Centrar texto */
+  display: flex; /* Para utilizar flexbox */
+  flex-direction: column; /* Dirección de los elementos dentro */
+  gap: 10px; /* Espacio entre elementos internos */
+  width: 100%; /* Ancho completo en pantallas pequeñas */
+  max-width: 2000px; /* Ancho máximo de la caja */
+  height: auto; /* Altura automática, se ajusta al contenido */
+  min-height: 200px; /* Altura mínima para mantener una apariencia uniforme */
+
+  /* Responsividad */
+  @media (min-width: 768px) {
+    width: 80%; /* Ancho del 80% en pantallas grandes */
+  }
+
+  @media (min-width: 992px) {
+    width: 600px; /* Ancho fijo en pantallas extra grandes */
+  }
+}
+
+.grid {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column; // Coloca en columna
+  gap: 20px; // Espacio entre los comentarios
+}
+
+.feedback-section {
+  text-align: center; // Centrar el texto
+  margin-top: 20px; // Espacio superior para separar del contenedor de comentarios
+}
+
+.btn {
+  background-color: #343a40; // Color de fondo negro
+  color: white; // Color del texto en blanco
+  padding: 10px 20px; // Espaciado interno del botón
+  text-decoration: none; // Sin subrayado
+  border-radius: 5px; // Bordes redondeados del botón
+  transition: background-color 0.3s; // Transición suave para hover
+
+  &:hover {
+    background-color: #212529; // Color más claro al pasar el mouse
+  }
+}
+
+.clasificacion {
+  display: flex;
+  justify-content: center;
+  font-size: 40px; /* Tamaño de las estrellas */
+}
+
+.clasificacion input {
+  display: none; /* Ocultar los botones de radio */
+}
+
+.clasificacion label {
+  color: orange; /* Color por defecto de las estrellas */
+  transition: color 0.3s; /* Suavizar el cambio de color */
+}
+
+/* Estrellas llenas basadas en la calificación */
+.clasificacion input:checked ~ label {
+  color: orange; /* Cambia el color a naranja para las estrellas a la izquierda */
+}
+
+/* Color de las estrellas llenas basado en la calificación */
+.clasificacion input:checked + label {
+  color: orange; /* Color de las estrellas llenas */
+}
+
+/* Cambiar el color de las estrellas vacías */
+.clasificacion input:checked {
+  & ~ input {
+    & + label {
+      color: lightgray; /* Color de las estrellas vacías a la derecha */
+    }
+  }
+}
+
+.description {
+  text-align: justify; // Justifica el texto
+  margin: 0 auto; // Centra el contenedor en la página
+}
+
+/* Estilos para el contenedor de encabezados */
+.headings {
+  margin-bottom: 20px; // Espacio inferior
+}
+
+/* Espaciado y estilo del switch */
+.buttons {
+  .badge {
+    padding: 10px; // Espaciado interno
+    display: flex;
+    align-items: center;
+  }
+
+  .form-check {
+    margin-left: 10px; // Espacio a la izquierda del switch
+  }
+}
+
+.fecha-hora {
+  display: flex; /* Usar flexbox para alinear */
+  margin: 0 170px; /* Espacio lateral uniforme (izquierda y derecha) */
+  align-items: center; /* Centrar verticalmente */
+  margin-top: 10px; /* Espacio superior para separación */
+  justify-content: flex-start; /* Alinear elementos al principio (izquierda) */
+}
+
+.fecha,
+.hora {
+  font-size: 14px; /* Tamaño de fuente para fecha y hora */
+  color: #555; /* Color más tenue para la fecha y hora */
+  margin-right: 15px; /* Espacio entre la fecha y la hora */
+}
+
+/* Estilo para pantallas grandes */
+@media (min-width: 768px) {
+  .fecha-hora {
+    flex-direction: row; /* Mantiene los elementos en fila en pantallas grandes */
+    margin: 0 170px; /* Mantiene el margen para pantallas grandes */
+  }
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 767px) {
+  .fecha-hora {
+    flex-direction: row; /* Mantiene los elementos en fila también en pantallas pequeñas */
+    margin: 0 130px; /* Reduce el margen lateral en pantallas pequeñas */
+  }
+}
