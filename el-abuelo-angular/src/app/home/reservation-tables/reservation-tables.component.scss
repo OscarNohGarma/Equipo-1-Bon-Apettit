@@ -44,12 +44,30 @@ h1,h2,h3{
   margin: 0 0 0.5em;
   font-size: 40px;
 }
-
+h
 img{
   max-width: 100%;
   vertical-align: middle;
   height: 120px;
   margin-top: -1.5em;
+}
+
+.encabezado {
+  font-size: 55px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 3px;
+  font-weight: 900;
+}
+.subtitulo {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px;
+  margin-top: 1rem;
 }
 
 .container2{
@@ -250,6 +268,9 @@ form > .form-four .bg-svg{
   font-size: 18px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
+}
+.no-show.ex{
+  display: none;
 }
 .cont-imagen {
   display: flex;

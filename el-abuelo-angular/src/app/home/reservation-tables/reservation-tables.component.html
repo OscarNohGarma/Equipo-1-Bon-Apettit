@@ -1,6 +1,6 @@
 <div id="page" class="site">
-  <h2 style="margin-bottom: 5rem;; text-align:center; font-weight: 900;">¡Reserva Tú Mesa Ahora!</h2>
-  <h4 style="margin-bottom: 20px;text-align:center; margin-top: -2.5rem;">Solo Completa El Formulario Con Los Datos Solicitantes</h4>
+  <h2 class="encabezado">Reservar una mesa</h2>
+  <h4 class="subtitulo">Completa el formulario con los datos solicitantes</h4>
   <div class="container2">
     <div class="form-box">
       <div class="progress2">
@@ -10,7 +10,7 @@
         <ul class="progress2-steps">
           <li class="step active">
             <span>1</span>
-            <p>Personal<br><span>Información Cliente</span></p>
+            <p>Personal<br><span>Tu información</span></p>
           </li>
           <li class="step">
             <span>2</span>
@@ -29,7 +29,7 @@
       <form (ngSubmit)="reservarMesa()" #reservationForm="ngForm">
         <div class="form-one form-step active">
           <div class="bg-svg"></div>
-          <h2> Información Del Cliente</h2>
+          <h2>Tu información</h2>
           <p style="color: black;">Complete todos los campos con la información que se le solicite.</p>
           <div>
             <label>Nombres</label>
@@ -86,11 +86,6 @@
             <span *ngIf="cantidadVacio" style="color: red;">Este campo es obligatorio</span>
           </div>
 
-          <p [ngStyle]="getColorStyle()">
-            Cantidad De Mesas Disponibles: {{ cantidadMesasDisponibles }}
-          </p>
-
-
           <div *ngIf="personasSeleccionadas">
             <label>Lugar De La Mesa</label>
             <select [(ngModel)]="reservation.ubicacion" name="ubicacion" id="Lugar"  (change)="onLugarChange($event)" (blur)="checkEmpty('ubicacion')" (change)="onInputChange('ubicacion')" required>
@@ -100,24 +95,14 @@
             </select>
             <span *ngIf="ubicacionVacio" style="color: red;">Este campo es obligatorio</span>
           </div>
-
-          <div>
-            <label for="cantidadMesas">Cantidad De Mesas A Reservar</label>
+          <p [ngStyle]="getColorStyle()" *ngIf="reservation.ubicacion">
+            Cantidad De Mesas Disponibles: {{ cantidadMesasDisponibles }}
+          </p>
+          <div class="no-show ex">
+            <label for="cantidadMesas">Cantidad De Mesas</label>
             <input type="number" id="cantidadMesas" #cantidadMesas [(ngModel)]="reservation.cantidadMesasReservada"  name="cantidadMesasReservada"
               placeholder="Cantidad De Mesas A Reservar" min="1" readonly required>
           </div>
-
-          <div *ngIf="reservation.tipo_decoracion !== 'Ninguna' && reservation.tipo_decoracion !== 'Personalizado'">
-            <label for="costoMesa">Costo Por Mesa (Sin Decoración)</label>
-            <input [(ngModel)]="reservation.costo" name="costo" type="number" id="costoMesa" #costoMesa placeholder='$ {{costoPorMesa}} MXN' readonly>
-        </div>
-
-        <!-- Mostrar cuando ES Ninguna o Personalizado -->
-        <div *ngIf="reservation.tipo_decoracion === 'Ninguna'">
-            <p style="color: black; margin-bottom: 1em; font-weight:bold;">
-                El precio será determinado por el consumo realizado en el local.
-            </p>
-        </div>
 
           <div *ngIf="lugarSeleccionado">
             <label>Decoración De la Mesa</label>
@@ -129,6 +114,18 @@
             </select>
             <span *ngIf="tipoDecoracionVacio" style="color: red;">Este campo es obligatorio</span>
           </div>
+          <div *ngIf="reservation.tipo_decoracion !== 'Ninguna' && reservation.tipo_decoracion !== 'Personalizado' && reservation.tipo_decoracion !== 'def'">
+            <label for="costoMesa" *ngIf="reservation.tipo_decoracion !== 'Ninguna'">Costo Por Mesa con Decoración</label>
+            <input [(ngModel)]="reservation.costo" name="costo" type="number" id="costoMesa" #costoMesa placeholder='$ {{costoPorMesa}} MXN' readonly>
+        </div>
+
+        <!-- Mostrar cuando ES Ninguna o Personalizado -->
+        <div *ngIf="reservation.tipo_decoracion === 'Ninguna'">
+            <p style="color: black; margin-bottom: 1em; font-weight:bold;">
+                El precio será determinado por el consumo realizado en el local.
+            </p>
+        </div>
+
 
           <!-- <div *ngIf="lugarSeleccionado">
             <label>Decoración De la Mesa</label>
@@ -159,16 +156,16 @@
           </div>
 
           <!-- Div para mostrar el precio de la decoración seleccionada -->
-          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
+          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado' && decoracionSeleccionada!=='def'">
             <p style="color: black; margin-bottom: 1em;">
-              Precio de decoración: $ {{ costoDecoraciones[decoracionSeleccionada] | currency:' MXN ' }}
+              Precio de decoración: $ {{ costoPorMesa | currency:' MXN ' }}
             </p>
           </div>
 
-          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
+          <!-- <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
             <label>Costo Por Mesa (Incluyendo Decoración)</label>
             <input  type="number" [value]="costoConDecoracion" readonly>
-          </div>
+          </div> -->
 
           <div *ngIf="decoracionSeleccionada && decoracionSeleccionada === 'Personalizado'">
             <p style="color: black; margin-bottom: 1em; font-weight:bold; ">Primero finalice el proceso de reservación y posteriormente contacte al dueño de la cafetería para acordar el tipo de decoración y precios a tratar, al número telefónico:</p>
@@ -197,7 +194,7 @@
           </div>
 
           <div>
-            <p class="text">Ya realizado el pago de la reservación. Suba el comprobante (Baucher) del pago para que lo comprobemos en sistema.</p>
+            <p class="text">Si ya ha realizado el pago de la reservación, suba el comprobante (Baucher) del pago para que lo comprobemos en sistema.</p>
             <div class="cont-imagen">
               <label class="submit-button" for="file-upload">Subir Comprobante De Pago</label>
               <input class="input2"  type="file" id="file-upload" #fileUpload (change)="handleFileUpload($event)"  accept="image/jpeg,image/jpg,image/png,image/heic">

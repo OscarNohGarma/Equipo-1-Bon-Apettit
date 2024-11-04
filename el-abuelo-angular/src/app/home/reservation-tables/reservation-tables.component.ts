@@ -137,7 +137,7 @@ export class ReservationTablesComponent implements OnInit {
   mostrarPreviewExterior: boolean = false;
   usuarioItems: Usuario[]=[];
 
-  reservation: ReservationTables = new ReservationTables(0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'En Espera', '');
+  reservation: ReservationTables = new ReservationTables(0, '', '', '', '', '', '', '', '', 'def', '1', '', 'def', '', '', 'En Espera', '');
   currentUser: string | null = null; // Controla la imagen expandida
   currentName: string | null = null;
   currentPhone:string | null = null;
