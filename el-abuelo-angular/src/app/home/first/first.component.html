@@ -1,0 +1,13 @@
+<p>first works!</p>
+<h1 class="titulo">Este es mi primer componente</h1>
+<p class="subtitulo">Mostrando el componente</p>
+
+<div class="grid">
+
+    <div class="box" *ngFor="let product of productItems">
+        <h1>{{ product.namee }}</h1>
+        <img [src]="product.image" [alt]="product.namee" class="imagen" />
+        <p>{{ product.precio | currency }}</p>
+    </div>
+
+</div>

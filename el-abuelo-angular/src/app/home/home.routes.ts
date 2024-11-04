@@ -12,6 +12,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CommunityComponent } from './community/community.component';
 import { AddComentarioComponent } from './community/add-comentario/add-comentario.component';
+import { FirstComponent } from './first/first.component';
 
 export const homeRoutes: Routes = [
   {
@@ -65,7 +66,10 @@ export const homeRoutes: Routes = [
     title: 'Agregar comentarios - El abuelo',
     component: AddComentarioComponent, // Componente de login del admin
   },
-  
-    
 
+  {
+    path: 'first',
+    title: 'Prueba',
+    component: FirstComponent, // Componente de login del admin
+  },
 ];
