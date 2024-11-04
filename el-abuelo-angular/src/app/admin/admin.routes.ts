@@ -1,9 +1,9 @@
 // feature.routes.ts
 import { Routes } from '@angular/router';
 import { InicioAdminComponent } from './owner/inicio-admin/inicio-admin.component';
-import { MenuAdminComponent } from './menu-admin/menu-admin.component';
-import { EditProductComponent } from './menu-admin/edit-product/edit-product.component';
-import { AddProductComponent } from './menu-admin/add-product/add-product.component';
+import { MenuAdminComponent } from './administrador/menu-admin/menu-admin.component';
+import { EditProductComponent } from './administrador/menu-admin/edit-product/edit-product.component';
+import { AddProductComponent } from './administrador/menu-admin/add-product/add-product.component';
 import { OrderAdminComponent } from '../admin/cocinero/order-admin/order-admin.component';
 import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AdminLoginComponent } from './admin-login/admin-login.component';
