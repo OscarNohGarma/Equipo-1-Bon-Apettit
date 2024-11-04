@@ -1,8 +1,7 @@
-
 <div id="page" class="site">
-  <h2 style="margin-bottom: 4rem; margin-top: -2rem; text-align:center;">¡Reserva Tú Mesa Ahora!</h2>
-  <h4 style="margin-bottom: 1rem;text-align:center; margin-top: -2.5rem;">Solo Completa El Formulario Con Los Datos Solicitantes</h4>
-  <div class="container2">
+  <h2 class="encabezado">Reservar una mesa</h2>
+  <h4 class="subtitulo">Completa el formulario con los datos solicitantes</h4>
+  <div class="container">
     <div class="form-box">
       <div class="progress2">
         <div class="logo">
@@ -11,7 +10,7 @@
         <ul class="progress2-steps">
           <li class="step active">
             <span>1</span>
-            <p>Personal<br><span>Información Cliente</span></p>
+            <p>Personal<br><span>Tu información</span></p>
           </li>
           <li class="step">
             <span>2</span>
@@ -27,23 +26,27 @@
           </li>
         </ul>
       </div>
-      <form action="">
+      <form (ngSubmit)="reservarMesa()" #reservationForm="ngForm">
         <div class="form-one form-step active">
           <div class="bg-svg"></div>
-          <h2> Información Del Cliente</h2>
+          <h2>Tu información</h2>
           <p style="color: black;">Complete todos los campos con la información que se le solicite.</p>
           <div>
             <label>Nombres</label>
-            <input type="text" name="Nombres" placeholder="Sus Nombres" required>
-          </div>
-          <div>
-            <label> Apellidos</label>
-            <input type="text" name="Apellidos" placeholder="Sus Apellidos" required>
+            <input type="text" id="namee" [(ngModel)]="reservation.namee" name="namee" placeholder="Sus Nombres" (blur)="checkEmpty('namee')" (input)="onInputChange('namee')" readonly required>
+            <span *ngIf="nameeVacio" style="color: red;">Este campo es obligatorio</span>
           </div>
 
+          <!-- <div>
+            <label>Apellidos</label>
+            <input type="text" [(ngModel)]="reservation.apellido" name="apellido" placeholder="Sus Apellidos" (blur)="checkEmpty('apellido')" (input)="onInputChange('apellido')" required>
+            <span *ngIf="apellidoVacio" style="color: red;">Este campo es obligatorio</span>
+          </div> -->
+
           <div>
-            <label> Número Telefónico </label>
-            <input type="tel" name="Telefono" placeholder="Su Número De Teléfono" maxlength="10" required>
+            <label>Número Telefónico</label>
+            <input type="tel" [(ngModel)]="reservation.telefono" name="telefono" placeholder="Su Número De Teléfono" maxlength="10" (blur)="checkEmpty('telefono')" (input)="onInputChange('telefono')" required>
+            <span *ngIf="telefonoVacio" style="color: red;">Este campo es obligatorio</span>
           </div>
 
         </div>
@@ -54,8 +57,9 @@
 
           <div>
             <label>Fecha A Reservar</label>
-            <input type="date" name="Fecha" [(ngModel)]="fechaReservada" (change)="validarFecha()" [min]="fechaMinima"
-              [attr.max]="fechaMaxima" appDisableDates required>
+            <input type="date" [(ngModel)]="reservation.fecha" name="fecha" (change)="validarFecha()" [min]="fechaMinima"
+              [attr.max]="fechaMaxima" appDisableDates (blur)="checkEmpty('fecha')" (input)="onInputChange('fecha')"  required>
+            <span *ngIf="fechaVacia" style="color: red;">Este campo es obligatorio</span>
             <span *ngIf="fechaInvalida" style="color: red;">
               Solo se permiten fechas de viernes a domingo.
             </span>
@@ -63,63 +67,75 @@
 
           <div>
             <label>Horario A Reservar</label>
-            <input type="time" name="Horario" [(ngModel)]="horarioReservado" (change)="validarHorario()" [min]="'19:00'"
-              [max]="'23:59'" [disabled]="fechaInvalida" required>
+            <input type="time" [(ngModel)]="reservation.hora" name="hora"  (change)="validarHorario()" [min]="'19:00'"
+              [max]="'23:59'" [disabled]="fechaInvalida" (blur)="checkEmpty('hora')" (input)="onInputChange('hora')"  required>
+            <span *ngIf="horaVacia" style="color: red;">Este campo es obligatorio</span>
             <span *ngIf="horarioInvalido" style="color: red;">
               El horario debe ser de 7:00 p.m. a 12:00 a.m.
             </span>
           </div>
 
-          <!-- <div>
-            <label>Lugar De La Mesa</label>
-            <select name="Lugar" id="Lugar" required (change)="onLugarChange($event)">
-              <option value="" selected disabled> Seleccione una opción</option>
-              <option value="Interior"> Interior </option>
-              <option value="Exterior"> Exterior</option>
-            </select>
-          </div> -->
-
           <div>
             <label>¿Para cuántas personas necesita?</label>
-            <select name="CantidadPersonas" id="CantidadPersonas" required (change)="onPersonasChange($event)">
+            <select [(ngModel)]="reservation.cantidad" (change)="onPersonasChange($event)" name="cantidad" id="CantidadPersonas" (blur)="checkEmpty('cantidad')" (change)="onInputChange('cantidad')" required>
               <option value="" selected disabled>Seleccione una opción</option>
-              <option value="2Personas">2 Personas</option>
-              <option value="4Personas">4 Personas</option>
-              <option value="6Personas">6 Personas</option>
+              <option value="2 Personas">2 Personas</option>
+              <option value="4 Personas">4 Personas</option>
+              <option value="6 Personas">6 Personas</option>
             </select>
+            <span *ngIf="cantidadVacio" style="color: red;">Este campo es obligatorio</span>
           </div>
-          <p class="text" style="font-weight: bold;">Cantidad De Mesas Disponibles: {{cantidadMesasDisponibles}}</p>
-          <!-- Solo mostrar el lugar de la mesa si ya se seleccionaron personas -->
+
           <div *ngIf="personasSeleccionadas">
             <label>Lugar De La Mesa</label>
-            <select name="Lugar" id="Lugar" required (change)="onLugarChange($event)">
+            <select [(ngModel)]="reservation.ubicacion" name="ubicacion" id="Lugar"  (change)="onLugarChange($event)" (blur)="checkEmpty('ubicacion')" (change)="onInputChange('ubicacion')" required>
               <option value="" selected disabled>Seleccione una opción</option>
               <option value="Interior">Interior</option>
               <option value="Exterior" *ngIf="mostrarExterior">Exterior</option>
             </select>
+            <span *ngIf="ubicacionVacio" style="color: red;">Este campo es obligatorio</span>
           </div>
-
-          <div>
-            <label for="cantidadMesas">Cantidad De Mesas A Reservar</label>
-            <input type="number" id="cantidadMesas" #cantidadMesas name="cantidadMesas"
+          <p [ngStyle]="getColorStyle()" *ngIf="reservation.ubicacion">
+            Cantidad De Mesas Disponibles: {{ cantidadMesasDisponibles }}
+          </p>
+          <div class="no-show ex">
+            <label for="cantidadMesas">Cantidad De Mesas</label>
+            <input type="number" id="cantidadMesas" #cantidadMesas [(ngModel)]="reservation.cantidadMesasReservada"  name="cantidadMesasReservada"
               placeholder="Cantidad De Mesas A Reservar" min="1" readonly required>
           </div>
 
-          <div>
-            <label for="costoMesa">Costo Por Mesa (Sin Decoración)</label>
-            <input type="number" id="costoMesa" #costoMesa name="Costo" placeholder="{costoPorMesa}" required readonly>
-          </div>
-
-
           <div *ngIf="lugarSeleccionado">
             <label>Decoración De la Mesa</label>
-            <select name="Decoracion" id="decoracion" (change)="onDecoracionChange($event)" required>
+            <select [(ngModel)]="reservation.tipo_decoracion" name="tipo_decoracion"  id="decoracion" (change)="onDecoracionChange($event)" data-required required>
+              <option value="" selected disabled>Seleccione una opción</option>
+              <option *ngFor="let decoracion of decoracionesDisponibles" [value]="decoracion">
+                {{ decoracion }}
+              </option>
+            </select>
+            <span *ngIf="tipoDecoracionVacio" style="color: red;">Este campo es obligatorio</span>
+          </div>
+          <div *ngIf="reservation.tipo_decoracion !== 'Ninguna' && reservation.tipo_decoracion !== 'Personalizado' && reservation.tipo_decoracion !== 'def'">
+            <label for="costoMesa" *ngIf="reservation.tipo_decoracion !== 'Ninguna'">Costo Por Mesa con Decoración</label>
+            <input [(ngModel)]="reservation.costo" name="costo" type="number" id="costoMesa" #costoMesa placeholder='$ {{costoPorMesa}} MXN' readonly>
+        </div>
+
+        <!-- Mostrar cuando ES Ninguna o Personalizado -->
+        <div *ngIf="reservation.tipo_decoracion === 'Ninguna'">
+            <p style="color: black; margin-bottom: 1em; font-weight:bold;">
+                El precio será determinado por el consumo realizado en el local.
+            </p>
+        </div>
+
+
+          <!-- <div *ngIf="lugarSeleccionado">
+            <label>Decoración De la Mesa</label>
+            <select [(ngModel)]="reservation.tipo_decoracion" name="tipo_decoracion" id="decoracion" (change)="onDecoracionChange($event)" required>
               <option value="" selected disabled>Seleccione una opción</option>
               <option *ngFor="let decoracion of decoracionesDisponibles" [value]="decoracion">
                 {{decoracion}}
               </option>
             </select>
-          </div>
+          </div> -->
 
           <!-- Contenedor para las imágenes de decoración -->
           <div style="display: flex;
@@ -132,7 +148,6 @@
             <img *ngIf="decoracionSeleccionada === 'Romantica' && mostrarPreviewInterior"
             src="../../../assets/imgDecoracionesReservaciones/RomanticaPreview2.jpeg"
             alt="Decoración Romántica Interior">
-
             <img *ngIf="decoracionSeleccionada === 'Romantica' && mostrarPreviewExterior"
             src="../../../assets/imgDecoracionesReservaciones/RomanticaPreview1.jpeg"
             alt="Decoración Romántica Exterior">
@@ -141,23 +156,21 @@
           </div>
 
           <!-- Div para mostrar el precio de la decoración seleccionada -->
-          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
+          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado' && decoracionSeleccionada!=='def'">
             <p style="color: black; margin-bottom: 1em;">
-              Precio de decoración: {{ costoDecoraciones[decoracionSeleccionada] | currency:'MXN' }}
+              Precio de decoración: $ {{ costoPorMesa | currency:' MXN ' }}
             </p>
           </div>
 
-
-          <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
+          <!-- <div *ngIf="decoracionSeleccionada && decoracionSeleccionada !== 'Ninguna' && decoracionSeleccionada !== 'Personalizado'">
             <label>Costo Por Mesa (Incluyendo Decoración)</label>
-            <input type="number" [value]="costoConDecoracion" readonly>
-          </div>
+            <input  type="number" [value]="costoConDecoracion" readonly>
+          </div> -->
 
           <div *ngIf="decoracionSeleccionada && decoracionSeleccionada === 'Personalizado'">
-            <p style="color: black; margin-bottom: 1em;">Primero finalice el proceso de reservación y posteriormente contacte al dueño de la cafetería para acordar la decoración y precios a tratar, al número telefónico:</p>
-            <input type="text" [value]="numeroTelefonico" readonly>
+            <p style="color: black; margin-bottom: 1em; font-weight:bold; ">Primero finalice el proceso de reservación y posteriormente contacte al dueño de la cafetería para acordar el tipo de decoración y precios a tratar, al número telefónico:</p>
+            <input style="color: black; font-weight: bold;" type="text" [value]="numeroTelefonico" readonly>
           </div>
-
         </div>
 
         <div class="form-three form-step">
@@ -166,34 +179,32 @@
           <div>
             <label>Mesas Reservadas: </label>
             <input type="text" [value]="cantidadMesasReservadas" readonly>
-            <!-- <span>{{ cantidadMesasReservadas }} mesa(s)</span> -->
           </div>
           <div>
             <label>Total A Pagar Por La Reservación: </label>
-            <input type="text" [value]="mensajeTotalPago" readonly>
+            <input type="text" [ngModel]="reservation.total" name="total" readonly>
           </div>
           <p class="text">A continuación, realice el pago por:</p>
 
           <div>
             <label for="cuentaBancaria">Tipo Banco:</label>
-            <input type="text" id="TipoBancaria" name="TipoBancaria" [value]="TipoBancaria" required readonly>
+            <input type="text" id="TipoBancaria" [(ngModel)]="reservation.tipo_banco" name="tipo_banco" [value]="TipoBancaria" required readonly>
             <label style="margin-top: 0.5rem;" for="cuentaBancaria">Numero De Cuenta:</label>
-            <input type="text" id="cuentaBancaria" name="cuentaBancaria" [value]="cuentaBancaria" required readonly>
-
+            <input type="text" id="cuentaBancaria" [(ngModel)]="reservation.numero_cuenta" name="numero_cuenta" [value]="cuentaBancaria" required readonly>
           </div>
 
           <div>
-            <p class="text">Ya realizado el pago de la reservación. Suba el baucher del pago para que lo comprobemos en sistema.</p>
-            <label for="file-upload">Subir Comprobante De Pago</label>
-            <input type="file" id="file-upload" #fileUpload accept="image/jpeg,image/jpg,image/png,image/heic">
-
-            <!-- Contenedor para previsualización de la imagen -->
-            <div id="preview-container">
-              <img #imagePreview id="image-preview" [src]="" alt="Previsualización de la imagen"
-                style="display: none; max-width: 100%; height: auto; margin-top: 1em;">
+            <p class="text">Si ya ha realizado el pago de la reservación, suba el comprobante (Baucher) del pago para que lo comprobemos en sistema.</p>
+            <div class="cont-imagen">
+              <label class="submit-button" for="file-upload">Subir Comprobante De Pago</label>
+              <input class="input2"  type="file" id="file-upload" #fileUpload (change)="handleFileUpload($event)"  accept="image/jpeg,image/jpg,image/png,image/heic">
+              <!-- Contenedor para previsualización de la imagen -->
+              <div id="preview-container">
+                <img #imagePreview id="image-preview" [src]="" alt="Previsualización de la imagen"
+                  style="display: none; max-width: 100%; height: auto; margin-top: 1em;">
+              </div>
             </div>
           </div>
-
         </div>
 
         <div class="form-four form-step">
@@ -202,10 +213,9 @@
 
           <p  style="color: black;">En un plazo de 30 minutos recibirás un mensaje de confirmación. En caso que no lo
             reciba contactenos al:
-            996 105 9860
+            {{numeroTelefonico}}
           </p>
         </div>
-
 
         <div *ngIf="!showReservarOtraMesa" class="btn-group">
           <button type="button" class="btn-prev" #prevButton disabled>Regresar</button>
@@ -217,7 +227,6 @@
         <div *ngIf="showReservarOtraMesa" class="btn-group">
           <button type="button" class="btn-next" (click)="reservarOtraMesa()">Reservar otra mesa</button>
         </div>
-
       </form>
     </div>
   </div>

@@ -158,7 +158,7 @@ img {
     gap: 30px;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 10px;
   }
 }
@@ -198,19 +198,26 @@ img {
   margin-bottom: 0;
   padding: 5px;
   border-radius: 3px;
-  transition: all 0.2s ease-in-out;
   font-weight: 600;
   // position: absolute;
   right: 0;
-}
-.user:hover {
-  background-color: rgb(255, 255, 255, 0.2);
-  cursor: pointer;
 }
 
 .div-cont-user {
   // position: absolute;
   right: 0;
+}
+@media (min-width: 768px) {
+  .user {
+    text-align: end;
+    max-width: 100px;
+  }
+}
+@media (min-width: 996px) {
+  .user {
+    text-align: start;
+    max-width: 100%;
+  }
 }
 .div-cont-user.phone {
   left: 100%;
@@ -299,4 +306,15 @@ img {
   position: absolute;
   gap: 5px;
   right: 0;
+}
+.down {
+  margin: 0;
+  color: #fff;
+  transition: all 0.2s ease-in-out;
+  padding: 3px 7px;
+  border-radius: 3px;
+}
+.down:hover {
+  background-color: rgb(255, 255, 255, 0.2);
+  cursor: pointer;
 }

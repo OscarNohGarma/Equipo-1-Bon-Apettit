@@ -2,19 +2,21 @@ import { ModeloPrincipal } from "./modelo_principal";
 
 export class Reservaciones extends ModeloPrincipal {
     tipocollection: string = "cita";
-    apellido: string;
     telefono: string;
     fecha: string;
     hora: string;
     cantidad: string;
     ubicacion: string;
+    cantidadMesasReservada: string;
     costo: string;
     tipo_decoracion: string;
     total: string;
     tipo_banco: string;
     numero_cuenta: string;
+    image: string;
     numero_contacto: string;
-    posicion: Array<string>;
+    estados: string;
+  
 
 }
 

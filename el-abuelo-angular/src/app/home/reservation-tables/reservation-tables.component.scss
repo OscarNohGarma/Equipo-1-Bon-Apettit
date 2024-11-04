@@ -23,7 +23,7 @@ html{
   scroll-behavior: smooth;
 }
 body{
-  font-family:  "raleway", sans-serif;
+  font-family:  "Raleway", "sans-serif";
   font-size: 14px;
   font-weight: 400;
   line-height: 1.8;
@@ -52,19 +52,40 @@ img{
   margin-top: -1.5em;
 }
 
-.container2{
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 2em;
-
+.encabezado {
+  font-size: 55px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 3px;
+  font-weight: 900;
+}
+.subtitulo {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px;
+  margin-top: 1rem;
 }
 
+// .container2{
+//   max-width: 1100px;
+//   margin: 0 auto;
+//   padding: 0 2em;
+
+// }
+.container{
+  margin: 0 auto;
+}
 .form-box{
   display: flex;
   flex-direction: column;
   margin-top: 5em;
-  border: 8px solid #e0e0e7;
-  border-radius: 15px;
+  border: 1px solid #b9b9b9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color:#faf9ff;
   margin-bottom: 5em;
 }
@@ -121,8 +142,8 @@ img{
 }
 .progress2 ul.progress2-steps li.active > span{
   color: white;
-  background-color: #6c5ce7;
-  border: 4px solid #a29bfe;
+  background-color: #343a40;
+  border: 4px solid #818181;
   z-index: 1;
 }
 .progress2 ul.progress2-steps li p span{
@@ -164,7 +185,8 @@ form > div > div:not(.checkbox){
 form :where(input,select){
   height: 40px;
   padding: 0 1em;
-  border-radius: 7px;
+  border: none;
+  border-radius: 5px;
   outline-color: #a29bfe;
   border: 1px solid #e0e0e7;
   background-color: transparent;
@@ -184,6 +206,7 @@ form .grouping input{
   max-width: 70px;
   text-align: center;
   margin-right: 1em;
+
 }
 
 form .checkbox input{
@@ -233,7 +256,40 @@ form > .form-four .bg-svg{
 
 
 /**Buttons*/
-
+.text-red {
+  color: red !important;
+}
+.submit-button{
+  all: unset;
+  text-align: center;
+  width: 100%;
+  padding: 6px 0;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.no-show.ex{
+  display: none;
+}
+.cont-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.submit-button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
+.input2[type="file"] {
+  display: none; /* Ocultar el input */
+}
 
 .btn-group{
   display: flex;
@@ -242,14 +298,14 @@ form > .form-four .bg-svg{
   margin-top: 2em;
 }
 .btn-group [class*="btn-"]{
-  background-color: #6c5ce7;
+  background-color: #343a40;
   color: white;
-  padding: 1em 2.5em;
-  border: 4px solid #a29bfe;
-  border-radius: 10px;
+  padding: 10px 30px;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
-  -webkit-transition: background-color .3s, border-color .3s ease-out;
-  transition: background-color .3s, border-color .3s ease-out;
+  -webkit-transition: background-color .3s, border-color all 0.1s ease-in-out;
+  transition: background-color .3s, border-color all 0.1s ease-in-out;
 }
 
 .btn-group [class*="btn-"]:disabled {
@@ -258,8 +314,8 @@ form > .form-four .bg-svg{
   cursor: text;
 }
 .btn-group [class*="btn-"]:hover:not(:disabled) {
-  background-color: #52505e;
-  border-color: #b0b0c0;
+  background-color: #212529;
+  border-color: #e0e0e7;
 }
 
 
@@ -278,9 +334,9 @@ form > .form-four .bg-svg{
 
 
 
-::placeholder{
-  color: #343a40;
-}
+// ::placeholder{
+//   color: #343a40;
+// }
 
 @media screen and (min-width: 1024px){
   .form-box{
@@ -334,8 +390,8 @@ form > .form-four .bg-svg{
   .form-box{
       display: flex;
       overflow: hidden; /* Evita que los bordes redondeados se corten */
-      border: 8px solid #b0b0c0;
-      border-radius: 15px;
+      // border: 8px solid #b0b0c0;
+      // border-radius: 15px;
   }
 
   .progress2 ul li p{
