@@ -44,7 +44,7 @@ h1,h2,h3{
   margin: 0 0 0.5em;
   font-size: 40px;
 }
-h
+
 img{
   max-width: 100%;
   vertical-align: middle;
@@ -70,19 +70,22 @@ img{
   margin-top: 1rem;
 }
 
-.container2{
-  max-width: 1100px;
+// .container2{
+//   max-width: 1100px;
+//   margin: 0 auto;
+//   padding: 0 2em;
+
+// }
+.container{
   margin: 0 auto;
-  padding: 0 2em;
-
 }
-
 .form-box{
   display: flex;
   flex-direction: column;
   margin-top: 5em;
-  border: 8px solid #e0e0e7;
-  border-radius: 15px;
+  border: 1px solid #b9b9b9;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color:#faf9ff;
   margin-bottom: 5em;
 }
@@ -139,8 +142,8 @@ img{
 }
 .progress2 ul.progress2-steps li.active > span{
   color: white;
-  background-color: #6c5ce7;
-  border: 4px solid #a29bfe;
+  background-color: #343a40;
+  border: 4px solid #818181;
   z-index: 1;
 }
 .progress2 ul.progress2-steps li p span{
@@ -297,7 +300,7 @@ form > .form-four .bg-svg{
 .btn-group [class*="btn-"]{
   background-color: #343a40;
   color: white;
-  padding: 1em 2.5em;
+  padding: 10px 30px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -331,9 +334,9 @@ form > .form-four .bg-svg{
 
 
 
-::placeholder{
-  color: #343a40;
-}
+// ::placeholder{
+//   color: #343a40;
+// }
 
 @media screen and (min-width: 1024px){
   .form-box{
@@ -387,8 +390,8 @@ form > .form-four .bg-svg{
   .form-box{
       display: flex;
       overflow: hidden; /* Evita que los bordes redondeados se corten */
-      border: 8px solid #b0b0c0;
-      border-radius: 15px;
+      // border: 8px solid #b0b0c0;
+      // border-radius: 15px;
   }
 
   .progress2 ul li p{

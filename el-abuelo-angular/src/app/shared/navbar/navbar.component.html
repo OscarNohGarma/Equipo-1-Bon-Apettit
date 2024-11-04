@@ -3,13 +3,14 @@
         <a [routerLink]="['/']">Inicio</a>
         <a [routerLink]="['menu']">Menú</a>
         <a [routerLink]="['Galeria']">Galería</a>
-        <a [routerLink]="['Reservaciones']">Reservaciones</a>
+        <a [routerLink]="['Reservaciones']">Reservación</a>
         <a [routerLink]="['comunidad']">Comunidad</a>
 
         <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar Sesión</p>
         <div *ngIf="currentUser" class="cont-pc">
             <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
-            <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
+            <p *ngIf="currentUser" class="user">{{currentName}} </p>
+            <p class="down" (click)="toggleUserMenu()">▼</p>
         </div>
 
         <div class="div-cont-user">
@@ -34,7 +35,8 @@
             <p *ngIf="!currentUser" (click)="onLoginMobile()" [routerLink]="['login']" class="login phone">Iniciar
                 Sesión</p>
             <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
-            <p *ngIf="currentUser" class="user" (click)="toggleUserMenu()">{{currentName}} ▼</p>
+            <p *ngIf="currentUser" class="user">{{currentName}}</p>
+            <p (click)="toggleUserMenu()" class="down">▼</p>
         </div>
     </div>
     <div class="user-menu phone box" [class.show]=" isUserMenuOpen">
@@ -57,7 +59,7 @@
                 <a [routerLink]="['/']">Inicio</a>
                 <a [routerLink]="['menu']">Menú</a>
                 <a [routerLink]="['Galeria']">Galería</a>
-                <a [routerLink]="['Reservaciones']">Reservaciones</a>
+                <a [routerLink]="['Reservaciones']">Reservación</a>
                 <a [routerLink]="['comunidad']">Comunidad</a>
                 <!-- <a [routerLink]="['contacto']">Contacto</a> -->
             </div>
