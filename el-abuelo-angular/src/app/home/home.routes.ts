@@ -9,7 +9,9 @@ import { RegisterComponent } from './register/register.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { AdminAuthGuard } from '../auth/admin-auth.guard';
 import { AuthGuard } from '../auth/auth.guard';
+import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CommunityComponent } from './community/community.component';
+import { AddComentarioComponent } from './community/add-comentario/add-comentario.component';
 
 export const homeRoutes: Routes = [
   {
@@ -33,6 +35,11 @@ export const homeRoutes: Routes = [
     component: ReservationTablesComponent,
   },
   {
+    path: 'profile/edit',
+    title: 'Editar perfil',
+    component: EditProfileComponent,
+  },
+  {
     path: 'login',
     title: 'Iniciar Sesión - El abuelo',
     component: LoginComponent, // Componente de login del admin
@@ -53,4 +60,12 @@ export const homeRoutes: Routes = [
     title: 'Comunidad - El abuelo',
     component: CommunityComponent, // Componente de login del admin
   },
+  {
+    path: 'agregar-comentarios',
+    title: 'Agregar comentarios - El abuelo',
+    component: AddComentarioComponent, // Componente de login del admin
+  },
+  
+    
+
 ];

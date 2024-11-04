@@ -1,158 +1,177 @@
-.main-login-container {
-    margin: 70px auto;
-  }
-  .main-login-container h2 {
-    margin-bottom: 30px;
-  }
-  .subtitle {
-    text-align: center;
-    font-size: 18px;
-    margin: 0 auto;
-    margin-bottom: 20px;
-    max-width: 400px;
-  }
-  .login-container {
-    width: 350px;
-    padding: 20px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
-  }
-  
-  h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-control {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .invalid .form-control {
-    border-color: red;
-  }
-  
-  .error-message {
-    color: red;
-    margin-top: 5px;
-  }
-  
-  .error-message {
-    color: red;
-    margin-bottom: 10px;
-    text-align: center;
-  }
-  
-  .btn-login {
-    width: 100%;
-    padding: 10px;
-    background-color: #343a40;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.1s ease-in-out;
-  }
-  
-  .btn-login:hover {
-    background-color: #212529;
-  }
-  .question {
-    text-align: center;
-    margin-top: 10px;
-  }
-  .question span {
-    color: #1a5ea2;
-  }
-  .question span:hover {
-    text-decoration: underline;
-    cursor: pointer;
-  }
- 
-  #form {
-    width: 250px; /* Ancho del formulario */
-    margin: 0 auto; /* Centrar el formulario */
-    padding: 20px; /* Espaciado interno */
-    border: 1px solid #ccc; /* Borde del formulario */
-    border-radius: 8px; /* Esquinas redondeadas */
-    background-color: #f9f9f9; /* Color de fondo del formulario */
-  }
-  
-  #form {
-    width: 250px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
-  }
-  
-  #form p {
-    text-align: center;
-    margin: 0;
-  }
-  
-  #form label {
-    font-size: 20px; /* Puedes ajustar este tamaño según sea necesario */
-    cursor: pointer; 
-    transition: color 0.3s; 
-  }
-  
-  input[type="radio"] {
-    display: none;
-  }
-  
-  label {
-    color: grey; 
-  }
-  
-  .clasificacion {
-    direction: rtl; 
-    unicode-bidi: bidi-override; 
-    display: flex; /* Usar flex para el contenedor de estrellas */
+main {
+  margin: 50px auto;
+  width: 800px;
+}
+
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+h2 {
+  text-decoration: underline;
+}
+
+.encabezado {
+  font-size: 55px;
+  font-weight: bolder;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 3px;
+  font-weight: 900;
+}
+
+.subtitulo {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+.box {
+  padding: 30px 20px; /* Espaciado interno */
+  margin: 10px auto; /* Margen superior e inferior, centrado */
+  background-color: #fff; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde de la caja */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+  text-align: center; /* Centrar texto */
+  display: flex; /* Para utilizar flexbox */
+  flex-direction: column; /* Dirección de los elementos dentro */
+  gap: 10px; /* Espacio entre elementos internos */
+  width: 100%; /* Ancho completo en pantallas pequeñas */
+  max-width: 2000px; /* Ancho máximo de la caja */
+  height: auto; /* Altura automática, se ajusta al contenido */
+  min-height: 200px; /* Altura mínima para mantener una apariencia uniforme */
+
+  /* Responsividad */
+  @media (min-width: 768px) {
+    width: 80%; /* Ancho del 80% en pantallas grandes */
   }
-  
-  .clasificacion label {
-    font-size: 40px; /* Cambia el tamaño de las estrellas aquí */
-    transition: color 0.3s; 
+
+  @media (min-width: 992px) {
+    width: 600px; /* Ancho fijo en pantallas extra grandes */
   }
-  
-  /* Cambiar el color de las estrellas al pasar el mouse */
-  .clasificacion label:hover,
-  .clasificacion label:hover ~ label {
-    color: orange; 
+}
+
+.grid {
+  margin-top: 60px;
+  display: flex;
+  flex-direction: column; // Coloca en columna
+  gap: 20px; // Espacio entre los comentarios
+}
+
+.feedback-section {
+  text-align: center; // Centrar el texto
+  margin-top: 20px; // Espacio superior para separar del contenedor de comentarios
+}
+
+.btn {
+  background-color: #343a40; // Color de fondo negro
+  color: white; // Color del texto en blanco
+  padding: 10px 20px; // Espaciado interno del botón
+  text-decoration: none; // Sin subrayado
+  border-radius: 5px; // Bordes redondeados del botón
+  transition: background-color 0.3s; // Transición suave para hover
+
+  &:hover {
+    background-color: #212529; // Color más claro al pasar el mouse
   }
-  
-  /* Cambiar el color de las estrellas seleccionadas */
-  input[type="radio"]:checked ~ label {
-    color: orange; 
+}
+
+.clasificacion {
+  display: flex;
+  justify-content: center;
+  font-size: 40px; /* Tamaño de las estrellas */
+}
+
+.clasificacion input {
+  display: none; /* Ocultar los botones de radio */
+}
+
+.clasificacion label {
+  color: orange; /* Color por defecto de las estrellas */
+  transition: color 0.3s; /* Suavizar el cambio de color */
+}
+
+/* Estrellas llenas basadas en la calificación */
+.clasificacion input:checked ~ label {
+  color: orange; /* Cambia el color a naranja para las estrellas a la izquierda */
+}
+
+/* Color de las estrellas llenas basado en la calificación */
+.clasificacion input:checked + label {
+  color: orange; /* Color de las estrellas llenas */
+}
+
+/* Cambiar el color de las estrellas vacías */
+.clasificacion input:checked {
+  & ~ input {
+    & + label {
+      color: lightgray; /* Color de las estrellas vacías a la derecha */
+    }
   }
-  
-  .btn-primary {
-    display: block; 
-    width: 100%; 
-    padding: 10px; 
-    background-color: #007bff; 
-    color: white; 
-    border: none; 
-    border-radius: 5px; 
-    font-size: 16px; 
-    cursor: pointer; 
-    transition: background-color 0.3s; 
+}
+
+.description {
+  text-align: justify; // Justifica el texto
+  margin: 0 auto; // Centra el contenedor en la página
+}
+
+/* Estilos para el contenedor de encabezados */
+.headings {
+  margin-bottom: 20px; // Espacio inferior
+}
+
+/* Espaciado y estilo del switch */
+.buttons {
+  .badge {
+    padding: 10px; // Espaciado interno
+    display: flex;
+    align-items: center;
   }
-  
-  .btn-primary:hover {
-    background-color: #0056b3; 
+
+  .form-check {
+    margin-left: 10px; // Espacio a la izquierda del switch
   }
-  
+}
+
+.fecha-hora {
+  display: flex; /* Usar flexbox para alinear */
+  margin: 0 170px; /* Espacio lateral uniforme (izquierda y derecha) */
+  align-items: center; /* Centrar verticalmente */
+  margin-top: 10px; /* Espacio superior para separación */
+  justify-content: flex-start; /* Alinear elementos al principio (izquierda) */
+}
+
+.fecha,
+.hora {
+  font-size: 14px; /* Tamaño de fuente para fecha y hora */
+  color: #555; /* Color más tenue para la fecha y hora */
+  margin-right: 15px; /* Espacio entre la fecha y la hora */
+}
+
+/* Estilo para pantallas grandes */
+@media (min-width: 768px) {
+  .fecha-hora {
+    flex-direction: row; /* Mantiene los elementos en fila en pantallas grandes */
+    margin: 0 170px; /* Mantiene el margen para pantallas grandes */
+  }
+}
+
+/* Estilo para pantallas pequeñas */
+@media (max-width: 767px) {
+  .fecha-hora {
+    flex-direction: row; /* Mantiene los elementos en fila también en pantallas pequeñas */
+    margin: 0 130px; /* Reduce el margen lateral en pantallas pequeñas */
+  }
+}

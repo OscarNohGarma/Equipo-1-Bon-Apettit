@@ -36,6 +36,7 @@ export class FirebaseGenericService {
     const nameQuerySnapshot: QuerySnapshot = await collection
       .where('id', '==', entity.namee)
       .get();
+
     if (!nameQuerySnapshot.empty) {
       throw new ConflictException('La entidad ya está registrada');
     }
