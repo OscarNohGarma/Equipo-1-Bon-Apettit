@@ -33,19 +33,23 @@
 </div>
 <div class="box" *ngIf="currentUser &&  (rol === 'DUEÑO' || rol === 'ADMINISTRADOR')">
     <div class="container navbar">
-        <div class="elemento-nav" [routerLink]="['/admin']" (click)="selectCategory('Inicio')">
+        <!-- <div class="elemento-nav" [routerLink]="['/admin']" (click)="selectCategory('Inicio')">
             Inicio
-        </div>
-        <div class="elemento-nav" [routerLink]="['/admin/menu']" (click)="selectCategory('Administrar Menú')">
+        </div> -->
+        <div *ngIf="rol==='ADMINISTRADOR'" class="elemento-nav" [routerLink]="['/admin/menu']"
+            (click)="selectCategory('Administrar Menú')">
             Menú
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/roles']" (click)="selectCategory('Roles de Usuarios')">
+        <div *ngIf="rol==='DUEÑO'" class="elemento-nav" [routerLink]="['/admin/roles']"
+            (click)="selectCategory('Roles de Usuarios')">
             Usuarios
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">
+        <div *ngIf="rol==='DUEÑO'" class="elemento-nav" [routerLink]="['/admin/report']"
+            (click)="selectCategory('Reporte')">
             Reporte
         </div>
-        <div class="elemento-nav" [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">
+        <div *ngIf="rol==='DUEÑO'" class="elemento-nav" [routerLink]="['/admin/clientes']"
+            (click)="selectCategory('Clientes')">
             Clientes
         </div>
 
@@ -56,11 +60,15 @@
             <p class="toggle-menu">▼</p>
         </div>
         <div class="submenu-mobile box" [class.show]=" isMenuOpen">
-            <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')">Inicio</div>
-            <div [routerLink]="['/admin/menu']" (click)="selectCategory('Menú')">Menú</div>
-            <div [routerLink]="['/admin/roles']" (click)="selectCategory('Usuarios')">Usuarios</div>
-            <div [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">Reporte</div>
-            <div [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">Clientes</div>
+            <!-- <div [routerLink]="['/admin']" (click)="selectCategory('Inicio')">Inicio</div> -->
+            <div *ngIf="rol==='ADMINISTRADOR'" [routerLink]="['/admin/menu']" (click)="selectCategory('Menú')">Menú
+            </div>
+            <div *ngIf="rol==='DUEÑO'" [routerLink]="['/admin/roles']" (click)="selectCategory('Usuarios')">Usuarios
+            </div>
+            <div *ngIf="rol==='DUEÑO'" [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">Reporte
+            </div>
+            <div *ngIf="rol==='DUEÑO'" [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">Clientes
+            </div>
         </div>
     </div>
 </div>

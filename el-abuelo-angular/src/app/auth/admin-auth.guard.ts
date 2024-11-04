@@ -24,7 +24,26 @@ export class AdminAuthGuard implements CanActivate {
     if (this.adminAuthService.isAuthenticated()) {
       const userRole = this.adminAuthService.getRol();
 
+      if (
+        userRole === 'DUEÑO' &&
+        state.url !== '/admin/report' &&
+        state.url !== '/admin/clientes' &&
+        state.url !== '/admin/roles'
+      ) {
+        this.router.navigate(['/admin/report']);
+        return false; // Bloquear la navegación original
+      }
       // Si el usuario es cocinero y trata de acceder a otra ruta, redirigir a /admin/ordenes
+
+      if (
+        userRole === 'ADMINISTRADOR' &&
+        state.url !== '/admin/menu' &&
+        state.url !== '/admin/comentarios'
+      ) {
+        this.router.navigate(['/admin/menu']);
+        return false; // Bloquear la navegación original
+      }
+
       if (userRole === 'COCINERO' && state.url !== '/admin/ordenes/activas') {
         this.router.navigate(['/admin/ordenes/activas']);
         return false; // Bloquear la navegación original
