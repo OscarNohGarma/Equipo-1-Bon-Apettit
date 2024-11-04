@@ -2,7 +2,6 @@ import { BaseModel } from '../../shared/baseModel';
 
 export class ReservationTables extends BaseModel{
 
-  apellido: string;
   telefono: string;
   fecha: string;
   hora: string;
@@ -22,7 +21,6 @@ export class ReservationTables extends BaseModel{
   constructor(
     id: number,
     namee: string,
-    apellido: string,
     telefono: string,
     fecha: string,
     hora: string,
@@ -40,7 +38,6 @@ export class ReservationTables extends BaseModel{
     usuario: string,
   ){
     super(id, namee); //Hereda id y namee de BaseModal
-    this.apellido = apellido;
     this.telefono = telefono;
     this.fecha = fecha;
     this.hora = hora;

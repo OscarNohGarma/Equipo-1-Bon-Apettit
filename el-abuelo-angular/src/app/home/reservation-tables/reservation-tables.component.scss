@@ -235,7 +235,37 @@ form > .form-four .bg-svg{
 
 
 /**Buttons*/
-
+.text-red {
+  color: red !important;
+}
+.submit-button{
+  all: unset;
+  text-align: center;
+  width: 100%;
+  padding: 6px 0;
+  border: none;
+  border: 1px solid #343a40;
+  color: #343a40;
+  font-weight: 400;
+  font-size: 18px;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+}
+.cont-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+.submit-button:hover {
+  color: white;
+  background-color: #343a40;
+  cursor: pointer;
+}
+.input2[type="file"] {
+  display: none; /* Ocultar el input */
+}
 
 .btn-group{
   display: flex;

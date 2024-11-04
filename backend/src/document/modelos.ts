@@ -2,7 +2,6 @@ import { ModeloPrincipal } from "./modelo_principal";
 
 export class Reservaciones extends ModeloPrincipal {
     tipocollection: string = "cita";
-    apellido: string;
     telefono: string;
     fecha: string;
     hora: string;
