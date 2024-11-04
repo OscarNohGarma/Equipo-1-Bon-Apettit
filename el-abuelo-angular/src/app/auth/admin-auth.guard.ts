@@ -28,7 +28,9 @@ export class AdminAuthGuard implements CanActivate {
         userRole === 'DUEÑO' &&
         state.url !== '/admin/report' &&
         state.url !== '/admin/clientes' &&
-        state.url !== '/admin/roles'
+        state.url !== '/admin/roles' &&
+        state.url !== '/admin/roles/add' &&
+        !state.url.startsWith('/admin/roles/edit/')
       ) {
         this.router.navigate(['/admin/report']);
         return false; // Bloquear la navegación original
@@ -38,7 +40,9 @@ export class AdminAuthGuard implements CanActivate {
       if (
         userRole === 'ADMINISTRADOR' &&
         state.url !== '/admin/menu' &&
-        state.url !== '/admin/comentarios'
+        state.url !== '/admin/menu/add' &&
+        state.url !== '/admin/comentarios' &&
+        !state.url.startsWith('/admin/menu/edit/')
       ) {
         this.router.navigate(['/admin/menu']);
         return false; // Bloquear la navegación original
