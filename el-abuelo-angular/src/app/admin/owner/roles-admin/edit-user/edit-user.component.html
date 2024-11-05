@@ -34,7 +34,7 @@
     </div>
 
 
-    <div *ngIf="currentRol!=='DUEÑO'" class="form-group">
+    <div *ngIf="userId !== currentId" class="form-group">
         <label for="rol">Rol:</label>
         <select id="rol" formControlName="rol" class="form-control" required>
             <option value="" disabled selected>Selecciona un rol para este usuario</option>
@@ -47,8 +47,8 @@
             El rol es requerido.
         </div>
     </div>
-    <p *ngIf="userForm.value.rol === 'ADMINISTRADOR'" class="warning">ADVERTENCIA: Los administradores tienen total
-        control sobre la información del página, como editar el menú y responder a comentarios.
+    <p *ngIf="userForm.value.rol === 'ADMINISTRADOR'" class="warning">ADVERTENCIA: Los administradores tienen control
+        sobre la información del página, como editar el menú y responder a comentarios.
     <p *ngIf="currentId === userId" class="warning"></p>
     <app-spinner *ngIf="loading" />
     <button type="submit" class="button ">ACTUALIZAR</button>

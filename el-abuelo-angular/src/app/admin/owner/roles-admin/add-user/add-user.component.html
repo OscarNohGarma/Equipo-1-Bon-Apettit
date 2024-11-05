@@ -47,8 +47,8 @@
         </div>
     </div>
 
-    <p *ngIf="userForm.value.rol === 'ADMINISTRADOR'" class="warning">ADVERTENCIA: Los administradores tienen total
-        control sobre la información del página, como editar el menú y responder a comentarios.</p>
+    <p *ngIf="userForm.value.rol === 'ADMINISTRADOR'" class="warning">ADVERTENCIA: Los administradores tienen control
+        sobre la información del página, como editar el menú y responder a comentarios.</p>
     <app-spinner *ngIf="loading" />
     <button type="submit" class="button ">AGREGAR</button>
 </form>

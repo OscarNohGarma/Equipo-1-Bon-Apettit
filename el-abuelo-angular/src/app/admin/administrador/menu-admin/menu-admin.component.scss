@@ -439,6 +439,12 @@ h3 {
   justify-content: center;
   align-items: center;
 }
+
+@media (min-width: 1280px) {
+  .name h1 {
+    margin-bottom: 0;
+  }
+}
 @media (min-width: 1280px) {
   .name {
     width: 200px;
