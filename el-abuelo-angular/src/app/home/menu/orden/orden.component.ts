@@ -7,14 +7,13 @@ import { Router } from '@angular/router';
 import { OrderMenu } from '../../../core/models/orderMenu';
 import { OrderMenuService } from '../../../core/services/order-menu.service';
 import { AuthService } from '../../../auth/auth.service';
-import { AddProductComponent } from '../../../admin/menu-admin/add-product/add-product.component';
 import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
 declare var Swal: any;
 
 @Component({
   selector: 'app-orden',
   standalone: true,
-  imports: [CommonModule, FormsModule, AddProductComponent, SpinnerComponent],
+  imports: [CommonModule, FormsModule, SpinnerComponent],
   templateUrl: './orden.component.html',
   styleUrls: ['./orden.component.scss'],
   providers: [OrderMenuService],

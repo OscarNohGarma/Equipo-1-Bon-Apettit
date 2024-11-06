@@ -378,7 +378,7 @@ form > .form-four .bg-svg{
       border-radius: 0 15px 15px 0;
       margin-top: 0;
       border-left: none;
-      height: 100%;
+      // height: 100%;
       display: flex;
       flex-direction: column;
       padding-bottom: 2em;
@@ -466,120 +466,12 @@ form > .form-four .bg-svg{
 }
 
 
-/*Reservation Tables*/
-
-/* .movie-container {
-  margin: 20px 0;
-}
-
-.movie-container select {
-  background-color: #fff;
-  border: 0;
-  border-radius: 5px;
-  font-size: 16px;
-  margin-left: 10px;
-  padding: 5px 15px 5px 15px;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-.container3 {
-  perspective: 1000px;
-  margin-bottom: 30px;
-  margin-top: 1rem;
-  margin-left: 2rem;
-}
-
-.seat {
-  background-color: #444451;
-  height: 26px;
-  width: 32px;
-  margin: 3px;
-  font-size: 50px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-}
- */
-/*
-.seat.selected {
-  background-color: green;
-}
-.seat.not {
-  cursor: not-allowed;
-  pointer-events: none;
-}
-.seat.nearby {
-  background-color: #d3d3d3;
-  cursor: not-allowed;
-} */
-
-
-/* .seat.sold {
-  background-color: blue;
-}
-
-.seat.not {
-  background-color: rgb(135, 10, 50);
-}
-
-.seat:nth-of-type(2) {
-  margin-right: 18px;
-}
-
-.seat:nth-last-of-type(2) {
-  margin-left: 18px;
-}
-
-.seat:not(.sold):hover {
-  cursor: pointer;
-  transform: scale(1.2);
-}
-
-.showcase .seat:not(.sold):hover {
-  cursor: default;
-  transform: scale(1);
-} */
-
-
-
-/* .showcase {
-  background: rgba(0, 0, 0, 0.1);
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #777;
-  list-style-type: none;
-  display: flex;
-  justify-content: space-between;
-  margin-top: 1rem;
-  margin: auto;
-}
-
-.showcase li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 10px;
-}
-.showcase li small {
-  margin-left: 2px;
-} */
-
 .row {
   display: flex;
   margin-top: 1rem;
 }
 
-/* .screen {
-  background-color: rgb(41, 174, 203);
-  height: 120px;
-  width: 100%;
-  margin: 15px 0;
-  transform: rotateX(-48deg);
-  box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
-} */
-
-p.text{
+text{
     margin: 5px 0;
     color: black;
 }
@@ -632,100 +524,4 @@ p.text span{
     }
   }
 }
-
-
-
-/* .container3 {
-  perspective: 1000px;
-  margin-bottom: 30px;
-  margin-top: 1rem;
-  width: 100%;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-} */
-
-/* Hacemos que los asientos sean flexibles */
-/* .row {
-  display: flex;
-  justify-content: center;
-  margin-top: 0.5rem;
-}
- */
-/* .seat {
-  background-color: #444451;
-  height: 1.5rem;
-  width: 1.5rem;
-  margin: 0.2rem;
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  transition: transform 0.3s ease-in-out;
-}
-
-.seat.selected {
-  background-color: green;
-}
-
-.seat.sold {
-  background-color: blue;
-}
-
-.seat:not(.sold):hover {
-  cursor: pointer;
-  transform: scale(1.1);
-}
- */
-
-/* Ajustamos el showcase para que sea más compacto en móviles */
-/* .showcase {
-  display: flex;
-  justify-content: space-around;
-  list-style-type: none;
-  padding: 0.5rem;
-  border-radius: 0.25rem;
-  background: rgba(0, 0, 0, 0.1);
-}
-
-.showcase li {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 0.5rem;
-}
-
-.showcase .seat {
-  margin-right: 0.25rem;
-  padding-left: 1.5rem;
-} */
-
-/* Media queries para ajustar tamaños en diferentes dispositivos */
-/* @media screen and (max-width: 768px) {
-  .seat {
-    height: 1.2rem;
-    width: 1.2rem;
-    margin: 0.15rem;
-  }
-
-  .showcase {
-    flex-wrap: wrap;
-  }
-
-  .showcase li {
-    margin: 0.25rem;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .seat {
-    height: 1rem;
-    width: 1rem;
-    margin: 0.1rem;
-  }
-
-  .container3 {
-    padding: 0 0.5rem;
-  }
-} */
-
-
 

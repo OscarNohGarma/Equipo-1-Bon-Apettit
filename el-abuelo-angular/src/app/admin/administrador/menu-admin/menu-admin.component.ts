@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ProductService } from '../../core/services/product.service';
-import { MenuProduct } from '../../core/models/menuProduct';
+import { ProductService } from '../../../core/services/product.service';
+import { MenuProduct } from '../../../core/models/menuProduct';
 import { Router, RouterModule } from '@angular/router';
-import { UploadService } from '../../core/services/upload.service';
+import { UploadService } from '../../../core/services/upload.service';
 declare var Swal: any;
 
 @Component({
