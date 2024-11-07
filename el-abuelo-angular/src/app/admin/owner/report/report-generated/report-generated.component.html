@@ -1,0 +1,40 @@
+<div class="orders container">
+    <div>
+        <h1 class="encabezado">{{dateFilter=="hoy" ? "Reporte de hoy": dateFilter=="mes" ?
+            "Reporte del mes" : dateFilter ==="semana" ? "Reporte de la semana" : "Reporte general"}}</h1>
+        <h2 class="subtitulo">Aquí tienes el resumen de las ventas {{dateFilter=="hoy" ? " de hoy" :
+            dateFilter=="semana"
+            ? " de la última semana" : dateFilter ==="mes" ? " del último mes" : "hasta la fecha"}} </h2>
+    </div>
+    <div>
+        <p *ngIf="dateFilter === 'mes' || dateFilter ==='semana' || dateFilter==='hoy'">Fecha: {{dateFilter ==="mes" ?
+            dateOneMonthAgo +" - "
+            :dateFilter === "semana"? dateOneWeekAgo +" - " :
+            ""}}{{dateToday}}</p>
+
+        <p>Número de órdenes completadas: {{nOrdenes}}</p>
+        <p>Número de órdenes entregadas en el local: {{entregasLocal}}</p>
+        <p>Número de órdenes entregadas a domicilio: {{entregasDomicilio}}</p>
+        <p>Total vendido: ${{total}}</p>
+
+        <div class="ventas">
+            <p>NÚMERO DE VENTAS POR PRODUCTO</p>
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Nombre del producto</th>
+                        <th>Cantidad vendida</th>
+                        <th>Total ($)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let producto of cantidadPorProducto">
+                        <th>{{producto.nombre}}</th>
+                        <th>{{producto.cantidad}}</th>
+                        <th>{{producto.total}}</th>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
