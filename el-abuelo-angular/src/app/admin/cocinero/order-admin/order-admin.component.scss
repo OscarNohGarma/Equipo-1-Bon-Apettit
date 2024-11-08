@@ -111,7 +111,7 @@ h2 {
   .box {
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 1fr;
   }
   .box.no-status {
     grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -151,27 +151,41 @@ p {
   position: relative;
 }
 .productos {
-  position: absolute;
   padding: 15px 25px;
-  margin: 0 auto 10px;
-  background-color: rgb(250, 250, 250);
-  border: 1px solid #ccc;
   border-radius: 10px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   z-index: 1000;
-  width: 200%;
   left: -50%;
   top: 115%;
   overflow: hidden;
-  max-height: 0; /* Altura inicial cero */
-  opacity: 0; /* Inicia invisible */
   transition: max-height 1s ease, opacity 0.5s ease; /* Animación de altura y opacidad */
   border-radius: 5px;
 }
+/* Aplicar estilos al scroll en pantallas grandes */
 @media (min-width: 992px) {
   .productos {
     left: 0%;
-    width: 150%;
+    max-height: 180px;
+    overflow: auto;
+  }
+
+  /* Personalizar el scroll */
+  .productos::-webkit-scrollbar {
+    width: 10px; /* Ancho de la barra de desplazamiento */
+  }
+
+  .productos::-webkit-scrollbar-track {
+    background: #ebebeb; /* Color de fondo del track */
+    border-radius: 5px;
+  }
+
+  .productos::-webkit-scrollbar-thumb {
+    background-color: #818288; /* Color del "thumb" */
+    border-radius: 5px;
+    border: 2px solid #f1f1f1; /* Espacio alrededor del "thumb" */
+  }
+
+  .productos::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Color del "thumb" al hacer hover */
   }
 }
 .productos.show {
@@ -194,6 +208,10 @@ p {
 .producto p {
   margin-bottom: 0;
   // padding-bottom: 10px;
+}
+.agregados {
+  font-weight: 600;
+  font-size: 18px;
 }
 .vin {
   font-weight: 800;
@@ -219,7 +237,6 @@ p {
 }
 .total {
   font-size: 20px;
-  margin-bottom: 20px;
   padding-top: 10px;
   border-top: 1px solid rgb(52, 58, 64, 0.3);
 }
@@ -236,14 +253,18 @@ p {
 .fecha {
   width: 100%;
   color: #343a40;
-  margin-bottom: 10px;
+  margin-top: 10px;
   display: flex;
   justify-content: center;
   flex-direction: column;
+  text-align: end;
 }
 @media (min-width: 992px) {
   .fecha {
-    margin-bottom: 0;
+    margin-top: 0;
+    position: absolute;
+    bottom: 10px;
+    left: -20px;
   }
 }
 .fecha p {
