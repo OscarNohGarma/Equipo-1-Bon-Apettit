@@ -18,6 +18,7 @@ import { ComentariosComponent } from './administrador/comentarios/comentarios.co
 import { ReportGeneratedComponent } from './owner/report/report-generated/report-generated.component';
 import { AddReplyComponent } from './administrador/comentarios/add-reply/add-reply.component';
 import { ReservacionTableComponent } from './owner/reservacion-table/reservacion-table.component';
+import { ViewReservacionComponent } from './owner/reservacion-table/view-reservacion/view-reservacion.component';
 
 export const adminRoutes: Routes = [
   {
@@ -116,6 +117,11 @@ export const adminRoutes: Routes = [
     path: 'reservaciones', // Ruta comodín para capturar cualquier ruta no reconocida
     title: 'Reservaciones - Administrador', // Redirigir al inicio
     component: ReservacionTableComponent,
+  },
+  {
+    path: 'reservaciones/view/:id', // Ruta comodín para capturar cualquier ruta no reconocida
+    title: 'Detalles de la reservación - Administrador', // Redirigir al inicio
+    component: ViewReservacionComponent,
   },
   {
     path: '**', // Ruta comodín para capturar cualquier ruta no reconocida

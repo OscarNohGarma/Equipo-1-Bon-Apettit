@@ -17,23 +17,20 @@ declare var Swal: any;
   styleUrl: './reservacion-table.component.scss',
   providers: [ReservationTablesService, UploadService],
 })
-export class ReservacionTableComponent implements OnInit{
-
+export class ReservacionTableComponent implements OnInit {
   reservation: ReservationTables[] = [];
   selectedStatus: string = 'En Espera';
-  selectStatus:string = 'Confirmada'
+  selectStatus: string = 'Confirmada';
   isDetailsOpen: boolean = false; //Controla la visualización del boton de detalle
 
-  searchTerm:string = '';
+  searchTerm: string = '';
   selectCategoryComprobante: string = 'TODOS';
 
   constructor(
     private reservationTablesServices: ReservationTablesService,
     private router: Router,
-    private uploadService:UploadService,
-  ){
-
-  }
+    private uploadService: UploadService
+  ) {}
 
   ngOnInit(): void {
     this.loadReservation();
@@ -46,8 +43,9 @@ export class ReservacionTableComponent implements OnInit{
         this.reservation = reservations;
 
         // Formatea la fecha sin restar días
-        this.reservation.forEach(res => {
-          if (res.fecha && /^\d{4}-\d{2}-\d{2}$/.test(res.fecha)) {  // Verifica si es YYYY-MM-DD
+        this.reservation.forEach((res) => {
+          if (res.fecha && /^\d{4}-\d{2}-\d{2}$/.test(res.fecha)) {
+            // Verifica si es YYYY-MM-DD
             const dateParts = res.fecha.split('-'); // Separar el año, mes y día
             const formattedDate = `${dateParts[2]}/${dateParts[1]}/${dateParts[0]}`; // DD/MM/YYYY
             res.fecha = formattedDate; // Asigna la fecha formateada
@@ -60,26 +58,22 @@ export class ReservacionTableComponent implements OnInit{
     );
   }
 
-
-  setStatus(estados:string, reservation: ReservationTables){
+  setStatus(estados: string, reservation: ReservationTables) {
     this.selectedStatus = estados;
     reservation.estados = estados;
-    const newReservation ={
+    const newReservation = {
       ...reservation,
       estados: this.selectedStatus,
     };
-    this.reservationTablesServices.update(reservation.id.toString(), newReservation).subscribe((response)=>{
-
-    }),
-    (error: any)=>{
-
-    }
+    this.reservationTablesServices
+      .update(reservation.id.toString(), newReservation)
+      .subscribe((response) => {}),
+      (error: any) => {};
   }
 
-  toggleDetails(reservation: ReservationTables):void{
+  toggleDetails(reservation: ReservationTables): void {
     reservation.isDetailsOpen = !reservation.isDetailsOpen;
   }
-
 
   goToDetails(reservation: ReservationTables): void {
     this.router.navigate(['/detalle', reservation.id]);
@@ -104,31 +98,48 @@ export class ReservacionTableComponent implements OnInit{
 
   updateReservationStatus(reservation: ReservationTables) {
     const updatedReservation = { ...reservation };
-    this.reservationTablesServices.update(reservation.id.toString(), updatedReservation).subscribe(
-      () => Swal.fire('Actualizado', 'El estado de la reservación se ha actualizado.', 'success'),
-      (error) => Swal.fire('Error', 'No se pudo actualizar el estado.', 'error')
-    );
+    this.reservationTablesServices
+      .update(reservation.id.toString(), updatedReservation)
+      .subscribe(
+        () =>
+          Swal.fire(
+            'Actualizado',
+            'El estado de la reservación se ha actualizado.',
+            'success'
+          ),
+        (error) =>
+          Swal.fire('Error', 'No se pudo actualizar el estado.', 'error')
+      );
   }
 
   isFinalState(estado: string): boolean {
-    return estado === 'Confirmada' || estado === 'Cancelado' || estado === 'Liberado';
+    return (
+      estado === 'Confirmada' || estado === 'Cancelado' || estado === 'Liberado'
+    );
   }
 
-  updateSearch(event:Event):void{
+  updateSearch(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
-    this.searchTerm = inputElement.value
+    this.searchTerm = inputElement.value;
   }
 
-   // Propiedad para filtrar las reservaciones combinando todos los filtros
-   get filteredReservation(): ReservationTables[] {
-    return this.reservation.filter(reservation => {
-      const matchesSearch = reservation.namee.toLowerCase().includes(this.searchTerm.toLowerCase());
+  // Propiedad para filtrar las reservaciones combinando todos los filtros
+  get filteredReservation(): ReservationTables[] {
+    return this.reservation.filter((reservation) => {
+      const matchesSearch = reservation.namee
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
 
-      const matchesComprobante = this.selectCategoryComprobante === 'TODOS' ||
-        (this.selectCategoryComprobante === 'Comprobante' && reservation.total !== '') ||
-        (this.selectCategoryComprobante === 'Sin Comprobante' && reservation.total === '');
+      const matchesComprobante =
+        this.selectCategoryComprobante === 'TODOS' ||
+        (this.selectCategoryComprobante === 'Comprobante' &&
+          reservation.total !== '') ||
+        (this.selectCategoryComprobante === 'Sin Comprobante' &&
+          reservation.total === '');
 
-      const matchesEstado = this.selectedStatus === '' || reservation.estados === this.selectedStatus
+      const matchesEstado =
+        this.selectedStatus === '' ||
+        reservation.estados === this.selectedStatus;
 
       return matchesSearch && matchesComprobante && matchesEstado;
     });
@@ -161,14 +172,16 @@ export class ReservacionTableComponent implements OnInit{
     ).then((result: any) => {
       if (result.isConfirmed) {
         // Elimina la imagen si existe
-        this.uploadService.deleteImage(this.getFileNameFromUrl(image)!).subscribe(
-          (response) => {
-            // Acción después de eliminar la imagen, si es necesario
-          },
-          (error) => {
-            console.error('Error al eliminar la imagen:', error);
-          }
-        );
+        this.uploadService
+          .deleteImage(this.getFileNameFromUrl(image)!)
+          .subscribe(
+            (response) => {
+              // Acción después de eliminar la imagen, si es necesario
+            },
+            (error) => {
+              console.error('Error al eliminar la imagen:', error);
+            }
+          );
 
         // Elimina la reservación
         this.reservationTablesServices.delete(id.toString()).subscribe(
@@ -194,7 +207,6 @@ export class ReservacionTableComponent implements OnInit{
       }
     });
   }
-
 
   //POPUP
   showPopup(icon: 'success' | 'error', title: string, text: string) {
@@ -273,5 +285,4 @@ export class ReservacionTableComponent implements OnInit{
       },
     });
   }
-
 }

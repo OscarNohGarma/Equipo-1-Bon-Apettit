@@ -25,14 +25,15 @@ export class AdminAuthGuard implements CanActivate {
       const userRole = this.adminAuthService.getRol();
 
       if (
-        userRole === 'DUEÑO' &&
-        state.url !== '/admin/reservaciones' &&
+        (userRole === 'DUEÑO' &&
+          state.url !== '/admin/reservaciones' &&
+          !state.url.startsWith('/admin/reservaciones/view'),
         state.url !== '/admin/report' &&
-        state.url !== '/admin/generado' &&
-        state.url !== '/admin/clientes' &&
-        state.url !== '/admin/roles' &&
-        state.url !== '/admin/roles/add' &&
-        !state.url.startsWith('/admin/roles/edit/')
+          state.url !== '/admin/generado' &&
+          state.url !== '/admin/clientes' &&
+          state.url !== '/admin/roles' &&
+          state.url !== '/admin/roles/add' &&
+          !state.url.startsWith('/admin/roles/edit/'))
       ) {
         this.router.navigate(['/admin/report']);
         return false; // Bloquear la navegación original
