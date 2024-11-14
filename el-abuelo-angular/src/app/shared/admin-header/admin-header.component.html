@@ -48,6 +48,9 @@
         <div class="elemento-nav" [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">
             Clientes
         </div>
+        <div class="elemento-nav" [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">
+          Reservaciones
+       </div>
 
     </div>
     <div class="mobile-seleccion">
@@ -61,6 +64,8 @@
             <div [routerLink]="['/admin/roles']" (click)="selectCategory('Usuarios')">Usuarios</div>
             <div [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">Reporte</div>
             <div [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">Clientes</div>
+            <div [routerLink]="['/admin/reservaciones']" (click)="selectCategory('Reservaciones')">Reservaciones</div>
+
         </div>
     </div>
 </div>
