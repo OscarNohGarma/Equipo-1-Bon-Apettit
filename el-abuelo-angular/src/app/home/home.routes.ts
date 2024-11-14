@@ -12,6 +12,7 @@ import { AuthGuard } from '../auth/auth.guard';
 import { EditProfileComponent } from './edit-profile/edit-profile.component';
 import { CommunityComponent } from './community/community.component';
 import { AddComentarioComponent } from './community/add-comentario/add-comentario.component';
+import { MyReservationsComponent } from './my-reservations/my-reservations.component';
 
 export const homeRoutes: Routes = [
   {
@@ -33,6 +34,12 @@ export const homeRoutes: Routes = [
     path: 'Reservaciones',
     title: 'Reservaciones - El abuelo',
     component: ReservationTablesComponent,
+  },
+  {
+    path:'mis-reservaciones',
+    title:'Mis reservaciones- El Abuelo',
+    component: MyReservationsComponent,
+    canActivate:[AuthGuard],
   },
   {
     path: 'profile/edit',
@@ -65,7 +72,7 @@ export const homeRoutes: Routes = [
     title: 'Agregar comentarios - El abuelo',
     component: AddComentarioComponent, // Componente de login del admin
   },
-  
-    
+
+
 
 ];

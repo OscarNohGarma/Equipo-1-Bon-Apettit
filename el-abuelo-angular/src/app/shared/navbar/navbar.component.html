@@ -8,6 +8,8 @@
 
         <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar Sesión</p>
         <div *ngIf="currentUser" class="cont-pc">
+            <img src="../../../assets/reservar.svg" alt="reservar" class="img-bag" style="height: 30px;
+            width: 34px;" [routerLink]="['/mis-reservaciones']">
             <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
             <p *ngIf="currentUser" class="user">{{currentName}} </p>
             <p class="down" (click)="toggleUserMenu()">▼</p>
@@ -34,9 +36,12 @@
         <div class="cont-login">
             <p *ngIf="!currentUser" (click)="onLoginMobile()" [routerLink]="['login']" class="login phone">Iniciar
                 Sesión</p>
+            <img src="../../../assets/reservar.svg" alt="reservar" class="img-bag" style="height: 30px;
+            width: 34px;" [routerLink]="['/mis-reservaciones']">
             <img src="../../../assets/bag.svg" alt="bolsa" class="img-bag" [routerLink]="['/mis-ordenes']">
             <p *ngIf="currentUser" class="user">{{currentName}}</p>
             <p (click)="toggleUserMenu()" class="down">▼</p>
+
         </div>
     </div>
     <div class="user-menu phone box" [class.show]=" isUserMenuOpen">

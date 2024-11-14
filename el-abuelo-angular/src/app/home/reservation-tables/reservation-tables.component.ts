@@ -235,24 +235,27 @@ export class ReservationTablesComponent implements OnInit {
   }
 
   // Método para actualizar el inventario con base en las reservaciones actuales
-  private actualizarInventario(reservations: any[]): void {
-    // Resetear el inventario de mesas a los valores originales antes de restar
-    this.tableInventory = {
-      interior: { '2 Personas': 2, '4 Personas': 2, '6 Personas': 4 },
-      exterior: { '2 Personas': 1, '4 Personas': 8, '6 Personas': 2 }
-    };
+  private actualizarInventario(reservations: ReservationTables[]): void {
+    this.reservationTables.getAll().subscribe((reservations) => {
+        // Restablece el inventario inicial
+        this.tableInventory = {
+            interior: { '2 Personas': 2, '4 Personas': 2, '6 Personas': 4 },
+            exterior: { '2 Personas': 1, '4 Personas': 8, '6 Personas': 2 }
+        };
 
-    // Restar las mesas reservadas del inventario
-    reservations.forEach(reservation => {
-      const tipo = reservation.cantidad as '2 Personas' | '4 Personas' | '6 Personas';
-      const ubicacion = reservation.ubicacion.toLowerCase() as 'interior' | 'exterior';
-
-      // Asegurar que el tipo y la ubicación son válidos antes de restar
-      if (this.tableInventory[ubicacion] && this.tableInventory[ubicacion][tipo] !== undefined) {
-        this.tableInventory[ubicacion][tipo] -= 1;
-      }
+        // Filtra reservaciones activas y ajusta el inventario
+        reservations.forEach(reservation => {
+            if (reservation.estados !== 'Cancelado' && reservation.estados !== 'Liberado') {
+                const tipo = reservation.cantidad as '2 Personas' | '4 Personas' | '6 Personas';
+                const ubicacion = reservation.ubicacion.toLowerCase() as 'interior' | 'exterior';
+                if (this.tableInventory[ubicacion] && this.tableInventory[ubicacion][tipo] !== undefined) {
+                    this.tableInventory[ubicacion][tipo] -= 1;
+                }
+            }
+        });
     });
-  }
+}
+
 
 
   checkEmpty(field: string): void {
