@@ -21,9 +21,8 @@
                 <p>{{order.user}}</p>
             </div>
             <div class="box-details">
-                <p class="button details" [class.active]="order.isDetailsOpen" (click)="toggleDetails(order)">Detalles
-                    ▼</p>
-                <div class="productos" [class.show]="order.isDetailsOpen">
+                <p class="agregados">{{order.productos.length}} añadidos</p>
+                <div class="productos">
                     <div class="producto" *ngFor="let producto of order.productos"
                         [class.no-status]="order.status==='completed'">
                         <input type="checkbox" [class.no-status]="order.status==='completed'" class="check">
@@ -32,7 +31,6 @@
                                 (${{producto.subtotal}})</span></p>
                     </div>
 
-                    <p class="total">Total a pagar: <span>${{order.total}}</span></p>
                 </div>
             </div>
 
@@ -59,8 +57,7 @@
                 [class.disabled]="order.status!== 'ready'" class="button add" (click)="completar(order)">Listo para
                 entregar</button>
             <div class="fecha">
-                <p>{{order.fecha}}</p>
-                <p>{{order.hora}}</p>
+                <p>{{order.hora}} - {{order.fecha}}</p>
             </div>
         </div>
     </div>

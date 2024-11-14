@@ -9,6 +9,26 @@
   font-weight: 900;
   margin-bottom: 10px;
 }
+.btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #343a40;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.1s ease-in-out;
+}
+.btn:hover {
+  background-color: #212529;
+}
+@media (min-width: 768px) {
+  .btn {
+    width: auto;
+    margin: 0 auto;
+    width: 280px;
+  }
+}
 h2 {
   margin-bottom: 10px;
   font-size: 30px;
@@ -23,7 +43,7 @@ h2 {
   font-size: 20px;
   font-weight: 400;
   text-align: center;
-  color: black;
+  color: #343a40;
   margin-bottom: 50px;
   margin-top: 1.6rem;
 }
@@ -229,6 +249,7 @@ p {
 @media (min-width: 992px) {
   .total {
     margin-bottom: 0;
+    padding-top: 0;
   }
 }
 .total span {
@@ -419,4 +440,10 @@ p {
 .entrega {
   font-weight: 600;
   color: #343a40;
+}
+.cont-btn {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
