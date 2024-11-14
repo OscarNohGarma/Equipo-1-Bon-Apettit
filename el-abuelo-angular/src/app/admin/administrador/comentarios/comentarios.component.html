@@ -6,18 +6,13 @@
     <h2 class="subtitulo">Gestiona y responde a los comentarios de los clientes</h2>
 
     <div class="rating-filter">
-      <button 
-        class="filter-btn"
-        [class.active]="calificacionSeleccionada === null"
+      <button class="filter-btn" [class.active]="calificacionSeleccionada === null"
         (click)="filtrarPorCalificacion(null)">
         Todos los comentarios
       </button>
-    
-      <button 
-        *ngFor="let rating of [5, 4, 3, 2, 1]"
-        class="filter-btn"
-        [class.active]="calificacionSeleccionada === rating"
-        (click)="filtrarPorCalificacion(rating)">
+
+      <button *ngFor="let rating of [5, 4, 3, 2, 1]" class="filter-btn"
+        [class.active]="calificacionSeleccionada === rating" (click)="filtrarPorCalificacion(rating)">
         {{ '★'.repeat(rating) }}
       </button>
     </div>
@@ -32,15 +27,18 @@
         </h1>
 
         <p class="usuario">
-          {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Admin' : comentario.comentario.usuario }}
+          {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Admin' : comentario.comentario.usuario
+          }}
         </p>
 
         <div class="fecha-hora d-flex justify-content-between">
           <p class="fecha">
-            {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Fecha Admin' : comentario.comentario.fecha }}
+            {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Fecha Admin' :
+            comentario.comentario.fecha }}
           </p>
           <p class="hora">
-            {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Hora Admin' : comentario.comentario.hora }}
+            {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Hora Admin' :
+            comentario.comentario.hora }}
           </p>
         </div>
 
@@ -48,13 +46,9 @@
 
         <div class="clasificacion">
           <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-            <input 
-              id="radio{{ star }}-{{ comentario.comentario.id }}" 
-              type="radio"
-              name="calification-{{ comentario.comentario.id }}" 
-              value="{{ star }}" 
-              [checked]="comentario.comentario.calification >= star.toString()" 
-              disabled />
+            <input id="radio{{ star }}-{{ comentario.comentario.id }}" type="radio"
+              name="calification-{{ comentario.comentario.id }}" value="{{ star }}"
+              [checked]="comentario.comentario.calification >= star.toString()" disabled />
             <label for="radio{{ star }}-{{ comentario.comentario.id }}">★</label>
           </ng-container>
         </div>
@@ -66,7 +60,7 @@
               <h4>{{ respuesta.namee }}</h4>
               <div class="btns ml-auto">
                 <img src="./../../../assets/delete-button.svg" alt="basura" class="btn-delete"
-                     (click)="eliminarRespuesta(respuesta.id)">
+                  (click)="eliminarRespuesta(respuesta.id)">
               </div>
             </div>
             <p>{{ respuesta.description }}</p>
@@ -82,31 +76,25 @@
 
         <!-- Botón para responder comentario y eliminar comentario -->
         <div class="feedback-section">
-          <button 
-            (click)="responderComentario(comentario.comentario.id)" 
-            class="btn">
-            {{ activeReplyId === comentario.comentario.id ? 'Cancelar Respuesta' : 'Responder Comentario' }}
+          <button (click)="responderComentario(comentario.comentario.id)" class="btn">
+            {{ activeReplyId === comentario.comentario.id ? 'Cancelar respuesta' : 'Responder' }}
           </button>
 
           <!-- Botón de Eliminar Comentario solo visible para el admin -->
-          <button 
-            (click)="eliminarComentario(comentario.comentario.id)" 
-            class="btn delete-btn">
-            Eliminar Comentario
+          <button (click)="eliminarComentario(comentario.comentario.id)" class="btn delete-btn">
+            Eliminar
           </button>
         </div>
 
         <!-- Formulario de respuesta inline -->
         <div *ngIf="activeReplyId === comentario.comentario.id" class="reply-container">
-          <app-add-reply 
-            [parentId]="comentario.comentario.id"
-            [description]="description"
+          <app-add-reply [parentId]="comentario.comentario.id" [description]="description"
             (replySubmitted)="onReplySubmitted()">
-            
+
           </app-add-reply>
         </div>
 
-      </div>               
+      </div>
     </div>
   </div>
 </div>

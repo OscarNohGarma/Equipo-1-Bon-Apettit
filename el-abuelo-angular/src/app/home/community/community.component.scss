@@ -68,10 +68,10 @@ h2 {
   gap: 15px;
   margin: 30px 0 40px 0;
   flex-wrap: wrap;
-  
+
   .filter-btn {
     padding: 10px 25px;
-    border: 2px solid #343a40;
+    border: 1px solid #b9b9b9;
     border-radius: 5px;
     background: transparent;
     color: #343a40;
@@ -79,13 +79,13 @@ h2 {
     transition: all 0.3s ease;
     font-weight: 500;
     min-width: 100px;
-    
+
     &:hover {
       background: #f8f9fa;
       transform: translateY(-2px);
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    
+
     &.active {
       background: #343a40;
       color: white;
@@ -204,8 +204,6 @@ h2 {
   justify-content: flex-start;
 }
 
-
-
 /* Estilos para las respuestas */
 .respuesta {
   background-color: #ffffff; /* Fondo blanco */
@@ -247,7 +245,6 @@ h2 {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más fuerte al pasar el cursor */
 }
 
-
 // Usuario y nombre
 .name {
   color: #343a40;
@@ -273,8 +270,6 @@ h2 {
     transform: none;
     margin-top: 20px;
   }
-
- 
 
   .encabezado {
     font-size: 40px;
@@ -312,8 +307,4 @@ h2 {
   .clasificacion {
     font-size: 30px;
   }
-
-
-  
-  
 }
