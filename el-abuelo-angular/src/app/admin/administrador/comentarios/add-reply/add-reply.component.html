@@ -1,0 +1,17 @@
+<div class="reply-container">
+  <h2 class="subtitle"></h2> <!-- Subtítulo añadido -->
+  <form (ngSubmit)="submitReply()" #commentForm="ngForm" novalidate>
+    <div class="form-group">
+      <label for="description">Tu Respuesta</label>
+      <textarea id="description" [(ngModel)]="description" name="description" class="form-control" placeholder="Escribe tu respuesta aquí" required></textarea>
+    </div>
+
+    <!-- Spinner mientras se envía la respuesta -->
+    <app-spinner *ngIf="loading"></app-spinner>
+
+    <!-- Botón de Envío -->
+    <button type="submit" class="btn-reply" [disabled]="loading || !description.trim()">
+      Mandar Respuesta
+    </button>
+  </form>
+</div>

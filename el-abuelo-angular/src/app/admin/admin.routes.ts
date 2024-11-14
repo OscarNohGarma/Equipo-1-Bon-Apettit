@@ -16,6 +16,7 @@ import { OrdersDealerComponent } from './repartidor/orders-dealer/orders-dealer.
 import { ClientsComponent } from './owner/clients/clients.component';
 import { ComentariosComponent } from './administrador/comentarios/comentarios.component';
 import { ReportGeneratedComponent } from './owner/report/report-generated/report-generated.component';
+import { AddReplyComponent } from './administrador/comentarios/add-reply/add-reply.component';
 
 export const adminRoutes: Routes = [
   {
@@ -46,6 +47,12 @@ export const adminRoutes: Routes = [
     path: 'comentarios',
     title: 'Comentarios - El abuelo',
     component: ComentariosComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'comentarios/reply/:id',
+    title: 'Agregar Respuesta - El abuelo',
+    component: AddReplyComponent,
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
