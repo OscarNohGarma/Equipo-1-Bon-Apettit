@@ -15,6 +15,7 @@ export class Community extends BaseModel {
       fecha: string, 
       hora: string,  
       usuario: string,  
+      public parentId?: number
     ) {
       super(id, namee); // Hereda id y namee de BaseModel
       this.description = description;
