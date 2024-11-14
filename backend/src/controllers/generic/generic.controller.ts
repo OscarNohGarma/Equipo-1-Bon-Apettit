@@ -15,10 +15,10 @@ export class GenericFirebaseController {
   }
 
   @Post('')
-  async createNewEntity(@Body() newEntity: ModeloPrincipal): Promise<{ message: string }> {
+  async createNewEntity(@Body() newEntity: ModeloPrincipal): Promise<{ message: string, id: string }> {
     
     await this.firebaseService.createEntity(newEntity, this.collectionName);
-    return { message: 'Entidad creada con éxito' };
+    return { message: 'Entidad creada con éxito', id: newEntity.id };
   }
 
   @Get('')
