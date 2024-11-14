@@ -17,6 +17,7 @@ import { ClientsComponent } from './owner/clients/clients.component';
 import { ComentariosComponent } from './administrador/comentarios/comentarios.component';
 import { ReportGeneratedComponent } from './owner/report/report-generated/report-generated.component';
 import { AddReplyComponent } from './administrador/comentarios/add-reply/add-reply.component';
+import { ReservacionTableComponent } from './owner/reservacion-table/reservacion-table.component';
 
 export const adminRoutes: Routes = [
   {
@@ -110,6 +111,11 @@ export const adminRoutes: Routes = [
     path: 'clientes',
     title: 'Clientes - Administrador',
     component: ClientsComponent, // Componente de login del admin
+  },
+  {
+    path: 'reservaciones', // Ruta comodín para capturar cualquier ruta no reconocida
+    title: 'Reservaciones - Administrador', // Redirigir al inicio
+    component: ReservacionTableComponent,
   },
   {
     path: '**', // Ruta comodín para capturar cualquier ruta no reconocida

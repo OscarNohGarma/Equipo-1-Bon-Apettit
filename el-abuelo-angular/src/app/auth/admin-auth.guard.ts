@@ -26,6 +26,7 @@ export class AdminAuthGuard implements CanActivate {
 
       if (
         userRole === 'DUEÑO' &&
+        state.url !== '/admin/reservaciones' &&
         state.url !== '/admin/report' &&
         state.url !== '/admin/generado' &&
         state.url !== '/admin/clientes' &&
@@ -43,9 +44,8 @@ export class AdminAuthGuard implements CanActivate {
         state.url !== '/admin/menu' &&
         state.url !== '/admin/menu/add' &&
         state.url !== '/admin/comentarios' &&
-        !state.url.startsWith('/admin/menu/edit/')&&
+        !state.url.startsWith('/admin/menu/edit/') &&
         !state.url.startsWith('/admin/comentarios/reply/')
-        
       ) {
         this.router.navigate(['/admin/menu']);
         return false; // Bloquear la navegación original

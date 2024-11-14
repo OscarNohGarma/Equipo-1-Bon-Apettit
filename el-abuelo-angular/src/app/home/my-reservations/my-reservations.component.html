@@ -22,7 +22,7 @@
       </div>
       <div class="reservaciones">
         <div class="reservacion">
-          <p class="vin"><span>Nombres:</span></p>
+          <p class="vin"><span>Nombre:</span></p>
           <p class="nombre-reservacion">{{reservation.namee}}</p>
         </div>
         <div class="reservacion">
@@ -30,7 +30,7 @@
           <p class="nombre-reservacion">{{reservation.telefono}}</p>
         </div>
         <div class="reservacion">
-          <p class="vin"><span>Mesas Reservadas:</span></p>
+          <p class="vin"><span>Mesas reservadas:</span></p>
           <p class="nombre-reservacion">{{reservation.cantidadMesasReservada}}</p>
         </div>
         <div class="reservacion">
@@ -38,25 +38,31 @@
           <p class="nombre-reservacion">{{reservation.cantidad}}</p>
         </div>
         <div class="reservacion">
-          <p class="vin"><span>Ubicación De La Mesa:</span></p>
+          <p class="vin"><span>Ubicación de la mesa:</span></p>
           <p class="nombre-reservacion">{{reservation.ubicacion}}</p>
         </div>
         <div class="reservacion">
           <p class="vin"><span>Decoración:</span></p>
           <p class="nombre-reservacion">{{reservation.tipo_decoracion}}</p>
         </div>
+        <div class="reservacion">
+          <p class="vin"><span>Fecha:</span></p>
+          <p class="nombre-reservacion">{{reservation.fecha}}</p>
+        </div>
+        <div class="reservacion">
+          <p class="vin"><span>Hora:</span></p>
+          <p class="nombre-reservacion">{{reservation.hora}}</p>
+        </div>
         <div class="reservacion" *ngIf="reservation.total !== ''">
           <p class="vin"><span>Comprobante:</span></p>
           <button class="button" (click)="openImageModal(reservation.image)">Ver Comprobante</button>
         </div>
-
-
       </div>
 
 
       <div class="modal" *ngIf="isModalOpen" (click)="closeImageModal()">
         <div class="modal-content" (click)="$event.stopPropagation()">
-          <img [src]="selectedImage" alt="Comprobante" class="modal-image"/>
+          <img [src]="selectedImage" alt="Comprobante" class="modal-image" />
           <button class="close-button" (click)="closeImageModal()">Cerrar</button>
         </div>
       </div>
@@ -64,11 +70,7 @@
 
       <div class="div-total">
         <p *ngIf="reservation.total !== ''" class="total">{{reservation.total}}</p>
-        <p *ngIf="reservation.total === ''" class="total">Consumo En El Local </p>
-        <div class="fecha">
-          <p class="vin2">Fecha Reservada: {{reservation.fecha}}</p>
-          <p class="vin2">Hora Reservada: {{reservation.hora}}</p>
-        </div>
+        <p *ngIf="reservation.total === ''" class="total">Consumo en el local </p>
       </div>
 
       <p class="estado">
@@ -80,15 +82,15 @@
             'estado-blue': reservation.estados === 'Liberado'
           }">
           {{
-            reservation.estados === "En Espera"
-              ? "🟡 En Espera"
-              : reservation.estados === "Confirmada"
-              ? "🟢 Confirmado"
-              : reservation.estados === "Liberado"
-              ? "🔵 Liberado"
-              : reservation.estados === "Cancelado"
-              ? "🔴 Cancelado"
-              : "Estado desconocido"
+          reservation.estados === "En Espera"
+          ? "🟡 En Espera"
+          : reservation.estados === "Confirmada"
+          ? "🟢 Confirmado"
+          : reservation.estados === "Liberado"
+          ? "🔵 Liberado"
+          : reservation.estados === "Cancelado"
+          ? "🔴 Cancelado"
+          : "Estado desconocido"
           }}
         </span>
 
@@ -101,7 +103,8 @@
       justify-content: center;
       align-items: center;
       align-content: center;
-      text-align: center;" *ngIf="reservation.estados === 'Cancelado' && reservation.total !== ''">Si su reservación fue cancelada y realizó una transferencia, comuníquese al: {{reservation.numero_contacto}}</span>
+      text-align: center;" *ngIf="reservation.estados === 'Cancelado' && reservation.total !== ''">Si su reservación
+        fue cancelada y realizó una transferencia, comuníquese al: {{reservation.numero_contacto}}</span>
 
     </div>
 
