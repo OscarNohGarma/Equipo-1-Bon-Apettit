@@ -17,6 +17,7 @@ export class ReservationTables extends BaseModel{
   numero_contacto: string;
   estados: string;
   usuario: string;
+  isDetailsOpen?: boolean;
 
   constructor(
     id: number,
@@ -36,6 +37,7 @@ export class ReservationTables extends BaseModel{
     numero_contacto: string,
     estados: string,
     usuario: string,
+
   ){
     super(id, namee); //Hereda id y namee de BaseModal
     this.telefono = telefono;

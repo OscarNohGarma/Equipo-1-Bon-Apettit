@@ -1,0 +1,110 @@
+<div class="container">
+  <div class="header">
+    <h1 class="encabezado"> Tus Reservaciones</h1>
+    <h2 class="subtitulo-encabezado">¡Sigue el estado de tu reservación!</h2>
+  </div>
+
+  <div class="filter-bar">
+    <select class="status-filter" (change)="updateStatusFilter($event)">
+      <option value="En Espera">En Espera</option>
+      <option value="Confirmada">Confirmadas</option>
+      <option value="Cancelado">Cancelados</option>
+      <option value="Liberado">Liberados</option>
+      <option value="TODO">Todas sus reservaciones</option>
+    </select>
+  </div>
+
+
+  <div class="grid">
+    <div class="box" *ngFor="let reservation of filterReservation">
+      <div class="enc">
+        <p class="subtitulo">Detalles de Tu Reservación</p>
+      </div>
+      <div class="reservaciones">
+        <div class="reservacion">
+          <p class="vin"><span>Nombres:</span></p>
+          <p class="nombre-reservacion">{{reservation.namee}}</p>
+        </div>
+        <div class="reservacion">
+          <p class="vin"><span>Teléfono:</span></p>
+          <p class="nombre-reservacion">{{reservation.telefono}}</p>
+        </div>
+        <div class="reservacion">
+          <p class="vin"><span>Mesas Reservadas:</span></p>
+          <p class="nombre-reservacion">{{reservation.cantidadMesasReservada}}</p>
+        </div>
+        <div class="reservacion">
+          <p class="vin"><span>Mesas Para:</span></p>
+          <p class="nombre-reservacion">{{reservation.cantidad}}</p>
+        </div>
+        <div class="reservacion">
+          <p class="vin"><span>Ubicación De La Mesa:</span></p>
+          <p class="nombre-reservacion">{{reservation.ubicacion}}</p>
+        </div>
+        <div class="reservacion">
+          <p class="vin"><span>Decoración:</span></p>
+          <p class="nombre-reservacion">{{reservation.tipo_decoracion}}</p>
+        </div>
+        <div class="reservacion" *ngIf="reservation.total !== ''">
+          <p class="vin"><span>Comprobante:</span></p>
+          <button class="button" (click)="openImageModal(reservation.image)">Ver Comprobante</button>
+        </div>
+
+
+      </div>
+
+
+      <div class="modal" *ngIf="isModalOpen" (click)="closeImageModal()">
+        <div class="modal-content" (click)="$event.stopPropagation()">
+          <img [src]="selectedImage" alt="Comprobante" class="modal-image"/>
+          <button class="close-button" (click)="closeImageModal()">Cerrar</button>
+        </div>
+      </div>
+
+
+      <div class="div-total">
+        <p *ngIf="reservation.total !== ''" class="total">{{reservation.total}}</p>
+        <p *ngIf="reservation.total === ''" class="total">Consumo En El Local </p>
+        <div class="fecha">
+          <p class="vin2">Fecha Reservada: {{reservation.fecha}}</p>
+          <p class="vin2">Hora Reservada: {{reservation.hora}}</p>
+        </div>
+      </div>
+
+      <p class="estado">
+        Estado:
+        <span [ngClass]="{
+            'estado-yellow': reservation.estados === 'En Espera',
+            'estado-red': reservation.estados === 'Cancelado',
+            'estado-green': reservation.estados === 'Confirmada',
+            'estado-blue': reservation.estados === 'Liberado'
+          }">
+          {{
+            reservation.estados === "En Espera"
+              ? "🟡 En Espera"
+              : reservation.estados === "Confirmada"
+              ? "🟢 Confirmado"
+              : reservation.estados === "Liberado"
+              ? "🔵 Liberado"
+              : reservation.estados === "Cancelado"
+              ? "🔴 Cancelado"
+              : "Estado desconocido"
+          }}
+        </span>
+
+
+      </p>
+      <br><span style="
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      align-content: center;
+      text-align: center;" *ngIf="reservation.estados === 'Cancelado' && reservation.total !== ''">Si su reservación fue cancelada y realizó una transferencia, comuníquese al: {{reservation.numero_contacto}}</span>
+
+    </div>
+
+  </div>
+
+</div>
