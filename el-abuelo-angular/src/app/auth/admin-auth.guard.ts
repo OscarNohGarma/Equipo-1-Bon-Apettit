@@ -27,6 +27,7 @@ export class AdminAuthGuard implements CanActivate {
       if (
         userRole === 'DUEÑO' &&
         state.url !== '/admin/report' &&
+        state.url !== '/admin/generado' &&
         state.url !== '/admin/clientes' &&
         state.url !== '/admin/roles' &&
         state.url !== '/admin/roles/add' &&

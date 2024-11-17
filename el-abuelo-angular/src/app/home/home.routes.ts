@@ -50,8 +50,8 @@ export const homeRoutes: Routes = [
     component: RegisterComponent, // Componente de login del admin
   },
   {
-    path: 'mis-ordenes',
-    title: 'Mis órdenes - El abuelo',
+    path: 'tus-ordenes',
+    title: 'Tus órdenes - El abuelo',
     component: MyOrdersComponent, // Componente de login del admin
     canActivate: [AuthGuard],
   },
@@ -65,7 +65,4 @@ export const homeRoutes: Routes = [
     title: 'Agregar comentarios - El abuelo',
     component: AddComentarioComponent, // Componente de login del admin
   },
-  
-    
-
 ];

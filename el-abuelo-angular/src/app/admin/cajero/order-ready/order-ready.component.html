@@ -29,8 +29,7 @@
             <p class="total">Total a pagar: <span>${{order.total}}</span></p>
             <button class="button add" (click)="completar(order)">Marcar como pagado</button>
             <div class="fecha">
-                <p>{{order.fecha}}</p>
-                <p>{{order.hora}}</p>
+                <p>{{order.hora}} - {{order.fecha}}</p>
             </div>
         </div>
     </div>

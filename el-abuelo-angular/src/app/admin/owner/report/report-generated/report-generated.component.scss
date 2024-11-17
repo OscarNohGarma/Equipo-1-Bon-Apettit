@@ -1,0 +1,39 @@
+.orders {
+  margin-bottom: 50px;
+}
+
+.encabezado {
+  font-size: 40px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+
+.subtitulo {
+  text-decoration: none;
+  font-size: 20px;
+  font-weight: 400;
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 50px;
+  margin-top: 1.6rem;
+}
+
+.ventas {
+  margin-top: 50px;
+}
+
+.tabla {
+  width: 100%;
+}
+.tabla thead {
+  background-color: #343a40;
+  color: white;
+}
+.tabla tr,
+.tabla th {
+  border: 1px solid #343a40;
+  text-align: center;
+}

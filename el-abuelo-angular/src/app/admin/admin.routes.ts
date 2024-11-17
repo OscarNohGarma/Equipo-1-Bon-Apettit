@@ -15,6 +15,7 @@ import { ReportComponent } from './owner/report/report.component';
 import { OrdersDealerComponent } from './repartidor/orders-dealer/orders-dealer.component';
 import { ClientsComponent } from './owner/clients/clients.component';
 import { ComentariosComponent } from './administrador/comentarios/comentarios.component';
+import { ReportGeneratedComponent } from './owner/report/report-generated/report-generated.component';
 
 export const adminRoutes: Routes = [
   {
@@ -92,6 +93,11 @@ export const adminRoutes: Routes = [
     path: 'report',
     title: 'Reportes - Administrador',
     component: ReportComponent, // Componente de login del admin
+  },
+  {
+    path: 'report/generado',
+    title: 'Reporte generado - Administrador',
+    component: ReportGeneratedComponent, // Componente de login del admin
   },
   {
     path: 'clientes',
