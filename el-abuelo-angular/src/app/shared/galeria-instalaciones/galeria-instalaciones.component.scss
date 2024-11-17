@@ -129,3 +129,17 @@ h3 {
     order: 1;
   }
 }
+h2 {
+  font-size: 44px;
+}
+h3 {
+  font-size: 30px;
+}
+@media (min-width: 768px) {
+  h2 {
+    font-size: 55px;
+  }
+  h3 {
+    font-size: 40px;
+  }
+}

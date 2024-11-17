@@ -43,6 +43,7 @@ ul {
 }
 .footer-logo {
   margin-bottom: 30px;
+  margin-top: 30px;
 }
 .footer-logo img {
   max-width: 200px;
@@ -92,10 +93,10 @@ ul {
 .footer-widget-heading h3::before {
   content: "";
   position: absolute;
-  left: 0;
+  left: 30%;
   bottom: -15px;
   height: 2px;
-  width: 50px;
+  width: 40%;
   background: #ff5e14;
 }
 .footer-widget ul li {
@@ -243,13 +244,18 @@ ul {
 
   .single-cta {
     flex-direction: row;
+    margin-bottom: 0;
   }
 }
 .centrado {
   text-align: center;
 }
+.find-us {
+  margin-top: 30px;
+}
+
 @media (min-width: 992px) {
-  .centrado {
-    text-align: start;
+  .find-us {
+    margin-top: 0;
   }
 }
