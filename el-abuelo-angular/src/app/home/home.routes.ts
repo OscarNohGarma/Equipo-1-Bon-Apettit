@@ -36,8 +36,8 @@ export const homeRoutes: Routes = [
     component: ReservationTablesComponent,
   },
   {
-    path: 'mis-reservaciones',
-    title: 'Mis reservaciones- El Abuelo',
+    path: 'tus-reservaciones',
+    title: 'Tus reservaciones- El Abuelo',
     component: MyReservationsComponent,
     canActivate: [AuthGuard],
   },
