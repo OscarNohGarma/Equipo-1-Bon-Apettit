@@ -146,7 +146,7 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
-  font-size: 18px;
+  font-size: 16px;
 }
 .button:hover {
   background-color: #212529;
@@ -307,7 +307,11 @@ h2 {
   transition: height 0.2s ease-in-out;
 }
 .modal-content h3 {
-  font-size: 3rem;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.modal-content p {
+  font-size: 18px;
   margin-bottom: 20px;
 }
 @media (min-width: 768px) {
@@ -343,14 +347,11 @@ h2 {
 
 .button.confirm {
   width: auto;
-  font-size: 20px;
 }
 
 .button.cancel {
   width: auto;
-
   background-color: #fff;
-  font-size: 20px;
   color: #c71527;
   border: 1px solid #c71527;
 }
@@ -385,7 +386,7 @@ h2 {
 .delivery-options label {
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 16px;
   color: #343a40;
   padding: 8px 15px;
   border: 1px solid #ccc;
@@ -426,10 +427,12 @@ h2 {
 .error-message {
   color: red;
   margin-top: 5px;
-}
-
-.error-message {
-  color: red;
   margin-bottom: 10px;
   text-align: center;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .error-message {
+    font-size: 18px;
+  }
 }
