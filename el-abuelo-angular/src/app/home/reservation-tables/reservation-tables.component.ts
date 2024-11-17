@@ -1,6 +1,15 @@
-import { Component, OnInit, ElementRef, ViewChild, Inject, PLATFORM_ID, AfterViewInit, ChangeDetectorRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild,
+  Inject,
+  PLATFORM_ID,
+  AfterViewInit,
+  ChangeDetectorRef,
+} from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { FormsModule,FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ReservationTables } from '../../core/models/reservationTables';
 import { ReservationTablesService } from '../../core/services/reservation-tables.service';
@@ -10,7 +19,7 @@ import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 import { Usuario } from '../../core/models/usuario';
 import { UploadService } from '../../core/services/upload.service';
-declare var Swal:any;
+declare var Swal: any;
 interface FormStep extends HTMLElement {
   classList: DOMTokenList;
 }
@@ -25,14 +34,17 @@ interface TableInventory {
 @Component({
   selector: 'app-reservation-tables',
   standalone: true,
-  imports: [CommonModule, FormsModule, HttpClientModule,ReactiveFormsModule,],
+  imports: [CommonModule, FormsModule, HttpClientModule, ReactiveFormsModule],
   templateUrl: './reservation-tables.component.html',
   styleUrls: ['./reservation-tables.component.scss'],
-  providers:[ReservationTablesService, AuthService, UsuarioService, UploadService],
+  providers: [
+    ReservationTablesService,
+    AuthService,
+    UsuarioService,
+    UploadService,
+  ],
 })
-
 export class ReservationTablesComponent implements OnInit {
-
   @ViewChild('nextButton') nextButton!: ElementRef<HTMLButtonElement>;
   @ViewChild('prevButton') prevButton!: ElementRef<HTMLButtonElement>;
   @ViewChild('fileUpload') fileUpload!: ElementRef<HTMLInputElement>;
@@ -43,28 +55,32 @@ export class ReservationTablesComponent implements OnInit {
   @ViewChild('count') countRef!: ElementRef;
   @ViewChild('total') totalRef!: ElementRef;
 
-
-
   public costoPorMesa: number = 300; // Costo base por mesa
-  public TipoBancaria: string = "BBVA";
-  public cuentaBancaria: string = "4152 3143 1423 8885";
+  public TipoBancaria: string = 'BBVA';
+  public cuentaBancaria: string = '4152 3143 1423 8885';
   public active: number = 1;
   private steps: NodeListOf<Element> | null = null;
   private formSteps: NodeListOf<FormStep> | null = null;
   // Agregar una propiedad para los tipos de archivo permitidos
-  private allowedFileTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/heic'];
+  private allowedFileTypes = [
+    'image/jpeg',
+    'image/jpg',
+    'image/png',
+    'image/heic',
+  ];
   // Totales por separado para cada ubicación
   totalCostInterior: number = 300;
   totalCostExterior: number = 300;
-  numeroTelefonico:string = "996 105 9860";
+  numeroTelefonico: string = '996 105 9860';
   decoracionSeleccionadaInterior: string = 'Ninguna';
   decoracionSeleccionadaExterior: string = 'Ninguna';
   decoracionSeleccionada: string = ''; // Variable para la decoración seleccionada
-  costoDecoraciones: { [key: string]: number } = { // Precios de decoraciones
-    'Ninguna': 0,
-    'Romantica':0,
-    'Cumpleaños': 0,
-    'Personalizado':0,
+  costoDecoraciones: { [key: string]: number } = {
+    // Precios de decoraciones
+    Ninguna: 0,
+    Romantica: 0,
+    Cumpleaños: 0,
+    Personalizado: 0,
   };
   costoConDecoracion: number = this.costoPorMesa; // Precio inicial con decoración
   lugarSeleccionado: string = ''; // Variable para almacenar el lugar seleccionado
@@ -82,29 +98,33 @@ export class ReservationTablesComponent implements OnInit {
   cantidadMesasReservadas: number = 1; // Nueva variable para la cantidad de mesas reservadas
   showReservarOtraMesa: boolean = false; // Nueva variable para controlar la visibilidad del botón
   isTableForTwo: boolean = false;
-  decoracionesDisponibles: string[] = ['Ninguna', 'Cumpleaños', 'Personalizado'];
+  decoracionesDisponibles: string[] = [
+    'Ninguna',
+    'Cumpleaños',
+    'Personalizado',
+  ];
   private tableInventory: TableInventory = {
     interior: {
       '2 Personas': 2, // 2 mesas de 2 personas
       '4 Personas': 2, // 2 mesas de 4 personas
-      '6 Personas': 4  // 4 mesas de 6 personas
+      '6 Personas': 4, // 4 mesas de 6 personas
     },
     exterior: {
       '2 Personas': 1, // si hay mesas de 2 personas en exterior
       '4 Personas': 8, // 8 mesas de 4 personas
-      '6 Personas': 2  // 2 mesas de 6 personas
-    }
+      '6 Personas': 2, // 2 mesas de 6 personas
+    },
   };
   cantidadMesasDisponibles: number = 0;
 
   selectedCapacity: string = '';
- // Método para calcular el total de mesas disponibles después de actualizar el inventario
+  // Método para calcular el total de mesas disponibles después de actualizar el inventario
   private calcularTotalMesas(): void {
     let total = 0;
-    Object.values(this.tableInventory.interior).forEach(cantidad => {
+    Object.values(this.tableInventory.interior).forEach((cantidad) => {
       total += cantidad;
     });
-    Object.values(this.tableInventory.exterior).forEach(cantidad => {
+    Object.values(this.tableInventory.exterior).forEach((cantidad) => {
       total += cantidad;
     });
 
@@ -112,35 +132,52 @@ export class ReservationTablesComponent implements OnInit {
 
     // Si no hay mesas disponibles, mostrar una alerta
     if (this.cantidadMesasDisponibles <= 0) {
-        Swal.fire({
-          title: 'Lo sentimos',
-          text: 'No hay mesas disponibles para reservar en este momento.',
-          icon: 'error',
-          didOpen: () => {
-              const confirmButton = Swal.getConfirmButton();
-              if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-                  confirmButton.onmouseover = () => {
-                      confirmButton.style.backgroundColor = '#212529';
-                  };
-                  confirmButton.onmouseout = () => {
-                      confirmButton.style.backgroundColor = '#343a40';
-                  };
-              }
+      Swal.fire({
+        title: 'Lo sentimos',
+        text: 'No hay mesas disponibles para reservar en este momento.',
+        icon: 'error',
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529';
+            };
+            confirmButton.onmouseout = () => {
+              confirmButton.style.backgroundColor = '#343a40';
+            };
           }
+        },
       });
     }
-
   }
-    // Agregar propiedades para controlar la visualización de las imágenes
+  // Agregar propiedades para controlar la visualización de las imágenes
   mostrarPreviewInterior: boolean = false;
   mostrarPreviewExterior: boolean = false;
-  usuarioItems: Usuario[]=[];
+  usuarioItems: Usuario[] = [];
 
-  reservation: ReservationTables = new ReservationTables(0, '', '', '', '', '', '', '', '', 'def', '1', '', 'def', '', '', 'En Espera', '');
+  reservation: ReservationTables = new ReservationTables(
+    0,
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    '',
+    'def',
+    '1',
+    '',
+    'def',
+    '',
+    '',
+    'En Espera',
+    ''
+  );
   currentUser: string | null = null; // Controla la imagen expandida
   currentName: string | null = null;
-  currentPhone:string | null = null;
+  currentPhone: string | null = null;
   imageUrl: string | null = null; // Añadir esta propiedad para almacenar la URL de la imagen
   selectedFile: File | null = null; // Archivo seleccionado para subir
 
@@ -152,18 +189,16 @@ export class ReservationTablesComponent implements OnInit {
   fechaVacia: boolean = false;
   horaVacia: boolean = false;
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object,
-      private reservationTables: ReservationTablesService,
-      private router: Router,
-      private authService: AuthService,
-      private usuarioService: UsuarioService,
-      private uploadService: UploadService,
-      private fb: FormBuilder,
-      private cdr: ChangeDetectorRef
-  )  {
-
-
-
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private reservationTables: ReservationTablesService,
+    private router: Router,
+    private authService: AuthService,
+    private usuarioService: UsuarioService,
+    private uploadService: UploadService,
+    private fb: FormBuilder,
+    private cdr: ChangeDetectorRef
+  ) {
     // Establecer fecha mínima como hoy
     this.fechaMinima = this.formatDate(new Date());
     // Establecer fecha máxima como 6 meses desde hoy
@@ -174,13 +209,11 @@ export class ReservationTablesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.currentUser = this.authService.getUser();
     this.currentName = this.authService.getUsername() ?? '';
     this.reservation.namee = this.currentName;
     this.currentPhone = this.authService.getPhone() ?? '';
     this.reservation.telefono = this.currentPhone;
-
 
     this.reservationTables.getAll().subscribe((reservations) => {
       this.actualizarInventario(reservations);
@@ -188,15 +221,13 @@ export class ReservationTablesComponent implements OnInit {
     });
 
     if (isPlatformBrowser(this.platformId)) {
-         // Configurar la fecha mínima (hoy)
-        const hoy = new Date();
-        this.minDate = hoy.toISOString().split('T')[0];
+      // Configurar la fecha mínima (hoy)
+      const hoy = new Date();
+      this.minDate = hoy.toISOString().split('T')[0];
       setTimeout(() => {
         this.initializeElements();
         this.setupEventListeners();
-
       });
-
     }
 
     this.calcularTotalMesas();
@@ -217,15 +248,17 @@ export class ReservationTablesComponent implements OnInit {
 
   getColorStyle() {
     return {
-      'color': this.cantidadMesasDisponibles === 0 ? 'red' : 'black',
-      'font-weight': 'bold'
+      color: this.cantidadMesasDisponibles === 0 ? 'red' : 'black',
+      'font-weight': 'bold',
     };
   }
 
   private initializeElements(): void {
     if (isPlatformBrowser(this.platformId)) {
       if (this.cantidadMesas && this.costoMesa) {
-        this.cantidadMesas.nativeElement.addEventListener('input', () => this.calcularCosto());
+        this.cantidadMesas.nativeElement.addEventListener('input', () =>
+          this.calcularCosto()
+        );
         this.costoMesa.nativeElement.value = this.costoPorMesa.toString();
       }
       this.steps = document.querySelectorAll('.step');
@@ -235,25 +268,37 @@ export class ReservationTablesComponent implements OnInit {
   }
 
   // Método para actualizar el inventario con base en las reservaciones actuales
-  private actualizarInventario(reservations: any[]): void {
-    // Resetear el inventario de mesas a los valores originales antes de restar
-    this.tableInventory = {
-      interior: { '2 Personas': 2, '4 Personas': 2, '6 Personas': 4 },
-      exterior: { '2 Personas': 1, '4 Personas': 8, '6 Personas': 2 }
-    };
+  private actualizarInventario(reservations: ReservationTables[]): void {
+    this.reservationTables.getAll().subscribe((reservations) => {
+      // Restablece el inventario inicial
+      this.tableInventory = {
+        interior: { '2 Personas': 2, '4 Personas': 2, '6 Personas': 4 },
+        exterior: { '2 Personas': 1, '4 Personas': 8, '6 Personas': 2 },
+      };
 
-    // Restar las mesas reservadas del inventario
-    reservations.forEach(reservation => {
-      const tipo = reservation.cantidad as '2 Personas' | '4 Personas' | '6 Personas';
-      const ubicacion = reservation.ubicacion.toLowerCase() as 'interior' | 'exterior';
-
-      // Asegurar que el tipo y la ubicación son válidos antes de restar
-      if (this.tableInventory[ubicacion] && this.tableInventory[ubicacion][tipo] !== undefined) {
-        this.tableInventory[ubicacion][tipo] -= 1;
-      }
+      // Filtra reservaciones activas y ajusta el inventario
+      reservations.forEach((reservation) => {
+        if (
+          reservation.estados !== 'Cancelado' &&
+          reservation.estados !== 'Liberado'
+        ) {
+          const tipo = reservation.cantidad as
+            | '2 Personas'
+            | '4 Personas'
+            | '6 Personas';
+          const ubicacion = reservation.ubicacion.toLowerCase() as
+            | 'interior'
+            | 'exterior';
+          if (
+            this.tableInventory[ubicacion] &&
+            this.tableInventory[ubicacion][tipo] !== undefined
+          ) {
+            this.tableInventory[ubicacion][tipo] -= 1;
+          }
+        }
+      });
     });
   }
-
 
   checkEmpty(field: string): void {
     switch (field) {
@@ -280,7 +325,6 @@ export class ReservationTablesComponent implements OnInit {
         this.horaVacia = !this.reservation.hora;
         this.validarHorario();
         break;
-
     }
   }
 
@@ -312,7 +356,6 @@ export class ReservationTablesComponent implements OnInit {
     }
   }
 
-
   private resetSelections(): void {
     this.lugarSeleccionado = '';
     this.decoracionSeleccionada = 'Ninguna';
@@ -337,7 +380,7 @@ export class ReservationTablesComponent implements OnInit {
   onPersonasChange(event: any) {
     this.resetSelections();
 
-    if (!event.target.value || event.target.value === "") {
+    if (!event.target.value || event.target.value === '') {
       this.calcularTotalMesas();
       return;
     }
@@ -351,7 +394,7 @@ export class ReservationTablesComponent implements OnInit {
     // Update available decorations based on table size
     this.updateDecoracionesDisponibles();
 
-    switch(this.cantidadPersonas) {
+    switch (this.cantidadPersonas) {
       case '2 Personas':
         this.mostrarExterior = true; // Changed to true to allow exterior selection for 2 people
         this.updateAvailableTables('Interior');
@@ -359,8 +402,9 @@ export class ReservationTablesComponent implements OnInit {
       case '4 Personas':
       case '6 Personas':
         this.mostrarExterior = true;
-        this.cantidadMesasDisponibles = this.tableInventory.interior[this.cantidadPersonas] +
-                                       this.tableInventory.exterior[this.cantidadPersonas];
+        this.cantidadMesasDisponibles =
+          this.tableInventory.interior[this.cantidadPersonas] +
+          this.tableInventory.exterior[this.cantidadPersonas];
         break;
       default:
         this.mostrarExterior = true;
@@ -368,7 +412,9 @@ export class ReservationTablesComponent implements OnInit {
     }
     // Reset selections
     const lugarSelect = document.getElementById('Lugar') as HTMLSelectElement;
-    const decoracionSelect = document.getElementById('decoracion') as HTMLSelectElement;
+    const decoracionSelect = document.getElementById(
+      'decoracion'
+    ) as HTMLSelectElement;
     if (lugarSelect) lugarSelect.value = '';
     if (decoracionSelect) decoracionSelect.value = 'Ninguna';
   }
@@ -383,7 +429,9 @@ export class ReservationTablesComponent implements OnInit {
 
   // Método para manejar el cambio de lugar (interior o exterior)
   onLugarChange(event: any) {
-    const decoracionSelect = document.getElementById('decoracion') as HTMLSelectElement;
+    const decoracionSelect = document.getElementById(
+      'decoracion'
+    ) as HTMLSelectElement;
     if (decoracionSelect) {
       decoracionSelect.value = 'Ninguna';
     }
@@ -395,9 +443,11 @@ export class ReservationTablesComponent implements OnInit {
     this.mostrarPreviewInterior = false;
     this.mostrarPreviewExterior = false;
 
-    if (!event.target.value || event.target.value === "") {
+    if (!event.target.value || event.target.value === '') {
       if (this.selectedCapacity) {
-        this.cantidadMesasDisponibles = this.tableInventory.interior[this.selectedCapacity] +  this.tableInventory.exterior[this.selectedCapacity];
+        this.cantidadMesasDisponibles =
+          this.tableInventory.interior[this.selectedCapacity] +
+          this.tableInventory.exterior[this.selectedCapacity];
       } else {
         this.calcularTotalMesas();
       }
@@ -420,12 +470,15 @@ export class ReservationTablesComponent implements OnInit {
     }
 
     if (location === 'Interior') {
-      this.cantidadMesasDisponibles = this.tableInventory.interior[this.selectedCapacity];
+      this.cantidadMesasDisponibles =
+        this.tableInventory.interior[this.selectedCapacity];
     } else if (location === 'Exterior') {
-      this.cantidadMesasDisponibles = this.tableInventory.exterior[this.selectedCapacity];
+      this.cantidadMesasDisponibles =
+        this.tableInventory.exterior[this.selectedCapacity];
     } else {
-      this.cantidadMesasDisponibles = this.tableInventory.interior[this.selectedCapacity] +
-                                     this.tableInventory.exterior[this.selectedCapacity];
+      this.cantidadMesasDisponibles =
+        this.tableInventory.interior[this.selectedCapacity] +
+        this.tableInventory.exterior[this.selectedCapacity];
     }
   }
   ///Apartir de aqui es del formulario . Formatea la fecha al formato requerido por el input type="date"
@@ -465,7 +518,6 @@ export class ReservationTablesComponent implements OnInit {
     }
   }
 
-
   // Validar el horario seleccionado
   validarHorario(): void {
     if (this.reservation.hora) {
@@ -483,7 +535,6 @@ export class ReservationTablesComponent implements OnInit {
     }
   }
 
-
   // Método para deshabilitar días en el datepicker
   disableDates(): string[] {
     const disabledDates: string[] = [];
@@ -495,13 +546,13 @@ export class ReservationTablesComponent implements OnInit {
       nextDate.setDate(hoy.getDate() + i);
       const dia = nextDate.getUTCDay(); // 0: domingo, 1: lunes, 2: martes, 3: miércoles, ...
 
-      if (dia === 1 || dia === 2) { // Deshabilitar lunes (1) y martes (2)
+      if (dia === 1 || dia === 2) {
+        // Deshabilitar lunes (1) y martes (2)
         disabledDates.push(nextDate.toISOString().split('T')[0]);
       }
     }
     return disabledDates;
   }
-
 
   onDecoracionChange(event: Event): void {
     const selectElement = event.target as HTMLSelectElement;
@@ -513,83 +564,76 @@ export class ReservationTablesComponent implements OnInit {
     // Mostrar alertas específicas para "Ninguna" o "Personalizado"
     if (this.decoracionSeleccionada === 'Ninguna') {
       Swal.fire({
-          title: 'Información',
-          text: 'Se saltará el paso 3 Pagos. Métodos de pagos. Únicamente se cobrará lo que consuma en el local.',
-          icon: 'info',
-          confirmButtonText: 'Entendido',
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            if (confirmButton) {
-              confirmButton.style.backgroundColor = '#343a40';
-              confirmButton.onmouseover = () => {
-                confirmButton.style.backgroundColor = '#212529'; // Color en hover
-              };
-              confirmButton.onmouseout = () => {
-                confirmButton.style.backgroundColor = '#343a40'; // Color normal
-              };
-            }
-          },
+        title: 'Información',
+        text: 'Se saltará el paso 3 Pagos. Métodos de pagos. Únicamente se cobrará lo que consuma en el local.',
+        icon: 'info',
+        confirmButtonText: 'Entendido',
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529'; // Color en hover
+            };
+            confirmButton.onmouseout = () => {
+              confirmButton.style.backgroundColor = '#343a40'; // Color normal
+            };
+          }
+        },
       });
-  } else if (this.decoracionSeleccionada === 'Personalizado') {
+    } else if (this.decoracionSeleccionada === 'Personalizado') {
       Swal.fire({
-          title: 'Información',
-          text: 'El costo y los detalles de la decoración se deben consultar directamente con el dueño del local.',
-          icon: 'info',
-          confirmButtonText: 'Entendido',
-          didOpen: () => {
-            const confirmButton = Swal.getConfirmButton();
-            if (confirmButton) {
-              confirmButton.style.backgroundColor = '#343a40';
-              confirmButton.onmouseover = () => {
-                confirmButton.style.backgroundColor = '#212529'; // Color en hover
-              };
-              confirmButton.onmouseout = () => {
-                confirmButton.style.backgroundColor = '#343a40'; // Color normal
-              };
-            }
-          },
+        title: 'Información',
+        text: 'El costo y los detalles de la decoración se deben consultar directamente con el dueño del local.',
+        icon: 'info',
+        confirmButtonText: 'Entendido',
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529'; // Color en hover
+            };
+            confirmButton.onmouseout = () => {
+              confirmButton.style.backgroundColor = '#343a40'; // Color normal
+            };
+          }
+        },
       });
-  }
+    }
 
     if (this.decoracionSeleccionada === 'Romantica' && this.isTableForTwo) {
       if (this.lugarSeleccionado === 'Interior') {
         this.mostrarPreviewInterior = true;
         this.mostrarPreviewExterior = false;
-
       } else if (this.lugarSeleccionado === 'Exterior') {
         this.mostrarPreviewInterior = false;
         this.mostrarPreviewExterior = true;
-
       }
     }
 
     if (this.lugarSeleccionado === 'Interior') {
       this.decoracionSeleccionadaInterior = this.decoracionSeleccionada;
-
     } else if (this.lugarSeleccionado === 'Exterior') {
       this.decoracionSeleccionadaExterior = this.decoracionSeleccionada;
-
-
     }
     this.updateButtonVisibility();
     this.calcularCosto();
   }
 
-
-
-
   private calcularCosto(): void {
     const cantidad = parseInt(this.cantidadMesas.nativeElement.value, 10);
-    const costoDecoracion = this.costoDecoraciones[this.decoracionSeleccionada] || 0;
+    const costoDecoracion =
+      this.costoDecoraciones[this.decoracionSeleccionada] || 0;
     // Validar que la cantidad sea mayor o igual a 1
     if (isNaN(cantidad) || cantidad < 1) {
       this.cantidadMesas.nativeElement.value = '1';
       return;
     }
 
-     // Actualizar la cantidad de mesas reservadas
+    // Actualizar la cantidad de mesas reservadas
     this.cantidadMesasReservadas = cantidad;
-    this.reservation.cantidadMesasReservada = `${this.cantidadMesasReservadas} Mesa`
+    this.reservation.cantidadMesasReservada = `${this.cantidadMesasReservadas} Mesa`;
     // Calcular el costo total
     const costoTotal = cantidad * this.costoPorMesa;
     this.reservation.costo = `$${this.costoPorMesa} MXN`;
@@ -599,8 +643,11 @@ export class ReservationTablesComponent implements OnInit {
 
     this.costoConDecoracion = costoTotalConDecoracion;
 
-     // Actualizar el mensaje dependiendo de si hay decoración o no
-     if (this.decoracionSeleccionada === 'Ninguna' || !this.decoracionSeleccionada) {
+    // Actualizar el mensaje dependiendo de si hay decoración o no
+    if (
+      this.decoracionSeleccionada === 'Ninguna' ||
+      !this.decoracionSeleccionada
+    ) {
       this.mensajeTotalPago = `Total sin decoración: $${costoTotal} MXN`;
       this.reservation.total = this.mensajeTotalPago; // Asigna el valor calculado
     } else {
@@ -616,14 +663,20 @@ export class ReservationTablesComponent implements OnInit {
 
   private updateButtonVisibility(): void {
     const nextButton = document.querySelector('.btn-next') as HTMLButtonElement;
-    const submitButton = document.querySelector('.btn-submit') as HTMLButtonElement;
+    const submitButton = document.querySelector(
+      '.btn-submit'
+    ) as HTMLButtonElement;
 
     if (nextButton && submitButton) {
       // En form-three (active === 3), ocultar siguiente y mostrar reservar
       if (this.active === 3) {
         nextButton.style.display = 'none';
         submitButton.style.display = 'block';
-      } else if (this.active === 2 && (this.decoracionSeleccionada === 'Ninguna' || this.decoracionSeleccionada === 'Personalizado')) {
+      } else if (
+        this.active === 2 &&
+        (this.decoracionSeleccionada === 'Ninguna' ||
+          this.decoracionSeleccionada === 'Personalizado')
+      ) {
         // En form-two con decoración Ninguna o Personalizado
         nextButton.style.display = 'none';
         submitButton.style.display = 'block';
@@ -635,99 +688,127 @@ export class ReservationTablesComponent implements OnInit {
     }
   }
 
-
   procesarReservaDirecta(): void {
     this.reservation.usuario = this.currentUser ?? '';
 
     // Verificar la disponibilidad de mesas
-    const tipo = this.reservation.cantidad as '2 Personas' | '4 Personas' | '6 Personas';
-    const ubicacion = this.reservation.ubicacion.toLowerCase() as 'interior' | 'exterior';
+    const tipo = this.reservation.cantidad as
+      | '2 Personas'
+      | '4 Personas'
+      | '6 Personas';
+    const ubicacion = this.reservation.ubicacion.toLowerCase() as
+      | 'interior'
+      | 'exterior';
 
     if (this.tableInventory[ubicacion][tipo] <= 0) {
-        Swal.fire({
-          title: 'Lo sentimos',
-          text: `No hay mesas disponibles para ${tipo} en el ${ubicacion}.`,
-          icon: 'error',
-          didOpen: () => {
-              const confirmButton = Swal.getConfirmButton();
-              if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-                  confirmButton.onmouseover = () => {
-                      confirmButton.style.backgroundColor = '#212529';
-                  };
-                  confirmButton.onmouseout = () => {
-                      confirmButton.style.backgroundColor = '#343a40';
-                  };
-              }
-            }
-        });
-        return; // Salir de la función si no hay disponibilidad
+      Swal.fire({
+        title: 'Lo sentimos',
+        text: `No hay mesas disponibles para ${tipo} en el ${ubicacion}.`,
+        icon: 'error',
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529';
+            };
+            confirmButton.onmouseout = () => {
+              confirmButton.style.backgroundColor = '#343a40';
+            };
+          }
+        },
+      });
+      return; // Salir de la función si no hay disponibilidad
     }
 
     if (this.validateFormOne() && this.validateFormTwo()) {
-        if (this.reservation.tipo_decoracion === 'Ninguna' ||
-          this.reservation.tipo_decoracion === 'Personalizado') {
-          this.reservation.costo = '';
-          this.reservation.total = '';
-        }
-        this.reservationTables.add(this.reservation).subscribe({
-            next: (response) => {
-                      Swal.fire({
-                        title: '¡Reservación Exitosa!',
-                        text: 'Su reservación ha sido procesada correctamente.',
-                        icon: 'success',
-                        didOpen: () => {
-                            const confirmButton = Swal.getConfirmButton();
-                            if (confirmButton) {
-                                confirmButton.style.backgroundColor = '#343a40';
-                                confirmButton.onmouseover = () => {
-                                    confirmButton.style.backgroundColor = '#212529';
-                                };
-                                confirmButton.onmouseout = () => {
-                                    confirmButton.style.backgroundColor = '#343a40';
-                                };
-                            }
-                        }
-                    }).then((result: any) => {
-                        if (result.isConfirmed) {
-                            this.active = 4;
-                            this.showReservarOtraMesa = true;
-                            this.updateProgress();
-                        }
-                    });
+      if (
+        this.reservation.tipo_decoracion === 'Ninguna' ||
+        this.reservation.tipo_decoracion === 'Personalizado'
+      ) {
+        this.reservation.costo = '';
+        this.reservation.total = '';
+      }
+      this.reservationTables.add(this.reservation).subscribe({
+        next: (response) => {
+          Swal.fire({
+            title: '¡Reservación Exitosa!',
+            text: 'Su reservación ha sido procesada correctamente.',
+            icon: 'success',
+            didOpen: () => {
+              const confirmButton = Swal.getConfirmButton();
+              if (confirmButton) {
+                confirmButton.style.backgroundColor = '#343a40';
+                confirmButton.onmouseover = () => {
+                  confirmButton.style.backgroundColor = '#212529';
+                };
+                confirmButton.onmouseout = () => {
+                  confirmButton.style.backgroundColor = '#343a40';
+                };
+              }
             },
-            error: (error) => {
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'Ocurrió un error al procesar la reservación. Inténtelo de nuevo.',
-                    icon: 'error',
-                    didOpen: () => {
-                        const confirmButton = Swal.getConfirmButton();
-                        if (confirmButton) {
-                            confirmButton.style.backgroundColor = '#343a40';
-                            confirmButton.onmouseover = () => {
-                                confirmButton.style.backgroundColor = '#212529';
-                            };
-                            confirmButton.onmouseout = () => {
-                                confirmButton.style.backgroundColor = '#343a40';
-                            };
-                        }
-                    }
-                });
+          }).then((result: any) => {
+            if (result.isConfirmed) {
+              this.active = 4;
+              this.showReservarOtraMesa = true;
+              this.updateProgress();
+            }
+          });
+        },
+        error: (error) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Ocurrió un error al procesar la reservación. Inténtelo de nuevo.',
+            icon: 'error',
+            didOpen: () => {
+              const confirmButton = Swal.getConfirmButton();
+              if (confirmButton) {
+                confirmButton.style.backgroundColor = '#343a40';
+                confirmButton.onmouseover = () => {
+                  confirmButton.style.backgroundColor = '#212529';
+                };
+                confirmButton.onmouseout = () => {
+                  confirmButton.style.backgroundColor = '#343a40';
+                };
+              }
             },
-        });
+          });
+        },
+      });
     }
   }
 
   private resetForm(): void {
-    this.reservation = new ReservationTables(0, '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'En Espera', this.currentUser ?? '');
+    this.reservation = new ReservationTables(
+      0,
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      '',
+      'En Espera',
+      this.currentUser ?? ''
+    );
     this.showReservarOtraMesa = false;
     this.active = 1;
   }
 
   reservarMesa(): void {
     this.reservation.usuario = this.currentUser ?? '';
-    if (this.active === 2 && (this.reservation.tipo_decoracion === 'Ninguna' || this.reservation.tipo_decoracion === 'Personalizado')) {
+    if (
+      this.active === 2 &&
+      (this.reservation.tipo_decoracion === 'Ninguna' ||
+        this.reservation.tipo_decoracion === 'Personalizado')
+    ) {
       // Limpiar costo y total si la decoración es Ninguna o Personalizado
       this.reservation.costo = '';
       this.reservation.total = '';
@@ -737,15 +818,33 @@ export class ReservationTablesComponent implements OnInit {
         this.onUpload().subscribe({
           next: () => {
             this.reservation.image = this.imageUrl ?? ''; // Asigna cadena vacía si imageUrl es null
-            if (this.reservation.tipo_decoracion === 'Ninguna' ||
-              this.reservation.tipo_decoracion === 'Personalizado') {
+            if (
+              this.reservation.tipo_decoracion === 'Ninguna' ||
+              this.reservation.tipo_decoracion === 'Personalizado'
+            ) {
               this.reservation.costo = '';
               this.reservation.total = '';
             }
             this.reservationTables.add(this.reservation).subscribe({
-
               next: () => {
-                Swal.fire('¡Reservación Exitosa!', 'Su reservación ha sido procesada correctamente.', 'success').then(() => {
+                Swal.fire({
+                  title: '¡Reservación Exitosa!',
+                  text: 'Su reservación ha sido procesada correctamente.',
+                  icon: 'success',
+                  confirmButtonText: 'Entendido',
+                  didOpen: () => {
+                    const confirmButton = Swal.getConfirmButton();
+                    if (confirmButton) {
+                      confirmButton.style.backgroundColor = '#343a40';
+                      confirmButton.onmouseover = () => {
+                        confirmButton.style.backgroundColor = '#212529';
+                      };
+                      confirmButton.onmouseout = () => {
+                        confirmButton.style.backgroundColor = '#343a40';
+                      };
+                    }
+                  },
+                }).then(() => {
                   this.reservationTables.getAll().subscribe((reservations) => {
                     this.actualizarInventario(reservations);
                     this.calcularTotalMesas();
@@ -756,45 +855,45 @@ export class ReservationTablesComponent implements OnInit {
                 });
               },
               error: () => {
-                  Swal.fire({
-                    title: 'Error',
-                    text: 'Ocurrió un error al procesar la reservación. Inténtelo de nuevo.',
-                    icon: 'error',
-                    didOpen: () => {
-                        const confirmButton = Swal.getConfirmButton();
-                        if (confirmButton) {
-                            confirmButton.style.backgroundColor = '#343a40';
-                            confirmButton.onmouseover = () => {
-                                confirmButton.style.backgroundColor = '#212529';
-                            };
-                            confirmButton.onmouseout = () => {
-                                confirmButton.style.backgroundColor = '#343a40';
-                            };
-                        }
+                Swal.fire({
+                  title: 'Error',
+                  text: 'Ocurrió un error al procesar la reservación. Inténtelo de nuevo.',
+                  icon: 'error',
+                  didOpen: () => {
+                    const confirmButton = Swal.getConfirmButton();
+                    if (confirmButton) {
+                      confirmButton.style.backgroundColor = '#343a40';
+                      confirmButton.onmouseover = () => {
+                        confirmButton.style.backgroundColor = '#212529';
+                      };
+                      confirmButton.onmouseout = () => {
+                        confirmButton.style.backgroundColor = '#343a40';
+                      };
                     }
+                  },
                 });
-              }
+              },
             });
           },
           error: () => {
-                Swal.fire({
-                  title: 'Error',
-                  text: 'Error al subir la imagen. Inténtelo de nuevo.',
-                  icon: 'error',
-                  didOpen: () => {
-                      const confirmButton = Swal.getConfirmButton();
-                      if (confirmButton) {
-                          confirmButton.style.backgroundColor = '#343a40';
-                          confirmButton.onmouseover = () => {
-                              confirmButton.style.backgroundColor = '#212529';
-                          };
-                          confirmButton.onmouseout = () => {
-                              confirmButton.style.backgroundColor = '#343a40';
-                          };
-                      }
-                  }
-              });
-          }
+            Swal.fire({
+              title: 'Error',
+              text: 'Error al subir la imagen. Inténtelo de nuevo.',
+              icon: 'error',
+              didOpen: () => {
+                const confirmButton = Swal.getConfirmButton();
+                if (confirmButton) {
+                  confirmButton.style.backgroundColor = '#343a40';
+                  confirmButton.onmouseover = () => {
+                    confirmButton.style.backgroundColor = '#212529';
+                  };
+                  confirmButton.onmouseout = () => {
+                    confirmButton.style.backgroundColor = '#343a40';
+                  };
+                }
+              },
+            });
+          },
         });
       }
     }
@@ -802,25 +901,33 @@ export class ReservationTablesComponent implements OnInit {
 
   reservarOtraMesa(): void {
     location.reload(); // Recarga la página para reiniciar los formularios
-     // Resetea el formulario para reservar otra mesa
-     this.active = 1;
-     this.showReservarOtraMesa = false;  // Ocultar el botón al volver al primer paso
+    // Resetea el formulario para reservar otra mesa
+    this.active = 1;
+    this.showReservarOtraMesa = false; // Ocultar el botón al volver al primer paso
   }
 
   private setupEventListeners(): void {
     if (this.nextButton && this.prevButton) {
-      this.nextButton.nativeElement.addEventListener('click', () => this.handleNext());
-      this.prevButton.nativeElement.addEventListener('click', () => this.handlePrev());
+      this.nextButton.nativeElement.addEventListener('click', () =>
+        this.handleNext()
+      );
+      this.prevButton.nativeElement.addEventListener('click', () =>
+        this.handlePrev()
+      );
     }
 
     if (this.fileUpload) {
-      this.fileUpload.nativeElement.addEventListener('change', (event) => this.handleFileUpload(event));
+      this.fileUpload.nativeElement.addEventListener('change', (event) =>
+        this.handleFileUpload(event)
+      );
     }
   }
 
   private validateFormOne(): boolean {
     const formOne = document.querySelector('.form-one') as HTMLElement;
-    const requiredInputs = formOne.querySelectorAll('input[required], select[required]');
+    const requiredInputs = formOne.querySelectorAll(
+      'input[required], select[required]'
+    );
 
     for (const input of Array.from(requiredInputs)) {
       const inputElement = input as HTMLInputElement | HTMLSelectElement;
@@ -833,15 +940,15 @@ export class ReservationTablesComponent implements OnInit {
           didOpen: () => {
             const confirmButton = Swal.getConfirmButton();
             if (confirmButton) {
+              confirmButton.style.backgroundColor = '#343a40';
+              confirmButton.onmouseover = () => {
+                confirmButton.style.backgroundColor = '#212529';
+              };
+              confirmButton.onmouseout = () => {
                 confirmButton.style.backgroundColor = '#343a40';
-                confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529';
-                };
-                confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40';
-                };
+              };
             }
-          }
+          },
         });
         return false;
       }
@@ -851,7 +958,9 @@ export class ReservationTablesComponent implements OnInit {
 
   private validateFormTwo(): boolean {
     const formTwo = document.querySelector('.form-two') as HTMLElement;
-    const requiredInputs = formTwo.querySelectorAll('input[required], select[required]');
+    const requiredInputs = formTwo.querySelectorAll(
+      'input[required], select[required]'
+    );
 
     for (const input of Array.from(requiredInputs)) {
       const inputElement = input as HTMLInputElement | HTMLSelectElement;
@@ -864,15 +973,15 @@ export class ReservationTablesComponent implements OnInit {
           didOpen: () => {
             const confirmButton = Swal.getConfirmButton();
             if (confirmButton) {
+              confirmButton.style.backgroundColor = '#343a40';
+              confirmButton.onmouseover = () => {
+                confirmButton.style.backgroundColor = '#212529';
+              };
+              confirmButton.onmouseout = () => {
                 confirmButton.style.backgroundColor = '#343a40';
-                confirmButton.onmouseover = () => {
-                    confirmButton.style.backgroundColor = '#212529';
-                };
-                confirmButton.onmouseout = () => {
-                    confirmButton.style.backgroundColor = '#343a40';
-                };
+              };
             }
-          }
+          },
         });
         /* console.log(inputElement) */
         return false;
@@ -885,7 +994,7 @@ export class ReservationTablesComponent implements OnInit {
         icon: 'error',
         title: 'Fecha inválida',
         text: 'Solo se permiten fechas de miércoles a domingo.',
-        confirmButtonText: 'Entendido'
+        confirmButtonText: 'Entendido',
       });
       return false;
     }
@@ -895,7 +1004,7 @@ export class ReservationTablesComponent implements OnInit {
         icon: 'error',
         title: 'Horario inválido',
         text: 'El horario debe ser de 7:00 p.m. a 12:00 a.m.',
-        confirmButtonText: 'Entendido'
+        confirmButtonText: 'Entendido',
       });
       return false;
     }
@@ -915,15 +1024,15 @@ export class ReservationTablesComponent implements OnInit {
         didOpen: () => {
           const confirmButton = Swal.getConfirmButton();
           if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529';
+            };
+            confirmButton.onmouseout = () => {
               confirmButton.style.backgroundColor = '#343a40';
-              confirmButton.onmouseover = () => {
-                  confirmButton.style.backgroundColor = '#212529';
-              };
-              confirmButton.onmouseout = () => {
-                  confirmButton.style.backgroundColor = '#343a40';
-              };
+            };
           }
-        }
+        },
       });
       return false;
     }
@@ -955,27 +1064,32 @@ export class ReservationTablesComponent implements OnInit {
           isValid = this.validateFormTwo(); // Mantener la validación original con su Swal
 
           if (isValid) {
-            const tipo = this.reservation.cantidad as '2 Personas' | '4 Personas' | '6 Personas';
-            const ubicacion = this.reservation.ubicacion.toLowerCase() as 'interior' | 'exterior';
+            const tipo = this.reservation.cantidad as
+              | '2 Personas'
+              | '4 Personas'
+              | '6 Personas';
+            const ubicacion = this.reservation.ubicacion.toLowerCase() as
+              | 'interior'
+              | 'exterior';
 
             if (this.tableInventory[ubicacion][tipo] <= 0) {
-                  Swal.fire({
-                    title: 'Lo sentimos',
-                    text: `No hay mesas disponibles para ${tipo} en el ${ubicacion}.`,
-                    icon: 'error',
-                    didOpen: () => {
-                        const confirmButton = Swal.getConfirmButton();
-                        if (confirmButton) {
-                            confirmButton.style.backgroundColor = '#343a40';
-                            confirmButton.onmouseover = () => {
-                                confirmButton.style.backgroundColor = '#212529';
-                            };
-                            confirmButton.onmouseout = () => {
-                                confirmButton.style.backgroundColor = '#343a40';
-                            };
-                        }
-                    }
-                });
+              Swal.fire({
+                title: 'Lo sentimos',
+                text: `No hay mesas disponibles para ${tipo} en el ${ubicacion}.`,
+                icon: 'error',
+                didOpen: () => {
+                  const confirmButton = Swal.getConfirmButton();
+                  if (confirmButton) {
+                    confirmButton.style.backgroundColor = '#343a40';
+                    confirmButton.onmouseover = () => {
+                      confirmButton.style.backgroundColor = '#212529';
+                    };
+                    confirmButton.onmouseout = () => {
+                      confirmButton.style.backgroundColor = '#343a40';
+                    };
+                  }
+                },
+              });
               return;
             }
 
@@ -986,7 +1100,10 @@ export class ReservationTablesComponent implements OnInit {
             this.onInputChange('fecha');
             this.onInputChange('hora');
 
-            if (this.decoracionSeleccionada === 'Ninguna' || this.decoracionSeleccionada === 'Personalizado') {
+            if (
+              this.decoracionSeleccionada === 'Ninguna' ||
+              this.decoracionSeleccionada === 'Personalizado'
+            ) {
               this.procesarReservaDirecta();
               return;
             }
@@ -1014,7 +1131,6 @@ export class ReservationTablesComponent implements OnInit {
     }
   }
 
-
   private handlePrev(): void {
     this.active--;
     if (this.active < 1) {
@@ -1028,7 +1144,7 @@ export class ReservationTablesComponent implements OnInit {
     if (!this.steps || !this.formSteps) return;
 
     this.steps.forEach((step, i) => {
-      if (i === (this.active - 1)) {
+      if (i === this.active - 1) {
         step.classList.add('active');
         this.formSteps![i].classList.add('active');
       } else {
@@ -1053,73 +1169,71 @@ export class ReservationTablesComponent implements OnInit {
     return Math.random().toString(36).substr(2, 9);
   }
 
-
-
   public handleFileUpload(event: Event): void {
-  const input = event.target as HTMLInputElement;
-  const file = input.files?.[0];
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
 
-  if (file && this.imagePreview) {
-    if (!this.allowedFileTypes.includes(file.type.toLowerCase())) {
+    if (file && this.imagePreview) {
+      if (!this.allowedFileTypes.includes(file.type.toLowerCase())) {
         Swal.fire({
           title: 'Error',
           text: 'Tipo de archivo no permitido. Por favor, seleccione una imagen en formato JPG, JPEG, PNG o HEIC.',
           icon: 'error',
           didOpen: () => {
-              const confirmButton = Swal.getConfirmButton();
-              if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-                  confirmButton.onmouseover = () => {
-                      confirmButton.style.backgroundColor = '#212529';
-                  };
-                  confirmButton.onmouseout = () => {
-                      confirmButton.style.backgroundColor = '#343a40';
-                  };
-              }
-          }
-      });
-      this.resetFileInput(input);
-      return;
-    }
+            const confirmButton = Swal.getConfirmButton();
+            if (confirmButton) {
+              confirmButton.style.backgroundColor = '#343a40';
+              confirmButton.onmouseover = () => {
+                confirmButton.style.backgroundColor = '#212529';
+              };
+              confirmButton.onmouseout = () => {
+                confirmButton.style.backgroundColor = '#343a40';
+              };
+            }
+          },
+        });
+        this.resetFileInput(input);
+        return;
+      }
 
-    if (file.size > 20 * 1024 * 1024) {
+      if (file.size > 20 * 1024 * 1024) {
         Swal.fire({
           title: 'Error',
           text: 'Archivo demasiado grande. Seleccione una imagen menor a 20MB.',
           icon: 'error',
           didOpen: () => {
-              const confirmButton = Swal.getConfirmButton();
-              if (confirmButton) {
-                  confirmButton.style.backgroundColor = '#343a40';
-                  confirmButton.onmouseover = () => {
-                      confirmButton.style.backgroundColor = '#212529';
-                  };
-                  confirmButton.onmouseout = () => {
-                      confirmButton.style.backgroundColor = '#343a40';
-                  };
-              }
-          }
-      });
-      this.resetFileInput(input);
-      return;
-    }
-
-    const newFileName = this.generateUniqueId() + '.png';
-    this.selectedFile = new File([file], newFileName, { type: file.type });
-
-    const reader = new FileReader();
-    reader.onload = (e: ProgressEvent<FileReader>) => {
-      if (e.target?.result && this.imagePreview) {
-        this.imagePreview.nativeElement.src = e.target.result as string;
-        this.imagePreview.nativeElement.style.display = 'block';
+            const confirmButton = Swal.getConfirmButton();
+            if (confirmButton) {
+              confirmButton.style.backgroundColor = '#343a40';
+              confirmButton.onmouseover = () => {
+                confirmButton.style.backgroundColor = '#212529';
+              };
+              confirmButton.onmouseout = () => {
+                confirmButton.style.backgroundColor = '#343a40';
+              };
+            }
+          },
+        });
+        this.resetFileInput(input);
+        return;
       }
-    };
-    reader.readAsDataURL(file);
-  } else if (this.imagePreview) {
-    this.imagePreview.nativeElement.src = '';
-    this.imagePreview.nativeElement.style.display = 'none';
+
+      const newFileName = this.generateUniqueId() + '.png';
+      this.selectedFile = new File([file], newFileName, { type: file.type });
+
+      const reader = new FileReader();
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target?.result && this.imagePreview) {
+          this.imagePreview.nativeElement.src = e.target.result as string;
+          this.imagePreview.nativeElement.style.display = 'block';
+        }
+      };
+      reader.readAsDataURL(file);
+    } else if (this.imagePreview) {
+      this.imagePreview.nativeElement.src = '';
+      this.imagePreview.nativeElement.style.display = 'none';
+    }
   }
-}
 
   private resetFileInput(input: HTMLInputElement): void {
     input.value = '';
@@ -1151,7 +1265,9 @@ export class ReservationTablesComponent implements OnInit {
                       attempts++;
                       setTimeout(checkImage, retryInterval);
                     } else {
-                      observer.error('Error al obtener la imagen después de varios intentos.');
+                      observer.error(
+                        'Error al obtener la imagen después de varios intentos.'
+                      );
                     }
                   }
                 },
@@ -1160,16 +1276,18 @@ export class ReservationTablesComponent implements OnInit {
                     attempts++;
                     setTimeout(checkImage, retryInterval);
                   } else {
-                    observer.error('Error al obtener la imagen después de varios intentos.');
+                    observer.error(
+                      'Error al obtener la imagen después de varios intentos.'
+                    );
                   }
-                }
+                },
               });
             };
             setTimeout(checkImage, retryInterval);
           },
           error: () => {
             observer.error('Error al subir la imagen.');
-          }
+          },
         });
       } else {
         observer.error('No hay archivo seleccionado.');

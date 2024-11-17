@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Community } from '../models/comentario';
 import { GenericService } from '../../shared/generic.service';
 import { environment } from '../../environment/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +14,8 @@ export class CommunityService extends GenericService<Community> {
   }
 
   protected override getBaseUrl(): string {
-    return `${environment.apiUrl}/comentario` // URL específica para la entidad 'comunidad'
+    return `${environment.apiUrl}/comentario`; // URL específica para la entidad 'comunidad'
   }
+
 }
 

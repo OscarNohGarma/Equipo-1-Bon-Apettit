@@ -56,6 +56,10 @@
             (click)="selectCategory('Clientes')">
             Clientes
         </div>
+        <div *ngIf="rol==='DUEÑO'" class="elemento-nav" [routerLink]="['/admin/reservaciones']"
+            (click)="selectCategory('Reservaciones')">
+            Reservaciones
+        </div>
 
     </div>
     <div class="mobile-seleccion">
@@ -75,6 +79,10 @@
             <div *ngIf="rol==='DUEÑO'" [routerLink]="['/admin/report']" (click)="selectCategory('Reporte')">Reporte
             </div>
             <div *ngIf="rol==='DUEÑO'" [routerLink]="['/admin/clientes']" (click)="selectCategory('Clientes')">Clientes
+            </div>
+            <div *ngIf="rol==='DUEÑO'" [routerLink]="['/admin/reservaciones']"
+                (click)="selectCategory('Reservaciones')">
+                Reservaciones
             </div>
         </div>
     </div>

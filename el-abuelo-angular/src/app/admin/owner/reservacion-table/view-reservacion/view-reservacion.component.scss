@@ -1,0 +1,205 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto 4rem auto;
+  // position: relative;
+}
+.encabezado {
+  font-size: 40px;
+  font-weight: bolder;
+  text-align: center;
+  margin-top: 3px;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+.back-button {
+  //   background-color: #343a40; /* Color oscuro elegante */
+  color: #343a40;
+  padding: 10px 15px;
+  height: 35px;
+  width: 35px;
+  border: none;
+  border-radius: 2px;
+  text-decoration: none;
+  font-size: 25px;
+  font-weight: 800;
+  transition: background-color 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  // position: absolute;
+  left: 30px;
+  top: 35px;
+  background-color: transparent;
+}
+
+.back-button:hover {
+  background-color: #343a40; /* Color más oscuro al pasar el ratón */
+  color: white;
+  cursor: pointer;
+}
+
+.back-button:before {
+  content: "←"; /* Flecha antes del texto */
+}
+.dis {
+  opacity: 0;
+  height: 35px;
+  width: 35px;
+}
+.dis:hover {
+  cursor: default;
+}
+
+
+.view-reservation-form{
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 0 4px 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+  position: relative;
+}
+
+@media(min-width: 992px){
+  .view-reservation-form{
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+    position: relative;
+    display: grid;
+    grid-template-columns: 2fr 2fr;
+    grid-template-rows: 2fr 2fr;
+    gap: 1.5rem;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: stretch;
+  }
+}
+
+.view-reservation-form h2{
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #343a40;
+}
+.form-group{
+  margin-bottom: 15px;
+}
+.form-group label{
+  display: block;
+  font-weight: bold;
+}
+.form-group img{
+  max-width: 100%;
+}
+.form-group input,
+.form-group select {
+  text-align:left;
+}
+
+.form-control {
+  width: 100%;
+  padding: 8px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-control:focus {
+  border-color: #80bdff;
+  outline: none;
+}
+
+
+
+.image-preview {
+  margin-top: 10px;
+  text-align: center;
+}
+
+.image-thumbnail {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  border: 1px solid #ced4da;
+}
+
+input[type="file"] {
+  display: none; /* Ocultar el input */
+}
+
+.cont-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.imagen {
+  width: 500px;
+  height: 550px;
+  // margin: 15px 0;
+  object-fit: cover; /* Hace que la imagen se ajuste recortando el exceso */
+  object-position: center; /* Centra la imagen dentro del contenedor */
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid rgb(52, 58, 64, 0.3);
+}
+@media (min-width: 992px) {
+  .imagen {
+    width: 200px;
+    height: 100px;
+  }
+}
+
+
+/* .image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.1s ease-in-out, visibility 0s ease-in-out;
+}
+
+.image-modal.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.image-modal-content {
+  position: relative;
+  max-width: 90%;
+  max-height: 90%;
+}
+
+.expanded-image {
+  max-width: 100%;
+  max-height: 700px;
+  object-fit: cover;
+  border-radius: 10px;
+  transform-origin: center center;
+}
+
+.image-modal:hover {
+  cursor: pointer;
+}
+ */

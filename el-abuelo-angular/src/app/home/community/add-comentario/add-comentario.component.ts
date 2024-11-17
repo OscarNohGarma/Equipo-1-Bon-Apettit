@@ -61,7 +61,8 @@ export class AddComentarioComponent implements OnInit {
       this.calification,
       new Date().toLocaleDateString(),
       new Date().toLocaleTimeString(),
-      this.currentUser || ''
+      this.currentUser || '',
+      
     );
 
     this.communityService.add(newComment).subscribe({

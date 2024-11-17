@@ -16,6 +16,9 @@ import { OrdersDealerComponent } from './repartidor/orders-dealer/orders-dealer.
 import { ClientsComponent } from './owner/clients/clients.component';
 import { ComentariosComponent } from './administrador/comentarios/comentarios.component';
 import { ReportGeneratedComponent } from './owner/report/report-generated/report-generated.component';
+import { AddReplyComponent } from './administrador/comentarios/add-reply/add-reply.component';
+import { ReservacionTableComponent } from './owner/reservacion-table/reservacion-table.component';
+import { ViewReservacionComponent } from './owner/reservacion-table/view-reservacion/view-reservacion.component';
 
 export const adminRoutes: Routes = [
   {
@@ -46,6 +49,12 @@ export const adminRoutes: Routes = [
     path: 'comentarios',
     title: 'Comentarios - El abuelo',
     component: ComentariosComponent,
+    canActivate: [AdminAuthGuard], // Protegido por el guard de admin
+  },
+  {
+    path: 'comentarios/reply/:id',
+    title: 'Agregar Respuesta - El abuelo',
+    component: AddReplyComponent,
     canActivate: [AdminAuthGuard], // Protegido por el guard de admin
   },
   {
@@ -103,6 +112,16 @@ export const adminRoutes: Routes = [
     path: 'clientes',
     title: 'Clientes - Administrador',
     component: ClientsComponent, // Componente de login del admin
+  },
+  {
+    path: 'reservaciones', // Ruta comodín para capturar cualquier ruta no reconocida
+    title: 'Reservaciones - Administrador', // Redirigir al inicio
+    component: ReservacionTableComponent,
+  },
+  {
+    path: 'reservaciones/view/:id', // Ruta comodín para capturar cualquier ruta no reconocida
+    title: 'Detalles de la reservación - Administrador', // Redirigir al inicio
+    component: ViewReservacionComponent,
   },
   {
     path: '**', // Ruta comodín para capturar cualquier ruta no reconocida

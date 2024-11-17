@@ -3,33 +3,80 @@
     <div class="header">
       <h1 class="encabezado">Comunidad</h1>
     </div>
+    
     <h2 class="subtitulo">Conoce lo que los clientes opinan de nosotros</h2>
-    <div class="grid">
-      <div class="box" *ngFor="let comentario of comentarioItems">
-        <h1 class="name">{{ comentario.namee }}</h1>
-        <p class="usuario">{{ comentario.usuario }}</p>
-        <div class="fecha-hora d-flex justify-content-between">
-          <p class="fecha">{{ comentario.fecha }}</p>
-
-          <p class="hora">{{ comentario.hora }}</p>
-        </div>
-        <p class="description">{{ comentario.description }}</p>
-
-        <!-- Mostrar calificación como estrellas -->
-        <div class="clasificacion">
-          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
-            <input id="radio{{ star }}-{{ comentario.id }}" type="radio"
-                   name="calification-{{ comentario.id }}" value="{{ star }}"
-                   [checked]="comentario.calification >= star.toString()" disabled />
-            <label for="radio{{ star }}-{{ comentario.id }}">★</label>
-          </ng-container>
-        </div>
-      </div>
+    
+    <!-- Filtro de calificaciones -->
+    <div class="rating-filter">
+      <button 
+        class="filter-btn"
+        [class.active]="calificacionSeleccionada === null"
+        (click)="filtrarPorCalificacion(null)">
+        Todos los comentarios
+      </button>
+    
+      <!-- Botones de calificación con el número de estrellas correspondientes -->
+      <button 
+        *ngFor="let rating of [5, 4, 3, 2, 1]"
+        class="filter-btn"
+        [class.active]="calificacionSeleccionada === rating"
+        (click)="filtrarPorCalificacion(rating)">
+        {{ '★'.repeat(rating) }}
+      </button>
     </div>
 
-    <div class="feedback-section">
-      <p>¿Te gustaría dejar tu opinión? ¡Nos encantaría escucharte!</p>
-      <a routerLink="/agregar-comentarios" class="btn">Dejar Opinión</a>
+    <div class="grid">
+      <div class="feedback-section">
+        <p>¿Te gustaría dejar tu opinión? ¡Nos encantaría escucharte!</p>
+        <a routerLink="/agregar-comentarios" class="btn">Dejar Opinión</a>
+      </div>
+      <div class="box" *ngFor="let comentario of comentariosFiltrados">
+        <h1 class="name">
+          {{ comentario.comentario.namee }}
+          <span *ngIf="comentario.comentario.id.toString() === adminAuthService.getId()" class="admin-label">
+            Admin
+          </span>
+        </h1>
+
+        <p class="usuario">
+          {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Admin' : comentario.comentario.usuario }}
+        </p>
+
+        <div class="fecha-hora d-flex justify-content-between">
+          <p class="fecha">
+            {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Fecha Admin' : comentario.comentario.fecha }}
+          </p>
+          <p class="hora">
+            {{ comentario.comentario.id.toString() === adminAuthService.getId() ? 'Hora Admin' : comentario.comentario.hora }}
+          </p>
+        </div>
+
+        <p class="description">{{ comentario.comentario.description }}</p>
+
+        <div class="clasificacion">
+          <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+            <input 
+              id="radio{{ star }}-{{ comentario.comentario.id }}" 
+              type="radio"
+              name="calification-{{ comentario.comentario.id }}" 
+              value="{{ star }}"
+              [checked]="comentario.comentario.calification >= star.toString()" 
+              disabled />
+            <label for="radio{{ star }}-{{ comentario.comentario.id }}">★</label>
+          </ng-container>
+        </div>
+
+        <div *ngFor="let respuesta of comentario.respuestas">
+          <div class="respuesta">
+            <h4>{{ respuesta.namee }}</h4>
+            <p>{{ respuesta.description }}</p>
+            <div class="fecha-hora d-flex justify-content-between">
+              <p class="fecha">{{ respuesta.fecha }}</p>
+              <p class="hora">{{ respuesta.hora }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
