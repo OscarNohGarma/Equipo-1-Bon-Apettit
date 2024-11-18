@@ -34,12 +34,13 @@
     </div>
     <div class="container">
         <div class="cont-login">
-            <p *ngIf="!currentUser" (click)="onLoginMobile()" [routerLink]="['login']" class="login phone">Iniciar
+            <p *ngIf="!currentUser" (click)="scrollOnMobile()" [routerLink]="['login']" class="login phone">Iniciar
                 Sesión</p>
-            <img *ngIf="currentUser" src="../../../assets/reservar.svg" alt="reservar" class="img-bag" style="height: 30px;
+            <img *ngIf="currentUser" src="../../../assets/reservar.svg" (click)="scrollOnMobile()" alt="reservar"
+                class="img-bag" style="height: 30px;
             width: 34px;" [routerLink]="['/tus-reservaciones']">
-            <img *ngIf="currentUser" src="../../../assets/bag.svg" alt="bolsa" class="img-bag"
-                [routerLink]="['/tus-ordenes']">
+            <img *ngIf="currentUser" src="../../../assets/bag.svg" (click)="scrollOnMobile()" alt="bolsa"
+                class="img-bag" [routerLink]="['/tus-ordenes']">
             <p *ngIf="currentUser" class="user">{{currentName}}</p>
             <p *ngIf="currentUser" (click)="toggleUserMenu()" class="down">▼</p>
 
@@ -62,11 +63,11 @@
             </div>
             <!-- <a class="telefono" href="tel:01-800-0000-000">01-800-0000-000</a> -->
             <div class="nav-phone">
-                <a [routerLink]="['/']">Inicio</a>
-                <a [routerLink]="['menu']">Menú</a>
-                <a [routerLink]="['Galeria']">Galería</a>
-                <a [routerLink]="['Reservaciones']">Reservación</a>
-                <a [routerLink]="['comunidad']">Comunidad</a>
+                <a (click)="scrollOnMobile()" [routerLink]="['/']">Inicio</a>
+                <a (click)="scrollOnMobile()" [routerLink]="['menu']">Menú</a>
+                <a (click)="scrollOnMobile()" [routerLink]="['Galeria']">Galería</a>
+                <a (click)="scrollOnMobile()" [routerLink]="['Reservaciones']">Reservación</a>
+                <a (click)="scrollOnMobile()" [routerLink]="['comunidad']">Comunidad</a>
                 <!-- <a [routerLink]="['contacto']">Contacto</a> -->
             </div>
             <div class="slogan">
