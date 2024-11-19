@@ -139,6 +139,7 @@ export class OrdenComponent implements OnInit {
               this.router.navigate(['/tus-ordenes']).then(() => {
                 // Esperar a que la navegación esté completa antes de desplazar
                 // window.scrollTo(0, 0); // Desplazarse al principio de la página
+                window.location.reload();
               });
             }, 500); // Ajusta el tiempo según lo necesites
           }

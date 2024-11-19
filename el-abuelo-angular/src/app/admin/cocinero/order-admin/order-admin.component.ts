@@ -4,6 +4,7 @@ import { OrderMenuService } from '../../../core/services/order-menu.service';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { Router, RouterModule } from '@angular/router';
+import { NotificationService } from '../../../core/services/notification.service';
 declare var Swal: any;
 @Component({
   selector: 'app-order-admin',
@@ -23,7 +24,7 @@ export class OrderAdminComponent implements OnInit {
   disableStatusFilter: boolean = false; // Nueva propiedad para desactivar el select
   constructor(
     private orderMenuService: OrderMenuService,
-    private router: Router
+    private notificationService: NotificationService
   ) {} // Inyectar el servicio
   ngOnInit(): void {
     this.loadOrders();
@@ -130,7 +131,9 @@ export class OrderAdminComponent implements OnInit {
     }
   }
 
-  deleteOrder(id: number) {
+  deleteOrder(id: number, user: string) {
+    this.notificationService.emitEvent('cancelOrder', { id, user });
+
     this.showConfirmDeletePopup(
       '¿Estás seguro que deseas cancelar la orden?',
       'Esta orden desaparecerá de esta sección'

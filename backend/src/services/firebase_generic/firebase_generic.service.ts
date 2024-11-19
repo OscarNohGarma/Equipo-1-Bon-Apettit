@@ -13,6 +13,7 @@ import {
 } from '@nestjs/common';
 import { Menu } from 'src/document/modelos';
 import { ModeloPrincipal } from 'src/document/modelo_principal';
+import { NotificationGateway } from 'src/websockets/notification.gateway';
 //import { Menu } from 'src/document/modelmenu';
 
 @Injectable()
@@ -20,6 +21,7 @@ export class FirebaseGenericService {
   constructor(
     @Inject(ModeloPrincipal.collectionName)
     private readonly defaultCollection: CollectionReference<ModeloPrincipal>,
+    private readonly notificationGateway: NotificationGateway, // Inyecta el gateway
   ) {}
 
   // Método genérico para crear una entidad (Menu o Cita)
@@ -44,6 +46,13 @@ export class FirebaseGenericService {
     const doc = await collection.doc();
     entity.id = doc.id; // Asigna un nuevo ID a la entidad
     await collection.doc(doc.id).set(entity);
+
+    // Emitir evento WebSocket
+    this.notificationGateway.emitEvent(`${collectionName}-created`, {
+      message: `Nueva entidad creada en ${collectionName}`,
+      entity,
+    });
+
     return entity;
   }
 
@@ -75,6 +84,10 @@ export class FirebaseGenericService {
       throw new ConflictException('Entidad no encontrada');
     }
     await collection.doc(entityId).delete();
+    // Emitir evento WebSocket
+    this.notificationGateway.emitEvent(`${collectionName}-deleted`, {
+      message: `Entidad con ID ${entityId} eliminada de ${collectionName}`,
+    });
   }
 
   // Método genérico para actualizar una entidad

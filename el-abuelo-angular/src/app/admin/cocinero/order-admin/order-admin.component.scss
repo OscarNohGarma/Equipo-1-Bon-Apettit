@@ -441,3 +441,8 @@ p {
 .btn-delete.no-status {
   display: none;
 }
+.btns {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+}
