@@ -101,6 +101,18 @@ h2 {
   background-color: #343a40;
   color: white;
 }
+.button.cancel {
+  border: 2px solid #c21d1d;
+  background-color: white;
+  color: #c21d1d;
+  margin-top: 10px;
+  width: auto;
+  &:hover {
+    border: 2px solid #c21d1d;
+    background-color: #c21d1d;
+    color: white;
+  }
+}
 
 .box {
   padding: 30px 50px;

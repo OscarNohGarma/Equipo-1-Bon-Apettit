@@ -131,24 +131,35 @@ export class OrderAdminComponent implements OnInit {
   }
 
   deleteOrder(id: number) {
-    const confirmed = window.confirm(
-      '¿Estás seguro de que deseas eliminar esta orden?'
-    );
-    if (confirmed) {
-      this.orderMenuService.delete(id.toString()).subscribe(
-        (response) => {
-          // console.log('Producto eliminado:', response);
-          // Aquí puedes agregar lógica para actualizar la vista
-          setTimeout(() => {
-            alert('Orden eliminada correctamente.');
-            this.loadOrders(); // Por ejemplo, recargar el menú
-          }, 500);
-        },
-        (error) => {
-          console.error('Error al eliminar la orden: ', error);
-        }
-      );
-    }
+    this.showConfirmDeletePopup(
+      '¿Estás seguro que deseas cancelar la orden?',
+      'Esta orden desaparecerá de esta sección'
+    ).then((result: any) => {
+      if (result.isConfirmed) {
+        this.orderMenuService.delete(id.toString()).subscribe(
+          (response) => {
+            // console.log('Producto eliminado:', response);
+            // Aquí puedes agregar lógica para actualizar la vista
+            setTimeout(() => {
+              this.showPopup(
+                'success',
+                'Orden cancelada',
+                'Orden cancelada correctamente'
+              ).then((result: any) => {
+                this.loadOrders(); // Recargar el menú después de eliminar el producto
+              });
+            }, 500);
+          },
+          (error) => {
+            this.showPopup(
+              'error',
+              'Ocurrió un error',
+              'No se pudo cancelar la orden'
+            );
+          }
+        );
+      }
+    });
   }
   //POPUP
   showPopup(icon: 'success' | 'error', title: string, text: string) {
@@ -222,6 +233,61 @@ export class OrderAdminComponent implements OnInit {
           cancelButton.onmouseout = () => {
             cancelButton.style.backgroundColor = '#fff'; // Color normal
             cancelButton.style.color = '#dc3545';
+          };
+        }
+      },
+    });
+  }
+  showConfirmDeletePopup(title: string, text: string) {
+    return Swal.fire({
+      icon: 'warning',
+      title,
+      text,
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Salir',
+      buttonsStyling: false, // Desactivar estilos predeterminados de SweetAlert2
+      didOpen: () => {
+        // Aplicar estilos directamente
+        const confirmButton = Swal.getConfirmButton();
+        const cancelButton = Swal.getCancelButton();
+
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#fff';
+          confirmButton.style.color = '#dc3545';
+          confirmButton.style.padding = '10px 20px';
+          confirmButton.style.fontWeight = 'bold';
+          confirmButton.style.border = 'none';
+          confirmButton.style.border = '2px solid #dc3545';
+          confirmButton.style.borderRadius = '5px';
+          confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+          confirmButton.style.marginRight = '10px'; // Agregar transición
+
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#dc3545'; // Color en hover
+            confirmButton.style.color = '#fff';
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#fff'; // Color normal
+            confirmButton.style.color = '#dc3545';
+          };
+        }
+
+        if (cancelButton) {
+          cancelButton.style.backgroundColor = '#343a40';
+          cancelButton.style.color = '#fff';
+          cancelButton.style.padding = '10px 20px';
+          cancelButton.style.fontWeight = 'bold';
+          cancelButton.style.border = 'none';
+          cancelButton.style.border = '2px solid #343a40';
+          cancelButton.style.borderRadius = '5px';
+          cancelButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+
+          cancelButton.onmouseover = () => {
+            cancelButton.style.backgroundColor = '#24272b'; // Color en hover
+          };
+          cancelButton.onmouseout = () => {
+            cancelButton.style.backgroundColor = '#343a40'; // Color normal
           };
         }
       },

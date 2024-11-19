@@ -172,12 +172,17 @@ a {
   }
 }
 .elemento-nav {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: inherit;
   padding: 12px 10px;
   transition: all 0.15s ease-in-out;
   color: #343a40;
+}
+@media (min-width: 768px) {
+  .elemento-nav {
+    font-size: 18px;
+  }
 }
 .elemento-nav:hover {
   background-color: #dfdfdf;
@@ -219,7 +224,6 @@ a {
 .toggle-menu {
   all: unset;
   padding: 0 4px;
-  font-size: 16px;
   margin-left: 10px;
   color: #343a40;
 }
