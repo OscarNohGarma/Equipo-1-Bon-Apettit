@@ -29,11 +29,23 @@ export class AdminHeaderComponent implements OnInit {
     this.currentRol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
     this.currentId = this.adminAuthService.getId(); // Obtener el nombre del usuario
     this.rol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
+
     if (typeof window !== 'undefined' && localStorage) {
       const savedCategory = localStorage.getItem('selectedCategory');
       if (savedCategory) {
         this.selectedCategory = savedCategory; // Restaurar la categoría seleccionada
       }
+    }
+    switch (this.rol) {
+      case 'DUEÑO':
+        this.selectedCategory = 'Reporte';
+        break;
+      case 'ADMINISTRADOR':
+        this.selectedCategory = 'Menú';
+        break;
+
+      default:
+        break;
     }
   }
 

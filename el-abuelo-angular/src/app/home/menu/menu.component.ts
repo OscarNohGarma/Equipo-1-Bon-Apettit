@@ -40,7 +40,6 @@ export class MenuComponent implements OnInit {
     this.productService.getAll().subscribe((data) => {
       this.menuItems = data;
     });
-    console.log(this.menuItems);
   }
 
   get filteredProducts(): MenuProduct[] {

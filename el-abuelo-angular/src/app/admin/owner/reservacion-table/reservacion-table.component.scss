@@ -11,11 +11,11 @@ h1 {
 
 h2 {
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 22px;
 }
 @media (min-width: 992px) {
   h2 {
-    font-size: 26px;
+    font-size: 24px;
   }
 }
 
@@ -24,7 +24,7 @@ h3 {
 }
 
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -32,11 +32,16 @@ h3 {
 }
 .subtitulo {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: black;
   margin-bottom: 50px;
+}
+@media (min-width: 768px) {
+  .subtitulo {
+    font-size: 18px;
+  }
 }
 
 .menu {
@@ -53,7 +58,7 @@ h3 {
   border: 1px solid #343a40;
   color: #343a40;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
@@ -427,6 +432,7 @@ h3 {
   .stock-filter {
     width: 100%; /* Ajustar al ancho completo */
     margin-bottom: 10px; /* Añadir espacio entre los filtros */
+    font-size: 14px;
   }
 }
 .name {
@@ -442,19 +448,21 @@ h3 {
   }
 }
 
-
-
-
 /*Reservaciones*/
 .enc {
   width: 100%;
+  margin-bottom: 10px;
 }
-
+@media (min-width: 768px) {
+  .enc {
+    margin-bottom: 0;
+  }
+}
 .box-details {
   position: relative;
 }
 
-.reservaciones{
+.reservaciones {
   position: absolute;
   padding: 15px 25px;
   margin: 0 auto 10px;
@@ -472,8 +480,8 @@ h3 {
   transition: max-height 1s ease, opacity 0.5s ease; /* Animación de altura y opacidad */
   border-radius: 5px;
 }
-@media(min-width: 992px){
-  .reservaciones{
+@media (min-width: 992px) {
+  .reservaciones {
     left: 0%;
     width: 150%;
   }
@@ -483,7 +491,7 @@ h3 {
   opacity: 1; /* Totalmente visible */
   overflow: auto;
 }
-.reservacion{
+.reservacion {
   display: grid;
   grid-template-columns: 0.5fr 1fr 4fr;
   gap: 10px;
@@ -491,46 +499,46 @@ h3 {
   align-items: center;
   padding: 10px 0;
 }
-.reservacion.no-status{
+.reservacion.no-status {
   grid-template-columns: 1fr 4fr;
 }
-.reservacion p{
+.reservacion p {
   margin-bottom: 0;
 }
-.vin{
+.vin {
   font-weight: 800;
   font-size: 20px;
 }
-.nombre-reservacion{
+.nombre-reservacion {
   text-align: start;
 }
 .precio {
   font-weight: 600;
 }
-.div-total{
+.div-total {
   display: grid;
   width: 100%;
   grid-template-columns: 3fr 2fr;
   margin-top: 10px;
   align-items: center;
 }
-@media (min-width:992px){
-  .div-total{
+@media (min-width: 992px) {
+  .div-total {
     margin-top: 0;
   }
 }
-.total{
+.total {
   font-size: 20px;
   margin-bottom: 20px;
   padding-top: 10px;
   border-top: 1px solid rgb(52, 58, 64, 0.3);
 }
-@media (min-width:992px){
-  .total{
+@media (min-width: 992px) {
+  .total {
     margin-bottom: 0;
   }
 }
-.total span{
+.total span {
   font-weight: 800;
   font-size: 22px;
 }
@@ -541,10 +549,14 @@ h3 {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  font-size: 14px;
+  margin-top: 10px;
 }
 @media (min-width: 992px) {
   .fecha {
     margin-bottom: 0;
+    margin-top: 0;
+    font-size: 16px;
   }
 }
 .fecha p {
@@ -553,14 +565,14 @@ h3 {
 
 //Estados de la reservacion
 
-.reservation-status{
+.reservation-status {
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 20px;
 }
 
-.circle{
+.circle {
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -569,7 +581,7 @@ h3 {
   transition: all 0.1s ease-in-out, transform 0.1s ease-in-out;
   border: 2px solid rgb(52, 58, 64, 0.5);
 }
-.circle.current-select{
+.circle.current-select {
   transform: scale(1.2);
 }
 .circle:nth-child(1).selected {
@@ -589,41 +601,43 @@ h3 {
   background-color: #ff4d4d; /* Rojo para cancelado */
 }
 
-.status{
+.status {
   margin-top: 15px;
   font-weight: 600;
   color: #343a40;
+  font-size: 14px;
 }
-@media (min-width:992px){
-  .status{
+@media (min-width: 992px) {
+  .status {
     margin-top: 10px;
+    font-size: 16px;
   }
 }
-.confirmada{
+.confirmada {
   color: #267e09;
   font-weight: 700;
   opacity: 0;
   transition: all 0.1s ease-in-out;
 }
-.confirmada.show{
+.confirmada.show {
   opacity: 1;
 }
-.canceled{
+.canceled {
   color: #000000;
   font-weight: 700;
   opacity: 0;
   transition: all 0.1s ease-in-out;
 }
-.canceled.show{
+.canceled.show {
   opacity: 1;
 }
-.liberado{
-  color: rgb(64, 77, 145);;
+.liberado {
+  color: rgb(64, 77, 145);
   font-weight: 700;
   opacity: 0;
   transition: all 0.1s ease-in-out;
 }
-.liberado.show{
+.liberado.show {
   opacity: 1;
 }
 
@@ -632,7 +646,6 @@ h3 {
   opacity: 0.5; /* Cambia la opacidad para indicar que está deshabilitado */
   cursor: not-allowed; /* Muestra el cursor de "no permitido" */
 }
-
 
 .order-status.no-status {
   display: none;
@@ -643,9 +656,6 @@ h3 {
 .sta.no-status {
   display: none;
 }
-
-
-
 
 //Button
 
@@ -659,7 +669,7 @@ h3 {
   background-color: #343a40;
   color: white;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   border-radius: 5px;
@@ -700,7 +710,7 @@ h3 {
   background-color: #343a40;
   color: white;
 }
-.group{
+.group {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;

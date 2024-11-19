@@ -3,7 +3,7 @@
 }
 
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -13,12 +13,17 @@
 
 .subtitulo {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: #343a40;
   margin-bottom: 50px;
   margin-top: 1.6rem;
+}
+@media (min-width: 768px) {
+  .subtitulo {
+    font-size: 18px;
+  }
 }
 
 .ventas {
@@ -27,6 +32,12 @@
 
 .tabla {
   width: 100%;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .tabla {
+    font-size: 16px;
+  }
 }
 .tabla thead {
   background-color: #343a40;
@@ -36,4 +47,36 @@
 .tabla th {
   border: 1px solid #343a40;
   text-align: center;
+}
+p {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  p {
+    font-size: 16px;
+  }
+}
+//BOTÓN REGRESAR
+.head-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.btn-back {
+  width: 30px;
+  height: 30px;
+  opacity: 85%;
+  transition: all 0.1s ease;
+}
+@media (min-width: 768px) {
+  .btn-back {
+    width: 35px;
+    height: 35px;
+  }
+}
+.btn-back:hover {
+  background-color: #b9bfc0;
+  border-radius: 50%;
+  cursor: pointer;
 }

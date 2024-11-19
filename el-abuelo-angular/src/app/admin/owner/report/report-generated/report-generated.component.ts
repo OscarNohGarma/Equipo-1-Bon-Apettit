@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { OrderMenu } from '../../../../core/models/orderMenu';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
 interface CantidadPorProducto {
   nombre: string;
@@ -12,7 +12,7 @@ declare const history: any;
 @Component({
   selector: 'app-report-generated',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './report-generated.component.html',
   styleUrl: './report-generated.component.scss',
 })
@@ -42,8 +42,8 @@ export class ReportGeneratedComponent {
     const oneMonthAgo = new Date(today);
     oneMonthAgo.setMonth(today.getMonth() - 1);
 
-    console.log(oneWeekAgo);
-    console.log(oneMonthAgo);
+    // console.log(oneWeekAgo);
+    // console.log(oneMonthAgo);
 
     this.dateToday = `${
       Number(today.getDate()) < 10 ? '0' : ''
@@ -102,10 +102,5 @@ export class ReportGeneratedComponent {
         }
       });
     });
-    console.log(this.cantidadPorProducto);
-    console.log(this.total);
-    console.log(this.nOrdenes);
-    console.log(this.entregasLocal);
-    console.log(this.entregasDomicilio);
   }
 }

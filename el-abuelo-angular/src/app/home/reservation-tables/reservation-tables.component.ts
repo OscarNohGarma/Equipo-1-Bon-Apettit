@@ -136,6 +136,7 @@ export class ReservationTablesComponent implements OnInit {
         title: 'Lo sentimos',
         text: 'No hay mesas disponibles para reservar en este momento.',
         icon: 'error',
+        confirmButtonText: 'Entendido',
         didOpen: () => {
           const confirmButton = Swal.getConfirmButton();
           if (confirmButton) {
@@ -705,6 +706,7 @@ export class ReservationTablesComponent implements OnInit {
         title: 'Lo sentimos',
         text: `No hay mesas disponibles para ${tipo} en el ${ubicacion}.`,
         icon: 'error',
+        confirmButtonText: 'Entendido',
         didOpen: () => {
           const confirmButton = Swal.getConfirmButton();
           if (confirmButton) {
@@ -735,6 +737,7 @@ export class ReservationTablesComponent implements OnInit {
             title: '¡Reservación Exitosa!',
             text: 'Su reservación ha sido procesada correctamente.',
             icon: 'success',
+            confirmButtonText: 'Aceptar',
             didOpen: () => {
               const confirmButton = Swal.getConfirmButton();
               if (confirmButton) {
@@ -831,7 +834,7 @@ export class ReservationTablesComponent implements OnInit {
                   title: '¡Reservación Exitosa!',
                   text: 'Su reservación ha sido procesada correctamente.',
                   icon: 'success',
-                  confirmButtonText: 'Entendido',
+                  confirmButtonText: 'Aceptar',
                   didOpen: () => {
                     const confirmButton = Swal.getConfirmButton();
                     if (confirmButton) {
@@ -859,6 +862,7 @@ export class ReservationTablesComponent implements OnInit {
                   title: 'Error',
                   text: 'Ocurrió un error al procesar la reservación. Inténtelo de nuevo.',
                   icon: 'error',
+                  confirmButtonText: 'Entendido',
                   didOpen: () => {
                     const confirmButton = Swal.getConfirmButton();
                     if (confirmButton) {
@@ -880,6 +884,7 @@ export class ReservationTablesComponent implements OnInit {
               title: 'Error',
               text: 'Error al subir la imagen. Inténtelo de nuevo.',
               icon: 'error',
+              confirmButtonText: 'Entendido',
               didOpen: () => {
                 const confirmButton = Swal.getConfirmButton();
                 if (confirmButton) {
@@ -995,6 +1000,18 @@ export class ReservationTablesComponent implements OnInit {
         title: 'Fecha inválida',
         text: 'Solo se permiten fechas de miércoles a domingo.',
         confirmButtonText: 'Entendido',
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529';
+            };
+            confirmButton.onmouseout = () => {
+              confirmButton.style.backgroundColor = '#343a40';
+            };
+          }
+        },
       });
       return false;
     }
@@ -1005,6 +1022,18 @@ export class ReservationTablesComponent implements OnInit {
         title: 'Horario inválido',
         text: 'El horario debe ser de 7:00 p.m. a 12:00 a.m.',
         confirmButtonText: 'Entendido',
+        didOpen: () => {
+          const confirmButton = Swal.getConfirmButton();
+          if (confirmButton) {
+            confirmButton.style.backgroundColor = '#343a40';
+            confirmButton.onmouseover = () => {
+              confirmButton.style.backgroundColor = '#212529';
+            };
+            confirmButton.onmouseout = () => {
+              confirmButton.style.backgroundColor = '#343a40';
+            };
+          }
+        },
       });
       return false;
     }
@@ -1077,6 +1106,7 @@ export class ReservationTablesComponent implements OnInit {
                 title: 'Lo sentimos',
                 text: `No hay mesas disponibles para ${tipo} en el ${ubicacion}.`,
                 icon: 'error',
+                confirmButtonText: 'Entendido',
                 didOpen: () => {
                   const confirmButton = Swal.getConfirmButton();
                   if (confirmButton) {
@@ -1179,6 +1209,7 @@ export class ReservationTablesComponent implements OnInit {
           title: 'Error',
           text: 'Tipo de archivo no permitido. Por favor, seleccione una imagen en formato JPG, JPEG, PNG o HEIC.',
           icon: 'error',
+          confirmButtonText: 'Entendido',
           didOpen: () => {
             const confirmButton = Swal.getConfirmButton();
             if (confirmButton) {
@@ -1201,6 +1232,7 @@ export class ReservationTablesComponent implements OnInit {
           title: 'Error',
           text: 'Archivo demasiado grande. Seleccione una imagen menor a 20MB.',
           icon: 'error',
+          confirmButtonText: 'Entendido',
           didOpen: () => {
             const confirmButton = Swal.getConfirmButton();
             if (confirmButton) {

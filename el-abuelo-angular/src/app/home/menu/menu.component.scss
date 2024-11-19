@@ -4,9 +4,14 @@ main {
 }
 
 h1 {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: bold;
   margin-bottom: 10px;
+}
+@media (min-width: 768px) {
+  h1 {
+    font-size: 24px;
+  }
 }
 
 h2 {
@@ -18,20 +23,31 @@ h3 {
 }
 
 .encabezado {
-  font-size: 55px;
+  font-size: 40px;
   font-weight: bolder;
   text-align: center;
   margin-bottom: 20px;
   margin-top: 3px;
   font-weight: 900;
 }
+
+@media (min-width: 768px) {
+  .encabezado {
+    font-size: 55px;
+  }
+}
 .subtitulo {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: black;
   margin-bottom: 50px;
+}
+@media (min-width: 768px) {
+  .subtitulo {
+    font-size: 18px;
+  }
 }
 
 .menu {
@@ -53,7 +69,7 @@ h3 {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
-  font-size: 18px;
+  font-size: 14px;
 }
 .button:hover {
   background-color: #212529;
@@ -110,7 +126,7 @@ h3 {
 
 .box h1 {
   font-weight: 800;
-  font-size: 30px;
+  font-size: 24px;
 }
 @media (min-width: 768px) {
   .box h1 {
@@ -134,13 +150,13 @@ h3 {
   }
 }
 .precio {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 700;
   color: #343a40;
 }
 @media (min-width: 768px) {
   .precio {
-    font-size: 25px;
+    font-size: 24px;
   }
 }
 .grid {
@@ -178,7 +194,7 @@ h3 {
 
 .selected-category {
   display: inline-block;
-  font-size: 18px;
+  font-size: 14px;
   font-weight: 300;
   color: #343a40;
   // background-color: rgba(255, 255, 255, 0.3);
@@ -213,6 +229,7 @@ h3 {
   border-radius: 5px;
   z-index: 1000;
   margin-top: 10px;
+  font-size: 14px;
 }
 
 .submenu-mobile.show {
@@ -305,7 +322,7 @@ h3 {
 }
 
 .sin-stock {
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 10px;
 }
 

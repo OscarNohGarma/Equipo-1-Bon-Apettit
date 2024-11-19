@@ -94,8 +94,13 @@ p {
 }
 
 h2 {
-  font-size: 30px;
+  font-size: 24px;
   text-align: center;
+}
+@media (min-width: 768px) {
+  h2 {
+    font-size: 30px;
+  }
 }
 .producto {
   display: flex;
@@ -130,12 +135,16 @@ h2 {
 
 .pago {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   margin-top: 20px;
 }
 .pago p span {
   font-weight: 700;
-  font-size: 20px;
+}
+@media (min-width: 768px) {
+  .pago {
+    font-size: 18px;
+  }
 }
 .button {
   width: 100%;
@@ -146,7 +155,7 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
-  font-size: 18px;
+  font-size: 14px;
 }
 .button:hover {
   background-color: #212529;
@@ -160,18 +169,28 @@ h2 {
 }
 
 .nombre {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 800;
+}
+@media (min-width: 768px) {
+  .nombre {
+    font-size: 20px;
+  }
 }
 
 .subtotal {
   font-weight: 800;
   margin: 0;
   color: #343a40;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .subtotal {
+    font-size: 18px;
+  }
 }
 
 .subtotal span {
-  font-size: 18px;
   font-weight: 600;
 }
 
@@ -205,7 +224,7 @@ h2 {
 
   // width: 100px;
   border: 1px solid rgb(52, 58, 64, 0.2);
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   margin-bottom: 10px;
   background-color: #f1f1f1;
@@ -215,6 +234,11 @@ h2 {
   width: 120px;
   border-radius: 5px;
   overflow: hidden;
+}
+@media (min-width: 768px) {
+  .cantidad {
+    font-size: 20px;
+  }
 }
 
 .inc,
@@ -232,9 +256,14 @@ h2 {
 }
 
 .precio {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 700;
   color: #343a40;
+}
+@media (min-width: 768px) {
+  .precio {
+    font-size: 20px;
+  }
 }
 
 .relative-box {
@@ -307,21 +336,28 @@ h2 {
   transition: height 0.2s ease-in-out;
 }
 .modal-content h3 {
-  font-size: 3rem;
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+.modal-content p {
+  font-size: 16px;
   margin-bottom: 20px;
 }
 @media (min-width: 768px) {
   .modal-content h3 {
     font-size: 2.5rem;
   }
+  .modal-content p {
+    font-size: 18px;
+  }
 }
 
 .modal-content {
-  font-size: 20px;
+  font-size: 18px;
 }
 @media (min-width: 768px) {
   .modal-content {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 
@@ -343,14 +379,11 @@ h2 {
 
 .button.confirm {
   width: auto;
-  font-size: 20px;
 }
 
 .button.cancel {
   width: auto;
-
   background-color: #fff;
-  font-size: 20px;
   color: #c71527;
   border: 1px solid #c71527;
 }
@@ -385,13 +418,18 @@ h2 {
 .delivery-options label {
   display: flex;
   align-items: center;
-  font-size: 18px;
+  font-size: 14px;
   color: #343a40;
   padding: 8px 15px;
   border: 1px solid #ccc;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease, color 0.3s ease;
+}
+@media (min-width: 768px) {
+  .delivery-options label {
+    font-size: 16px;
+  }
 }
 
 /* Oculta el radio real */
@@ -426,10 +464,12 @@ h2 {
 .error-message {
   color: red;
   margin-top: 5px;
-}
-
-.error-message {
-  color: red;
   margin-bottom: 10px;
   text-align: center;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .error-message {
+    font-size: 18px;
+  }
 }

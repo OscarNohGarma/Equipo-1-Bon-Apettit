@@ -1,6 +1,8 @@
 <div id="page" class="site">
-  <h2 class="encabezado">Reservar una mesa</h2>
-  <h4 class="subtitulo">Completa el formulario con los datos solicitantes</h4>
+  <div class="enc">
+    <h2 class="encabezado">Reservar una mesa</h2>
+    <h4 class="subtitulo">Completa el formulario con los datos solicitantes</h4>
+  </div>
   <div class="container">
     <div class="form-box">
       <div class="progress2">
@@ -10,26 +12,26 @@
         <ul class="progress2-steps">
           <li class="step active">
             <span>1</span>
-            <p>Personal<br><span>Tu información</span></p>
+            <p>Personal<br><span>Información personal</span></p>
           </li>
           <li class="step">
             <span>2</span>
-            <p>Reservar<br><span>Reservación Mesa</span></p>
+            <p>Datos<br><span>Datos de reservación</span></p>
           </li>
           <li class="step">
             <span>3</span>
-            <p>Pagos<br><span>Metodos De Pago</span></p>
+            <p>Pago<br><span>Método de pago</span></p>
           </li>
           <li class="step">
             <span>4</span>
-            <p>¡Listo!<br><span>Reservación Lista</span></p>
+            <p>¡Listo!<br><span>Reservación lista</span></p>
           </li>
         </ul>
       </div>
       <form (ngSubmit)="reservarMesa()" #reservationForm="ngForm">
         <div class="form-one form-step active">
           <div class="bg-svg"></div>
-          <h2>Tu información</h2>
+          <h2>Información personal</h2>
           <p style="color: black;">Complete todos los campos con la información que se le solicite.</p>
           <div>
             <label>Nombres</label>
@@ -54,7 +56,7 @@
         </div>
         <div class="form-two form-step">
           <div class="bg-svg"></div>
-          <h2> Datos Reservación Mesa</h2>
+          <h2> Datos de reservación</h2>
           <p class="text">Complete todos los campos con la información que se solicite.</p>
 
           <div>
@@ -191,22 +193,22 @@
 
         <div class="form-three form-step">
           <div class="bg-svg"></div>
-          <h2>Metodos De Pagos</h2>
+          <h2>Método de pago</h2>
           <div>
-            <label>Mesas Reservadas: </label>
+            <label>Mesas reservadas: </label>
             <input type="text" [value]="cantidadMesasReservadas" readonly>
           </div>
           <div>
-            <label>Total A Pagar Por La Reservación: </label>
+            <label>Total a pagar: </label>
             <input type="text" [ngModel]="reservation.total" name="total" readonly>
           </div>
           <p class="text">A continuación, realice el pago por:</p>
 
           <div>
-            <label for="cuentaBancaria">Tipo Banco:</label>
+            <label for="cuentaBancaria">Banco:</label>
             <input type="text" id="TipoBancaria" [(ngModel)]="reservation.tipo_banco" name="tipo_banco"
               [value]="TipoBancaria" required readonly>
-            <label style="margin-top: 0.5rem;" for="cuentaBancaria">Numero De Cuenta:</label>
+            <label style="margin-top: 0.5rem;" for="cuentaBancaria">Numero de cuenta:</label>
             <input type="text" id="cuentaBancaria" [(ngModel)]="reservation.numero_cuenta" name="numero_cuenta"
               [value]="cuentaBancaria" required readonly>
           </div>
@@ -215,7 +217,7 @@
             <p class="text">Si ya ha realizado el pago de la reservación, suba el comprobante (Baucher) del pago para
               que lo comprobemos en sistema.</p>
             <div class="cont-imagen">
-              <label class="submit-button" for="file-upload">Subir Comprobante De Pago</label>
+              <label class="submit-button" for="file-upload">Subir comprobante de pago</label>
               <input class="input2" type="file" id="file-upload" #fileUpload (change)="handleFileUpload($event)"
                 accept="image/jpeg,image/jpg,image/png,image/heic">
               <!-- Contenedor para previsualización de la imagen -->
@@ -240,7 +242,7 @@
         <div *ngIf="!showReservarOtraMesa" class="btn-group">
           <button type="button" class="btn-prev" #prevButton disabled>Regresar</button>
           <button type="button" class="btn-next" #nextButton>Siguiente</button>
-          <button type="button" class="btn-submit" (click)="reservarMesa()">Reservar Mesa</button>
+          <button type="button" class="btn-submit" (click)="reservarMesa()">Reservar mesa</button>
         </div>
 
         <!-- Agrega este botón para reservar otra mesa -->

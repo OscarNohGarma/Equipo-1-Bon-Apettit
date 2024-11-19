@@ -49,12 +49,12 @@
                     placeholder="Crea una contraseña" required />
                 <div *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.invalid"
                     class="error-message">
-                    <small *ngIf="registerForm.get('password')?.errors?.['required']">
+                    <p *ngIf="registerForm.get('password')?.errors?.['required']">
                         La contraseña es requerida
-                    </small>
-                    <small *ngIf="registerForm.get('password')?.errors?.['minlength']">
+                    </p>
+                    <p *ngIf="registerForm.get('password')?.errors?.['minlength']">
                         La contraseña debe tener al menos 10 caracteres.
-                    </small>
+                    </p>
                 </div>
             </div>
 

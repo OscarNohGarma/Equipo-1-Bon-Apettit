@@ -1,5 +1,5 @@
 <div class="main-login-container">
-    <h2>Iniciar Sesión</h2>
+    <h2>Iniciar sesión</h2>
     <p class="subtitle">Inicia sesión para acceder a las opciones de la página.</p>
     <div class="login-container">
         <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
@@ -28,7 +28,7 @@
             </div>
             <app-spinner *ngIf="loading" />
 
-            <button type="submit" class="btn-login">Iniciar Sesión</button>
+            <button type="submit" class="btn-login">Iniciar sesión</button>
         </form>
     </div>
     <p class="question">No tienes una cuenta? <span [routerLink]="['/registro']"

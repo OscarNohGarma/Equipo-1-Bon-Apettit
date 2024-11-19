@@ -2,7 +2,7 @@
   margin-bottom: 50px;
 }
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -11,7 +11,7 @@
 }
 h2 {
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 22px;
 }
 @media (min-width: 992px) {
   h2 {
@@ -20,18 +20,37 @@ h2 {
 }
 .subtitulo {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: black;
   margin-bottom: 50px;
   margin-top: 1.6rem;
 }
+@media (min-width: 992px) {
+  .subtitulo {
+    font-size: 18px;
+  }
+}
 .enc {
   width: 100%;
+  margin-bottom: 20px;
+}
+@media (min-width: 992px) {
+  .enc {
+    margin-bottom: 0;
+  }
 }
 .enc h2 {
   margin-top: 0;
+}
+.enc p {
+  font-size: 14px;
+}
+@media (min-width: 992px) {
+  .enc p {
+    font-size: 16px;
+  }
 }
 // @media (min-width: 992px) {
 //   .subtitulo {
@@ -49,12 +68,12 @@ h2 {
   background-color: #343a40;
   color: white;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   border-radius: 5px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .button {
     font-size: 15px;
   }
@@ -116,7 +135,7 @@ p {
   font-weight: 600;
   font-size: 30px;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .box h1 {
     font-size: 25px;
   }
@@ -188,6 +207,12 @@ p {
 }
 .nombre-producto {
   text-align: start;
+  font-size: 14px;
+}
+@media (min-width: 992px) {
+  .nombre-producto {
+    font-size: 16px;
+  }
 }
 .precio {
   font-weight: 600;
@@ -205,19 +230,19 @@ p {
   }
 }
 .total {
-  font-size: 20px;
+  font-size: 16px;
   margin-bottom: 20px;
   padding-top: 10px;
 }
 
 @media (min-width: 992px) {
   .total {
+    font-size: 18px;
     margin-bottom: 0;
   }
 }
 .total span {
   font-weight: 800;
-  font-size: 22px;
 }
 .fecha {
   width: 100%;
@@ -227,6 +252,7 @@ p {
   justify-content: center;
   flex-direction: column;
   text-align: end;
+  font-size: 14px;
 }
 @media (min-width: 992px) {
   .fecha {
@@ -234,6 +260,7 @@ p {
     position: absolute;
     bottom: 5px;
     left: -20px;
+    font-size: 16px;
   }
 }
 .fecha p {

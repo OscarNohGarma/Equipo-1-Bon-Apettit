@@ -1,6 +1,10 @@
 <div class="header">
-    <button class="back-button" [routerLink]="['/admin/menu']"></button>
-    <h2 class="encabezado">Editar Producto</h2>
+
+    <div class="head-back">
+        <!-- <button class="back-button" [routerLink]="['/admin/menu']"></button> -->
+        <img src="../../../../../assets/back-button.png" alt="regresar" class="btn-back" [routerLink]="['/admin/menu']">
+        <h2 class="encabezado">Editar</h2>
+    </div>
     <button class="dis"></button>
 </div>
 <form [formGroup]="productForm" (ngSubmit)="saveProduct()" class="edit-product-form">
@@ -12,7 +16,7 @@
         </label>
     </div>
     <div class="form-group">
-        <label for="namee">Nombre del Producto:</label>
+        <label for="namee">Nombre del producto:</label>
         <input type="text" id="namee" formControlName="namee" class="form-control"
             placeholder="Ingresa el nombre del producto" required />
         <div *ngIf="productForm.get('namee')?.touched && productForm.get('namee')?.invalid" class="error-message">
@@ -31,7 +35,7 @@
     </div>
 
     <div class="form-group">
-        <label for="image">Imagen del Producto:</label>
+        <label for="image">Imagen del producto:</label>
         <div class="cont-imagen">
             <img *ngIf="imagePreviewUrl" [src]="imagePreviewUrl" alt="Vista previa"
                 style="max-width: 100%; margin-top: 10px;">
@@ -59,5 +63,5 @@
         Selecciona una categoría.
     </div>
     <app-spinner *ngIf="loading" />
-    <button type="submit" class="button ">ACTUALIZAR</button>
+    <button type="submit" class="button ">GUARDAR</button>
 </form>

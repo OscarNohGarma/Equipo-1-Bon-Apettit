@@ -7,7 +7,7 @@
   // position: relative;
 }
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -53,24 +53,23 @@
   cursor: default;
 }
 
-
-.view-reservation-form{
+.view-reservation-form {
   max-width: 500px;
   margin: auto;
   padding: 20px;
   border: 1px solid #ccc;
-  border-radius: 0 4px 10px rgba(0,0,0,0.1);
+  border-radius: 0 4px 10px rgba(0, 0, 0, 0.1);
   background-color: #fff;
   position: relative;
 }
 
-@media(min-width: 992px){
-  .view-reservation-form{
+@media (min-width: 992px) {
+  .view-reservation-form {
     max-width: 1100px;
     margin: auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 0 4px 10px rgba(0,0,0,0.1);
+    border-radius: 0 4px 10px rgba(0, 0, 0, 0.1);
     background-color: #fff;
     position: relative;
     display: grid;
@@ -84,25 +83,25 @@
   }
 }
 
-.view-reservation-form h2{
+.view-reservation-form h2 {
   font-size: 35px;
   text-align: center;
   margin-bottom: 20px;
   color: #343a40;
 }
-.form-group{
+.form-group {
   margin-bottom: 15px;
 }
-.form-group label{
+.form-group label {
   display: block;
   font-weight: bold;
 }
-.form-group img{
+.form-group img {
   max-width: 100%;
 }
 .form-group input,
 .form-group select {
-  text-align:left;
+  text-align: left;
 }
 
 .form-control {
@@ -117,8 +116,6 @@
   border-color: #80bdff;
   outline: none;
 }
-
-
 
 .image-preview {
   margin-top: 10px;
@@ -144,7 +141,6 @@ input[type="file"] {
   justify-content: center;
 }
 
-
 .imagen {
   width: 500px;
   height: 550px;
@@ -161,7 +157,6 @@ input[type="file"] {
     height: 100px;
   }
 }
-
 
 /* .image-modal {
   position: fixed;
@@ -203,3 +198,37 @@ input[type="file"] {
   cursor: pointer;
 }
  */
+.head-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.btn-back {
+  width: 30px;
+  height: 30px;
+  opacity: 85%;
+  transition: all 0.1s ease;
+}
+@media (min-width: 768px) {
+  .btn-back {
+    width: 35px;
+    height: 35px;
+  }
+}
+.btn-back:hover {
+  background-color: #b9bfc0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+label,
+input {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  label,
+  input {
+    font-size: 16px;
+  }
+}

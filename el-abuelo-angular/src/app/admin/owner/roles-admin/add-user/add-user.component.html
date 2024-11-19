@@ -1,7 +1,11 @@
 <div class="header">
-    <button class="back-button" [routerLink]="['/admin/roles']"></button>
-    <h2 class="encabezado">Agregar Usuario</h2>
-    <button class="dis"></button>
+    <!-- <button class="back-button" [routerLink]="['/admin/roles']"></button> -->
+    <div class="head-back">
+        <img src="../../../../../assets/back-button.png" alt="regresar" class="btn-back"
+            [routerLink]="['/admin/roles']">
+        <h2 class="encabezado">Añadir nuevo</h2>
+        <button class="dis"></button>
+    </div>
 
 </div>
 <form [formGroup]="userForm" (ngSubmit)="saveUser()" class="edit-product-form">

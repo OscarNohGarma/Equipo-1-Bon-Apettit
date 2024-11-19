@@ -6,10 +6,15 @@
 }
 .subtitle {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0 auto;
   margin-bottom: 20px;
   max-width: 400px;
+}
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 18px;
+  }
 }
 .login-container {
   width: 350px;
@@ -24,6 +29,12 @@
 h2 {
   text-align: center;
   margin-bottom: 20px;
+  font-size: 38px;
+}
+@media (min-width: 768px) {
+  h2 {
+    font-size: 55px;
+  }
 }
 
 .form-group {
@@ -45,12 +56,14 @@ h2 {
 .error-message {
   color: red;
   margin-top: 5px;
-}
-
-.error-message {
-  color: red;
   margin-bottom: 10px;
   text-align: center;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .error-message {
+    font-size: 16px;
+  }
 }
 .form-group input.ng-invalid.ng-touched,
 .form-group select.ng-invalid.ng-touched {
@@ -65,6 +78,12 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .btn-login {
+    font-size: 16px;
+  }
 }
 
 .btn-login:hover {
@@ -80,4 +99,16 @@ h2 {
 .question span:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+label,
+input,
+.question {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  label,
+  input,
+  .question {
+    font-size: 16px;
+  }
 }

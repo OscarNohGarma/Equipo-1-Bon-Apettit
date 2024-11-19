@@ -1,11 +1,13 @@
 <div class="orders container">
-    <div>
+    <div class="head-back">
+        <img src="../../../../../assets/back-button.png" alt="regresar" class="btn-back"
+            [routerLink]="['/admin/report']">
         <h1 class="encabezado">{{dateFilter=="hoy" ? "Reporte de hoy": dateFilter=="mes" ?
             "Reporte del mes" : dateFilter ==="semana" ? "Reporte de la semana" : "Reporte general"}}</h1>
-        <h2 class="subtitulo">Aquí tienes el resumen de las ventas {{dateFilter=="hoy" ? " de hoy" :
-            dateFilter=="semana"
-            ? " de la última semana" : dateFilter ==="mes" ? " del último mes" : "hasta la fecha"}} </h2>
     </div>
+    <h2 class="subtitulo">Aquí tienes el resumen de las ventas {{dateFilter=="hoy" ? " de hoy" :
+        dateFilter=="semana"
+        ? " de la última semana" : dateFilter ==="mes" ? " del último mes" : "hasta la fecha"}} </h2>
     <div>
         <p *ngIf="dateFilter === 'mes' || dateFilter ==='semana' || dateFilter==='hoy'">Fecha: {{dateFilter ==="mes" ?
             dateOneMonthAgo +" - "

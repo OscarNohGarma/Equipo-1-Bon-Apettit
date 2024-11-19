@@ -43,6 +43,11 @@
       color: #495057;
       resize: none;
     }
+    @media (min-width: 768px) {
+      textarea.form-control {
+        font-size: 16px;
+      }
+    }
 
     textarea.form-control:focus {
       border-color: #80bdff;
@@ -56,7 +61,7 @@
     padding: 10px;
     background-color: #343a40; /* Botón negro */
     color: #fff;
-    font-size: 16px;
+    font-size: 14px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -69,6 +74,19 @@
     &:disabled {
       background-color: #6c757d;
       cursor: not-allowed;
+    }
+  }
+  @media (min-width: 768px) {
+    .btn-reply {
+      font-size: 16px;
+    }
+  }
+  label {
+    font-size: 16px;
+  }
+  @media (min-width: 768px) {
+    label {
+      font-size: 18px;
     }
   }
 }

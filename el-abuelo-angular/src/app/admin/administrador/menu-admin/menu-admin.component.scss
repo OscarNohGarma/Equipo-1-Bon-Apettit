@@ -4,7 +4,6 @@ main {
 }
 
 h1 {
-  font-size: 24px;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -18,7 +17,7 @@ h3 {
 }
 
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -26,11 +25,16 @@ h3 {
 }
 .subtitulo {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: black;
   margin-bottom: 50px;
+}
+@media (min-width: 768px) {
+  .subtitulo {
+    font-size: 18px;
+  }
 }
 
 .menu {
@@ -96,12 +100,12 @@ h3 {
 
 .box h1 {
   font-weight: 800;
-  font-size: 30px;
   margin-top: 0;
+  font-size: 20px;
 }
 @media (min-width: 768px) {
   .box h1 {
-    font-size: 25px;
+    font-size: 22px;
   }
 }
 .box p {
@@ -125,13 +129,13 @@ h3 {
   }
 }
 .precio {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 700;
   color: #343a40;
 }
 @media (min-width: 992px) {
   .precio {
-    font-size: 25px;
+    font-size: 22px;
   }
 }
 .grid {
@@ -309,14 +313,14 @@ h3 {
   flex-direction: column-reverse;
 }
 .btn-delete {
-  width: 35px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
   opacity: 45%;
   transition: all 0.2s ease-in;
 }
 .btn-edit {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   opacity: 45%;
   transition: all 0.2s ease-in;
 }
@@ -357,10 +361,10 @@ h3 {
 .add-button {
   background-color: white;
   color: #343a40;
-  border: 3px solid #343a40;
+  opacity: 75%;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   font-size: 60px;
   display: flex;
   justify-content: center;
@@ -377,14 +381,19 @@ h3 {
   }
 }
 .add-button:hover {
-  background-color: #343a40;
+  background-color: #9c9c9c;
   color: white;
 }
 
 .box .stock-status {
   margin-bottom: 0;
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 600;
+}
+@media (min-width: 768px) {
+  .box .stock-status {
+    font-size: 16px;
+  }
 }
 
 .stock-status.activo {
@@ -399,7 +408,6 @@ h3 {
   display: inline-block;
   padding: 5px 10px;
   border-radius: 5px;
-  font-size: 14px;
 }
 
 /* Barra de filtros en pantallas grandes */
@@ -414,30 +422,30 @@ h3 {
 .category-filter,
 .stock-filter {
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid #c9c9c9;
   border-radius: 5px;
-  width: 30%;
+  width: 100%;
+  margin: 0 auto;
+  margin-bottom: 10px; /* Añadir espacio entre los filtros */
 }
-
+@media (min-width: 768px) {
+  .search-bar,
+  .category-filter,
+  .stock-filter {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #c9c9c9;
+    border-radius: 5px;
+    width: 30%;
+    margin-bottom: 0;
+  }
+}
 /* Estilos para pantallas pequeñas */
 @media (max-width: 768px) {
   .filter-bar {
     flex-direction: column; /* Apilar los filtros verticalmente */
   }
-
-  .search-bar,
-  .category-filter,
-  .stock-filter {
-    width: 100%; /* Ajustar al ancho completo */
-    margin-bottom: 10px; /* Añadir espacio entre los filtros */
-  }
-}
-.name {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 @media (min-width: 1280px) {
@@ -449,5 +457,17 @@ h3 {
   .name {
     width: 200px;
     padding: 0 20px;
+  }
+}
+.name {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+}
+@media (min-width: 768px) {
+  .name {
+    font-size: 18px;
   }
 }

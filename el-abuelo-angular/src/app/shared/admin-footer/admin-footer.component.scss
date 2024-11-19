@@ -7,11 +7,16 @@
   background: #202020;
   padding: 25px 0;
 }
-.copyright-text p {
+.copyright-text {
   text-align: center;
   margin: 0;
-  font-size: 14px;
+  font-size: 12px;
   color: #878787;
+}
+@media (min-width: 768px) {
+  .copyright-text {
+    font-size: 14px;
+  }
 }
 .copyright-text p a {
   color: #ff5e14;

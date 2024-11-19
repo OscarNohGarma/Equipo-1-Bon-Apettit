@@ -80,36 +80,51 @@ export class ReservacionTableComponent implements OnInit {
   }
 
   confirmReservation(reservation: ReservationTables) {
-    reservation.estados = 'Confirmada';
-    this.updateReservationStatus(reservation);
+    this.updateReservationStatus(reservation, 'Confirmada');
   }
 
   cancelReservation(reservation: ReservationTables) {
-    reservation.estados = 'Cancelado';
-
-    this.updateReservationStatus(reservation);
+    this.updateReservationStatus(reservation, 'Cancelado');
   }
 
   releaseTable(reservation: ReservationTables) {
-    reservation.estados = 'Liberado';
-
-    this.updateReservationStatus(reservation);
+    this.updateReservationStatus(reservation, 'Liberado');
   }
 
-  updateReservationStatus(reservation: ReservationTables) {
-    const updatedReservation = { ...reservation };
-    this.reservationTablesServices
-      .update(reservation.id.toString(), updatedReservation)
-      .subscribe(
-        () =>
-          Swal.fire(
-            'Actualizado',
-            'El estado de la reservación se ha actualizado.',
-            'success'
-          ),
-        (error) =>
-          Swal.fire('Error', 'No se pudo actualizar el estado.', 'error')
-      );
+  updateReservationStatus(reservation: ReservationTables, estado: string) {
+    this.showConfirmPopup(
+      `¿Deseas ${
+        estado === 'Confirmada'
+          ? 'confirmar'
+          : estado === 'Cancelado'
+          ? 'cancelar'
+          : estado === 'Liberado'
+          ? 'liberar'
+          : ''
+      } esta reservación?`,
+      ''
+    ).then((result: any) => {
+      if (result.isConfirmed) {
+        const updatedReservation = { ...reservation };
+        this.reservationTablesServices
+          .update(reservation.id.toString(), updatedReservation)
+          .subscribe(
+            () =>
+              this.showPopup(
+                'success',
+                'Actualizado',
+                'El estado de la reservación se ha actualizado.'
+              ),
+            (error) =>
+              this.showPopup(
+                'error',
+                'Ocurrió un error',
+                'No se pudo actualizar el estado.'
+              )
+          );
+        reservation.estados = estado;
+      }
+    });
   }
 
   isFinalState(estado: string): boolean {
@@ -166,7 +181,7 @@ export class ReservacionTableComponent implements OnInit {
   }
 
   deleteReservation(id: number, image: string) {
-    this.showConfirmPopup(
+    this.showConfirmDeletePopup(
       '¿Deseas Eliminar Esta Reservación?',
       'Esta Acción Es Irreversible, La Reservación Se Eliminará Permanentemente.'
     ).then((result: any) => {
@@ -230,7 +245,7 @@ export class ReservacionTableComponent implements OnInit {
     });
   }
   //CONFIRM POPUP
-  showConfirmPopup(title: string, text: string) {
+  showConfirmDeletePopup(title: string, text: string) {
     return Swal.fire({
       icon: 'warning',
       title,
@@ -280,6 +295,62 @@ export class ReservacionTableComponent implements OnInit {
           };
           cancelButton.onmouseout = () => {
             cancelButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
+  }
+  showConfirmPopup(title: string, text: string) {
+    return Swal.fire({
+      icon: 'warning',
+      title,
+      text,
+      showCancelButton: true,
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+      buttonsStyling: false, // Desactivar estilos predeterminados de SweetAlert2
+      didOpen: () => {
+        // Aplicar estilos directamente
+        const confirmButton = Swal.getConfirmButton();
+        const cancelButton = Swal.getCancelButton();
+
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.style.color = '#fff';
+          confirmButton.style.padding = '10px 20px';
+          confirmButton.style.fontWeight = 'bold';
+          confirmButton.style.border = 'none';
+          confirmButton.style.border = '2px solid #343a40';
+          confirmButton.style.borderRadius = '5px';
+          confirmButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+          confirmButton.style.marginRight = '10px'; // Agregar transición
+
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#24272b'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+
+        if (cancelButton) {
+          cancelButton.style.backgroundColor = '#fff';
+          cancelButton.style.color = '#dc3545';
+          cancelButton.style.padding = '10px 20px';
+          cancelButton.style.fontWeight = 'bold';
+          cancelButton.style.border = 'none';
+          cancelButton.style.border = '2px solid #dc3545';
+          cancelButton.style.borderRadius = '5px';
+          cancelButton.style.transition = 'background-color 0.3s ease'; // Agregar transición
+          cancelButton.style.marginRight = '10px'; // Agregar transición
+
+          cancelButton.onmouseover = () => {
+            cancelButton.style.backgroundColor = '#dc3545'; // Color en hover
+            cancelButton.style.color = '#fff';
+          };
+          cancelButton.onmouseout = () => {
+            cancelButton.style.backgroundColor = '#fff'; // Color normal
+            cancelButton.style.color = '#dc3545';
           };
         }
       },

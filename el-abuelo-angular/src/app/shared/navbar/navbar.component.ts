@@ -40,12 +40,16 @@ export class NavbarComponent implements OnInit {
     });
   }
   onEdit() {
+    this.router.navigate(['/profile/edit']).then(() => {});
+  }
+  onEditMobile() {
     this.router.navigate(['/profile/edit']).then(() => {
       // Forzar la recarga de la página después de la navegación
-      window.location.reload();
+
+      window.scroll(0, 700);
     });
   }
-  onLoginMobile() {
+  scrollOnMobile() {
     window.scroll(0, 700);
   }
   onLogin() {

@@ -1,5 +1,5 @@
 .encabezado {
-  font-size: 55px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-bottom: 20px;
@@ -7,23 +7,36 @@
   font-weight: 900;
   margin-bottom: 20px;
 }
-
+@media (min-width: 768px) {
+  .encabezado {
+    font-size: 55px;
+  }
+}
 .subtitulo {
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 20px;
+}
+@media (min-width: 768px) {
+  .subtitulo {
+    font-size: 22px;
+  }
 }
 
 .subtitulo-encabezado {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: #343a40;
   margin-bottom: 50px;
   margin-top: 2.5rem;
 }
-
+@media (min-width: 768px) {
+  .subtitulo-encabezado {
+    font-size: 20px;
+  }
+}
 .enc {
   width: 100%;
   border-bottom: 1px solid rgb(52, 58, 64, 0.2);
@@ -43,13 +56,13 @@
   border: 1px solid #343a40;
   color: #343a40;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 16px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
 }
 @media (min-width: 768px) {
   .button {
-    font-size: 15px;
+    font-size: 18px;
   }
 }
 
@@ -90,7 +103,6 @@
 }
 @media (min-width: 762px) {
   .grid.one-col {
-    margin: 0 100px;
   }
 }
 @media (min-width: 992px) {
@@ -130,7 +142,7 @@
 
 .reservaciones {
   width: 100%;
-  font-size: 18px;
+  font-size: 16px;
   margin: 10px 0;
   display: flex;
   flex-direction: column;
@@ -146,7 +158,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   /* grid-template-columns: 2fr 2fr; */
-  gap: 100px;
+
   align-items: center;
   padding: 10px 0;
   align-content: center;
@@ -160,14 +172,26 @@
 
 .vin {
   font-weight: 800;
-  font-size: 20px;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .vin {
+    font-size: 18px;
+  }
 }
 .vin2 {
   font-weight: 800;
   font-size: 15px;
 }
-.nombre-reservacion {
+.vin-rel {
   text-align: start;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .vin-rel {
+    text-align: start;
+    font-size: 16px;
+  }
 }
 .precio {
   font-weight: 600;
@@ -181,11 +205,15 @@
 }
 .total {
   margin-bottom: 0;
-  font-size: 20px;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .total {
+    font-size: 18px;
+  }
 }
 .total span {
   font-weight: 800;
-  font-size: 22px;
 }
 .fecha {
   width: 100%;
@@ -199,7 +227,12 @@
   text-align: center;
   margin-top: 20px;
   margin-bottom: 0;
-  font-size: 18px;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .estado {
+    font-size: 18px;
+  }
 }
 .estado span {
   font-weight: 600;
@@ -232,22 +265,17 @@
 .status-filter,
 .completed-filter {
   padding: 10px;
-  font-size: 16px;
+  font-size: 14px;
   border: 1px solid #c9c9c9;
   border-radius: 5px;
-  width: 30%;
+  width: 70%;
 }
 
 /* Estilos para pantallas pequeñas */
-@media (max-width: 768px) {
-  .filter-bar {
-    flex-direction: column; /* Apilar los filtros verticalmente */
-  }
-
-  .status-filter,
-  .completed-filter {
-    width: 100%; /* Ajustar al ancho completo */
-    margin-bottom: 10px; /* Añadir espacio entre los filtros */
+@media (min-width: 768px) {
+  .status-filter {
+    font-size: 16px;
+    width: 30%;
   }
 }
 

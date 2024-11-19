@@ -29,13 +29,13 @@
         <p>Total a pagar: <span>${{ total }}</span></p>
     </div>
 
-    <button (click)="confirmarPedido()" class="button add">Confirmar Pedido</button>
+    <button (click)="confirmarPedido()" class="button add">Confirmar pedido</button>
 </div>
 
 <!-- Modal -->
 <div [class.show-bg]="modalVisible" class="modal-overlay">
     <form (ngSubmit)="enviarPedido()" #sendForm="ngForm" novalidate class="modal-content">
-        <h3>Confirmar Pedido</h3>
+        <h3>Confirmar pedido</h3>
         <p>Selecciona la opción de entrega:</p>
 
         <!-- Selección del tipo de entrega -->

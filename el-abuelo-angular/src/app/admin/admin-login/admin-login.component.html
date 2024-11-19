@@ -1,6 +1,8 @@
 <div class="main-login-container">
-    <h2>Iniciar Sesión</h2>
-    <p class="subtitle">Inicia sesión para acceder al panel de administrador.</p>
+    <div class="enc">
+        <h2>Iniciar sesión</h2>
+        <p class="subtitle">Inicia sesión para acceder al panel de administrador.</p>
+    </div>
     <div class="login-container">
         <form (ngSubmit)="login()" #loginForm="ngForm" novalidate>
             <div class="form-group"
@@ -28,7 +30,7 @@
             </div>
             <app-spinner *ngIf="loading" />
 
-            <button type="submit" class="btn-login">Iniciar Sesión</button>
+            <button type="submit" class="btn-login">Iniciar sesión</button>
         </form>
     </div>
 </div>

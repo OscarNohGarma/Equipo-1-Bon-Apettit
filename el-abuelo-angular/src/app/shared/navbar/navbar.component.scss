@@ -39,12 +39,17 @@ img {
 .nombre-sitio {
   color: white;
   text-align: center;
-  font-size: 50px;
+  font-size: 44px;
 }
 
 @media (min-width: 768px) {
   .nombre-sitio {
-    font-size: 76px;
+    font-size: 56px;
+  }
+}
+@media (min-width: 992px) {
+  .nombre-sitio {
+    font-size: 78px;
   }
 }
 
@@ -75,8 +80,9 @@ img {
   }
 }
 .slogan h1 {
-  font-size: 30px;
+  font-size: 24px;
   margin: 0;
+  margin-bottom: 10px;
 }
 @media (min-width: 768px) {
   .slogan h1 {
@@ -86,7 +92,7 @@ img {
     text-align: center;
   }
 }
-@media (min-width: 1280px) {
+@media (min-width: 992px) {
   .slogan h1 {
     font-size: 3rem;
   }
@@ -98,6 +104,11 @@ img {
 .slogan p {
   margin: 0;
   line-height: 1;
+}
+@media (min-width: 768px) {
+  .slogan p {
+    font-size: 18px;
+  }
 }
 
 // NAVEGACION
@@ -142,7 +153,7 @@ img {
 }
 
 .nav-phone a {
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .navegacion {
@@ -169,7 +180,7 @@ img {
   }
 }
 .login {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   margin-bottom: 0;
   padding: 5px;
@@ -182,6 +193,7 @@ img {
 @media (min-width: 768px) {
   .login {
     position: absolute;
+    font-size: 18px;
   }
 }
 .login:hover {
@@ -193,7 +205,7 @@ img {
   position: relative;
 }
 .user {
-  font-size: 18px;
+  font-size: 16px;
   color: white;
   margin-bottom: 0;
   padding: 5px;
@@ -201,6 +213,11 @@ img {
   font-weight: 600;
   // position: absolute;
   right: 0;
+}
+@media (min-width: 768px) {
+  .user {
+    font-size: 18px;
+  }
 }
 
 .div-cont-user {
@@ -317,4 +334,7 @@ img {
 .down:hover {
   background-color: rgb(255, 255, 255, 0.2);
   cursor: pointer;
+}
+.user-menu.phone {
+  font-size: 14px;
 }

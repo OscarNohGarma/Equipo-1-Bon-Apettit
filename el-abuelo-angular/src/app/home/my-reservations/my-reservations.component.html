@@ -1,16 +1,16 @@
 <div class="container">
   <div class="header">
-    <h1 class="encabezado"> Tus Reservaciones</h1>
+    <h1 class="encabezado"> Tus reservaciones</h1>
     <h2 class="subtitulo-encabezado">¡Sigue el estado de tu reservación!</h2>
   </div>
 
   <div class="filter-bar">
     <select class="status-filter" (change)="updateStatusFilter($event)">
-      <option value="En Espera">En Espera</option>
+      <option value="En Espera">En espera</option>
       <option value="Confirmada">Confirmadas</option>
-      <option value="Cancelado">Cancelados</option>
-      <option value="Liberado">Liberados</option>
-      <option value="TODO">Todas sus reservaciones</option>
+      <option value="Cancelado">Canceladas</option>
+      <option value="Liberado">Liberadas</option>
+      <option value="TODO">Todas tus reservaciones</option>
     </select>
   </div>
 
@@ -18,44 +18,44 @@
   <div class="grid">
     <div class="box" *ngFor="let reservation of filterReservation">
       <div class="enc">
-        <p class="subtitulo">Detalles de Tu Reservación</p>
+        <p class="subtitulo">Detalles de la reservación</p>
       </div>
       <div class="reservaciones">
         <div class="reservacion">
           <p class="vin"><span>Nombre:</span></p>
-          <p class="nombre-reservacion">{{reservation.namee}}</p>
+          <p class="vin-rel">{{reservation.namee}}</p>
         </div>
         <div class="reservacion">
           <p class="vin"><span>Teléfono:</span></p>
-          <p class="nombre-reservacion">{{reservation.telefono}}</p>
+          <p class="vin-rel">{{reservation.telefono}}</p>
         </div>
         <div class="reservacion">
           <p class="vin"><span>Mesas reservadas:</span></p>
-          <p class="nombre-reservacion">{{reservation.cantidadMesasReservada}}</p>
+          <p class="vin-rel">{{reservation.cantidadMesasReservada}}</p>
         </div>
         <div class="reservacion">
-          <p class="vin"><span>Mesas Para:</span></p>
-          <p class="nombre-reservacion">{{reservation.cantidad}}</p>
+          <p class="vin"><span>Mesa para:</span></p>
+          <p class="vin-rel">{{reservation.cantidad}}</p>
         </div>
         <div class="reservacion">
           <p class="vin"><span>Ubicación de la mesa:</span></p>
-          <p class="nombre-reservacion">{{reservation.ubicacion}}</p>
+          <p class="vin-rel">{{reservation.ubicacion}}</p>
         </div>
         <div class="reservacion">
           <p class="vin"><span>Decoración:</span></p>
-          <p class="nombre-reservacion">{{reservation.tipo_decoracion}}</p>
+          <p class="vin-rel">{{reservation.tipo_decoracion}}</p>
         </div>
         <div class="reservacion">
           <p class="vin"><span>Fecha:</span></p>
-          <p class="nombre-reservacion">{{reservation.fecha}}</p>
+          <p class="vin-rel">{{reservation.fecha}}</p>
         </div>
         <div class="reservacion">
           <p class="vin"><span>Hora:</span></p>
-          <p class="nombre-reservacion">{{reservation.hora}}</p>
+          <p class="vin-rel">{{reservation.hora}}</p>
         </div>
         <div class="reservacion" *ngIf="reservation.total !== ''">
           <p class="vin"><span>Comprobante:</span></p>
-          <button class="button" (click)="openImageModal(reservation.image)">Ver Comprobante</button>
+          <button class="button" (click)="openImageModal(reservation.image)">Ver comprobante</button>
         </div>
       </div>
 

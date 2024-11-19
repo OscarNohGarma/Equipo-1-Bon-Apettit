@@ -1,8 +1,13 @@
 <div class="header">
-    <button class="back-button" [routerLink]="['/admin/roles']"></button>
-    <h2 class="encabezado" *ngIf="currentId !== userId">Editar Usuario</h2>
-    <h2 class="encabezado" *ngIf="currentId === userId">Editar tu Perfil</h2>
-    <button class="dis"></button>
+    <!-- <button class="back-button" [routerLink]="['/admin/roles']"></button>
+      -->
+    <div class="head-back">
+        <img src="../../../../../assets/back-button.png" alt="regresar" class="btn-back"
+            [routerLink]="['/admin/roles']">
+        <h2 class="encabezado" *ngIf="currentId !== userId">Editar</h2>
+        <h2 class="encabezado" *ngIf="currentId === userId">Editar</h2>
+        <button class="dis"></button>
+    </div>
 
 </div>
 <form [formGroup]="userForm" (ngSubmit)="saveUser()" class="edit-product-form">

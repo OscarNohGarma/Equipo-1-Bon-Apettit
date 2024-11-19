@@ -84,14 +84,14 @@ export class ReportComponent {
         parseInt(orderDateParts[1]) - 1, // Mes
         parseInt(orderDateParts[0]) // Día
       );
-      console.log(oneWeekAgo);
-      console.log(oneMonthAgo);
+      // console.log(oneWeekAgo);
+      // console.log(oneMonthAgo);
 
       const year = oneMonthAgo.getFullYear();
       const month = oneMonthAgo.getMonth() + 1; // Los meses empiezan desde 0
       const day = oneMonthAgo.getDate();
 
-      console.log(`${year}-${month}-${day}`);
+      // console.log(`${year}-${month}-${day}`);
 
       switch (this.dateFilter) {
         case 'hoy':
