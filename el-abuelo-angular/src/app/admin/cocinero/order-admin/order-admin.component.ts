@@ -41,6 +41,16 @@ export class OrderAdminComponent implements OnInit {
           isDetailsOpen: false, // Inicia en false para que los detalles estén ocultos al principio
         }));
     });
+    this.notificationService.listenToEvent('orderAdded', (data) => {
+      console.log('Evento recibido desde el servidor:', data);
+      // Aquí puedes mostrar una notificación o hacer lo que necesites
+      this.showNotification(data.message, data.user);
+    });
+  }
+
+  private showNotification(message: string, user: string): void {
+    this.showInfoPopup('info', 'Nueva orden', 'Se ha añadido una nueva orden');
+    this.loadOrders();
   }
 
   get filteredOrders(): OrderMenu[] {
@@ -164,7 +174,7 @@ export class OrderAdminComponent implements OnInit {
     });
   }
   //POPUP
-  showPopup(icon: 'success' | 'error', title: string, text: string) {
+  showPopup(icon: 'success' | 'error' | 'info', title: string, text: string) {
     return Swal.fire({
       icon,
       title,
@@ -290,6 +300,30 @@ export class OrderAdminComponent implements OnInit {
           };
           cancelButton.onmouseout = () => {
             cancelButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
+    });
+  }
+  showInfoPopup(
+    icon: 'success' | 'error' | 'info',
+    title: string,
+    text: string
+  ) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: icon === 'success' ? 'Aceptar' : 'Entendido',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
           };
         }
       },

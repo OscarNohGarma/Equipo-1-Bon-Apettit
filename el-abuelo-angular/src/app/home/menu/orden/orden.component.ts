@@ -8,6 +8,7 @@ import { OrderMenu } from '../../../core/models/orderMenu';
 import { OrderMenuService } from '../../../core/services/order-menu.service';
 import { AuthService } from '../../../auth/auth.service';
 import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
+import { NotificationService } from '../../../core/services/notification.service';
 declare var Swal: any;
 
 @Component({
@@ -34,7 +35,8 @@ export class OrdenComponent implements OnInit {
     public ordenService: OrderService,
     private router: Router,
     public ordenMenuService: OrderMenuService,
-    public authService: AuthService
+    public authService: AuthService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -119,11 +121,14 @@ export class OrdenComponent implements OnInit {
       tipoEntrega: this.tipoEntrega,
       ...(this.tipoEntrega === 'domicilio' && { direccion: this.direccion }),
     };
+    const us = this.currentUser;
     //ENVIAR LA ORDEN SI TODO ESTÁ CORRECTO
     this.ordenMenuService.add(newOrden).subscribe(
       (response) => {
         // Muestra el SweetAlert y espera a que el usuario confirme antes de continuar
         this.loading = false;
+
+        this.notificationService.emitEvent('addOrder', { us });
         this.showPopup(
           'success',
           '¡Pedido Exitoso!',
