@@ -1,5 +1,5 @@
 .encabezado {
-  font-size: 44px;
+  font-size: 38px;
 }
 @media (min-width: 768px) {
   .encabezado {
@@ -73,7 +73,7 @@ h1 {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 15px;
 }
 .button:hover {
@@ -89,4 +89,12 @@ h1 {
 }
 .contenido {
   text-align: center;
+}
+.text {
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .text {
+    font-size: 18px;
+  }
 }

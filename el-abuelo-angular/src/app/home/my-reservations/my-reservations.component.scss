@@ -1,5 +1,5 @@
 .encabezado {
-  font-size: 44px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-bottom: 20px;
@@ -13,7 +13,7 @@
   }
 }
 .subtitulo {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
   margin-bottom: 20px;
 }
@@ -25,7 +25,7 @@
 
 .subtitulo-encabezado {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: #343a40;
@@ -172,19 +172,26 @@
 
 .vin {
   font-weight: 800;
-  font-size: 18px;
+  font-size: 16px;
 }
 @media (min-width: 768px) {
   .vin {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 .vin2 {
   font-weight: 800;
   font-size: 15px;
 }
-.nombre-reservacion {
+.vin-rel {
   text-align: start;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .vin-rel {
+    text-align: start;
+    font-size: 16px;
+  }
 }
 .precio {
   font-weight: 600;

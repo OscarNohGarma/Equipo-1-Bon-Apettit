@@ -14,7 +14,7 @@ h2 {
 }
 
 .encabezado {
-  font-size: 44px;
+  font-size: 38px;
   font-weight: 900;
   text-align: center;
   margin-bottom: 20px;
@@ -28,7 +28,7 @@ h2 {
 
 .subtitulo {
   text-decoration: none;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: #343a40;
@@ -36,7 +36,7 @@ h2 {
 }
 @media (min-width: 768px) {
   .subtitulo {
-    font-size: 20px;
+    font-size: 18px;
   }
 }
 
@@ -140,6 +140,11 @@ h2 {
   text-align: center;
   margin-top: 20px;
 }
+@media (min-width: 768px) {
+  .feedback-section {
+    font-size: 18px;
+  }
+}
 
 .btn {
   background-color: #343a40;
@@ -148,9 +153,15 @@ h2 {
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s;
+  font-size: 14px;
 
   &:hover {
     background-color: #212529;
+  }
+}
+@media (min-width: 768px) {
+  .btn {
+    font-size: 16px;
   }
 }
 
@@ -188,6 +199,12 @@ h2 {
 .description {
   text-align: justify;
   margin: 0 auto;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .description {
+    font-size: 16px;
+  }
 }
 
 .headings {
@@ -212,6 +229,12 @@ h2 {
   align-items: center;
   margin-top: 10px;
   justify-content: flex-start;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .fecha-hora {
+    font-size: 16px;
+  }
 }
 
 /* Estilos para las respuestas */
@@ -261,10 +284,20 @@ h2 {
   font-size: 18px;
   font-weight: 600;
 }
+@media (min-width: 768px) {
+  .name {
+    font-size: 20px;
+  }
+}
 
 .usuario {
   color: #666;
   font-size: 14px;
+}
+@media (min-width: 768px) {
+  .usuario {
+    font-size: 16px;
+  }
 }
 
 // Media queries

@@ -6,7 +6,7 @@
         <a [routerLink]="['Reservaciones']">Reservación</a>
         <a [routerLink]="['comunidad']">Comunidad</a>
 
-        <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar Sesión</p>
+        <p *ngIf="!currentUser" [routerLink]="['login']" class="login" (click)="onLogin()">Iniciar sesión</p>
         <div *ngIf="currentUser" class="cont-pc">
             <img src="../../../assets/reservar.svg" alt="reservar" class="img-bag" style="height: 30px;
             width: 34px;" [routerLink]="['/tus-reservaciones']">
@@ -35,7 +35,7 @@
     <div class="container">
         <div class="cont-login">
             <p *ngIf="!currentUser" (click)="scrollOnMobile()" [routerLink]="['login']" class="login phone">Iniciar
-                Sesión</p>
+                sesión</p>
             <img *ngIf="currentUser" src="../../../assets/reservar.svg" (click)="scrollOnMobile()" alt="reservar"
                 class="img-bag" style="height: 30px;
             width: 34px;" [routerLink]="['/tus-reservaciones']">
@@ -47,7 +47,7 @@
         </div>
     </div>
     <div class="user-menu phone box" [class.show]=" isUserMenuOpen">
-        <div (click)="onEdit()" class="elemento-menu-user">
+        <div (click)="onEditMobile()" class="elemento-menu-user">
             Editar perfil
         </div>
         <div (click)="onLogout()" class="elemento-menu-user logout">

@@ -6,10 +6,15 @@
 }
 .subtitle {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0 auto;
   margin-bottom: 20px;
   max-width: 400px;
+}
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 18px;
+  }
 }
 .login-container {
   width: 350px;
@@ -62,6 +67,12 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .btn-login {
+    font-size: 16px;
+  }
 }
 
 .btn-login:hover {
@@ -70,6 +81,12 @@ h2 {
 .question {
   text-align: center;
   margin-top: 10px;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .question {
+    font-size: 16px;
+  }
 }
 .question span {
   color: #1a5ea2;
@@ -79,10 +96,20 @@ h2 {
   cursor: pointer;
 }
 h2 {
-  font-size: 44px;
+  font-size: 38px;
 }
 @media (min-width: 768px) {
   h2 {
     font-size: 55px;
+  }
+}
+label,
+input {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  label,
+  input {
+    font-size: 16px;
   }
 }

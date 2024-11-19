@@ -6,10 +6,15 @@
 }
 .subtitle {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0 auto;
   margin-bottom: 20px;
   max-width: 400px;
+}
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 20px;
+  }
 }
 .login-container {
   width: 350px;
@@ -24,7 +29,7 @@
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 44px;
+  font-size: 38px;
 }
 @media (min-width: 768px) {
   h2 {
@@ -71,8 +76,13 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.1s ease-in-out;
+  font-size: 14px;
 }
-
+@media (min-width: 768px) {
+  .btn-login {
+    font-size: 16px;
+  }
+}
 .btn-login:hover {
   background-color: #212529;
 }
@@ -86,4 +96,12 @@ h2 {
 .question span:hover {
   text-decoration: underline;
   cursor: pointer;
+}
+label {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  label {
+    font-size: 16px;
+  }
 }

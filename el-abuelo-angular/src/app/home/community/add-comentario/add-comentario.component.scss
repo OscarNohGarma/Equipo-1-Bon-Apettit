@@ -6,10 +6,15 @@
 }
 .subtitle {
   text-align: center;
-  font-size: 18px;
+  font-size: 16px;
   margin: 0 auto;
   margin-bottom: 50px;
   max-width: 400px;
+}
+@media (min-width: 768px) {
+  .subtitle {
+    font-size: 18px;
+  }
 }
 .login-container {
   width: 350px;
@@ -24,7 +29,7 @@
 h2 {
   text-align: center;
   margin-bottom: 20px;
-  font-size: 44px;
+  font-size: 38px;
 }
 @media (min-width: 768px) {
   h2 {
@@ -166,4 +171,23 @@ textarea {
   width: 100%; /* Para que ocupe todo el ancho del contenedor */
   height: 100px; /* Ajusta la altura según lo necesites */
   resize: none; /* Permite redimensionar verticalmente */
+}
+.btn-login {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .btn-login {
+    font-size: 16px;
+  }
+}
+label,
+textarea {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  label,
+  textarea {
+    font-size: 16px;
+  }
 }

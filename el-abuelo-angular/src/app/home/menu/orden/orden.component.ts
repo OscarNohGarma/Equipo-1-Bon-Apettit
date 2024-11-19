@@ -46,7 +46,6 @@ export class OrdenComponent implements OnInit {
     this.currentUser = this.authService.getUser()!;
     this.currentName = this.authService.getUsername()!;
     this.currentPhone = this.authService.getPhone()!;
-    console.log(this.currentPhone);
   }
 
   toggleOrden() {

@@ -16,7 +16,6 @@ ul {
   margin-top: 8px;
 }
 .cta-text {
-  padding-left: 15px;
   display: inline-block;
 }
 .cta-text h4 {
@@ -27,7 +26,12 @@ ul {
 }
 .cta-text span {
   color: #fff;
-  font-size: 15px;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .cta-text span {
+    font-size: 16px;
+  }
 }
 .footer-content {
   position: relative;
@@ -53,6 +57,11 @@ ul {
   font-size: 14px;
   color: whitesmoke;
   line-height: 28px;
+}
+@media (min-width: 768px) {
+  .footer-text p {
+    font-size: 16px;
+  }
 }
 .footer-social-icon span {
   color: #fff;
@@ -186,17 +195,25 @@ ul {
 .cta-text {
   flex: 1;
 }
+@media (min-width: 768px) {
+  .cta-text {
+    padding-left: 15px;
+  }
+}
 
 .cta-text h4 {
   color: #fff;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   margin-bottom: 2px;
 }
-
-.cta-text span {
-  color: #fff;
-  font-size: 15px;
+@media (min-width: 768px) {
+  .cta-text h4 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
 }
 
 /* Estilos responsivos */
@@ -257,5 +274,13 @@ ul {
 @media (min-width: 992px) {
   .find-us {
     margin-top: 0;
+  }
+}
+.copyright-text {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .copyright-text {
+    font-size: 16px;
   }
 }
