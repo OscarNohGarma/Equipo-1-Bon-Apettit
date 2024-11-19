@@ -5,6 +5,7 @@ import { AuthService } from '../../auth/auth.service';
 import { CommonModule } from '@angular/common';
 import { NotificationService } from '../../core/services/notification.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-my-orders',
@@ -59,16 +60,44 @@ export class MyOrdersComponent implements OnInit {
   }
   private showNotification(message: string, user: string): void {
     // Muestra la notificación o mensaje al usuario, por ejemplo:
-    console.log(user);
-    console.log(this.currentUser);
-
     if (user === this.currentUser) {
-      alert(message); // Reemplaza con tu propia lógica de notificación
+      this.showPopup(
+        'error',
+        'Ordel cancelada',
+        'Tu orden fue cancelada por que no hay ingredientes suficientes'
+      ).then((result) => {
+        this.router.navigate(['/tus-ordenes']);
+        this.orderMenuService.getAll().subscribe((data) => {
+          this.orderItems = data
+            .filter((order) => order.user === this.currentUser)
+            .reverse();
+        });
+      });
     }
-    this.router.navigate(['/tus-ordenes']).then(() => {
-      // Esperar a que la navegación esté completa antes de desplazar
-      // window.scrollTo(0, 0); // Desplazarse al principio de la página
-      window.location.reload();
+    // this.router.navigate(['/tus-ordenes']).then(() => {
+    // Esperar a que la navegación esté completa antes de desplazar
+    // window.scrollTo(0, 0); // Desplazarse al principio de la página
+
+    // });
+  }
+  showPopup(icon: 'success' | 'error', title: string, text: string) {
+    return Swal.fire({
+      icon,
+      title,
+      text,
+      confirmButtonText: 'Ver',
+      didOpen: () => {
+        const confirmButton = Swal.getConfirmButton();
+        if (confirmButton) {
+          confirmButton.style.backgroundColor = '#343a40';
+          confirmButton.onmouseover = () => {
+            confirmButton.style.backgroundColor = '#212529'; // Color en hover
+          };
+          confirmButton.onmouseout = () => {
+            confirmButton.style.backgroundColor = '#343a40'; // Color normal
+          };
+        }
+      },
     });
   }
 }

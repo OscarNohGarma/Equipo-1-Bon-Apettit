@@ -132,8 +132,6 @@ export class OrderAdminComponent implements OnInit {
   }
 
   deleteOrder(id: number, user: string) {
-    this.notificationService.emitEvent('cancelOrder', { id, user });
-
     this.showConfirmDeletePopup(
       '¿Estás seguro que deseas cancelar la orden?',
       'Esta orden desaparecerá de esta sección'
@@ -144,6 +142,7 @@ export class OrderAdminComponent implements OnInit {
             // console.log('Producto eliminado:', response);
             // Aquí puedes agregar lógica para actualizar la vista
             setTimeout(() => {
+              this.notificationService.emitEvent('cancelOrder', { id, user });
               this.showPopup(
                 'success',
                 'Orden cancelada',
