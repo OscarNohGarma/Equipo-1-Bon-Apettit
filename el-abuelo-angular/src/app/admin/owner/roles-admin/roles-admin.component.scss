@@ -18,7 +18,7 @@ h3 {
 }
 
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -26,11 +26,16 @@ h3 {
 }
 .subtitulo {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: black;
   margin-bottom: 50px;
+}
+@media (min-width: 768px) {
+  .subtitulo {
+    font-size: 18px;
+  }
 }
 .header {
   display: flex;
@@ -41,10 +46,10 @@ h3 {
 .add-button {
   background-color: white;
   color: #343a40;
-  border: 3px solid #343a40;
+  opacity: 75%;
   border-radius: 50%;
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   font-size: 60px;
   display: flex;
   justify-content: center;
@@ -95,12 +100,12 @@ h3 {
 
 .box h1 {
   font-weight: 800;
-  font-size: 30px;
+  font-size: 22px;
   margin-top: 0;
 }
 @media (min-width: 768px) {
   .box h1 {
-    font-size: 25px;
+    font-size: 24px;
   }
 }
 .grid {
@@ -124,16 +129,28 @@ h3 {
   flex-direction: column-reverse;
 }
 .btn-delete {
-  width: 35px;
-  height: 35px;
+  width: 28px;
+  height: 28px;
   opacity: 45%;
   transition: all 0.2s ease-in;
 }
 .btn-edit {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   opacity: 45%;
   transition: all 0.2s ease-in;
+}
+@media (min-width: 768px) {
+  .btn-delete {
+    width: 32px;
+    height: 32px;
+  }
+}
+@media (min-width: 768px) {
+  .btn-edit {
+    width: 30px;
+    height: 30px;
+  }
 }
 @media (min-width: 768px) {
   .btns {
@@ -190,10 +207,12 @@ h3 {
 
 .rol {
   margin-bottom: 5px;
+  font-size: 14px;
 }
 @media (min-width: 992px) {
   .rol {
     margin-bottom: 0;
+    font-size: 16px;
   }
 }
 .name {

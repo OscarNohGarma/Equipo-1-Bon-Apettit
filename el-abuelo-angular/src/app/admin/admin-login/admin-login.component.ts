@@ -47,49 +47,49 @@ export class AdminLoginComponent implements OnInit {
     const foundUser = this.usuarioItems.find(
       (user) => user.user === this.username
     );
-    setTimeout(() => {
-      if (foundUser) {
-        // Validar si la contraseña coincide
-        if (foundUser.password === this.password) {
-          // Login exitoso, simula el almacenamiento del token
-          this.adminAuthService.login(
-            'fake-token',
-            foundUser.id.toString(),
-            foundUser.user,
-            foundUser.password,
-            foundUser.namee,
-            foundUser.rol
-          ); // Aquí podrías pasar un token real si lo tienes
-          this.loading = false;
-          this.showPopup(
-            'success',
-            '¡Inicio de sesión exitoso!',
-            'Bienvenido al panel de administrador'
-          ).then((result: any) => {
-            this.router.navigate(['/admin']).then(() => {
-              // Forzar la recarga de la página después de la navegación
-              window.location.reload();
-            });
+    // setTimeout(() => {
+    if (foundUser) {
+      // Validar si la contraseña coincide
+      if (foundUser.password === this.password) {
+        // Login exitoso, simula el almacenamiento del token
+        this.adminAuthService.login(
+          'fake-token',
+          foundUser.id.toString(),
+          foundUser.user,
+          foundUser.password,
+          foundUser.namee,
+          foundUser.rol
+        ); // Aquí podrías pasar un token real si lo tienes
+        this.loading = false;
+        this.showPopup(
+          'success',
+          '¡Inicio de sesión exitoso!',
+          'Bienvenido al panel de administrador'
+        ).then((result: any) => {
+          this.router.navigate(['/admin']).then(() => {
+            // Forzar la recarga de la página después de la navegación
+            window.location.reload();
           });
-        } else {
-          // Contraseña incorrecta
-          this.loading = false;
-          this.showPopup(
-            'error',
-            'Contraseña incorrecta.',
-            'Revisa que la contraseña es correcta.'
-          );
-        }
+        });
       } else {
-        // Usuario no encontrado
+        // Contraseña incorrecta
         this.loading = false;
         this.showPopup(
           'error',
-          'Usuario no encontrado.',
-          'Revisa que el usuario es correcto.'
+          'Contraseña incorrecta.',
+          'Revisa que la contraseña es correcta.'
         );
       }
-    }, 2000);
+    } else {
+      // Usuario no encontrado
+      this.loading = false;
+      this.showPopup(
+        'error',
+        'Usuario no encontrado.',
+        'Revisa que el usuario es correcto.'
+      );
+    }
+    // }, 2000);
   }
   //POPUP PERSONALIZABLE
   showPopup(icon: 'success' | 'error', title: string, text: string) {

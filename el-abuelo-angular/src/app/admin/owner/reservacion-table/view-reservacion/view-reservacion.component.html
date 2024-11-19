@@ -1,14 +1,15 @@
 <div class="header">
-  <button class="back-button" [routerLink]="['/admin/reservaciones']"></button>
-  <h2 class="encabezado">Detalles Reservación</h2>
-  <button class="dis"></button>
+  <div class="head-back">
+    <img src="../../../../../assets/back-button.png" alt="regresar" class="btn-back" (click)="goBack()">
+    <h2 class="encabezado">Detalles</h2>
+    <button class="dis"></button>
+  </div>
 </div>
 
 <form [formGroup]="reservationForm" class="view-reservation-form">
   <div class="form-group">
     <label for="usuario">Nombre Del Usuario:</label>
-    <input type="text" id="usuario" formControlName="usuario" class="form-control"
-    [readOnly]="reservation?.usuario">
+    <input type="text" id="usuario" formControlName="usuario" class="form-control" [readOnly]="reservation?.usuario">
   </div>
 
   <div class=" form-group">
@@ -23,7 +24,8 @@
 
   <div class="form-group">
     <label for="cantidadMesasReservada">Mesas Reservadas:</label>
-    <input type="text" readonly id="cantidadMesasReservada" formControlName="cantidadMesasReservada" class="form-control" [readOnly]="reservation?.cantidadMesasReservada">
+    <input type="text" readonly id="cantidadMesasReservada" formControlName="cantidadMesasReservada"
+      class="form-control" [readOnly]="reservation?.cantidadMesasReservada">
 
   </div>
 
@@ -34,12 +36,13 @@
 
   <div class="form-group">
     <label for="ubicacion">Ubicación De La Mesa Reservada:</label>
-    <input type="text" id="ubicacion" formControlName="ubicacion" class="form-control" [readOnly]="reservation?.ubicacion" >
+    <input type="text" id="ubicacion" formControlName="ubicacion" class="form-control"
+      [readOnly]="reservation?.ubicacion">
   </div>
 
   <div class="form-group" *ngIf="reservation?.costo !== ''">
     <label for="costo">Costo Por Mesa:</label>
-    <input type="text" id="costo" formControlName="costo" class="form-control"  [readOnly]="reservation?.costo ">
+    <input type="text" id="costo" formControlName="costo" class="form-control" [readOnly]="reservation?.costo ">
   </div>
 
   <div class="form-group" *ngIf="reservation?.costo === ''">
@@ -49,7 +52,8 @@
 
   <div class="form-group">
     <label for="tipo_decoracion">Tipo De Decoración Solicitada:</label>
-    <input type="text" id="tipo_decoracion" class="form-control" formControlName="tipo_decoracion" [readOnly]="reservation?.tipo_decoracion">
+    <input type="text" id="tipo_decoracion" class="form-control" formControlName="tipo_decoracion"
+      [readOnly]="reservation?.tipo_decoracion">
   </div>
 
   <div class="form-group">
@@ -69,9 +73,10 @@
 
 
   <div class="form-group" *ngIf="reservation?.total !==''">
-    <label for="numero_cuenta">Pago Realizado A  {{reservation?.tipo_banco}}, Al Número De Cuenta: </label>
+    <label for="numero_cuenta">Pago Realizado A {{reservation?.tipo_banco}}, Al Número De Cuenta: </label>
     <!-- <input type="text" id="tipo_banco" class="form-control" formControlName="tipo_banco" [readOnly]="reservation?.tipo_banco"> -->
-    <input type="text" id="numero_cuenta" class="form-control" formControlName="numero_cuenta" [readOnly]="reservation?.numero_cuenta">
+    <input type="text" id="numero_cuenta" class="form-control" formControlName="numero_cuenta"
+      [readOnly]="reservation?.numero_cuenta">
   </div>
 
   <!-- <div class="form-group" *ngIf="reservation?.total !== ''">
@@ -85,7 +90,7 @@
   <div class="form-group" *ngIf="reservation?.total !==''">
     <label for="image">Comprobante De Pago:</label>
     <div class="cont-imagen">
-      <img  [src]="reservation?.image" [alt]="reservation?.image" style="max-width: 100%; margin-top: 10px;" >
+      <img [src]="reservation?.image" [alt]="reservation?.image" style="max-width: 100%; margin-top: 10px;">
     </div>
   </div>
 

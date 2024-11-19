@@ -2,7 +2,7 @@
   margin-bottom: 50px;
 }
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -11,24 +11,35 @@
 }
 h2 {
   margin-bottom: 10px;
-  font-size: 30px;
+  font-size: 22px;
 }
 @media (min-width: 992px) {
   h2 {
-    font-size: 26px;
+    font-size: 24px;
   }
 }
 .subtitulo {
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   text-align: center;
   color: black;
   margin-bottom: 50px;
   margin-top: 1.6rem;
 }
+@media (min-width: 768px) {
+  .subtitulo {
+    font-size: 18px;
+  }
+}
 .enc {
   width: 100%;
+  margin-bottom: 10px;
+}
+@media (min-width: 768px) {
+  .enc {
+    margin-bottom: 0;
+  }
 }
 .enc h2 {
   margin-top: 0;
@@ -49,7 +60,7 @@ h2 {
   background-color: #343a40;
   color: white;
   font-weight: 400;
-  font-size: 18px;
+  font-size: 14px;
   text-decoration: none;
   transition: all 0.2s ease-in-out;
   border-radius: 5px;
@@ -200,6 +211,12 @@ p {
   text-align: end;
   align-items: center;
   padding: 10px 0;
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .producto {
+    font-size: 16px;
+  }
 }
 .producto.no-status {
   grid-template-columns: 1fr 4fr;
@@ -211,7 +228,12 @@ p {
 }
 .agregados {
   font-weight: 600;
-  font-size: 18px;
+  font-size: 16px;
+}
+@media (min-width: 768px) {
+  .agregados {
+    font-size: 18px;
+  }
 }
 .vin {
   font-weight: 800;
@@ -258,6 +280,7 @@ p {
   justify-content: center;
   flex-direction: column;
   text-align: end;
+  font-size: 14px;
 }
 @media (min-width: 992px) {
   .fecha {
@@ -265,6 +288,7 @@ p {
     position: absolute;
     bottom: 10px;
     left: -20px;
+    font-size: 16px;
   }
 }
 .fecha p {
@@ -310,10 +334,12 @@ p {
   margin-top: 15px;
   font-weight: 600;
   color: #343a40;
+  font-size: 14px;
 }
 @media (min-width: 992px) {
   .status {
     margin-top: 10px;
+    font-size: 16px;
   }
 }
 
@@ -354,6 +380,7 @@ p {
   .completed-filter {
     width: 100%; /* Ajustar al ancho completo */
     margin-bottom: 10px; /* Añadir espacio entre los filtros */
+    font-size: 14px;
   }
 }
 

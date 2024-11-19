@@ -7,7 +7,7 @@
   // position: relative;
 }
 .encabezado {
-  font-size: 40px;
+  font-size: 38px;
   font-weight: bolder;
   text-align: center;
   margin-top: 3px;
@@ -176,7 +176,52 @@ input[type="file"] {
   margin-top: 5px;
   font-size: 14px;
 }
+@media (min-width: 768px) {
+  .error-message {
+    font-size: 16px;
+  }
+}
 .form-group input.ng-invalid.ng-touched,
 .form-group select.ng-invalid.ng-touched {
   border: 2px solid red;
+}
+label,
+input,
+.button,
+.submit-button,
+select {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  label,
+  input,
+  .button,
+  .submit-button,
+  select {
+    font-size: 16px;
+  }
+}
+
+.head-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+.btn-back {
+  width: 30px;
+  height: 30px;
+  opacity: 85%;
+  transition: all 0.1s ease;
+}
+@media (min-width: 768px) {
+  .btn-back {
+    width: 35px;
+    height: 35px;
+  }
+}
+.btn-back:hover {
+  background-color: #b9bfc0;
+  border-radius: 50%;
+  cursor: pointer;
 }

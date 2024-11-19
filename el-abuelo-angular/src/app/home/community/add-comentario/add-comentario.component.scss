@@ -52,6 +52,14 @@ h2 {
 .invalid .form-control {
   border-color: red;
 }
+.invalid {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  .invalid {
+    font-size: 16px;
+  }
+}
 
 .error-message {
   color: red;

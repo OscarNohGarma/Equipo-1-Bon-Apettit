@@ -276,11 +276,11 @@ ul {
     margin-top: 0;
   }
 }
-.copyright-text {
-  font-size: 14px;
+.copyright-text p {
+  font-size: 12px;
 }
 @media (min-width: 768px) {
-  .copyright-text {
-    font-size: 16px;
+  .copyright-text p {
+    font-size: 14px;
   }
 }

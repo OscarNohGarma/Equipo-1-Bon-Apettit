@@ -29,7 +29,6 @@ export class AdminHeaderComponent implements OnInit {
     this.currentRol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
     this.currentId = this.adminAuthService.getId(); // Obtener el nombre del usuario
     this.rol = this.adminAuthService.getRol(); // Obtener el nombre del usuario
-    console.log(this.rol);
 
     if (typeof window !== 'undefined' && localStorage) {
       const savedCategory = localStorage.getItem('selectedCategory');

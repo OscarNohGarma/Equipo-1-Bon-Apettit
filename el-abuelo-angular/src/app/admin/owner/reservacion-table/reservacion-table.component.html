@@ -1,24 +1,23 @@
-
 <div class="bg-menu">
   <div class="container">
     <div class="header">
       <h1 class="encabezado">Reservaciones</h1>
     </div>
-    <h2 class="subtitulo">Visualiza las reservaciones registrados en tu página</h2>
+    <h2 class="subtitulo">Visualiza las reservaciones de los clientes</h2>
 
     <div class="filter-bar">
-      <input type="text" placeholder="Buscar Reservación..." class="search-bar" (input)="updateSearch($event)">
-      <select class="category-filter" (change)="updateCategoryComprobante($event)" >
-        <option value="TODOS">Todas Las Reservaciones</option>
-        <option value="Comprobante">Con Comprobante</option>
-        <option value="Sin Comprobante">Sin Comprobante</option>
+      <input type="text" placeholder="Buscar por nombre" class="search-bar" (input)="updateSearch($event)">
+      <select class="category-filter" (change)="updateCategoryComprobante($event)">
+        <option value="TODOS">Todas las reservaciones</option>
+        <option value="Comprobante">Con comprobante</option>
+        <option value="Sin Comprobante">Sin comprobante</option>
       </select>
       <select class="stock-filter" (change)="updateEstados($event)">
-        <option value="En Espera">En Espera</option>
+        <option value="En Espera">En espera</option>
         <option value="Confirmada">Confirmados</option>
         <option value="Liberado">Liberados</option>
         <option value="Cancelado">Cancelados</option>
-        <option value="">Todas Las Reservaciones</option>
+        <option value="">Todas</option>
       </select>
     </div>
 
@@ -37,36 +36,34 @@
           <div class="reservation-status">
             <div class="circle"
               [class.selected]="reservation.estados === 'En Espera' || reservation.estados === 'Confirmada' || reservation.estados === 'Liberado' || reservation.estados === 'Cancelado'"
-              [class.current-selected]="reservation.estados === 'En Espera'"
-              >
+              [class.current-selected]="reservation.estados === 'En Espera'">
             </div>
             <div class="circle" *ngIf="reservation.estados !== 'Cancelado'"
               [class.selected]="reservation.estados === 'Confirmada' || reservation.estados === 'Liberado'"
-              [class.current-selected]="reservation.estados === 'Confirmada'"
-              >
+              [class.current-selected]="reservation.estados === 'Confirmada'">
               <p class="confirmada" [class.show]="reservation.estados === 'Confirmada'">✓</p>
               <p class="canceled" [class.show]="reservation.estados === 'Cancelado'" style="color: white;">✘</p>
             </div>
 
-            <div class="circle" *ngIf="reservation.estados === 'Cancelado'"
-              [ngClass]="{'selected': reservation.estados === 'Cancelado',
-                     'cancelado': reservation.estados === 'Cancelado'}"
-              >
+            <div class="circle" *ngIf="reservation.estados === 'Cancelado'" [ngClass]="{'selected': reservation.estados === 'Cancelado',
+                     'cancelado': reservation.estados === 'Cancelado'}">
               <p class="canceled" [class.show]="reservation.estados === 'Cancelado'">✘</p>
             </div>
 
             <div class="circle" [class.selected]="reservation.estados === 'Liberado'"
-              [class.current-selected]="reservation.estados === 'Liberado'"
-              >
+              [class.current-selected]="reservation.estados === 'Liberado'">
               <p class="liberado" [class.show]="reservation.estados === 'Liberado'">+</p>
 
             </div>
           </div>
 
           <p class="status" *ngIf="reservation.estados === 'En Espera'">En Espera</p>
-          <p class="status" *ngIf="reservation.estados === 'Confirmada'" style="color: #4daf2d;">Reservación Confirmada</p>
-          <p class="status" *ngIf="reservation.estados === 'Cancelado'" style="color: #ff4d4d;">Reservación Cancelada</p>
-          <p class="status" *ngIf="reservation.estados === 'Liberado'" style="color: rgb(64, 77, 145);">Mesa Disponible</p>
+          <p class="status" *ngIf="reservation.estados === 'Confirmada'" style="color: #4daf2d;">Reservación Confirmada
+          </p>
+          <p class="status" *ngIf="reservation.estados === 'Cancelado'" style="color: #ff4d4d;">Reservación Cancelada
+          </p>
+          <p class="status" *ngIf="reservation.estados === 'Liberado'" style="color: rgb(64, 77, 145);">Mesa Disponible
+          </p>
         </div>
 
         <div class="group">
@@ -74,8 +71,7 @@
           <button class="button add" *ngIf="reservation.estados !=='Cancelado'"
             (click)="confirmReservation(reservation)"
             [class.no-status]="reservation.estados === 'Confirmada' || reservation.estados === 'Liberado'"
-            [disabled]="reservation.estados !== 'En Espera'"
-            [class.disabled]="reservation.estados !== 'En Espera'">
+            [disabled]="reservation.estados !== 'En Espera'" [class.disabled]="reservation.estados !== 'En Espera'">
             Confirmar
           </button>
 
@@ -83,33 +79,28 @@
           <button class="button add" *ngIf="reservation.estados !=='Cancelado'" style="margin-top: 1rem;"
             (click)="cancelReservation(reservation)"
             [class.no-status]="reservation.estados === 'Confirmada' || reservation.estados === 'Liberado'"
-            [disabled]="reservation.estados !== 'En Espera'"
-            [class.disabled]="reservation.estados !== 'En Espera'">
+            [disabled]="reservation.estados !== 'En Espera'" [class.disabled]="reservation.estados !== 'En Espera'">
             Cancelar
           </button>
 
-          <button class="button add" *ngIf="reservation.estados !== 'Confirmada' && reservation.estados !== 'En Espera'" style="margin-top: 1rem;"
-          (click)="cancelReservation(reservation)"
-          [class.no-status]="reservation.estados === 'Confirmada' || reservation.estados === 'Liberado'"
-          [disabled]="reservation.estados !== 'En Espera'"
-          [class.disabled]="reservation.estados !== 'En Espera'">
-          Reservación Cancelada
-         </button>
+          <button class="button add" *ngIf="reservation.estados !== 'Confirmada' && reservation.estados !== 'En Espera'"
+            style="margin-top: 1rem;" (click)="cancelReservation(reservation)"
+            [class.no-status]="reservation.estados === 'Confirmada' || reservation.estados === 'Liberado'"
+            [disabled]="reservation.estados !== 'En Espera'" [class.disabled]="reservation.estados !== 'En Espera'">
+            Reservación Cancelada
+          </button>
 
           <!-- Botón Liberar Mesa - Solo habilitado cuando el estado es 'Confirmada' -->
-          <button class="button add" *ngIf="reservation.estados !=='Cancelado'"
-            (click)="releaseTable(reservation)"
+          <button class="button add" *ngIf="reservation.estados !=='Cancelado'" (click)="releaseTable(reservation)"
             [class.no-status]="reservation.estados === 'En Espera' || reservation.estados === 'Liberado'"
-            [disabled]="reservation.estados !== 'Confirmada'"
-            [class.disabled]="reservation.estados !== 'Confirmada'">
+            [disabled]="reservation.estados !== 'Confirmada'" [class.disabled]="reservation.estados !== 'Confirmada'">
             Liberar Mesa
           </button>
 
           <!-- Botón Liberar Mesa - Solo habilitado cuando el estado es 'Confirmada' -->
           <button class="button add" *ngIf="reservation.estados !=='Cancelado'"
             [class.no-status]="reservation.estados === 'En Espera' || reservation.estados === 'Confirmada'"
-            [disabled]="reservation.estados !== 'Confirmada'"
-            [class.disabled]="reservation.estados !== 'Confirmada'">
+            [disabled]="reservation.estados !== 'Confirmada'" [class.disabled]="reservation.estados !== 'Confirmada'">
             Liberar Mesa
           </button>
         </div>
@@ -117,12 +108,12 @@
         <div class="btns" *ngIf="reservation.estados === 'Cancelado'">
 
           <img src="./../../../assets/delete-button.svg" alt="basura" class="btn-delete"
-              (click)="deleteReservation(reservation.id, reservation.image)">
+            (click)="deleteReservation(reservation.id, reservation.image)">
         </div>
 
         <div class="fecha">
-          <p>Fecha Reservación: {{reservation.fecha}}</p>
-          <p>Hora Reservación: {{reservation.hora}} pm</p>
+          <p>Fecha reservada: {{reservation.fecha}}</p>
+          <p>Hora reservada: {{reservation.hora}} pm</p>
         </div>
       </div>
     </div>
