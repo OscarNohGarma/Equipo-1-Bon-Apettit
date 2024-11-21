@@ -72,12 +72,6 @@ export class OrderAdminComponent implements OnInit {
   }
 
   completar(order: OrderMenu): void {
-    const tipoEntrega = order.tipoEntrega;
-    const user = order.user;
-    this.notificationService.emitEvent('completeOrder', {
-      tipoEntrega,
-      user,
-    });
     this.showConfirmPopup(
       '¿Deseas enviar esta orden?',
       'Esta orden desaparecerá de esta sección y pasará al repartidor/cajero.'
@@ -92,10 +86,12 @@ export class OrderAdminComponent implements OnInit {
           (response) => {
             // El producto fue eliminado exitosamente
             setTimeout(() => {
-              // this.notificationService.emitEvent('completeOrder', {
-              //   tipoEntrega,
-              //   user,
-              // });
+              const tipoEntrega = order.tipoEntrega;
+              const user = order.user;
+              this.notificationService.emitEvent('completeOrder', {
+                tipoEntrega,
+                user,
+              });
               this.showPopup(
                 'success',
                 '¡Orden enviada!',
