@@ -1,7 +1,7 @@
 <div class="container">
     <div class="header">
         <h1 class="encabezado">Tus órdenes</h1>
-        <h2 class="subtitulo-encabezado">¡Sigue el estado de tu orden!</h2>
+        <h2 class="subtitulo-encabezado">Te recomendamos ver frecuentemente el estado de tu orden</h2>
     </div>
     <div class="filter-bar">
         <select class="status-filter" (change)="updateStatus($event)">
@@ -23,6 +23,9 @@
                     </p>
                 </div>
             </div>
+            <p class="direccion">
+                {{order.tipoEntrega === "local" ? "ENTREGA EN EL LOCAL" : "DIRECCIÓN: " + order.direccion }}
+            </p>
             <div class="div-total">
                 <p class="total">Total: <span>${{order.total}}</span></p>
                 <div class="fecha">

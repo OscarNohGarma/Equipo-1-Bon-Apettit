@@ -261,3 +261,13 @@
     width: 30%;
   }
 }
+.direccion {
+  font-size: 14px;
+  margin-top: 20px;
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .direccion {
+    font-size: 16px;
+  }
+}

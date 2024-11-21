@@ -68,10 +68,12 @@ export class OrdenComponent implements OnInit {
 
   confirmarPedido() {
     this.modalVisible = true; // Muestra el modal
+    this.notificationService.reconnect();
   }
 
   cerrarModal() {
     this.modalVisible = false; // Oculta el modal
+    this.notificationService.disconnect();
   }
 
   enviarPedido() {
@@ -92,6 +94,7 @@ export class OrdenComponent implements OnInit {
       return;
     }
     this.loading = true;
+    this.notificationService.reconnect();
     // Lógica para enviar el pedido con el nombre del cliente
 
     // Obtener la fecha en formato YYYY-MM-DD
@@ -122,13 +125,14 @@ export class OrdenComponent implements OnInit {
       ...(this.tipoEntrega === 'domicilio' && { direccion: this.direccion }),
     };
     const us = this.currentUser;
+    const tipoEntrega = this.tipoEntrega;
     //ENVIAR LA ORDEN SI TODO ESTÁ CORRECTO
     this.ordenMenuService.add(newOrden).subscribe(
       (response) => {
         // Muestra el SweetAlert y espera a que el usuario confirme antes de continuar
         this.loading = false;
-
-        this.notificationService.emitEvent('addOrder', { us });
+        this.notificationService.emitEvent('addOrder', { us, tipoEntrega });
+        this.notificationService.disconnect();
         this.showPopup(
           'success',
           '¡Pedido Exitoso!',

@@ -33,9 +33,15 @@ export class MyOrdersComponent implements OnInit {
     });
     // Escuchar el evento 'mensaje' desde el servidor
     this.notificationService.listenToEvent('orderCancelled', (data) => {
-      console.log('Evento recibido desde el servidor:', data);
+      // console.log('Evento recibido desde el servidor:', data);
       // Aquí puedes mostrar una notificación o hacer lo que necesites
-      this.showNotification(data.message, data.user);
+      this.showCancelNotification(data.message, data.user);
+    });
+
+    this.notificationService.listenToEvent('orderCompleted', (data) => {
+      // console.log('Evento recibido desde el servidor:', data);
+      // Aquí puedes mostrar una notificación o hacer lo que necesites
+      this.showCompleteNotification(data.message, data.user, data.entrega);
     });
 
     // Emitir un evento 'mensaje' al servidor
@@ -58,7 +64,7 @@ export class MyOrdersComponent implements OnInit {
       return matchesStatus;
     });
   }
-  private showNotification(message: string, user: string): void {
+  private showCancelNotification(message: string, user: string): void {
     // Muestra la notificación o mensaje al usuario, por ejemplo:
     if (user === this.currentUser) {
       this.showPopup(
@@ -66,19 +72,41 @@ export class MyOrdersComponent implements OnInit {
         'Ordel cancelada',
         'Tu orden fue cancelada por que no hay ingredientes suficientes'
       ).then((result) => {
-        this.router.navigate(['/tus-ordenes']);
-        this.orderMenuService.getAll().subscribe((data) => {
-          this.orderItems = data
-            .filter((order) => order.user === this.currentUser)
-            .reverse();
-        });
+        if (result.isConfirmed) {
+          this.router.navigate(['/tus-ordenes']);
+          this.orderMenuService.getAll().subscribe((data) => {
+            this.orderItems = data
+              .filter((order) => order.user === this.currentUser)
+              .reverse();
+          });
+        }
       });
     }
-    // this.router.navigate(['/tus-ordenes']).then(() => {
-    // Esperar a que la navegación esté completa antes de desplazar
-    // window.scrollTo(0, 0); // Desplazarse al principio de la página
-
-    // });
+  }
+  private showCompleteNotification(
+    message: string,
+    user: string,
+    entrega: string
+  ): void {
+    // Muestra la notificación o mensaje al usuario, por ejemplo:
+    if (user === this.currentUser) {
+      this.showPopup(
+        'success',
+        'Orden lista para entregar',
+        entrega === 'local'
+          ? 'Tu orden está lista para ser recogida en el local'
+          : 'Tu orden esta lista para ser entregada a domicilio'
+      ).then((result) => {
+        if (result.isConfirmed) {
+          this.router.navigate(['/tus-ordenes']);
+          this.orderMenuService.getAll().subscribe((data) => {
+            this.orderItems = data
+              .filter((order) => order.user === this.currentUser)
+              .reverse();
+          });
+        }
+      });
+    }
   }
   showPopup(icon: 'success' | 'error', title: string, text: string) {
     return Swal.fire({

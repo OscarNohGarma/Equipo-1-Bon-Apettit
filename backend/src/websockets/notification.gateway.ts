@@ -9,7 +9,7 @@ import { Server, Socket } from 'socket.io';
 
 @WebSocketGateway({
   cors: {
-    origin: 'http://localhost:4200', // Cambia según tu cliente
+    origin: '*', // Cambia según tu cliente
     methods: ['GET', 'POST'],
   },
   transports: ['websocket'], // Solo WebSocket
@@ -44,6 +44,18 @@ export class NotificationGateway
       user: payload.user,
     });
   }
+
+  @SubscribeMessage('completeOrder')
+  handleCompleteOrder(client: Socket, payload: any): void {
+    console.log('Orden completada desde el cliente:', payload);
+    // Emitir un evento a todos los clientes conectados notificando la cancelación
+    this.server.emit('orderCompleted', {
+      message: `Orden completada para el usuario ${payload.user}`,
+      user: payload.user,
+      entrega: payload.tipoEntrega,
+    });
+  }
+
   @SubscribeMessage('addOrder')
   handleAddOrder(client: Socket, payload: any): void {
     console.log('Orden recibida desde el cliente:', payload);
@@ -51,6 +63,7 @@ export class NotificationGateway
     this.server.emit('orderAdded', {
       message: `Orden agregada para el usuario ${payload.us}`,
       user: payload.us,
+      entrega: payload.tipoEntrega,
     });
   }
 
