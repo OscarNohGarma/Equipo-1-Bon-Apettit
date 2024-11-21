@@ -48,6 +48,7 @@ export class OrdenComponent implements OnInit {
     this.currentUser = this.authService.getUser()!;
     this.currentName = this.authService.getUsername()!;
     this.currentPhone = this.authService.getPhone()!;
+    this.notificationService.disconnect();
   }
 
   toggleOrden() {
@@ -94,7 +95,6 @@ export class OrdenComponent implements OnInit {
       return;
     }
     this.loading = true;
-    this.notificationService.reconnect();
     // Lógica para enviar el pedido con el nombre del cliente
 
     // Obtener la fecha en formato YYYY-MM-DD
