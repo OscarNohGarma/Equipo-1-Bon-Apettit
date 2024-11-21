@@ -24,10 +24,12 @@ export class NavbarComponent implements OnInit {
   isUserMenuOpen: boolean = false; // Para controlar la visibilidad del menú desplegable
   constructor(private authService: AuthService, private router: Router) {}
   ngOnInit(): void {
-    this.currentUser = this.authService.getUser();
     this.currentRol = this.authService.getRol(); // Obtener el nombre del usuario
     this.currentId = this.authService.getId(); // Obtener el nombre del usuario
     this.currentName = this.authService.getUsername(); // Obtener el nombre del usuario
+    setTimeout(() => {
+      this.currentUser = this.authService.getUser();
+    }, 200);
   }
   toggleUserMenu() {
     this.isUserMenuOpen = !this.isUserMenuOpen;

@@ -8,6 +8,7 @@ import { OrderMenu } from '../../../core/models/orderMenu';
 import { OrderMenuService } from '../../../core/services/order-menu.service';
 import { AuthService } from '../../../auth/auth.service';
 import { SpinnerComponent } from '../../../shared/spinner/spinner.component';
+import { NotificationService } from '../../../core/services/notification.service';
 declare var Swal: any;
 
 @Component({
@@ -34,7 +35,8 @@ export class OrdenComponent implements OnInit {
     public ordenService: OrderService,
     private router: Router,
     public ordenMenuService: OrderMenuService,
-    public authService: AuthService
+    public authService: AuthService,
+    private notificationService: NotificationService
   ) {}
 
   ngOnInit() {
@@ -46,6 +48,7 @@ export class OrdenComponent implements OnInit {
     this.currentUser = this.authService.getUser()!;
     this.currentName = this.authService.getUsername()!;
     this.currentPhone = this.authService.getPhone()!;
+    this.notificationService.disconnect();
   }
 
   toggleOrden() {
@@ -66,10 +69,12 @@ export class OrdenComponent implements OnInit {
 
   confirmarPedido() {
     this.modalVisible = true; // Muestra el modal
+    this.notificationService.reconnect();
   }
 
   cerrarModal() {
     this.modalVisible = false; // Oculta el modal
+    this.notificationService.disconnect();
   }
 
   enviarPedido() {
@@ -119,11 +124,15 @@ export class OrdenComponent implements OnInit {
       tipoEntrega: this.tipoEntrega,
       ...(this.tipoEntrega === 'domicilio' && { direccion: this.direccion }),
     };
+    const us = this.currentUser;
+    const tipoEntrega = this.tipoEntrega;
     //ENVIAR LA ORDEN SI TODO ESTÁ CORRECTO
     this.ordenMenuService.add(newOrden).subscribe(
       (response) => {
         // Muestra el SweetAlert y espera a que el usuario confirme antes de continuar
         this.loading = false;
+        this.notificationService.emitEvent('addOrder', { us, tipoEntrega });
+        this.notificationService.disconnect();
         this.showPopup(
           'success',
           '¡Pedido Exitoso!',
@@ -139,6 +148,7 @@ export class OrdenComponent implements OnInit {
               this.router.navigate(['/tus-ordenes']).then(() => {
                 // Esperar a que la navegación esté completa antes de desplazar
                 // window.scrollTo(0, 0); // Desplazarse al principio de la página
+                window.location.reload();
               });
             }, 500); // Ajusta el tiempo según lo necesites
           }

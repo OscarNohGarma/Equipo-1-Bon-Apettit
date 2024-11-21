@@ -53,9 +53,12 @@
                 <p class="status" *ngIf="order.status==='preparation'">Preparándose</p>
                 <p class="status" *ngIf="order.status==='ready'" style="color: #4daf2d;">Listo</p>
             </div>
-            <button [class.no-status]="order.status==='completed'" [disabled]="order.status!== 'ready'"
-                [class.disabled]="order.status!== 'ready'" class="button add" (click)="completar(order)">Listo para
-                entregar</button>
+            <div class="btns">
+                <button [class.no-status]="order.status==='completed'" [disabled]="order.status!== 'ready'"
+                    [class.disabled]="order.status!== 'ready'" class="button add" (click)="completar(order)">Listo para
+                    entregar</button>
+                <button class="button cancel" (click)="deleteOrder(order.id, order.user)">Cancelar orden</button>
+            </div>
             <div class="fecha">
                 <p>{{order.hora}} - {{order.fecha}}</p>
             </div>

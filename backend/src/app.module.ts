@@ -1,11 +1,8 @@
-
-
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 
-
-import { ConfigModule, ConfigService} from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 import { FirestoreModule } from './module/firestore/firestore.module';
 import { FirestoreMenuModule } from './module/firestoreconfig/firestoreconfig.module';
@@ -27,7 +24,7 @@ import { FirebaseComprobanteService } from './services/firebase-comprobante/fire
 import { FirebaseComprobanteController } from './controllers/firebase-comprobante/firebase-comprobante.controller';
 import { FireComentariosController } from './controllers/fire-comentarios/fire-comentarios.controller';
 import { FireComentariosService } from './services/fire-comentarios/fire-comentarios.service';
-
+import { WebsocketsModule } from './websockets/websockets.module';
 
 @Module({
   imports: [
@@ -42,10 +39,33 @@ import { FireComentariosService } from './services/fire-comentarios/fire-comenta
       }),
       inject: [ConfigService],
     }),
-    
 
-    FirestoreModule,FirestorageModule],
-  controllers: [AppController, UploadController, FirebaseCitaController, FirebaseOrdenController, FireAuthController, GenericFirebaseController, FirebaseUsuarioController, FirebaseComprobanteController, FireComentariosController],
-  providers: [AppService,StorageService, FirebaseProductoService, FirebaseCitasService, FirebaseOrdenService, FireAuthService,FirebaseGenericService, FirebaseUsuarioService, FirebaseComprobanteService, FireComentariosService],
+    FirestoreModule,
+    FirestorageModule,
+    WebsocketsModule,
+  ],
+  controllers: [
+    AppController,
+    UploadController,
+    FirebaseCitaController,
+    FirebaseOrdenController,
+    FireAuthController,
+    GenericFirebaseController,
+    FirebaseUsuarioController,
+    FirebaseComprobanteController,
+    FireComentariosController,
+  ],
+  providers: [
+    AppService,
+    StorageService,
+    FirebaseProductoService,
+    FirebaseCitasService,
+    FirebaseOrdenService,
+    FireAuthService,
+    FirebaseGenericService,
+    FirebaseUsuarioService,
+    FirebaseComprobanteService,
+    FireComentariosService,
+  ],
 })
 export class AppModule {}

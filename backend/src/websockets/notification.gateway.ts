@@ -1,0 +1,73 @@
+import {
+  WebSocketGateway,
+  WebSocketServer,
+  OnGatewayConnection,
+  OnGatewayDisconnect,
+  SubscribeMessage,
+} from '@nestjs/websockets';
+import { Server, Socket } from 'socket.io';
+
+@WebSocketGateway({
+  cors: {
+    origin: '*', // Cambia según tu cliente
+    methods: ['GET', 'POST'],
+  },
+  transports: ['websocket'], // Solo WebSocket
+})
+export class NotificationGateway
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
+  @WebSocketServer()
+  server: Server;
+
+  handleConnection(client: Socket) {
+    console.log(`Cliente conectado: ${client.id}`);
+  }
+
+  handleDisconnect(client: Socket) {
+    console.log(`Cliente desconectado: ${client.id}`);
+  }
+
+  @SubscribeMessage('mensaje')
+  handleMensaje(client: Socket, payload: any): void {
+    console.log('Mensaje recibido desde el cliente:', payload);
+    // Puedes emitir un evento de vuelta al cliente
+    client.emit('mensaje', { text: 'Mensaje recibido correctamente' });
+  }
+
+  @SubscribeMessage('cancelOrder')
+  handleCancelOrder(client: Socket, payload: any): void {
+    console.log('Orden cancelada desde el cliente:', payload);
+    // Emitir un evento a todos los clientes conectados notificando la cancelación
+    this.server.emit('orderCancelled', {
+      message: `Orden ${payload.id} cancelada para el usuario ${payload.user}`,
+      user: payload.user,
+    });
+  }
+
+  @SubscribeMessage('completeOrder')
+  handleCompleteOrder(client: Socket, payload: any): void {
+    console.log('Orden completada desde el cliente:', payload);
+    // Emitir un evento a todos los clientes conectados notificando la cancelación
+    this.server.emit('orderCompleted', {
+      message: `Orden completada para el usuario ${payload.user}`,
+      user: payload.user,
+      entrega: payload.tipoEntrega,
+    });
+  }
+
+  @SubscribeMessage('addOrder')
+  handleAddOrder(client: Socket, payload: any): void {
+    console.log('Orden recibida desde el cliente:', payload);
+    // Emitir un evento a todos los clientes conectados notificando la cancelación
+    this.server.emit('orderAdded', {
+      message: `Orden agregada para el usuario ${payload.us}`,
+      user: payload.us,
+      entrega: payload.tipoEntrega,
+    });
+  }
+
+  emitEvent(eventName: string, data: any) {
+    this.server.emit(eventName, data);
+  }
+}
