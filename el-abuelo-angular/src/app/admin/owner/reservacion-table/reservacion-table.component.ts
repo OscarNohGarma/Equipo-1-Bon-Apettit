@@ -105,7 +105,7 @@ export class ReservacionTableComponent implements OnInit {
       ''
     ).then((result: any) => {
       if (result.isConfirmed) {
-        const updatedReservation = { ...reservation };
+        const updatedReservation = { ...reservation, estados: estado };
         this.reservationTablesServices
           .update(reservation.id.toString(), updatedReservation)
           .subscribe(
